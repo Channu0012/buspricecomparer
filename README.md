@@ -33,10 +33,6 @@
    npm start
    ```
 
-4. **Open in browser:**
-   - 🌐 **Website**: [http://localhost:3000](http://localhost:3000)
-   - 📊 **Admin Dashboard**: [http://localhost:3000/admin](http://localhost:3000/admin) *(Password: `001200`)*
-
 ---
 
 ## 💼 Revenue Model
