@@ -1,9 +1,11 @@
 'use strict';
 
-const express = require('express');
-const fs      = require('fs');
-const path    = require('path');
-const os      = require('os');
+const express   = require('express');
+const fs        = require('fs');
+const path      = require('path');
+const os        = require('os');
+const helmet    = require('helmet');
+const rateLimit = require('express-rate-limit');
 const { v4: uuidv4 } = require('uuid');
 
 const app  = express();
@@ -22,15 +24,44 @@ function getLanIP() {
   return 'localhost';
 }
 
-// ─── MIDDLEWARE ──────────────────────────────────────────────────────────────
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// ─── INPUT SANITIZER (ANTI-XSS) ──────────────────────────────────────────────
+function sanitizeInput(str) {
+  if (typeof str !== 'string') return '';
+  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').trim();
+}
 
-// CORS — allow requests from any origin (Live Server, other devices, deployed domain)
+// ─── SECURITY MIDDLEWARE ──────────────────────────────────────────────────────
+// Helmet: Set security HTTP headers
+app.use(helmet({
+  contentSecurityPolicy: false, // allow Google fonts & inline SVGs smoothly
+  crossOriginResourcePolicy: { policy: 'cross-origin' }
+}));
+
+// Rate Limiting: Prevent DDoS / Brute Force
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300, // max 300 requests per window per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests from this IP. Please try again later.' }
+});
+
+const submitLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 15, // max 15 submissions per hour per IP (reviews / alerts)
+  message: { error: 'Submission limit reached. Please wait an hour before submitting again.' }
+});
+
+app.use(globalLimiter);
+
+app.use(express.json({ limit: '10kb' })); // limit body payload to 10kb
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+// CORS — allow requests cleanly
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-pass');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
@@ -72,6 +103,14 @@ app.get('/bus/:slug', (req, res) => {
 
 app.get('/alerts', (req, res) => {
   res.sendFile(path.join(__dirname, 'templates', 'alerts.html'));
+});
+
+app.get('/privacy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'templates', 'privacy.html'));
+});
+
+app.get('/terms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'templates', 'terms.html'));
 });
 
 app.get('/admin', (req, res) => {
@@ -246,7 +285,7 @@ app.get('/api/bus/:slug', (req, res) => {
 });
 
 // ─── API: SUBMIT REVIEW ───────────────────────────────────────────────────────
-app.post('/api/review', (req, res) => {
+app.post('/api/review', submitLimiter, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
 
@@ -261,16 +300,16 @@ app.post('/api/review', (req, res) => {
 
   const review = {
     id: `rev-${uuidv4().slice(0, 8)}`,
-    busId,
-    userName: userName.trim(),
-    userCity: (userCity || '').trim(),
+    busId: sanitizeInput(busId),
+    userName: sanitizeInput(userName),
+    userCity: sanitizeInput(userCity),
     rating: Math.min(5, Math.max(1, parseInt(rating))),
-    title: (title || '').trim(),
-    comment: comment.trim(),
+    title: sanitizeInput(title),
+    comment: sanitizeInput(comment),
     date: new Date().toISOString().split('T')[0],
     helpfulCount: 0,
     verified: false,
-    platform: platform || 'buscompare'
+    platform: sanitizeInput(platform) || 'buscompare'
   };
 
   db.reviews.push(review);
@@ -289,30 +328,34 @@ app.post('/api/review', (req, res) => {
 });
 
 // ─── API: PRICE ALERT SUBSCRIPTION ───────────────────────────────────────────
-app.post('/api/alert', (req, res) => {
+app.post('/api/alert', submitLimiter, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
 
   const { email, whatsapp, routeFrom, routeTo, maxPrice, tier } = req.body;
 
-  if (!email || !routeFrom || !routeTo) {
+  const cleanEmail = sanitizeInput(email);
+  const cleanFrom = sanitizeInput(routeFrom);
+  const cleanTo = sanitizeInput(routeTo);
+
+  if (!cleanEmail || !cleanFrom || !cleanTo) {
     return res.status(400).json({ error: 'Email, routeFrom, routeTo are required' });
   }
 
   // Check duplicate
-  const existing = db.alerts.find(a => a.email === email && a.routeFrom === routeFrom && a.routeTo === routeTo);
+  const existing = db.alerts.find(a => a.email === cleanEmail && a.routeFrom === cleanFrom && a.routeTo === cleanTo);
   if (existing) {
     return res.status(409).json({ error: 'Alert already exists for this route and email', existing });
   }
 
   const alert = {
     id: `alert-${uuidv4().slice(0, 8)}`,
-    email: email.trim(),
-    whatsapp: (whatsapp || '').trim(),
-    routeFrom: routeFrom.trim(),
-    routeTo: routeTo.trim(),
+    email: cleanEmail,
+    whatsapp: sanitizeInput(whatsapp),
+    routeFrom: cleanFrom,
+    routeTo: cleanTo,
     maxPrice: maxPrice ? parseInt(maxPrice) : null,
-    tier: tier || 'free',
+    tier: sanitizeInput(tier) || 'free',
     active: true,
     createdAt: new Date().toISOString(),
     triggeredCount: 0
@@ -324,6 +367,7 @@ app.post('/api/alert', (req, res) => {
 
   res.status(201).json({ success: true, alert });
 });
+
 
 // ─── AFFILIATE REDIRECT (CLICK TRACKING) ─────────────────────────────────────
 app.get('/go/:platform/:busId', (req, res) => {
