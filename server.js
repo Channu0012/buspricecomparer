@@ -157,6 +157,20 @@ app.get('/api/routes', (req, res) => {
 });
 
 // ─── API: SEARCH ──────────────────────────────────────────────────────────────
+// ─── CITY NORMALIZATION HELPER ──────────────────────────────────────────────
+const CITY_ALIASES = {
+  'bengaluru': 'bangalore', 'madras': 'chennai', 'bombay': 'mumbai',
+  'poona': 'pune', 'calcutta': 'kolkata', 'gurugram': 'gurgaon',
+  'baroda': 'vadodara', 'trivandrum': 'thiruvananthapuram', 'vizag': 'visakhapatnam'
+};
+
+function normalizeCity(name) {
+  if (!name) return '';
+  const clean = name.trim().toLowerCase();
+  return CITY_ALIASES[clean] || clean;
+}
+
+// ─── API: SEARCH ──────────────────────────────────────────────────────────────
 app.get('/api/search', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -167,16 +181,29 @@ app.get('/api/search', (req, res) => {
     return res.status(400).json({ error: 'From and To cities are required' });
   }
 
+  const normFrom = normalizeCity(from);
+  const normTo   = normalizeCity(to);
+
   // Increment search counter
   db.admin.totalSearches = (db.admin.totalSearches || 0) + 1;
   writeDB(db);
 
-  // Filter buses by route
+  // Smart filter buses by route (exact or normalized alias match)
   let results = db.buses.filter(bus => {
-    const fromMatch = bus.route.from.toLowerCase() === from.toLowerCase();
-    const toMatch = bus.route.to.toLowerCase() === to.toLowerCase();
-    return fromMatch && toMatch;
+    const bFrom = normalizeCity(bus.route.from);
+    const bTo   = normalizeCity(bus.route.to);
+    return bFrom === normFrom && bTo === normTo;
   });
+
+  // Fallback: If no exact/alias match, try partial includes match
+  if (results.length === 0) {
+    results = db.buses.filter(bus => {
+      const bFrom = normalizeCity(bus.route.from);
+      const bTo   = normalizeCity(bus.route.to);
+      return (bFrom.includes(normFrom) || normFrom.includes(bFrom)) &&
+             (bTo.includes(normTo) || normTo.includes(bTo));
+    });
+  }
 
   // Filter by bus type
   if (busType && busType !== 'all') {

@@ -484,16 +484,45 @@ async function loadCities() {
 function setupAC(inId, dropId) {
   const inp = document.getElementById(inId);
   const drop = document.getElementById(dropId);
+  let activeIdx = -1;
+
   inp.addEventListener('input', () => {
+    activeIdx = -1;
     const q = inp.value.trim().toLowerCase();
     if (q.length < 1) { drop.classList.remove('open'); return; }
-    const m = cities.filter(c => c.name.toLowerCase().includes(q)).slice(0, 8);
+    const m = cities.filter(c => c.name.toLowerCase().includes(q) || c.state.toLowerCase().includes(q)).slice(0, 8);
     if (!m.length) { drop.classList.remove('open'); return; }
-    drop.innerHTML = m.map(c => `<div class="cdrop-item" onclick="pick('${inId}','${dropId}','${c.name}')">${hi(c.name,q)}<span class="cdrop-state">${c.state}</span></div>`).join('');
+    drop.innerHTML = m.map((c, i) => `<div class="cdrop-item" data-idx="${i}" onclick="pick('${inId}','${dropId}','${c.name}')">${hi(c.name,q)}<span class="cdrop-state">${c.state}</span></div>`).join('');
     drop.classList.add('open');
   });
+
   inp.addEventListener('blur', () => setTimeout(() => drop.classList.remove('open'), 200));
-  inp.addEventListener('keydown', e => { if (e.key==='Escape') drop.classList.remove('open'); });
+
+  inp.addEventListener('keydown', e => {
+    const items = drop.querySelectorAll('.cdrop-item');
+    if (!drop.classList.contains('open') || !items.length) {
+      if (e.key === 'Escape') drop.classList.remove('open');
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIdx = (activeIdx + 1) % items.length;
+      updateActive(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIdx = (activeIdx - 1 + items.length) % items.length;
+      updateActive(items);
+    } else if (e.key === 'Enter' && activeIdx >= 0) {
+      e.preventDefault();
+      items[activeIdx].click();
+    } else if (e.key === 'Escape') {
+      drop.classList.remove('open');
+    }
+  });
+
+  function updateActive(items) {
+    items.forEach((it, i) => it.classList.toggle('hi', i === activeIdx));
+  }
 }
 
 function hi(text, q) {
