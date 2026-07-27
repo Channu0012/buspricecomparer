@@ -1,0 +1,20 @@
+{
+  "name": "buscompare-india",
+  "version": "1.0.0",
+  "description": "India's #1 Bus Price Comparison Platform — Compare fares across RedBus, AbhiBus, MakeMyTrip & more",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["bus", "price comparison", "travel", "india", "redbus", "abhibus", "cheap bus"],
+  "author": "BusCompare India",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

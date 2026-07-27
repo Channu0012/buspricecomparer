@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Bus Search Results — BusCompare India</title>
+  <meta name="description" content="Compare bus prices across all major operators for your route. Find cheapest tickets on RedBus, AbhiBus, MakeMyTrip and more.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#070B14;--s1:#0D1221;--s2:#131926;--card:#161E2E;--ch:#1C2640;--border:rgba(255,255,255,0.07);--bl:rgba(255,255,255,0.12);--p:#F97316;--pd:#C2550B;--pg:rgba(249,115,22,0.25);--blue:#3B82F6;--green:#10B981;--gg:rgba(16,185,129,0.1);--gold:#F59E0B;--red:#EF4444;--rg:rgba(239,68,68,0.1);--t:#F1F5F9;--ts:#94A3B8;--tm:#475569;--r:12px;--rl:18px;--tr:0.2s cubic-bezier(0.4,0,0.2,1);--trs:0.4s cubic-bezier(0.4,0,0.2,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--s2);border-radius:3px}
+
+    /* ── NAVBAR ── */
+    .navbar{position:sticky;top:0;z-index:1000;padding:12px 24px;background:rgba(7,11,20,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.5)}
+    .nav-in{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:20px}
+    .nav-logo{font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--t);text-decoration:none;display:flex;align-items:center;gap:8px;margin-right:20px;flex-shrink:0}
+    .nav-logo-icon{width:34px;height:34px;background:var(--p);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+    .nav-logo em{color:var(--p);font-style:normal}
+
+    /* COMPACT SEARCH BAR */
+    .cs-bar{flex:1;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid var(--bl);border-radius:100px;padding:8px 8px 8px 20px;max-width:680px}
+    .cs-from,.cs-to{font-size:14px;font-weight:700;color:var(--t);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+    .cs-arrow{color:var(--p);font-size:13px;font-weight:800;flex-shrink:0}
+    .cs-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
+    .cs-date{font-size:12px;color:var(--ts);font-weight:600;white-space:nowrap}
+    .cs-change-btn{background:var(--p);color:#fff;border:none;border-radius:100px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:var(--tr);margin-left:auto}
+    .cs-change-btn:hover{background:var(--pd)}
+
+    /* ── LAYOUT ── */
+    .main-layout{max-width:1400px;margin:0 auto;padding:24px 24px 80px;display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:start}
+
+    /* ── FILTER SIDEBAR ── */
+    .sidebar{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto}
+    .sidebar::-webkit-scrollbar{width:4px}
+    .sf-title{font-size:16px;font-weight:800;color:var(--t);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+    .sf-clear{font-size:12px;font-weight:700;color:var(--p);cursor:pointer;transition:var(--tr)}
+    .sf-clear:hover{color:var(--pd)}
+    .sf-group{margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:20px}
+    .sf-group:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+    .sf-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--ts);margin-bottom:12px}
+    .sf-opts{display:flex;flex-direction:column;gap:8px}
+    .sf-opt{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ts);transition:var(--tr)}
+    .sf-opt:hover{color:var(--t)}
+    .sf-cb{width:16px;height:16px;border:2px solid var(--bl);border-radius:4px;background:transparent;cursor:pointer;accent-color:var(--p);flex-shrink:0}
+    .time-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .time-btn{background:rgba(255,255,255,.04);border:1px solid var(--bl);border-radius:8px;padding:10px 8px;font-size:11px;font-weight:700;color:var(--ts);cursor:pointer;text-align:center;transition:var(--tr);font-family:inherit}
+    .time-btn:hover,.time-btn.active{background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.3);color:var(--p)}
+    .price-range{margin-top:8px}
+    .price-track{position:relative;height:4px;background:var(--bl);border-radius:2px;margin:16px 0}
+    .price-fill{position:absolute;height:100%;background:var(--p);border-radius:2px}
+    .price-input-row{display:flex;gap:8px;align-items:center}
+    .price-inp{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:8px;padding:8px 10px;color:var(--t);font-size:12px;font-family:inherit;outline:none;width:100%;text-align:center;font-weight:700}
+    .price-sep{color:var(--tm);font-size:12px;font-weight:600}
+    .apply-btn{width:100%;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:var(--tr);margin-top:20px}
+    .apply-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px var(--pg)}
+
+    /* ── RESULTS AREA ── */
+    .results-area{display:flex;flex-direction:column;gap:16px}
+    .results-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .results-count{font-size:15px;font-weight:700;color:var(--t)}
+    .results-count em{color:var(--p);font-style:normal}
+    .sort-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+    .sort-label{font-size:12px;font-weight:700;color:var(--tm)}
+    .sort-btns{display:flex;gap:8px}
+    .sort-btn{background:rgba(255,255,255,.04);border:1px solid var(--bl);border-radius:100px;padding:7px 16px;font-size:12px;font-weight:700;color:var(--ts);cursor:pointer;transition:var(--tr);font-family:inherit;white-space:nowrap}
+    .sort-btn:hover{color:var(--t)}
+    .sort-btn.active{background:rgba(249,115,22,.12);border-color:rgba(249,115,22,.3);color:var(--p)}
+
+    /* ── BUS CARD ── */
+    .bus-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:var(--trs);animation:fadeUp .4s ease both}
+    .bus-card:hover{border-color:rgba(249,115,22,.25);box-shadow:0 16px 50px rgba(0,0,0,.4),0 0 0 1px rgba(249,115,22,.1)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .bc-top{padding:20px 24px 16px;border-bottom:1px solid var(--border)}
+    .bc-header{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+    .bc-operator{font-size:16px;font-weight:800;color:var(--t)}
+    .bc-bus-type{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px}
+    .bc-badges{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+    .badge{font-size:10px;font-weight:800;padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:0.5px}
+    .badge-top{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.2);color:var(--gold)}
+    .badge-best{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);color:var(--green)}
+    .badge-lux{background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.2);color:#A78BFA}
+    .badge-gov{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2);color:var(--blue)}
+    .badge-full{background:var(--rg);border:1px solid rgba(239,68,68,.2);color:var(--red)}
+    .bc-route-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .bc-time{display:flex;flex-direction:column;text-align:center;flex-shrink:0}
+    .bc-time-val{font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:var(--t);line-height:1}
+    .bc-time-stop{font-size:11px;color:var(--tm);font-weight:600;margin-top:2px;max-width:100px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .bc-line{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
+    .bc-dur{font-size:12px;font-weight:700;color:var(--ts)}
+    .bc-track{width:100%;display:flex;align-items:center;gap:4px}
+    .bc-dot{width:8px;height:8px;border-radius:50%;background:var(--p);flex-shrink:0}
+    .bc-line-bar{flex:1;height:2px;background:linear-gradient(90deg,var(--p),rgba(249,115,22,.3))}
+    .bc-arrow-ic{color:var(--p);font-size:16px;flex-shrink:0}
+    .bc-dist{font-size:11px;color:var(--tm);font-weight:500}
+    .bc-rating{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0}
+    .bc-stars{color:var(--gold);font-size:13px}
+    .bc-rval{font-size:14px;font-weight:800;color:var(--t)}
+    .bc-rcnt{font-size:11px;color:var(--tm);font-weight:500}
+    .bc-amenities{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    .amen-chip{display:flex;align-items:center;gap:4px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--ts)}
+
+    /* PRICE COMPARISON */
+    .bc-prices{padding:16px 24px;background:rgba(0,0,0,.2);border-bottom:1px solid var(--border)}
+    .bc-prices-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tm);margin-bottom:12px}
+    .prices-row{display:flex;gap:12px;flex-wrap:wrap;align-items:stretch}
+    .price-chip{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--bl);border-radius:10px;padding:10px 16px;min-width:90px;cursor:pointer;transition:var(--tr);text-decoration:none;position:relative}
+    .price-chip:hover{border-color:rgba(249,115,22,.3);background:rgba(249,115,22,.06);transform:translateY(-2px)}
+    .price-chip.cheapest{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.3);box-shadow:0 0 0 1px rgba(16,185,129,.15)}
+    .price-chip.cheapest::before{content:'✓ CHEAPEST';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:9px;font-weight:800;padding:2px 8px;border-radius:100px;letter-spacing:0.5px;white-space:nowrap}
+    .pc-platform{font-size:11px;font-weight:700;color:var(--ts);margin-bottom:6px}
+    .pc-price{font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:var(--t);line-height:1}
+    .price-chip.cheapest .pc-price{color:var(--green)}
+    .pc-savings{font-size:10px;font-weight:700;color:var(--green);margin-top:2px}
+
+    /* CTA ROW */
+    .bc-cta{padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .bc-seats{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+    .bc-seats.urgent{color:var(--red)}
+    .bc-seats.ok{color:var(--green)}
+    .bc-btns{display:flex;gap:10px;align-items:center}
+    .bc-detail-btn{background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:100px;padding:10px 20px;font-size:13px;font-weight:700;color:var(--ts);cursor:pointer;transition:var(--tr);font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+    .bc-detail-btn:hover{color:var(--t);background:rgba(255,255,255,.1)}
+    .bc-book-btn{background:linear-gradient(135deg,var(--p),var(--pd));border:none;border-radius:100px;padding:10px 22px;font-size:13px;font-weight:800;color:#fff;cursor:pointer;transition:var(--tr);font-family:inherit;display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap}
+    .bc-book-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px var(--pg)}
+
+    /* SKELETON */
+    .skeleton{background:linear-gradient(90deg,var(--card) 25%,var(--ch) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--r)}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .skel-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;display:flex;flex-direction:column;gap:16px}
+
+    /* EMPTY STATE */
+    .empty-state{text-align:center;padding:80px 24px;color:var(--ts)}
+    .empty-emoji{font-size:64px;margin-bottom:20px}
+    .empty-title{font-size:24px;font-weight:800;color:var(--t);margin-bottom:10px}
+    .empty-sub{font-size:15px;color:var(--ts);margin-bottom:28px}
+    .empty-btn{background:var(--p);color:#fff;border:none;border-radius:100px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:var(--tr)}
+    .empty-btn:hover{background:var(--pd)}
+
+    /* ROUTE INFO BAR */
+    .route-info-bar{background:var(--s1);border:1px solid var(--border);border-radius:var(--rl);padding:18px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+    .rib-route{font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--t)}
+    .rib-route .arr{color:var(--p);font-size:16px}
+    .rib-meta{display:flex;gap:16px;flex-wrap:wrap}
+    .rib-chip{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ts);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:5px 14px}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){.main-layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none}.sort-btns{overflow-x:auto}}
+    @media(max-width:600px){.bc-route-row{flex-wrap:wrap}.bc-rating{margin-left:0}.prices-row{gap:8px}.price-chip{min-width:75px;padding:8px 12px}.bc-cta{flex-direction:column;align-items:flex-start}.bc-btns{width:100%}.bc-book-btn,.bc-detail-btn{flex:1;justify-content:center}}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-in">
+    <a href="/" class="nav-logo"><div class="nav-logo-icon">🚌</div>Bus<em>Compare</em></a>
+    <div class="cs-bar" id="cs-bar">
+      <span class="cs-from" id="cs-from">Loading...</span>
+      <span class="cs-arrow">→</span>
+      <span class="cs-to" id="cs-to">Loading...</span>
+      <span class="cs-divider"></span>
+      <span class="cs-date" id="cs-date">Today</span>
+      <button class="cs-change-btn" onclick="window.location.href='/'">Change</button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sf-title">
+      Filters
+      <span class="sf-clear" onclick="clearAll()">Clear All</span>
+    </div>
+
+    <div class="sf-group">
+      <div class="sf-label">Bus Type</div>
+      <div class="sf-opts">
+        <label class="sf-opt"><input type="checkbox" class="sf-cb" value="ac-sleeper" onchange="applyFilters()" id="f-acs"> AC Sleeper (2+1)</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb" value="luxury-sleeper" onchange="applyFilters()" id="f-lux"> Luxury Sleeper (1+1)</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb" value="ac-seater" onchange="applyFilters()" id="f-acst"> AC Seater (2+2)</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb" value="non-ac-sleeper" onchange="applyFilters()" id="f-nas"> Non-AC Sleeper</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb" value="non-ac-seater" onchange="applyFilters()" id="f-nast"> Non-AC Seater</label>
+      </div>
+    </div>
+
+    <div class="sf-group">
+      <div class="sf-label">Departure Time</div>
+      <div class="time-btns">
+        <button class="time-btn" data-time="morning" onclick="toggleTime(this)">🌅<br>Morning<br>6AM–12PM</button>
+        <button class="time-btn" data-time="afternoon" onclick="toggleTime(this)">☀️<br>Afternoon<br>12–5PM</button>
+        <button class="time-btn" data-time="evening" onclick="toggleTime(this)">🌆<br>Evening<br>5–9PM</button>
+        <button class="time-btn" data-time="night" onclick="toggleTime(this)">🌙<br>Night<br>9PM–6AM</button>
+      </div>
+    </div>
+
+    <div class="sf-group">
+      <div class="sf-label">Operators</div>
+      <div class="sf-opts" id="op-filters">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <div class="sf-group">
+      <div class="sf-label">Amenities</div>
+      <div class="sf-opts">
+        <label class="sf-opt"><input type="checkbox" class="sf-cb amenity-cb" value="wifi" onchange="applyFilters()"> 📶 WiFi</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb amenity-cb" value="usb-charging" onchange="applyFilters()"> 🔌 USB Charging</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb amenity-cb" value="blanket" onchange="applyFilters()"> 🛏️ Blanket</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb amenity-cb" value="entertainment" onchange="applyFilters()"> 🎬 Entertainment</label>
+        <label class="sf-opt"><input type="checkbox" class="sf-cb amenity-cb" value="snacks" onchange="applyFilters()"> 🍿 Snacks</label>
+      </div>
+    </div>
+
+    <div class="sf-group">
+      <div class="sf-label">Price Range</div>
+      <div class="price-range">
+        <div class="price-input-row">
+          <input type="number" class="price-inp" id="min-price" placeholder="₹ Min" oninput="applyFilters()">
+          <span class="price-sep">—</span>
+          <input type="number" class="price-inp" id="max-price" placeholder="₹ Max" oninput="applyFilters()">
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- RESULTS -->
+  <main>
+    <!-- ROUTE INFO BAR -->
+    <div class="route-info-bar" id="route-info" style="display:none">
+      <div class="rib-route" id="rib-route">Mumbai <span class="arr">→</span> Pune</div>
+      <div class="rib-meta" id="rib-meta"></div>
+    </div>
+
+    <!-- RESULTS HEADER -->
+    <div class="results-header">
+      <div class="results-count" id="results-count">Loading results...</div>
+      <div class="sort-row">
+        <span class="sort-label">Sort:</span>
+        <div class="sort-btns">
+          <button class="sort-btn active" data-sort="default" onclick="setSort(this,'default')">Best Match</button>
+          <button class="sort-btn" data-sort="price-asc" onclick="setSort(this,'price-asc')">Cheapest First</button>
+          <button class="sort-btn" data-sort="rating" onclick="setSort(this,'rating')">Top Rated</button>
+          <button class="sort-btn" data-sort="departure" onclick="setSort(this,'departure')">Earliest Depart</button>
+          <button class="sort-btn" data-sort="duration" onclick="setSort(this,'duration')">Fastest</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKELETON CARDS -->
+    <div id="skeleton-area">
+      <div class="skel-card" style="margin-bottom:16px"><div class="skeleton" style="height:20px;width:40%"></div><div class="skeleton" style="height:60px"></div><div class="skeleton" style="height:40px"></div></div>
+      <div class="skel-card" style="margin-bottom:16px"><div class="skeleton" style="height:20px;width:55%"></div><div class="skeleton" style="height:60px"></div><div class="skeleton" style="height:40px"></div></div>
+      <div class="skel-card"><div class="skeleton" style="height:20px;width:35%"></div><div class="skeleton" style="height:60px"></div><div class="skeleton" style="height:40px"></div></div>
+    </div>
+
+    <!-- RESULTS LIST -->
+    <div id="results-list" class="results-area" style="display:none"></div>
+
+    <!-- EMPTY STATE -->
+    <div id="empty-state" class="empty-state" style="display:none">
+      <div class="empty-emoji">🚌</div>
+      <div class="empty-title">No buses found</div>
+      <p class="empty-sub">No buses match your filters for this route.<br>Try adjusting your filters or search a different date.</p>
+      <button class="empty-btn" onclick="clearAll()">Clear All Filters</button>
+    </div>
+  </main>
+</div>
+
+<script>
+const AMENITY_ICONS = {
+  'wifi':'📶','usb-charging':'🔌','blanket':'🛏️','water-bottle':'💧',
+  'entertainment':'🎬','snacks':'🍿','reading-light':'💡','ac-individual':'❄️'
+};
+const PLATFORM_NAMES = {redbus:'RedBus',abhibus:'AbhiBus',makemytrip:'MakeMyTrip',yatra:'Yatra',direct:'Direct'};
+const BADGE_MAP = {
+  'best-value': {cls:'badge-best', label:'Best Value'},
+  'popular': {cls:'badge-top', label:'Popular'},
+  'top-rated': {cls:'badge-top', label:'Top Rated'},
+  'luxury': {cls:'badge-lux', label:'Luxury'},
+  'government': {cls:'badge-gov', label:'Govt'},
+  'budget': {cls:'badge-best', label:'Budget'},
+  'fastest': {cls:'badge-best', label:'Fastest'},
+  'almost-full': {cls:'badge-full', label:'Almost Full'},
+  'frequent': {cls:'badge-gov', label:'Frequent'},
+  'comfortable': {cls:'badge-lux', label:'Comfortable'}
+};
+
+let allBuses = [];
+let currentSort = 'default';
+let activeTime = null;
+let params = {};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sp = new URLSearchParams(location.search);
+  params = {
+    from: sp.get('from') || '',
+    to: sp.get('to') || '',
+    date: sp.get('date') || '',
+    busType: sp.get('busType') || 'all'
+  };
+
+  document.getElementById('cs-from').textContent = params.from || '—';
+  document.getElementById('cs-to').textContent = params.to || '—';
+  document.getElementById('cs-date').textContent = params.date ? fmtDate(params.date) : 'Today';
+  document.title = `${params.from} to ${params.to} Buses — BusCompare India`;
+
+  loadResults();
+});
+
+function fmtDate(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-IN', {day:'numeric',month:'short',weekday:'short'});
+}
+
+async function loadResults() {
+  try {
+    const sp = new URLSearchParams({from:params.from, to:params.to});
+    if (params.date) sp.set('date', params.date);
+    const r = await fetch(`/api/search?${sp}`);
+    const d = await r.json();
+    allBuses = d.results || [];
+
+    document.getElementById('skeleton-area').style.display = 'none';
+    document.getElementById('results-list').style.display = 'flex';
+
+    // Route info
+    if (d.route) {
+      document.getElementById('route-info').style.display = 'flex';
+      document.getElementById('rib-route').innerHTML = `${params.from} <span class="arr">→</span> ${params.to}`;
+      document.getElementById('rib-meta').innerHTML = `
+        <div class="rib-chip">📍 ${d.route.distance} km</div>
+        <div class="rib-chip">⏱ ${d.route.avgDuration}</div>
+        <div class="rib-chip">🚌 ${allBuses.length} buses found</div>
+        <div class="rib-chip">💰 From ₹${d.route.minPrice?.toLocaleString('en-IN') || '—'}</div>
+      `;
+    }
+
+    // Populate operator filters
+    if (d.availableOperators && d.availableOperators.length) {
+      document.getElementById('op-filters').innerHTML = d.availableOperators.map(op => `
+        <label class="sf-opt">
+          <input type="checkbox" class="sf-cb op-cb" value="${op.code}" onchange="applyFilters()"> ${op.name}
+        </label>
+      `).join('');
+    }
+
+    renderBuses(allBuses);
+  } catch(e) {
+    document.getElementById('skeleton-area').style.display = 'none';
+    document.getElementById('empty-state').style.display = 'block';
+    document.getElementById('results-count').textContent = 'Error loading results';
+  }
+}
+
+function applyFilters() {
+  let buses = [...allBuses];
+
+  // Bus type
+  const typeVals = [...document.querySelectorAll('.sf-cb[id^="f-"]:checked')].map(c => c.value);
+  if (typeVals.length) buses = buses.filter(b => typeVals.includes(b.busTypeCode));
+
+  // Operators
+  const opVals = [...document.querySelectorAll('.op-cb:checked')].map(c => c.value);
+  if (opVals.length) buses = buses.filter(b => opVals.includes(b.operatorCode));
+
+  // Amenities
+  const amenVals = [...document.querySelectorAll('.amenity-cb:checked')].map(c => c.value);
+  if (amenVals.length) buses = buses.filter(b => amenVals.every(a => b.amenities.includes(a)));
+
+  // Departure time
+  if (activeTime) {
+    buses = buses.filter(b => {
+      const h = parseInt(b.route.departureTime.split(':')[0]);
+      if (activeTime==='morning') return h>=6 && h<12;
+      if (activeTime==='afternoon') return h>=12 && h<17;
+      if (activeTime==='evening') return h>=17 && h<21;
+      if (activeTime==='night') return h>=21 || h<6;
+      return true;
+    });
+  }
+
+  // Price
+  const minP = parseInt(document.getElementById('min-price').value);
+  const maxP = parseInt(document.getElementById('max-price').value);
+  if (!isNaN(minP)) buses = buses.filter(b => b.lowestPrice >= minP);
+  if (!isNaN(maxP)) buses = buses.filter(b => b.lowestPrice <= maxP);
+
+  // Sort
+  buses = sortBuses(buses, currentSort);
+  renderBuses(buses);
+}
+
+function sortBuses(buses, sort) {
+  return [...buses].sort((a, b) => {
+    switch(sort) {
+      case 'price-asc': return a.lowestPrice - b.lowestPrice;
+      case 'price-desc': return b.lowestPrice - a.lowestPrice;
+      case 'rating': return b.rating - a.rating;
+      case 'departure': return a.route.departureTime.localeCompare(b.route.departureTime);
+      case 'duration': return a.route.durationMinutes - b.route.durationMinutes;
+      default: {
+        if (b.featured !== a.featured) return b.featured ? 1 : -1;
+        return a.lowestPrice - b.lowestPrice;
+      }
+    }
+  });
+}
+
+function setSort(btn, sort) {
+  currentSort = sort;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function toggleTime(btn) {
+  const t = btn.dataset.time;
+  if (activeTime === t) {
+    activeTime = null;
+    btn.classList.remove('active');
+  } else {
+    activeTime = t;
+    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  applyFilters();
+}
+
+function clearAll() {
+  document.querySelectorAll('.sf-cb').forEach(c => c.checked = false);
+  document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('min-price').value = '';
+  document.getElementById('max-price').value = '';
+  activeTime = null;
+  currentSort = 'default';
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('[data-sort="default"]').classList.add('active');
+  renderBuses(allBuses);
+}
+
+function renderBuses(buses) {
+  const list = document.getElementById('results-list');
+  const empty = document.getElementById('empty-state');
+  const cnt = document.getElementById('results-count');
+
+  if (!buses.length) {
+    list.style.display = 'none';
+    empty.style.display = 'block';
+    cnt.innerHTML = 'No buses found';
+    return;
+  }
+
+  list.style.display = 'flex';
+  empty.style.display = 'none';
+  cnt.innerHTML = `<em>${buses.length} bus${buses.length>1?'es':''}</em> found — Compare & save!`;
+
+  list.innerHTML = buses.map((bus, idx) => buildCard(bus, idx)).join('');
+}
+
+function buildCard(b, idx) {
+  // Find cheapest platform
+  const prices = Object.entries(b.prices).filter(([k,v]) => v !== null).sort(([,a],[,b]) => a-b);
+  const cheapest = prices[0];
+  const maxPrice = prices[prices.length-1][1];
+  const savings = cheapest ? maxPrice - cheapest[1] : 0;
+
+  const badgesHtml = (b.badges||[]).map(badge => {
+    const m = BADGE_MAP[badge];
+    return m ? `<span class="badge ${m.cls}">${m.label}</span>` : '';
+  }).join('');
+
+  const amenHtml = b.amenities.map(a => `<span class="amen-chip">${AMENITY_ICONS[a]||'•'} ${a.replace(/-/g,' ')}</span>`).join('');
+
+  const priceChipsHtml = prices.slice(0,5).map(([platform, price], i) => {
+    const isCheapest = i === 0;
+    return `
+      <a class="price-chip ${isCheapest?'cheapest':''}" href="/go/${platform}/${b.id}" target="_blank">
+        <div class="pc-platform">${PLATFORM_NAMES[platform]||platform}</div>
+        <div class="pc-price">₹${price.toLocaleString('en-IN')}</div>
+        ${isCheapest && savings > 0 ? `<div class="pc-savings">Save ₹${savings}</div>` : ''}
+      </a>
+    `;
+  }).join('');
+
+  const seatsLeft = b.seatsLeft || 0;
+  const seatsClass = seatsLeft <= 5 ? 'urgent' : 'ok';
+  const seatsIcon = seatsLeft <= 5 ? '🔴' : '🟢';
+  const seatsText = seatsLeft <= 3 ? `Only ${seatsLeft} seats left!` : seatsLeft <= 10 ? `${seatsLeft} seats left` : `${seatsLeft} seats available`;
+
+  const cheapPlatformName = cheapest ? PLATFORM_NAMES[cheapest[0]]||cheapest[0] : 'RedBus';
+  const cheapPrice = cheapest ? cheapest[1] : b.lowestPrice;
+  const cheapPlatformId = cheapest ? cheapest[0] : 'redbus';
+
+  return `
+    <div class="bus-card" style="animation-delay:${idx*0.06}s">
+      <div class="bc-top">
+        <div class="bc-header">
+          <div class="bc-operator">${b.operator}</div>
+          <div class="bc-bus-type">${b.busType}</div>
+          <div class="bc-badges">${badgesHtml}</div>
+        </div>
+        <div class="bc-route-row">
+          <div class="bc-time">
+            <div class="bc-time-val">${b.route.departureTime}</div>
+            <div class="bc-time-stop">${b.route.departureStop || b.route.from}</div>
+          </div>
+          <div class="bc-line">
+            <div class="bc-dur">⏱ ${b.route.duration}</div>
+            <div class="bc-track">
+              <div class="bc-dot"></div>
+              <div class="bc-line-bar"></div>
+              <div class="bc-arrow-ic">→</div>
+            </div>
+            <div class="bc-dist">📍 ${b.route.distance} km</div>
+          </div>
+          <div class="bc-time">
+            <div class="bc-time-val">${b.route.arrivalTime}</div>
+            <div class="bc-time-stop">${b.route.arrivalStop || b.route.to}</div>
+          </div>
+          <div class="bc-rating">
+            <div class="bc-stars">★</div>
+            <div class="bc-rval">${b.rating}</div>
+            <div class="bc-rcnt">(${(b.reviewCount||0).toLocaleString('en-IN')})</div>
+          </div>
+        </div>
+        <div class="bc-amenities">${amenHtml}</div>
+      </div>
+      <div class="bc-prices">
+        <div class="bc-prices-label">💰 Compare Prices Across Platforms</div>
+        <div class="prices-row">${priceChipsHtml}</div>
+      </div>
+      <div class="bc-cta">
+        <div class="bc-seats ${seatsClass}">${seatsIcon} ${seatsText}</div>
+        <div class="bc-btns">
+          <a href="/bus/${b.slug}" class="bc-detail-btn">View Details</a>
+          <a href="/go/${cheapPlatformId}/${b.id}" target="_blank" class="bc-book-btn">
+            Book on ${cheapPlatformName} — ₹${cheapPrice.toLocaleString('en-IN')} ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>

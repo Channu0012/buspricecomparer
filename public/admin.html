@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder Dashboard — BusCompare India</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#050810;--s1:#0A0E1A;--s2:#0F1523;--card:#121929;--ch:#171F30;--border:rgba(255,255,255,0.06);--bl:rgba(255,255,255,0.1);--p:#F97316;--pd:#C2550B;--pg:rgba(249,115,22,0.2);--blue:#3B82F6;--bg2:rgba(59,130,246,0.12);--green:#10B981;--gg:rgba(16,185,129,0.1);--gold:#F59E0B;--red:#EF4444;--purple:#8B5CF6;--t:#F1F5F9;--ts:#94A3B8;--tm:#475569;--r:10px;--rl:16px;--tr:0.2s cubic-bezier(0.4,0,0.2,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--s2);border-radius:3px}
+
+    /* LAYOUT */
+    .layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+
+    /* SIDEBAR */
+    .sidebar{background:var(--s1);border-right:1px solid var(--border);padding:0;position:sticky;top:0;height:100vh;overflow-y:auto}
+    .sb-logo{padding:24px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    .sb-logo-icon{width:36px;height:36px;background:var(--p);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .sb-logo-text{font-family:'Outfit',sans-serif;font-size:18px;font-weight:900}
+    .sb-logo-text em{color:var(--p);font-style:normal}
+    .sb-logo-sub{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tm);background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);padding:2px 8px;border-radius:100px}
+    .sb-section{padding:20px 12px 8px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--tm)}
+    .sb-nav{list-style:none;padding:0 8px}
+    .sb-nav li{margin-bottom:2px}
+    .sb-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);color:var(--ts);font-size:13px;font-weight:600;cursor:pointer;transition:var(--tr);border:none;background:none;width:100%;font-family:inherit}
+    .sb-link:hover{background:rgba(255,255,255,.04);color:var(--t)}
+    .sb-link.active{background:rgba(249,115,22,.12);color:var(--p);border:1px solid rgba(249,115,22,.15)}
+    .sb-link .sb-icon{font-size:16px;flex-shrink:0}
+    .sb-divider{border:none;border-top:1px solid var(--border);margin:12px 12px}
+    .sb-live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:auto;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{box-shadow:0 0 0 6px rgba(16,185,129,0)}}
+    .sb-bottom{position:absolute;bottom:0;left:0;right:0;padding:16px;border-top:1px solid var(--border);background:var(--s1)}
+    .sb-site-btn{width:100%;background:var(--p);color:#fff;border:none;border-radius:100px;padding:10px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+    .sb-site-btn:hover{background:var(--pd)}
+
+    /* MAIN */
+    .main{padding:28px;overflow-x:hidden}
+    .main-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px}
+    .page-title{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900}
+    .page-sub{font-size:14px;color:var(--ts);margin-top:2px}
+    .header-actions{display:flex;gap:10px;align-items:center}
+    .refresh-btn{background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:100px;padding:8px 18px;font-size:13px;font-weight:700;color:var(--ts);cursor:pointer;font-family:inherit;transition:var(--tr);display:flex;align-items:center;gap:6px}
+    .refresh-btn:hover{color:var(--t);background:rgba(255,255,255,.1)}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--green);background:var(--gg);border:1px solid rgba(16,185,129,.2);padding:7px 14px;border-radius:100px}
+
+    /* METRICS GRID */
+    .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+    .metric-card{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:20px;position:relative;overflow:hidden;transition:var(--tr)}
+    .metric-card:hover{border-color:var(--bl);transform:translateY(-2px)}
+    .metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .mc-orange::before{background:linear-gradient(90deg,var(--p),var(--pd))}
+    .mc-green::before{background:linear-gradient(90deg,var(--green),#059669)}
+    .mc-blue::before{background:linear-gradient(90deg,var(--blue),var(--bd))}
+    .mc-purple::before{background:linear-gradient(90deg,var(--purple),#7C3AED)}
+    .metric-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tm);margin-bottom:8px}
+    .metric-val{font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;line-height:1;margin-bottom:6px}
+    .mc-orange .metric-val{color:var(--p)}
+    .mc-green .metric-val{color:var(--green)}
+    .mc-blue .metric-val{color:var(--blue)}
+    .mc-purple .metric-val{color:var(--purple)}
+    .metric-change{font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px}
+    .metric-change.up{color:var(--green)}
+    .metric-change.neutral{color:var(--ts)}
+    .metric-icon{position:absolute;bottom:16px;right:16px;font-size:32px;opacity:.15}
+
+    /* REVENUE DETAIL */
+    .rev-detail{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;margin-bottom:24px}
+    .rd-title{font-size:16px;font-weight:800;margin-bottom:6px}
+    .rd-sub{font-size:13px;color:var(--ts);margin-bottom:20px}
+    .rd-formula{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .rd-step{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+    .rd-step-icon{font-size:24px;margin-bottom:8px}
+    .rd-step-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tm);margin-bottom:4px}
+    .rd-step-val{font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:var(--p)}
+    .rd-step-desc{font-size:11px;color:var(--tm);margin-top:3px}
+
+    /* TWO COLUMN ROW */
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+    .three-col{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
+
+    /* SECTION CARD */
+    .sc{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:20px}
+    .sc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px}
+    .sc-title{font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px}
+    .sc-badge{font-size:10px;font-weight:700;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);color:var(--p);padding:2px 8px;border-radius:100px}
+    .sc-action{font-size:12px;font-weight:700;color:var(--ts);cursor:pointer;transition:var(--tr)}
+    .sc-action:hover{color:var(--p)}
+
+    /* PLATFORM BAR CHART */
+    .platform-bars{display:flex;flex-direction:column;gap:12px}
+    .pbar-row{display:flex;align-items:center;gap:12px}
+    .pbar-label{font-size:12px;font-weight:700;color:var(--ts);min-width:90px}
+    .pbar-track{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+    .pbar-fill{height:100%;border-radius:4px;transition:width .8s cubic-bezier(0.4,0,0.2,1)}
+    .pbar-count{font-size:12px;font-weight:800;color:var(--t);min-width:28px;text-align:right}
+    .pbar-pct{font-size:11px;color:var(--tm);min-width:32px;text-align:right}
+
+    /* TABLE */
+    table{width:100%;border-collapse:collapse}
+    th{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tm);padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+    td{padding:12px;font-size:13px;color:var(--ts);border-bottom:1px solid rgba(255,255,255,.04)}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:rgba(255,255,255,.02);color:var(--t)}
+    .td-badge{font-size:10px;font-weight:800;padding:3px 9px;border-radius:100px;text-transform:uppercase}
+    .td-rb{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red)}
+    .td-ab{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);color:var(--p)}
+    .td-mm{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--blue)}
+    .td-ya{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:var(--gold)}
+    .td-di{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green)}
+    .td-price{font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:var(--green)}
+    .td-time{font-size:11px;color:var(--tm);font-weight:600}
+
+    /* REVIEW CARD MINI */
+    .rev-mini{display:flex;flex-direction:column;gap:12px}
+    .rev-mini-item{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+    .rmi-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .rmi-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+    .rmi-name{font-size:13px;font-weight:800;color:var(--t)}
+    .rmi-meta{font-size:11px;color:var(--tm)}
+    .rmi-stars{color:var(--gold);font-size:11px;margin-left:auto;letter-spacing:1px}
+    .rmi-text{font-size:12px;color:var(--ts);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+    /* TOP ROUTES */
+    .top-routes{display:flex;flex-direction:column;gap:8px}
+    .tr-row{display:flex;align-items:center;gap:12px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:var(--r)}
+    .tr-rank{font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:var(--p);min-width:28px}
+    .tr-route{font-size:13px;font-weight:700;color:var(--t);flex:1}
+    .tr-clicks{font-size:12px;font-weight:700;color:var(--ts)}
+
+    /* ALERTS PREVIEW */
+    .alerts-list{display:flex;flex-direction:column;gap:8px}
+    .alert-row{display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:var(--r)}
+    .ar-email{font-size:13px;font-weight:700;color:var(--t);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ar-route{font-size:12px;color:var(--ts)}
+    .ar-tier{font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px}
+    .ar-free{background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.2);color:var(--tm)}
+    .ar-pro{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);color:var(--p)}
+
+    /* EMPTY MSG */
+    .empty-msg{text-align:center;padding:32px;color:var(--tm);font-size:13px}
+
+    /* SKELETON */
+    .skeleton{background:linear-gradient(90deg,var(--card) 25%,var(--ch) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--r)}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    /* RESPONSIVE */
+    @media(max-width:1100px){.metrics-grid{grid-template-columns:1fr 1fr}.two-col,.three-col{grid-template-columns:1fr}.rd-formula{grid-template-columns:1fr}}
+    @media(max-width:768px){.layout{grid-template-columns:1fr}.sidebar{display:none}.metrics-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.metrics-grid{grid-template-columns:1fr}}
+
+    /* ── PASSWORD GATE ── */
+    #pw-gate{
+      position:fixed;inset:0;z-index:9999;
+      background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(249,115,22,.12) 0%,transparent 55%),
+                 radial-gradient(ellipse 50% 40% at 90% 100%,rgba(139,92,246,.08) 0%,transparent 50%),
+                 var(--bg);
+      display:flex;align-items:center;justify-content:center;
+      transition:opacity .5s ease,visibility .5s ease;
+    }
+    #pw-gate.hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .pw-box{
+      background:var(--card);border:1px solid var(--bl);
+      border-radius:24px;padding:48px 40px;width:100%;max-width:420px;
+      text-align:center;box-shadow:0 40px 100px rgba(0,0,0,.7);
+      animation:pwDrop .5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes pwDrop{from{opacity:0;transform:translateY(-30px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .pw-logo{width:60px;height:60px;background:var(--p);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px}
+    .pw-title{font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;margin-bottom:6px}
+    .pw-sub{font-size:13px;color:var(--ts);margin-bottom:32px}
+    .pw-field-wrap{position:relative;margin-bottom:14px}
+    .pw-input{
+      width:100%;background:rgba(255,255,255,.06);border:2px solid var(--bl);
+      border-radius:12px;padding:16px 52px 16px 20px;
+      color:var(--t);font-size:20px;font-family:'Outfit',sans-serif;font-weight:700;
+      letter-spacing:6px;text-align:center;outline:none;
+      transition:border-color .2s,box-shadow .2s;
+    }
+    .pw-input:focus{border-color:var(--p);box-shadow:0 0 0 4px var(--pg)}
+    .pw-toggle{
+      position:absolute;right:16px;top:50%;transform:translateY(-50%);
+      background:none;border:none;cursor:pointer;color:var(--tm);font-size:18px;
+      transition:color .2s;padding:4px;
+    }
+    .pw-toggle:hover{color:var(--ts)}
+    .pw-error{
+      font-size:13px;font-weight:700;color:var(--red);
+      background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);
+      border-radius:8px;padding:10px 14px;margin-bottom:14px;display:none;
+      animation:shake .35s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    @keyframes shake{10%,90%{transform:translateX(-3px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
+    .pw-submit{
+      width:100%;background:linear-gradient(135deg,var(--p),var(--pd));
+      border:none;border-radius:12px;padding:16px;
+      font-size:16px;font-weight:800;color:#fff;
+      cursor:pointer;font-family:inherit;transition:all .2s;
+      box-shadow:0 8px 24px var(--pg);
+    }
+    .pw-submit:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(249,115,22,.4)}
+    .pw-submit:active{transform:translateY(0)}
+    .pw-hint{font-size:11px;color:var(--tm);margin-top:18px}
+  </style>
+</head>
+<body>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="pw-gate">
+  <div class="pw-box">
+    <div class="pw-logo">🔐</div>
+    <div class="pw-title">Founder Access</div>
+    <div class="pw-sub">Enter your password to access the dashboard</div>
+    <div class="pw-field-wrap">
+      <input
+        type="password"
+        class="pw-input"
+        id="pw-input"
+        placeholder="••••••"
+        maxlength="20"
+        autocomplete="current-password"
+        onkeydown="if(event.key==='Enter') checkPassword()"
+      >
+      <button class="pw-toggle" id="pw-toggle" onclick="toggleVisibility()" type="button">👁️</button>
+    </div>
+    <div class="pw-error" id="pw-error">❌ Incorrect password. Please try again.</div>
+    <button class="pw-submit" onclick="checkPassword()">Unlock Dashboard →</button>
+    <div class="pw-hint">🔒 Founder-only access &nbsp;•&nbsp; Session secured</div>
+  </div>
+</div>
+
+<div class="layout" id="dashboard" style="display:none">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div style="position:sticky;top:0">
+      <div class="sb-logo">
+        <div class="sb-logo-icon">🚌</div>
+        <div>
+          <div class="sb-logo-text">Bus<em>Compare</em></div>
+          <div class="sb-logo-sub">Founder Dashboard</div>
+        </div>
+      </div>
+      <div class="sb-section">Analytics</div>
+      <ul class="sb-nav">
+        <li><button class="sb-link active" onclick="showSection('overview')"><span class="sb-icon">📊</span>Overview<span class="sb-live-dot"></span></button></li>
+        <li><button class="sb-link" onclick="showSection('revenue')"><span class="sb-icon">💰</span>Revenue</button></li>
+        <li><button class="sb-link" onclick="showSection('clicks')"><span class="sb-icon">🔗</span>Affiliate Clicks</button></li>
+      </ul>
+      <div class="sb-section">Content</div>
+      <ul class="sb-nav">
+        <li><button class="sb-link" onclick="showSection('routes')"><span class="sb-icon">🗺️</span>Top Routes</button></li>
+        <li><button class="sb-link" onclick="showSection('reviews')"><span class="sb-icon">⭐</span>Reviews</button></li>
+        <li><button class="sb-link" onclick="showSection('alerts')"><span class="sb-icon">🔔</span>Alert Subs</button></li>
+      </ul>
+      <hr class="sb-divider">
+      <ul class="sb-nav">
+        <li><a href="/" class="sb-link"><span class="sb-icon">🌐</span>View Website</a></li>
+        <li><a href="/search?from=Mumbai&to=Pune" class="sb-link"><span class="sb-icon">🔍</span>Test Search</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main" id="main-content">
+    <div class="main-header">
+      <div>
+        <div class="page-title">📊 Founder Dashboard</div>
+        <div class="page-sub" id="last-updated">Loading data...</div>
+      </div>
+      <div class="header-actions">
+        <div class="live-badge"><span style="width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite"></span>Live Data</div>
+        <button class="refresh-btn" onclick="loadStats()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-grid">
+      <div class="metric-card mc-orange">
+        <div class="metric-label">💰 Est. Revenue</div>
+        <div class="metric-val" id="m-revenue">₹0</div>
+        <div class="metric-change neutral" id="m-rev-sub">@₹80 avg/click</div>
+        <div class="metric-icon">💰</div>
+      </div>
+      <div class="metric-card mc-green">
+        <div class="metric-label">🔗 Total Clicks</div>
+        <div class="metric-val" id="m-clicks">0</div>
+        <div class="metric-change up" id="m-clicks-sub">Affiliate redirects</div>
+        <div class="metric-icon">🔗</div>
+      </div>
+      <div class="metric-card mc-blue">
+        <div class="metric-label">🔍 Searches</div>
+        <div class="metric-val" id="m-searches">0</div>
+        <div class="metric-change neutral">Total route searches</div>
+        <div class="metric-icon">🔍</div>
+      </div>
+      <div class="metric-card mc-purple">
+        <div class="metric-label">🔔 Alert Subs</div>
+        <div class="metric-val" id="m-alerts">0</div>
+        <div class="metric-change neutral">Active subscribers</div>
+        <div class="metric-icon">🔔</div>
+      </div>
+    </div>
+
+    <!-- REVENUE MODEL BREAKDOWN -->
+    <div class="rev-detail">
+      <div class="rd-title">💡 Revenue Model Breakdown</div>
+      <div class="rd-sub">How BusCompare makes money — for every visitor who books through us</div>
+      <div class="rd-formula">
+        <div class="rd-step">
+          <div class="rd-step-icon">🔗</div>
+          <div class="rd-step-title">Affiliate Commission</div>
+          <div class="rd-step-val" id="rd-aff">₹0</div>
+          <div class="rd-step-desc">₹50–₹150 per booking</div>
+        </div>
+        <div class="rd-step">
+          <div class="rd-step-icon">📺</div>
+          <div class="rd-step-title">Ad Revenue (Adsense)</div>
+          <div class="rd-step-val" id="rd-ads">₹0</div>
+          <div class="rd-step-desc">~₹2/page view est.</div>
+        </div>
+        <div class="rd-step">
+          <div class="rd-step-icon">⭐</div>
+          <div class="rd-step-title">Pro Alert Subs</div>
+          <div class="rd-step-val" id="rd-subs">₹0</div>
+          <div class="rd-step-desc">₹99/mo per subscriber</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLICKS + ROUTES -->
+    <div class="three-col">
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-title">🔗 Affiliate Clicks by Platform</div>
+        </div>
+        <div class="platform-bars" id="platform-bars">
+          <div class="skeleton" style="height:28px"></div>
+          <div class="skeleton" style="height:28px"></div>
+          <div class="skeleton" style="height:28px"></div>
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-title">🔥 Top Booking Routes</div>
+        </div>
+        <div class="top-routes" id="top-routes">
+          <div class="skeleton" style="height:40px"></div>
+          <div class="skeleton" style="height:40px"></div>
+          <div class="skeleton" style="height:40px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT CLICKS + REVIEWS -->
+    <div class="two-col">
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-title">🔗 Recent Affiliate Clicks</div>
+          <div class="sc-badge" id="total-clicks-badge">0 total</div>
+        </div>
+        <div id="recent-clicks-area">
+          <div class="skeleton" style="height:200px"></div>
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sc-head">
+          <div class="sc-title">⭐ Recent Reviews</div>
+          <div class="sc-badge" id="avg-rating-badge">— avg</div>
+        </div>
+        <div class="rev-mini" id="recent-reviews-area">
+          <div class="skeleton" style="height:80px"></div>
+          <div class="skeleton" style="height:80px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTS -->
+    <div class="sc">
+      <div class="sc-head">
+        <div class="sc-title">🔔 Price Alert Subscribers</div>
+        <div class="sc-badge" id="alerts-badge">0 subs</div>
+      </div>
+      <div id="alerts-area">
+        <div class="empty-msg">No subscribers yet. Share your website to grow!</div>
+      </div>
+    </div>
+
+    <!-- DB QUICK STATS -->
+    <div class="two-col" style="margin-top:16px">
+      <div class="sc">
+        <div class="sc-head"><div class="sc-title">📊 Database Summary</div></div>
+        <table>
+          <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+          <tbody id="db-stats-body">
+            <tr><td>Total Buses in DB</td><td class="td-price" id="db-buses">—</td></tr>
+            <tr><td>Total Routes</td><td class="td-price" id="db-routes">—</td></tr>
+            <tr><td>Total Reviews</td><td class="td-price" id="db-reviews">—</td></tr>
+            <tr><td>Avg Bus Rating</td><td class="td-price" id="db-avg-rating">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sc">
+        <div class="sc-head"><div class="sc-title">💼 Growth Milestones</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px" id="milestones">
+          <div class="tr-row"><div class="tr-rank">🎯</div><div class="tr-route">First 100 clicks</div><div class="tr-clicks" id="ms1">—</div></div>
+          <div class="tr-row"><div class="tr-rank">💰</div><div class="tr-route">₹10,000 revenue</div><div class="tr-clicks" id="ms2">—</div></div>
+          <div class="tr-row"><div class="tr-rank">🔔</div><div class="tr-route">100 alert subscribers</div><div class="tr-clicks" id="ms3">—</div></div>
+          <div class="tr-row"><div class="tr-rank">⭐</div><div class="tr-route">50 reviews</div><div class="tr-clicks" id="ms4">—</div></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div><!-- end #dashboard -->
+
+<script>
+/* ── PASSWORD GATE LOGIC ── */
+const ADMIN_PASS = '001200';
+
+function checkPassword() {
+  const val = document.getElementById('pw-input').value;
+  const err = document.getElementById('pw-error');
+  if (val === ADMIN_PASS) {
+    sessionStorage.setItem('bc_admin_auth', '1');
+    unlockDashboard();
+  } else {
+    err.style.display = 'block';
+    // Re-trigger shake animation
+    err.style.animation = 'none';
+    requestAnimationFrame(() => { err.style.animation = ''; });
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+    // Shake the box too
+    const box = document.querySelector('.pw-box');
+    box.style.animation = 'none';
+    requestAnimationFrame(() => { box.style.animation = 'shake .35s cubic-bezier(.36,.07,.19,.97) both'; });
+  }
+}
+
+function unlockDashboard() {
+  const gate = document.getElementById('pw-gate');
+  const dash = document.getElementById('dashboard');
+  gate.classList.add('hidden');
+  dash.style.display = 'grid';
+  setTimeout(() => gate.remove(), 600);
+  loadStats();
+}
+
+function toggleVisibility() {
+  const inp = document.getElementById('pw-input');
+  const btn = document.getElementById('pw-toggle');
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁️'; }
+}
+
+// Auto-unlock if already authenticated this session
+document.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('bc_admin_auth') === '1') {
+    unlockDashboard();
+  } else {
+    document.getElementById('pw-input').focus();
+  }
+});
+/* ── END PASSWORD GATE ── */
+
+const PLATFORM_COLORS = {
+  redbus:'var(--red)', abhibus:'var(--p)', makemytrip:'var(--blue)',
+  yatra:'var(--gold)', direct:'var(--green)'
+};
+const PLATFORM_NAMES = {redbus:'RedBus',abhibus:'AbhiBus',makemytrip:'MakeMyTrip',yatra:'Yatra',direct:'Direct'};
+const PLATFORM_BADGE = {redbus:'td-rb',abhibus:'td-ab',makemytrip:'td-mm',yatra:'td-ya',direct:'td-di'};
+const AV_COLORS = ['rgba(249,115,22,.15)','rgba(59,130,246,.15)','rgba(16,185,129,.15)','rgba(139,92,246,.15)'];
+
+// loadStats is called by unlockDashboard, not DOMContentLoaded
+
+async function loadStats() {
+  try {
+    document.getElementById('last-updated').textContent = 'Refreshing...';
+    const r = await fetch('/api/admin/stats');
+    const d = await r.json();
+    render(d);
+    document.getElementById('last-updated').textContent = 'Last updated: ' + new Date().toLocaleTimeString('en-IN');
+  } catch(e) {
+    document.getElementById('last-updated').textContent = 'Error loading stats — is server running?';
+  }
+}
+
+function render(d) {
+  const ov = d.overview;
+
+  // Metrics
+  document.getElementById('m-revenue').textContent = '₹' + (ov.revenueEstimate || 0).toLocaleString('en-IN');
+  document.getElementById('m-clicks').textContent = (ov.totalClicks || 0).toLocaleString('en-IN');
+  document.getElementById('m-searches').textContent = (ov.totalSearches || 0).toLocaleString('en-IN');
+  document.getElementById('m-alerts').textContent = (ov.totalAlerts || 0).toLocaleString('en-IN');
+
+  // Revenue model
+  document.getElementById('rd-aff').textContent = '₹' + (ov.revenueEstimate || 0).toLocaleString('en-IN');
+  document.getElementById('rd-ads').textContent = '₹' + Math.round((ov.totalSearches||0) * 2).toLocaleString('en-IN');
+  document.getElementById('rd-subs').textContent = '₹' + ((ov.totalAlerts||0) * 99).toLocaleString('en-IN');
+
+  // DB stats
+  document.getElementById('db-buses').textContent = ov.totalBuses || '—';
+  document.getElementById('db-routes').textContent = ov.totalRoutes || '—';
+  document.getElementById('db-reviews').textContent = (ov.totalReviews || 0);
+  document.getElementById('db-avg-rating').textContent = d.avgRating ? d.avgRating + ' ★' : '—';
+
+  // Platform bars
+  const platforms = d.clicksByPlatform || {};
+  const total = Object.values(platforms).reduce((s,v) => s+v, 0);
+  const pbarArea = document.getElementById('platform-bars');
+  if (total === 0) {
+    pbarArea.innerHTML = '<div class="empty-msg">No clicks yet. Start by testing the search!</div>';
+  } else {
+    pbarArea.innerHTML = Object.entries(platforms).sort(([,a],[,b]) => b-a).map(([p, cnt]) => `
+      <div class="pbar-row">
+        <div class="pbar-label">${PLATFORM_NAMES[p]||p}</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:${Math.round(cnt/total*100)}%;background:${PLATFORM_COLORS[p]||'var(--p)'}"></div></div>
+        <div class="pbar-count">${cnt}</div>
+        <div class="pbar-pct">${Math.round(cnt/total*100)}%</div>
+      </div>
+    `).join('');
+  }
+
+  // Top routes
+  const topR = document.getElementById('top-routes');
+  if (!d.topRoutes || !d.topRoutes.length) {
+    topR.innerHTML = '<div class="empty-msg">No route clicks tracked yet</div>';
+  } else {
+    topR.innerHTML = d.topRoutes.map((r, i) => `
+      <div class="tr-row">
+        <div class="tr-rank">${i+1}</div>
+        <div class="tr-route">${r.route}</div>
+        <div class="tr-clicks">${r.clicks} clicks</div>
+      </div>
+    `).join('');
+  }
+
+  // Recent clicks table
+  document.getElementById('total-clicks-badge').textContent = `${ov.totalClicks || 0} total`;
+  const rcArea = document.getElementById('recent-clicks-area');
+  if (!d.recentClicks || !d.recentClicks.length) {
+    rcArea.innerHTML = '<div class="empty-msg">No affiliate clicks yet.<br>Test by clicking "Book Now" on any bus!</div>';
+  } else {
+    rcArea.innerHTML = `<table>
+      <thead><tr><th>Platform</th><th>Route</th><th>Price</th><th>Time</th></tr></thead>
+      <tbody>
+        ${d.recentClicks.map(c => `
+          <tr>
+            <td><span class="td-badge ${PLATFORM_BADGE[c.platform]||'td-di'}">${PLATFORM_NAMES[c.platform]||c.platform}</span></td>
+            <td>${c.route || '—'}</td>
+            <td class="td-price">${c.price ? '₹' + c.price.toLocaleString('en-IN') : '—'}</td>
+            <td class="td-time">${new Date(c.timestamp).toLocaleTimeString('en-IN', {hour:'2-digit',minute:'2-digit'})}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+  }
+
+  // Recent reviews
+  document.getElementById('avg-rating-badge').textContent = d.avgRating ? `${d.avgRating} ★ avg` : '— avg';
+  const rrArea = document.getElementById('recent-reviews-area');
+  if (!d.recentReviews || !d.recentReviews.length) {
+    rrArea.innerHTML = '<div class="empty-msg">No reviews yet</div>';
+  } else {
+    rrArea.innerHTML = d.recentReviews.map((rev, i) => `
+      <div class="rev-mini-item">
+        <div class="rmi-head">
+          <div class="rmi-av" style="background:${AV_COLORS[i%AV_COLORS.length]}">${rev.userName.slice(0,2).toUpperCase()}</div>
+          <div><div class="rmi-name">${rev.userName}</div><div class="rmi-meta">${rev.date}</div></div>
+          <div class="rmi-stars">${'★'.repeat(rev.rating)}${'☆'.repeat(5-rev.rating)}</div>
+        </div>
+        <div class="rmi-text">${rev.comment}</div>
+      </div>
+    `).join('');
+  }
+
+  // Alerts
+  document.getElementById('alerts-badge').textContent = `${ov.totalAlerts || 0} subs`;
+  const alertsArea = document.getElementById('alerts-area');
+  if (!d.recentAlerts || !d.recentAlerts.length) {
+    alertsArea.innerHTML = '<div class="empty-msg">No alert subscribers yet.<br>Share /alerts to get signups!</div>';
+  } else {
+    alertsArea.innerHTML = '<div class="alerts-list">' + d.recentAlerts.map(a => `
+      <div class="alert-row">
+        <div class="ar-email">${a.email}</div>
+        <div class="ar-route">${a.routeFrom} → ${a.routeTo}</div>
+        ${a.maxPrice ? `<div style="font-size:11px;color:var(--p);font-weight:700">< ₹${a.maxPrice}</div>` : ''}
+        <div class="ar-tier ${a.tier==='pro'?'ar-pro':'ar-free'}">${a.tier.toUpperCase()}</div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  // Milestones
+  document.getElementById('ms1').textContent = ov.totalClicks >= 100 ? '✅ Done!' : `${ov.totalClicks || 0}/100`;
+  document.getElementById('ms2').textContent = ov.revenueEstimate >= 10000 ? '✅ Done!' : `₹${ov.revenueEstimate || 0}/₹10,000`;
+  document.getElementById('ms3').textContent = ov.totalAlerts >= 100 ? '✅ Done!' : `${ov.totalAlerts || 0}/100`;
+  document.getElementById('ms4').textContent = ov.totalReviews >= 50 ? '✅ Done!' : `${ov.totalReviews || 0}/50`;
+}
+
+function showSection(sec) {
+  document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Auto-refresh every 30 seconds
+setInterval(loadStats, 30000);
+</script>
+</body>
+</html>
