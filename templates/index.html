@@ -215,7 +215,24 @@
       <a href="/search?from=Mumbai&to=Pune" class="nav-link">Routes</a>
       <a href="/alerts" class="nav-link">Price Alerts</a>
     </div>
-    <a href="/alerts" class="nav-cta">🔔 Free Price Alerts</a>
+    <div style="display:flex;align-items:center;gap:10px">
+      <select id="curr-sel" class="fselect" style="padding:6px 10px;font-size:12px;width:auto;border-radius:100px" onchange="switchCurr(this.value)">
+        <option value="INR">₹ INR</option>
+        <option value="USD">$ USD</option>
+        <option value="EUR">€ EUR</option>
+        <option value="GBP">£ GBP</option>
+        <option value="AED">د.إ AED</option>
+      </select>
+      <select id="lang-sel" class="fselect" style="padding:6px 10px;font-size:12px;width:auto;border-radius:100px" onchange="switchLang(this.value)">
+        <option value="EN">🌐 EN</option>
+        <option value="HI">🇮🇳 हिंदी</option>
+        <option value="KA">🇮🇳 ಕನ್ನಡ</option>
+        <option value="TA">🇮🇳 தமிழ்</option>
+        <option value="MR">🇮🇳 मराठी</option>
+        <option value="TE">🇮🇳 తెలుగు</option>
+      </select>
+      <a href="/alerts" class="nav-cta">🔔 Free Price Alerts</a>
+    </div>
   </div>
 </nav>
 

@@ -287,7 +287,140 @@ app.get('/api/search', (req, res) => {
     total: results.length,
     route: route || null,
     availableOperators,
+    coupons: db.coupons || [],
+    priceHistory: route ? route.priceHistory : null,
     query: { from, to, date, busType, operator, sort }
+  });
+});
+
+// ─── API: PRICE TRENDS ────────────────────────────────────────────────────────
+app.get('/api/price-trends', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { from, to } = req.query;
+  if (!from || !to) return res.status(400).json({ error: 'from and to required' });
+
+  const route = db.routes.find(r =>
+    normalizeCity(r.from) === normalizeCity(from) &&
+    normalizeCity(r.to) === normalizeCity(to)
+  );
+
+  const basePrice = route ? route.minPrice : 450;
+  const history = route && route.priceHistory ? route.priceHistory : [
+    { day: "Mon", price: Math.round(basePrice * 0.95) },
+    { day: "Tue", price: Math.round(basePrice * 0.90) },
+    { day: "Wed", price: Math.round(basePrice * 0.92) },
+    { day: "Thu", price: Math.round(basePrice * 1.00) },
+    { day: "Fri", price: Math.round(basePrice * 1.25) },
+    { day: "Sat", price: Math.round(basePrice * 1.30) },
+    { day: "Sun", price: Math.round(basePrice * 1.15) }
+  ];
+
+  const avgPrice = Math.round(history.reduce((s, h) => s + h.price, 0) / history.length);
+  const minDay = history.reduce((min, h) => h.price < min.price ? h : min, history[0]);
+
+  res.json({
+    from,
+    to,
+    history,
+    avgPrice,
+    cheapestDay: minDay.day,
+    cheapestPrice: minDay.price,
+    recommendation: `Prices are lowest on ${minDay.day}s (₹${minDay.price}). High demand on Fridays & Saturdays!`
+  });
+});
+
+// ─── API: SEAT MAP ────────────────────────────────────────────────────────────
+app.get('/api/seat-map/:busId', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const bus = db.buses.find(b => b.id === req.params.busId);
+  if (!bus) return res.status(404).json({ error: 'Bus not found' });
+
+  const isSleeper = bus.busTypeCode ? bus.busTypeCode.includes('sleeper') : true;
+  const basePrice = bus.lowestPrice;
+
+  let decks = {};
+
+  if (isSleeper) {
+    decks = {
+      isSleeper: true,
+      lowerDeck: [
+        [ { id: 'L1', no: '1L', type: 'single', status: 'available', price: basePrice + 50, isWindow: true }, { id: 'L2', no: '2L', type: 'double', status: 'booked', price: basePrice, isWindow: false }, { id: 'L3', no: '3L', type: 'double', status: 'available', price: basePrice + 50, isWindow: true } ],
+        [ { id: 'L4', no: '4L', type: 'single', status: 'female', price: basePrice + 50, isWindow: true }, { id: 'L5', no: '5L', type: 'double', status: 'available', price: basePrice, isWindow: false }, { id: 'L6', no: '6L', type: 'double', status: 'available', price: basePrice + 50, isWindow: true } ],
+        [ { id: 'L7', no: '7L', type: 'single', status: 'available', price: basePrice + 50, isWindow: true }, { id: 'L8', no: '8L', type: 'double', status: 'booked', price: basePrice, isWindow: false }, { id: 'L9', no: '9L', type: 'double', status: 'female', price: basePrice + 50, isWindow: true } ],
+        [ { id: 'L10', no: '10L', type: 'single', status: 'available', price: basePrice + 50, isWindow: true }, { id: 'L11', no: '11L', type: 'double', status: 'available', price: basePrice, isWindow: false }, { id: 'L12', no: '12L', type: 'double', status: 'available', price: basePrice + 50, isWindow: true } ]
+      ],
+      upperDeck: [
+        [ { id: 'U1', no: '1U', type: 'single', status: 'available', price: basePrice, isWindow: true }, { id: 'U2', no: '2U', type: 'double', status: 'available', price: basePrice - 30, isWindow: false }, { id: 'U3', no: '3U', type: 'double', status: 'booked', price: basePrice, isWindow: true } ],
+        [ { id: 'U4', no: '4U', type: 'single', status: 'booked', price: basePrice, isWindow: true }, { id: 'U5', no: '5U', type: 'double', status: 'available', price: basePrice - 30, isWindow: false }, { id: 'U6', no: '6U', type: 'double', status: 'available', price: basePrice, isWindow: true } ],
+        [ { id: 'U7', no: '7U', type: 'single', status: 'female', price: basePrice, isWindow: true }, { id: 'U8', no: '8U', type: 'double', status: 'available', price: basePrice - 30, isWindow: false }, { id: 'U9', no: '9U', type: 'double', status: 'available', price: basePrice, isWindow: true } ],
+        [ { id: 'U10', no: '10U', type: 'single', status: 'available', price: basePrice, isWindow: true }, { id: 'U11', no: '11U', type: 'double', status: 'booked', price: basePrice - 30, isWindow: false }, { id: 'U12', no: '12U', type: 'double', status: 'available', price: basePrice, isWindow: true } ]
+      ]
+    };
+  } else {
+    decks = {
+      isSleeper: false,
+      lowerDeck: [
+        [ { id: 'S1', no: 'A1', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true }, { id: 'S2', no: 'A2', type: 'seat', status: 'available', price: basePrice, isWindow: false }, { id: 'S3', no: 'A3', type: 'seat', status: 'booked', price: basePrice, isWindow: false }, { id: 'S4', no: 'A4', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true } ],
+        [ { id: 'S5', no: 'B1', type: 'seat', status: 'female', price: basePrice + 30, isWindow: true }, { id: 'S6', no: 'B2', type: 'seat', status: 'available', price: basePrice, isWindow: false }, { id: 'S7', no: 'B3', type: 'seat', status: 'available', price: basePrice, isWindow: false }, { id: 'S8', no: 'B4', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true } ],
+        [ { id: 'S9', no: 'C1', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true }, { id: 'S10', no: 'C2', type: 'seat', status: 'booked', price: basePrice, isWindow: false }, { id: 'S11', no: 'C3', type: 'seat', status: 'booked', price: basePrice, isWindow: false }, { id: 'S12', no: 'C4', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true } ],
+        [ { id: 'S13', no: 'D1', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true }, { id: 'S14', no: 'D2', type: 'seat', status: 'available', price: basePrice, isWindow: false }, { id: 'S15', no: 'D3', type: 'seat', status: 'female', price: basePrice, isWindow: false }, { id: 'S16', no: 'D4', type: 'seat', status: 'available', price: basePrice + 30, isWindow: true } ]
+      ]
+    };
+  }
+
+  res.json({
+    busId: bus.id,
+    busName: bus.operator,
+    busType: bus.busType,
+    totalSeats: bus.totalSeats,
+    seatsLeft: bus.seatsLeft,
+    basePrice,
+    decks
+  });
+});
+
+// ─── API: COUPON VALIDATION ───────────────────────────────────────────────────
+app.post('/api/coupons/validate', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { code, amount } = req.body;
+  if (!code) return res.status(400).json({ error: 'Coupon code required' });
+
+  const cleanCode = sanitizeInput(code).toUpperCase();
+  const baseAmount = parseInt(amount) || 500;
+
+  const coupons = db.coupons || [
+    { code: "BUSCOMP100", discount: 100, type: "flat", minSpend: 500, description: "Flat ₹100 OFF on all bookings above ₹500" },
+    { code: "SUPERBUS50", discount: 50, type: "flat", minSpend: 250, description: "Flat ₹50 OFF on any bus ticket" },
+    { code: "FIRSTBUS150", discount: 150, type: "flat", minSpend: 700, description: "₹150 OFF for first time BusCompare users" },
+    { code: "FESTIVE200", discount: 200, type: "flat", minSpend: 1000, description: "Flat ₹200 OFF on Luxury & Volvo Sleeper buses" }
+  ];
+
+  const coupon = coupons.find(c => c.code === cleanCode);
+
+  if (!coupon) {
+    return res.status(404).json({ valid: false, error: 'Invalid coupon code. Try BUSCOMP100 or SUPERBUS50' });
+  }
+
+  if (baseAmount < coupon.minSpend) {
+    return res.status(400).json({ valid: false, error: `Minimum order amount of ₹${coupon.minSpend} required for code ${coupon.code}` });
+  }
+
+  const finalAmount = Math.max(0, baseAmount - coupon.discount);
+
+  res.json({
+    valid: true,
+    code: coupon.code,
+    discount: coupon.discount,
+    originalAmount: baseAmount,
+    finalAmount,
+    description: coupon.description,
+    message: `🎉 Coupon ${coupon.code} applied! You saved ₹${coupon.discount}.`
   });
 });
 

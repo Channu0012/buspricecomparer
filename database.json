@@ -97,6 +97,42 @@
       "code": "SRT",
       "state": "Gujarat",
       "popular": false
+    },
+    {
+      "name": "Chandigarh",
+      "code": "IXC",
+      "state": "Punjab",
+      "popular": true
+    },
+    {
+      "name": "Nagpur",
+      "code": "NAG",
+      "state": "Maharashtra",
+      "popular": true
+    },
+    {
+      "name": "Udaipur",
+      "code": "UDR",
+      "state": "Rajasthan",
+      "popular": true
+    },
+    {
+      "name": "Durgapur",
+      "code": "RGP",
+      "state": "West Bengal",
+      "popular": false
+    },
+    {
+      "name": "Kalaburagi",
+      "code": "KLB",
+      "state": "Karnataka",
+      "popular": true
+    },
+    {
+      "name": "Jamkhandi",
+      "code": "JMK",
+      "state": "Karnataka",
+      "popular": true
     }
   ],
   "operators": [
@@ -171,6 +207,38 @@
       "totalBuses": 280,
       "founded": 1995,
       "tagline": "South India Specialists"
+    },
+    {
+      "code": "ZNG",
+      "name": "Zingbus",
+      "rating": 4.6,
+      "totalBuses": 350,
+      "founded": 2019,
+      "tagline": "Tech-Driven Premium Travel"
+    },
+    {
+      "code": "ICS",
+      "name": "IntrCity SmartBus",
+      "rating": 4.7,
+      "totalBuses": 400,
+      "founded": 2018,
+      "tagline": "India's Smartest Bus Network"
+    },
+    {
+      "code": "NEU",
+      "name": "NeuGo Electric",
+      "rating": 4.8,
+      "totalBuses": 180,
+      "founded": 2021,
+      "tagline": "100% Eco-Friendly EV Travel"
+    },
+    {
+      "code": "GRN",
+      "name": "Greenline Travels",
+      "rating": 4.3,
+      "totalBuses": 210,
+      "founded": 2010,
+      "tagline": "Comfort & Eco Safety"
     }
   ],
   "routes": [
@@ -187,7 +255,37 @@
       "maxPrice": 950,
       "popularCount": 12500,
       "description": "Most popular route in Maharashtra",
-      "category": "express"
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 189
+        },
+        {
+          "day": "Tue",
+          "price": 179
+        },
+        {
+          "day": "Wed",
+          "price": 183
+        },
+        {
+          "day": "Thu",
+          "price": 199
+        },
+        {
+          "day": "Fri",
+          "price": 249
+        },
+        {
+          "day": "Sat",
+          "price": 259
+        },
+        {
+          "day": "Sun",
+          "price": 229
+        }
+      ]
     },
     {
       "id": "blr-chn",
@@ -202,7 +300,37 @@
       "maxPrice": 1800,
       "popularCount": 9800,
       "description": "Busiest South India intercity route",
-      "category": "overnight"
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 333
+        },
+        {
+          "day": "Tue",
+          "price": 315
+        },
+        {
+          "day": "Wed",
+          "price": 322
+        },
+        {
+          "day": "Thu",
+          "price": 350
+        },
+        {
+          "day": "Fri",
+          "price": 438
+        },
+        {
+          "day": "Sat",
+          "price": 455
+        },
+        {
+          "day": "Sun",
+          "price": 402
+        }
+      ]
     },
     {
       "id": "del-jai",
@@ -217,7 +345,37 @@
       "maxPrice": 1200,
       "popularCount": 8200,
       "description": "Gateway to Rajasthan",
-      "category": "express"
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 238
+        },
+        {
+          "day": "Tue",
+          "price": 225
+        },
+        {
+          "day": "Wed",
+          "price": 230
+        },
+        {
+          "day": "Thu",
+          "price": 250
+        },
+        {
+          "day": "Fri",
+          "price": 313
+        },
+        {
+          "day": "Sat",
+          "price": 325
+        },
+        {
+          "day": "Sun",
+          "price": 288
+        }
+      ]
     },
     {
       "id": "hyd-blr",
@@ -232,7 +390,37 @@
       "maxPrice": 2500,
       "popularCount": 7100,
       "description": "Tech city to tech city",
-      "category": "overnight"
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 570
+        },
+        {
+          "day": "Tue",
+          "price": 540
+        },
+        {
+          "day": "Wed",
+          "price": 552
+        },
+        {
+          "day": "Thu",
+          "price": 600
+        },
+        {
+          "day": "Fri",
+          "price": 750
+        },
+        {
+          "day": "Sat",
+          "price": 780
+        },
+        {
+          "day": "Sun",
+          "price": 690
+        }
+      ]
     },
     {
       "id": "mum-goa",
@@ -247,7 +435,37 @@
       "maxPrice": 2800,
       "popularCount": 6800,
       "description": "Beach lovers' favourite route",
-      "category": "overnight"
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 523
+        },
+        {
+          "day": "Tue",
+          "price": 495
+        },
+        {
+          "day": "Wed",
+          "price": 506
+        },
+        {
+          "day": "Thu",
+          "price": 550
+        },
+        {
+          "day": "Fri",
+          "price": 688
+        },
+        {
+          "day": "Sat",
+          "price": 715
+        },
+        {
+          "day": "Sun",
+          "price": 633
+        }
+      ]
     },
     {
       "id": "blr-mys",
@@ -262,7 +480,37 @@
       "maxPrice": 700,
       "popularCount": 6200,
       "description": "Heritage city express",
-      "category": "express"
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 143
+        },
+        {
+          "day": "Tue",
+          "price": 135
+        },
+        {
+          "day": "Wed",
+          "price": 138
+        },
+        {
+          "day": "Thu",
+          "price": 150
+        },
+        {
+          "day": "Fri",
+          "price": 188
+        },
+        {
+          "day": "Sat",
+          "price": 195
+        },
+        {
+          "day": "Sun",
+          "price": 173
+        }
+      ]
     },
     {
       "id": "chn-mad",
@@ -277,7 +525,37 @@
       "maxPrice": 1600,
       "popularCount": 5400,
       "description": "Tamil Nadu's busiest overnight",
-      "category": "overnight"
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 380
+        },
+        {
+          "day": "Tue",
+          "price": 360
+        },
+        {
+          "day": "Wed",
+          "price": 368
+        },
+        {
+          "day": "Thu",
+          "price": 400
+        },
+        {
+          "day": "Fri",
+          "price": 500
+        },
+        {
+          "day": "Sat",
+          "price": 520
+        },
+        {
+          "day": "Sun",
+          "price": 460
+        }
+      ]
     },
     {
       "id": "pun-goa",
@@ -292,7 +570,37 @@
       "maxPrice": 2200,
       "popularCount": 4900,
       "description": "Weekend getaway favorite",
-      "category": "overnight"
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 475
+        },
+        {
+          "day": "Tue",
+          "price": 450
+        },
+        {
+          "day": "Wed",
+          "price": 460
+        },
+        {
+          "day": "Thu",
+          "price": 500
+        },
+        {
+          "day": "Fri",
+          "price": 625
+        },
+        {
+          "day": "Sat",
+          "price": 650
+        },
+        {
+          "day": "Sun",
+          "price": 575
+        }
+      ]
     },
     {
       "id": "ahm-mum",
@@ -307,7 +615,37 @@
       "maxPrice": 2000,
       "popularCount": 4100,
       "description": "Gujarat to Maharashtra business route",
-      "category": "overnight"
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 475
+        },
+        {
+          "day": "Tue",
+          "price": 450
+        },
+        {
+          "day": "Wed",
+          "price": 460
+        },
+        {
+          "day": "Thu",
+          "price": 500
+        },
+        {
+          "day": "Fri",
+          "price": 625
+        },
+        {
+          "day": "Sat",
+          "price": 650
+        },
+        {
+          "day": "Sun",
+          "price": 575
+        }
+      ]
     },
     {
       "id": "del-agr",
@@ -322,7 +660,217 @@
       "maxPrice": 1000,
       "popularCount": 3900,
       "description": "Taj Mahal tourist route",
-      "category": "express"
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 209
+        },
+        {
+          "day": "Tue",
+          "price": 198
+        },
+        {
+          "day": "Wed",
+          "price": 202
+        },
+        {
+          "day": "Thu",
+          "price": 220
+        },
+        {
+          "day": "Fri",
+          "price": 275
+        },
+        {
+          "day": "Sat",
+          "price": 286
+        },
+        {
+          "day": "Sun",
+          "price": 253
+        }
+      ]
+    },
+    {
+      "id": "del-ixc",
+      "from": "Delhi",
+      "fromCode": "DEL",
+      "to": "Chandigarh",
+      "toCode": "IXC",
+      "slug": "delhi-to-chandigarh",
+      "distance": 245,
+      "avgDuration": "4h 15m",
+      "minPrice": 320,
+      "maxPrice": 1100,
+      "popularCount": 7800,
+      "description": "North India's busiest express highway route",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 340
+        },
+        {
+          "day": "Tue",
+          "price": 320
+        },
+        {
+          "day": "Wed",
+          "price": 330
+        },
+        {
+          "day": "Thu",
+          "price": 360
+        },
+        {
+          "day": "Fri",
+          "price": 480
+        },
+        {
+          "day": "Sat",
+          "price": 520
+        },
+        {
+          "day": "Sun",
+          "price": 440
+        }
+      ]
+    },
+    {
+      "id": "chn-cbe",
+      "from": "Chennai",
+      "fromCode": "CHN",
+      "to": "Coimbatore",
+      "toCode": "CBE",
+      "slug": "chennai-to-coimbatore",
+      "distance": 500,
+      "avgDuration": "8h 00m",
+      "minPrice": 480,
+      "maxPrice": 1650,
+      "popularCount": 6500,
+      "description": "Industrial hub corridor in Tamil Nadu",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 500
+        },
+        {
+          "day": "Tue",
+          "price": 480
+        },
+        {
+          "day": "Wed",
+          "price": 490
+        },
+        {
+          "day": "Thu",
+          "price": 550
+        },
+        {
+          "day": "Fri",
+          "price": 720
+        },
+        {
+          "day": "Sat",
+          "price": 750
+        },
+        {
+          "day": "Sun",
+          "price": 620
+        }
+      ]
+    },
+    {
+      "id": "pun-nag",
+      "from": "Pune",
+      "fromCode": "PUN",
+      "to": "Nagpur",
+      "toCode": "NAG",
+      "slug": "pune-to-nagpur",
+      "distance": 710,
+      "avgDuration": "11h 30m",
+      "minPrice": 650,
+      "maxPrice": 2400,
+      "popularCount": 5200,
+      "description": "Samruddhi Mahamarg expressway route",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 680
+        },
+        {
+          "day": "Tue",
+          "price": 650
+        },
+        {
+          "day": "Wed",
+          "price": 670
+        },
+        {
+          "day": "Thu",
+          "price": 720
+        },
+        {
+          "day": "Fri",
+          "price": 950
+        },
+        {
+          "day": "Sat",
+          "price": 990
+        },
+        {
+          "day": "Sun",
+          "price": 820
+        }
+      ]
+    },
+    {
+      "id": "jmk-klb",
+      "from": "Jamkhandi",
+      "fromCode": "JMK",
+      "to": "Kalaburagi",
+      "toCode": "KLB",
+      "slug": "jamkhandi-to-kalaburagi",
+      "distance": 280,
+      "avgDuration": "5h 30m",
+      "minPrice": 299,
+      "maxPrice": 850,
+      "popularCount": 4200,
+      "description": "North Karnataka intercity express route",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 310
+        },
+        {
+          "day": "Tue",
+          "price": 299
+        },
+        {
+          "day": "Wed",
+          "price": 305
+        },
+        {
+          "day": "Thu",
+          "price": 330
+        },
+        {
+          "day": "Fri",
+          "price": 420
+        },
+        {
+          "day": "Sat",
+          "price": 450
+        },
+        {
+          "day": "Sun",
+          "price": 380
+        }
+      ]
     }
   ],
   "buses": [
@@ -1759,6 +2307,194 @@
         "luxury",
         "top-rated"
       ]
+    },
+    {
+      "id": "bus-021",
+      "slug": "zingbus-electric-delhi-chandigarh-0630",
+      "operator": "Zingbus",
+      "operatorCode": "ZNG",
+      "busType": "Electric AC Seater (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4.7,
+      "reviewCount": 850,
+      "totalBookings": 21000,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Delhi",
+        "to": "Chandigarh",
+        "routeId": "del-ixc",
+        "departureTime": "06:30",
+        "arrivalTime": "10:45",
+        "duration": "4h 15m",
+        "durationMinutes": 255,
+        "distance": 245,
+        "departureStop": "Kashmere Gate ISBT",
+        "arrivalStop": "Sector 43 ISBT"
+      },
+      "prices": {
+        "redbus": 380,
+        "abhibus": 360,
+        "makemytrip": 395,
+        "yatra": 410,
+        "direct": 349
+      },
+      "lowestPrice": 349,
+      "highestPrice": 410,
+      "seatsLeft": 12,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Kashmere Gate ISBT",
+          "time": "06:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Sector 43 ISBT",
+          "time": "10:45"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 6h before",
+        "luggage": "1 bag (max 15kg)"
+      },
+      "featured": true,
+      "badges": [
+        "best-value",
+        "fastest"
+      ]
+    },
+    {
+      "id": "bus-022",
+      "slug": "intrcity-smartbus-ac-sleeper-chennai-coimbatore-2200",
+      "operator": "IntrCity SmartBus",
+      "operatorCode": "ICS",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.8,
+      "reviewCount": 1120,
+      "totalBookings": 34000,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "entertainment",
+        "snacks"
+      ],
+      "route": {
+        "from": "Chennai",
+        "to": "Coimbatore",
+        "routeId": "chn-cbe",
+        "departureTime": "22:00",
+        "arrivalTime": "06:00",
+        "duration": "8h 00m",
+        "durationMinutes": 480,
+        "distance": 500,
+        "departureStop": "Koyambedu CMBT",
+        "arrivalStop": "Gandhipuram"
+      },
+      "prices": {
+        "redbus": 790,
+        "abhibus": 750,
+        "makemytrip": 820,
+        "yatra": 850,
+        "direct": 699
+      },
+      "lowestPrice": 699,
+      "highestPrice": 850,
+      "seatsLeft": 6,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "22:00"
+        },
+        {
+          "name": "Sriperumbudur",
+          "time": "22:45"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Gandhipuram",
+          "time": "06:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 12h before",
+        "luggage": "2 bags (max 20kg)"
+      },
+      "featured": true,
+      "badges": [
+        "top-rated",
+        "luxury"
+      ]
+    },
+    {
+      "id": "bus-023",
+      "slug": "srs-travels-ac-sleeper-jamkhandi-kalaburagi-2130",
+      "operator": "SRS Travels",
+      "operatorCode": "SRS",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.4,
+      "reviewCount": 310,
+      "totalBookings": 12000,
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Jamkhandi",
+        "to": "Kalaburagi",
+        "routeId": "jmk-klb",
+        "departureTime": "21:30",
+        "arrivalTime": "03:00",
+        "duration": "5h 30m",
+        "durationMinutes": 330,
+        "distance": 280,
+        "departureStop": "Jamkhandi Old Bus Stand",
+        "arrivalStop": "Kalaburagi Central Stand"
+      },
+      "prices": {
+        "redbus": 450,
+        "abhibus": 420,
+        "makemytrip": 460,
+        "yatra": 480,
+        "direct": 399
+      },
+      "lowestPrice": 399,
+      "highestPrice": 480,
+      "seatsLeft": 9,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Jamkhandi Old Bus Stand",
+          "time": "21:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Kalaburagi Central Stand",
+          "time": "03:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before",
+        "luggage": "2 bags (max 15kg)"
+      },
+      "featured": false,
+      "badges": [
+        "best-value"
+      ]
     }
   ],
   "reviews": [
@@ -1956,5 +2692,35 @@
     "totalAlerts": 1,
     "revenueEstimate": 80,
     "lastReset": "2026-07-27"
-  }
+  },
+  "coupons": [
+    {
+      "code": "BUSCOMP100",
+      "discount": 100,
+      "type": "flat",
+      "minSpend": 500,
+      "description": "Flat ₹100 OFF on all bookings above ₹500"
+    },
+    {
+      "code": "SUPERBUS50",
+      "discount": 50,
+      "type": "flat",
+      "minSpend": 250,
+      "description": "Flat ₹50 OFF on any bus ticket"
+    },
+    {
+      "code": "FIRSTBUS150",
+      "discount": 150,
+      "type": "flat",
+      "minSpend": 700,
+      "description": "₹150 OFF for first time BusCompare users"
+    },
+    {
+      "code": "FESTIVE200",
+      "discount": 200,
+      "type": "flat",
+      "minSpend": 1000,
+      "description": "Flat ₹200 OFF on Luxury & Volvo Sleeper buses"
+    }
+  ]
 }

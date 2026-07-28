@@ -429,6 +429,16 @@ function renderPage(d) {
         }).join('')}
       </div>
 
+      <!-- COUPON APPLICATOR -->
+      <div style="background:rgba(255,255,255,.03);border:1px dashed var(--p);border-radius:var(--r);padding:14px;margin-bottom:16px">
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--p);margin-bottom:6px">🎟️ Apply Coupon Code</div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="coupon-in" placeholder="BUSCOMP100" style="flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:8px;padding:8px 12px;color:var(--t);font-size:12px;font-weight:700;outline:none;text-transform:uppercase">
+          <button onclick="applyCouponCode()" style="background:var(--p);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">Apply</button>
+        </div>
+        <div id="coupon-msg" style="font-size:11px;margin-top:6px;font-weight:600"></div>
+      </div>
+
       <div class="bp-info-rows">
         <div class="bp-info-row"><span class="bp-info-key">Departure</span><span class="bp-info-val">${bus.route.departureTime} — ${bus.route.departureStop||bus.route.from}</span></div>
         <div class="bp-info-row"><span class="bp-info-key">Arrival</span><span class="bp-info-val">${bus.route.arrivalTime} — ${bus.route.arrivalStop||bus.route.to}</span></div>
@@ -491,6 +501,30 @@ async function submitReview() {
     }
   } catch(e) {
     alert('Failed to submit review. Please try again.');
+  }
+}
+
+async function applyCouponCode() {
+  const code = document.getElementById('coupon-in').value.trim();
+  const msg = document.getElementById('coupon-msg');
+  if (!code) { msg.style.color = 'var(--red)'; msg.textContent = 'Please enter a coupon code'; return; }
+  try {
+    const r = await fetch('/api/coupons/validate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code, amount: busData ? busData.lowestPrice : 500 })
+    });
+    const d = await r.json();
+    if (d.valid) {
+      msg.style.color = 'var(--green)';
+      msg.textContent = d.message;
+    } else {
+      msg.style.color = 'var(--red)';
+      msg.textContent = d.error || 'Invalid coupon';
+    }
+  } catch(e) {
+    msg.style.color = 'var(--red)';
+    msg.textContent = 'Error applying coupon';
   }
 }
 

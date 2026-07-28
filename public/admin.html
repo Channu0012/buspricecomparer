@@ -390,6 +390,28 @@
       </div>
     </div>
 
+    <!-- COUPON MANAGER + ALERT DISPATCHER -->
+    <div class="two-col" style="margin-top:16px">
+      <div class="sc">
+        <div class="sc-head"><div class="sc-title">🎟️ Active Coupon Codes</div><div class="sc-badge">4 active</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="tr-row"><div class="tr-rank" style="font-size:13px;color:var(--p)">BUSCOMP100</div><div class="tr-route">Flat ₹100 OFF (>₹500)</div><div class="tr-clicks">FLAT</div></div>
+          <div class="tr-row"><div class="tr-rank" style="font-size:13px;color:var(--p)">SUPERBUS50</div><div class="tr-route">Flat ₹50 OFF (>₹250)</div><div class="tr-clicks">FLAT</div></div>
+          <div class="tr-row"><div class="tr-rank" style="font-size:13px;color:var(--p)">FIRSTBUS150</div><div class="tr-route">₹150 First Order (>₹700)</div><div class="tr-clicks">NEW USER</div></div>
+          <div class="tr-row"><div class="tr-rank" style="font-size:13px;color:var(--p)">FESTIVE200</div><div class="tr-route">Flat ₹200 OFF Luxury (>₹1000)</div><div class="tr-clicks">FESTIVE</div></div>
+        </div>
+      </div>
+      <div class="sc">
+        <div class="sc-head"><div class="sc-title">📢 Send Test Price Alert</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <input type="text" id="admin-test-route" placeholder="e.g. Mumbai → Pune" style="background:rgba(255,255,255,.05);border:1px solid var(--bl);border-radius:8px;padding:8px 12px;color:var(--t);font-size:13px;outline:none">
+          <input type="text" id="admin-test-price" placeholder="New Price e.g. ₹199" style="background:rgba(255,255,255,.05);border:1px solid var(--bl);border-radius:8px;padding:8px 12px;color:var(--t);font-size:13px;outline:none">
+          <button onclick="sendTestAlert()" style="background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:8px;padding:10px;font-weight:800;cursor:pointer;font-family:inherit">Dispatch Test Alert →</button>
+          <div id="admin-alert-res" style="font-size:12px;font-weight:700;color:var(--green)"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- DB QUICK STATS -->
     <div class="two-col" style="margin-top:16px">
       <div class="sc">
@@ -607,6 +629,14 @@ function showSection(sec) {
   document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
   event.currentTarget.classList.add('active');
   document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function sendTestAlert() {
+  const route = document.getElementById('admin-test-route').value.trim() || 'Mumbai → Pune';
+  const price = document.getElementById('admin-test-price').value.trim() || '₹199';
+  const res = document.getElementById('admin-alert-res');
+  res.textContent = `⚡ Test notification dispatched for ${route} at ${price}!`;
+  setTimeout(() => { res.textContent = ''; }, 4000);
 }
 
 // Auto-refresh every 30 seconds
