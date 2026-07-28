@@ -105,34 +105,18 @@ function writeDB(data) {
   return true;
 }
 
-// ─── TEMPLATE SERVING ────────────────────────────────────────────────────────
-app.get('/', (req, res) => {
+// ─── UNIFIED SINGLE PAGE APPLICATION (SPA) SERVING ───────────────────────────
+const serveSPA = (req, res) => {
   res.sendFile(path.join(__dirname, 'templates', 'index.html'));
-});
+};
 
-app.get('/search', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'search.html'));
-});
-
-app.get('/bus/:slug', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'bus.html'));
-});
-
-app.get('/alerts', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'alerts.html'));
-});
-
-app.get('/privacy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'privacy.html'));
-});
-
-app.get('/terms', (req, res) => {
-  res.sendFile(path.join(__dirname, 'templates', 'terms.html'));
-});
-
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
-});
+app.get('/', serveSPA);
+app.get('/search', serveSPA);
+app.get('/bus/:slug', serveSPA);
+app.get('/alerts', serveSPA);
+app.get('/privacy', serveSPA);
+app.get('/terms', serveSPA);
+app.get('/admin', serveSPA);
 
 // ─── API: CITIES ─────────────────────────────────────────────────────────────
 app.get('/api/cities', (req, res) => {
