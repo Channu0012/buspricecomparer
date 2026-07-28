@@ -477,6 +477,13 @@ let activeDeck = 'lower';
 let activeBusForSeat = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+  const savedCurr = localStorage.getItem('bc_curr') || 'INR';
+  const savedLang = localStorage.getItem('bc_lang') || 'EN';
+  if (document.getElementById('curr-sel')) document.getElementById('curr-sel').value = savedCurr;
+  if (document.getElementById('lang-sel')) document.getElementById('lang-sel').value = savedLang;
+  currentCurr = savedCurr;
+  currentLang = savedLang;
+
   const sp = new URLSearchParams(location.search);
   params = {
     from: sp.get('from') || '',

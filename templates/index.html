@@ -475,6 +475,7 @@ let cities = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
   setToday();
+  initPreferences();
   await loadCities();
   await loadPopular();
   initScroll();
@@ -482,6 +483,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('navbar').classList.toggle('scrolled', scrollY > 50);
   });
 });
+
+function initPreferences() {
+  const savedCurr = localStorage.getItem('bc_curr') || 'INR';
+  const savedLang = localStorage.getItem('bc_lang') || 'EN';
+  if (document.getElementById('curr-sel')) document.getElementById('curr-sel').value = savedCurr;
+  if (document.getElementById('lang-sel')) document.getElementById('lang-sel').value = savedLang;
+}
+
+function switchCurr(val) {
+  localStorage.setItem('bc_curr', val);
+  loadPopular();
+}
+
+function switchLang(val) {
+  localStorage.setItem('bc_lang', val);
+}
 
 function setToday() {
   const d = new Date();

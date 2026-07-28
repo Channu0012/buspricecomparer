@@ -871,6 +871,636 @@
           "price": 380
         }
       ]
+    },
+    {
+      "id": "to-from",
+      "from": "Chennai",
+      "fromCode": "REV",
+      "to": "Bangalore",
+      "toCode": "REV",
+      "slug": "chennai-to-bangalore",
+      "distance": 350,
+      "avgDuration": "6h 30m",
+      "minPrice": 799,
+      "maxPrice": 910,
+      "popularCount": 39136,
+      "description": "Return route Chennai to Bangalore",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 759
+        },
+        {
+          "day": "Tue",
+          "price": 719
+        },
+        {
+          "day": "Wed",
+          "price": 735
+        },
+        {
+          "day": "Thu",
+          "price": 799
+        },
+        {
+          "day": "Fri",
+          "price": 999
+        },
+        {
+          "day": "Sat",
+          "price": 1039
+        },
+        {
+          "day": "Sun",
+          "price": 919
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Goa",
+      "fromCode": "REV",
+      "to": "Mumbai",
+      "toCode": "REV",
+      "slug": "goa-to-mumbai",
+      "distance": 590,
+      "avgDuration": "10h 30m",
+      "minPrice": 1699,
+      "maxPrice": 1900,
+      "popularCount": 25680,
+      "description": "Return route Goa to Mumbai",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 1614
+        },
+        {
+          "day": "Tue",
+          "price": 1529
+        },
+        {
+          "day": "Wed",
+          "price": 1563
+        },
+        {
+          "day": "Thu",
+          "price": 1699
+        },
+        {
+          "day": "Fri",
+          "price": 2124
+        },
+        {
+          "day": "Sat",
+          "price": 2209
+        },
+        {
+          "day": "Sun",
+          "price": 1954
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Pune",
+      "fromCode": "REV",
+      "to": "Mumbai",
+      "toCode": "REV",
+      "slug": "pune-to-mumbai",
+      "distance": 148,
+      "avgDuration": "3h 30m",
+      "minPrice": 290,
+      "maxPrice": 315,
+      "popularCount": 304000,
+      "description": "Return route Pune to Mumbai",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 276
+        },
+        {
+          "day": "Tue",
+          "price": 261
+        },
+        {
+          "day": "Wed",
+          "price": 267
+        },
+        {
+          "day": "Thu",
+          "price": 290
+        },
+        {
+          "day": "Fri",
+          "price": 363
+        },
+        {
+          "day": "Sat",
+          "price": 377
+        },
+        {
+          "day": "Sun",
+          "price": 334
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Jaipur",
+      "fromCode": "REV",
+      "to": "Delhi",
+      "toCode": "REV",
+      "slug": "jaipur-to-delhi",
+      "distance": 282,
+      "avgDuration": "5h 00m",
+      "minPrice": 499,
+      "maxPrice": 600,
+      "popularCount": 22960,
+      "description": "Return route Jaipur to Delhi",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 474
+        },
+        {
+          "day": "Tue",
+          "price": 449
+        },
+        {
+          "day": "Wed",
+          "price": 459
+        },
+        {
+          "day": "Thu",
+          "price": 499
+        },
+        {
+          "day": "Fri",
+          "price": 624
+        },
+        {
+          "day": "Sat",
+          "price": 649
+        },
+        {
+          "day": "Sun",
+          "price": 574
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Bangalore",
+      "fromCode": "REV",
+      "to": "Hyderabad",
+      "toCode": "REV",
+      "slug": "bangalore-to-hyderabad",
+      "distance": 574,
+      "avgDuration": "10h 00m",
+      "minPrice": 829,
+      "maxPrice": 990,
+      "popularCount": 30240,
+      "description": "Return route Bangalore to Hyderabad",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 788
+        },
+        {
+          "day": "Tue",
+          "price": 746
+        },
+        {
+          "day": "Wed",
+          "price": 763
+        },
+        {
+          "day": "Thu",
+          "price": 829
+        },
+        {
+          "day": "Fri",
+          "price": 1036
+        },
+        {
+          "day": "Sat",
+          "price": 1078
+        },
+        {
+          "day": "Sun",
+          "price": 953
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Mysore",
+      "fromCode": "REV",
+      "to": "Bangalore",
+      "toCode": "REV",
+      "slug": "mysore-to-bangalore",
+      "distance": 150,
+      "avgDuration": "3h 00m",
+      "minPrice": 199,
+      "maxPrice": 225,
+      "popularCount": 132000,
+      "description": "Return route Mysore to Bangalore",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 189
+        },
+        {
+          "day": "Tue",
+          "price": 179
+        },
+        {
+          "day": "Wed",
+          "price": 183
+        },
+        {
+          "day": "Thu",
+          "price": 199
+        },
+        {
+          "day": "Fri",
+          "price": 249
+        },
+        {
+          "day": "Sat",
+          "price": 259
+        },
+        {
+          "day": "Sun",
+          "price": 229
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Goa",
+      "fromCode": "REV",
+      "to": "Pune",
+      "toCode": "REV",
+      "slug": "goa-to-pune",
+      "distance": 456,
+      "avgDuration": "8h 00m",
+      "minPrice": 549,
+      "maxPrice": 640,
+      "popularCount": 19600,
+      "description": "Return route Goa to Pune",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 522
+        },
+        {
+          "day": "Tue",
+          "price": 494
+        },
+        {
+          "day": "Wed",
+          "price": 505
+        },
+        {
+          "day": "Thu",
+          "price": 549
+        },
+        {
+          "day": "Fri",
+          "price": 686
+        },
+        {
+          "day": "Sat",
+          "price": 714
+        },
+        {
+          "day": "Sun",
+          "price": 631
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Madurai",
+      "fromCode": "REV",
+      "to": "Chennai",
+      "toCode": "REV",
+      "slug": "madurai-to-chennai",
+      "distance": 461,
+      "avgDuration": "8h 30m",
+      "minPrice": 699,
+      "maxPrice": 800,
+      "popularCount": 32960,
+      "description": "Return route Madurai to Chennai",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 664
+        },
+        {
+          "day": "Tue",
+          "price": 629
+        },
+        {
+          "day": "Wed",
+          "price": 643
+        },
+        {
+          "day": "Thu",
+          "price": 699
+        },
+        {
+          "day": "Fri",
+          "price": 874
+        },
+        {
+          "day": "Sat",
+          "price": 909
+        },
+        {
+          "day": "Sun",
+          "price": 804
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Mumbai",
+      "fromCode": "REV",
+      "to": "Ahmedabad",
+      "toCode": "REV",
+      "slug": "mumbai-to-ahmedabad",
+      "distance": 528,
+      "avgDuration": "9h 00m",
+      "minPrice": 749,
+      "maxPrice": 860,
+      "popularCount": 26720,
+      "description": "Return route Mumbai to Ahmedabad",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 712
+        },
+        {
+          "day": "Tue",
+          "price": 674
+        },
+        {
+          "day": "Wed",
+          "price": 689
+        },
+        {
+          "day": "Thu",
+          "price": 749
+        },
+        {
+          "day": "Fri",
+          "price": 936
+        },
+        {
+          "day": "Sat",
+          "price": 974
+        },
+        {
+          "day": "Sun",
+          "price": 861
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Agra",
+      "fromCode": "REV",
+      "to": "Delhi",
+      "toCode": "REV",
+      "slug": "agra-to-delhi",
+      "distance": 233,
+      "avgDuration": "4h 30m",
+      "minPrice": 429,
+      "maxPrice": 520,
+      "popularCount": 35600,
+      "description": "Return route Agra to Delhi",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 408
+        },
+        {
+          "day": "Tue",
+          "price": 386
+        },
+        {
+          "day": "Wed",
+          "price": 395
+        },
+        {
+          "day": "Thu",
+          "price": 429
+        },
+        {
+          "day": "Fri",
+          "price": 536
+        },
+        {
+          "day": "Sat",
+          "price": 558
+        },
+        {
+          "day": "Sun",
+          "price": 493
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Chandigarh",
+      "fromCode": "REV",
+      "to": "Delhi",
+      "toCode": "REV",
+      "slug": "chandigarh-to-delhi",
+      "distance": 245,
+      "avgDuration": "4h 15m",
+      "minPrice": 349,
+      "maxPrice": 410,
+      "popularCount": 16800,
+      "description": "Return route Chandigarh to Delhi",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 332
+        },
+        {
+          "day": "Tue",
+          "price": 314
+        },
+        {
+          "day": "Wed",
+          "price": 321
+        },
+        {
+          "day": "Thu",
+          "price": 349
+        },
+        {
+          "day": "Fri",
+          "price": 436
+        },
+        {
+          "day": "Sat",
+          "price": 454
+        },
+        {
+          "day": "Sun",
+          "price": 401
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Coimbatore",
+      "fromCode": "REV",
+      "to": "Chennai",
+      "toCode": "REV",
+      "slug": "coimbatore-to-chennai",
+      "distance": 500,
+      "avgDuration": "8h 00m",
+      "minPrice": 699,
+      "maxPrice": 850,
+      "popularCount": 27200,
+      "description": "Return route Coimbatore to Chennai",
+      "category": "overnight",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 664
+        },
+        {
+          "day": "Tue",
+          "price": 629
+        },
+        {
+          "day": "Wed",
+          "price": 643
+        },
+        {
+          "day": "Thu",
+          "price": 699
+        },
+        {
+          "day": "Fri",
+          "price": 874
+        },
+        {
+          "day": "Sat",
+          "price": 909
+        },
+        {
+          "day": "Sun",
+          "price": 804
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Kalaburagi",
+      "fromCode": "REV",
+      "to": "Jamkhandi",
+      "toCode": "REV",
+      "slug": "kalaburagi-to-jamkhandi",
+      "distance": 280,
+      "avgDuration": "5h 30m",
+      "minPrice": 399,
+      "maxPrice": 480,
+      "popularCount": 9600,
+      "description": "Return route Kalaburagi to Jamkhandi",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 379
+        },
+        {
+          "day": "Tue",
+          "price": 359
+        },
+        {
+          "day": "Wed",
+          "price": 367
+        },
+        {
+          "day": "Thu",
+          "price": 399
+        },
+        {
+          "day": "Fri",
+          "price": 499
+        },
+        {
+          "day": "Sat",
+          "price": 519
+        },
+        {
+          "day": "Sun",
+          "price": 459
+        }
+      ]
+    },
+    {
+      "id": "to-from",
+      "from": "Nagpur",
+      "fromCode": "REV",
+      "to": "Pune",
+      "toCode": "REV",
+      "slug": "nagpur-to-pune",
+      "distance": 710,
+      "avgDuration": "11h 30m",
+      "minPrice": 680,
+      "maxPrice": 800,
+      "popularCount": 14800,
+      "description": "Return route Nagpur to Pune",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 646
+        },
+        {
+          "day": "Tue",
+          "price": 612
+        },
+        {
+          "day": "Wed",
+          "price": 626
+        },
+        {
+          "day": "Thu",
+          "price": 680
+        },
+        {
+          "day": "Fri",
+          "price": 850
+        },
+        {
+          "day": "Sat",
+          "price": 884
+        },
+        {
+          "day": "Sun",
+          "price": 782
+        }
+      ]
     }
   ],
   "buses": [
@@ -2495,6 +3125,1760 @@
       "badges": [
         "best-value"
       ]
+    },
+    {
+      "id": "bus-024",
+      "slug": "vrl-travels-ac-sleeper-pune-nagpur-2000",
+      "operator": "VRL Travels",
+      "operatorCode": "VRL",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.5,
+      "reviewCount": 620,
+      "totalBookings": 18500,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Pune",
+        "to": "Nagpur",
+        "routeId": "pun-nag",
+        "departureTime": "20:00",
+        "arrivalTime": "07:30",
+        "duration": "11h 30m",
+        "durationMinutes": 690,
+        "distance": 710,
+        "departureStop": "Swargate",
+        "arrivalStop": "Ganeshpeth Bus Stand"
+      },
+      "prices": {
+        "redbus": 750,
+        "abhibus": 720,
+        "makemytrip": 780,
+        "yatra": 800,
+        "direct": 680
+      },
+      "lowestPrice": 680,
+      "highestPrice": 800,
+      "seatsLeft": 10,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Swargate",
+          "time": "20:00"
+        },
+        {
+          "name": "Viman Nagar",
+          "time": "20:45"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Ganeshpeth Bus Stand",
+          "time": "07:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 12h before",
+        "luggage": "2 bags (max 20kg)"
+      },
+      "featured": true,
+      "badges": [
+        "best-value",
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-001",
+      "slug": "srs-ac-sleeper-chennai-bangalore-900",
+      "operator": "SRS Travels",
+      "operatorCode": "SRS",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.3,
+      "reviewCount": 1122,
+      "totalBookings": 41582,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Chennai",
+        "to": "Bangalore",
+        "routeId": "to-from",
+        "departureTime": "09:00",
+        "arrivalTime": "15:30",
+        "duration": "6h 30m",
+        "durationMinutes": 390,
+        "distance": 350,
+        "departureStop": "Koyambedu CMBT",
+        "arrivalStop": "Majestic Bus Stand"
+      },
+      "prices": {
+        "redbus": 850,
+        "abhibus": 820,
+        "makemytrip": 880,
+        "yatra": 910,
+        "direct": 799
+      },
+      "lowestPrice": 799,
+      "highestPrice": 910,
+      "seatsLeft": 12,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Guindy",
+          "time": "09:00"
+        },
+        {
+          "name": "Koyambedu CMBT",
+          "time": "09:00"
+        },
+        {
+          "name": "Tambaram",
+          "time": "09:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Majestic Bus Stand",
+          "time": "15:30"
+        },
+        {
+          "name": "Electronic City",
+          "time": "15:30"
+        },
+        {
+          "name": "Silk Board",
+          "time": "15:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags (max 15kg each)"
+      },
+      "featured": true,
+      "badges": [
+        "best-value",
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-002",
+      "slug": "vrl-ac-seater-chennai-bangalore-1000",
+      "operator": "VRL Travels",
+      "operatorCode": "VRL",
+      "busType": "Volvo Multi-Axle AC (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4.5,
+      "reviewCount": 2081,
+      "totalBookings": 76033,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "entertainment",
+        "water-bottle",
+        "snacks",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Chennai",
+        "to": "Bangalore",
+        "routeId": "to-from",
+        "departureTime": "10:00",
+        "arrivalTime": "16:30",
+        "duration": "6h 30m",
+        "durationMinutes": 390,
+        "distance": 350,
+        "departureStop": "Koyambedu CMBT",
+        "arrivalStop": "Shivajinagar"
+      },
+      "prices": {
+        "redbus": 1100,
+        "abhibus": 1050,
+        "makemytrip": 1150,
+        "yatra": 1200,
+        "direct": 999
+      },
+      "lowestPrice": 999,
+      "highestPrice": 1200,
+      "seatsLeft": 18,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "10:00"
+        },
+        {
+          "name": "Guindy",
+          "time": "10:00"
+        },
+        {
+          "name": "T. Nagar",
+          "time": "10:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Shivajinagar",
+          "time": "16:30"
+        },
+        {
+          "name": "Majestic",
+          "time": "16:30"
+        },
+        {
+          "name": "HSR Layout",
+          "time": "16:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 12h before departure",
+        "luggage": "1 bag (max 20kg)"
+      },
+      "featured": false,
+      "badges": [
+        "top-rated",
+        "fastest"
+      ]
+    },
+    {
+      "id": "bus-rev-003",
+      "slug": "ksrtc-ac-seater-chennai-bangalore-1100",
+      "operator": "KSRTC",
+      "operatorCode": "KSRTC",
+      "busType": "Airavata Club Class AC (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4,
+      "reviewCount": 3502,
+      "totalBookings": 106250,
+      "amenities": [
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Chennai",
+        "to": "Bangalore",
+        "routeId": "to-from",
+        "departureTime": "11:00",
+        "arrivalTime": "17:30",
+        "duration": "6h 30m",
+        "durationMinutes": 390,
+        "distance": 350,
+        "departureStop": "Koyambedu CMBT",
+        "arrivalStop": "Majestic KSRTC Stand"
+      },
+      "prices": {
+        "redbus": 520,
+        "abhibus": 510,
+        "makemytrip": 530,
+        "yatra": null,
+        "direct": 499
+      },
+      "lowestPrice": 499,
+      "highestPrice": 530,
+      "seatsLeft": 3,
+      "totalSeats": 48,
+      "boardingPoints": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "11:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Majestic KSRTC Stand",
+          "time": "17:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "No cancellation after booking",
+        "luggage": "As per KSRTC norms"
+      },
+      "featured": false,
+      "badges": [
+        "government",
+        "budget"
+      ]
+    },
+    {
+      "id": "bus-rev-004",
+      "slug": "ort-luxury-sleeper-goa-mumbai-830",
+      "operator": "Orange Travels",
+      "operatorCode": "ORT",
+      "busType": "Luxury Sleeper (1+1)",
+      "busTypeCode": "luxury-sleeper",
+      "rating": 4.6,
+      "reviewCount": 888,
+      "totalBookings": 27285,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "entertainment",
+        "snacks",
+        "ac-individual",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Goa",
+        "to": "Mumbai",
+        "routeId": "to-from",
+        "departureTime": "08:30",
+        "arrivalTime": "19:00",
+        "duration": "10h 30m",
+        "durationMinutes": 630,
+        "distance": 590,
+        "departureStop": "Panaji Bus Stand",
+        "arrivalStop": "Dadar TT Circle"
+      },
+      "prices": {
+        "redbus": 1800,
+        "abhibus": 1750,
+        "makemytrip": 1850,
+        "yatra": 1900,
+        "direct": 1699
+      },
+      "lowestPrice": 1699,
+      "highestPrice": 1900,
+      "seatsLeft": 8,
+      "totalSeats": 18,
+      "boardingPoints": [
+        {
+          "name": "Panaji Bus Stand",
+          "time": "08:30"
+        },
+        {
+          "name": "Mapusa",
+          "time": "08:30"
+        },
+        {
+          "name": "Calangute",
+          "time": "08:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Dadar TT Circle",
+          "time": "19:00"
+        },
+        {
+          "name": "Bandra Kurla Complex",
+          "time": "19:00"
+        },
+        {
+          "name": "Vashi Sector 17",
+          "time": "19:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 48h before departure",
+        "luggage": "2 bags (max 15kg each)"
+      },
+      "featured": true,
+      "badges": [
+        "top-rated",
+        "luxury",
+        "almost-full"
+      ]
+    },
+    {
+      "id": "bus-rev-005",
+      "slug": "pvt-ac-sleeper-goa-mumbai-930",
+      "operator": "Paulo Travels",
+      "operatorCode": "PVT",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.1,
+      "reviewCount": 1310,
+      "totalBookings": 44455,
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Goa",
+        "to": "Mumbai",
+        "routeId": "to-from",
+        "departureTime": "09:30",
+        "arrivalTime": "20:00",
+        "duration": "10h 30m",
+        "durationMinutes": 630,
+        "distance": 590,
+        "departureStop": "Panaji Bus Stand",
+        "arrivalStop": "Mumbai Central"
+      },
+      "prices": {
+        "redbus": 1100,
+        "abhibus": 1050,
+        "makemytrip": 1150,
+        "yatra": 1200,
+        "direct": 999
+      },
+      "lowestPrice": 999,
+      "highestPrice": 1200,
+      "seatsLeft": 21,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Panaji Bus Stand",
+          "time": "09:30"
+        },
+        {
+          "name": "Mapusa",
+          "time": "09:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Mumbai Central",
+          "time": "20:00"
+        },
+        {
+          "name": "Dadar",
+          "time": "20:00"
+        },
+        {
+          "name": "Thane",
+          "time": "20:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags (max 15kg each)"
+      },
+      "featured": false,
+      "badges": [
+        "best-value",
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-006",
+      "slug": "msrtc-ac-seater-pune-mumbai-1900",
+      "operator": "MSRTC",
+      "operatorCode": "MSRTC",
+      "busType": "Shivneri AC (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4,
+      "reviewCount": 8029,
+      "totalBookings": 323000,
+      "amenities": [
+        "usb-charging",
+        "water-bottle"
+      ],
+      "route": {
+        "from": "Pune",
+        "to": "Mumbai",
+        "routeId": "to-from",
+        "departureTime": "19:00",
+        "arrivalTime": "22:30",
+        "duration": "3h 30m",
+        "durationMinutes": 210,
+        "distance": 148,
+        "departureStop": "Swargate Depot",
+        "arrivalStop": "Mumbai Central Depot"
+      },
+      "prices": {
+        "redbus": 310,
+        "abhibus": 300,
+        "makemytrip": 315,
+        "yatra": null,
+        "direct": 290
+      },
+      "lowestPrice": 290,
+      "highestPrice": 315,
+      "seatsLeft": 14,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Swargate Depot",
+          "time": "19:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Mumbai Central Depot",
+          "time": "22:30"
+        },
+        {
+          "name": "Dadar",
+          "time": "22:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Non-refundable",
+        "luggage": "Hand luggage only"
+      },
+      "featured": false,
+      "badges": [
+        "government",
+        "budget",
+        "frequent"
+      ]
+    },
+    {
+      "id": "bus-rev-007",
+      "slug": "chr-luxury-seater-pune-mumbai-2000",
+      "operator": "Chartered Bus",
+      "operatorCode": "CHR",
+      "busType": "Luxury AC Seater (2+1)",
+      "busTypeCode": "luxury-seater",
+      "rating": 4.7,
+      "reviewCount": 489,
+      "totalBookings": 16065,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "entertainment",
+        "water-bottle",
+        "snacks",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Pune",
+        "to": "Mumbai",
+        "routeId": "to-from",
+        "departureTime": "20:00",
+        "arrivalTime": "23:00",
+        "duration": "3h 00m",
+        "durationMinutes": 180,
+        "distance": 148,
+        "departureStop": "Hinjewadi IT Park",
+        "arrivalStop": "BKC Pickup Point"
+      },
+      "prices": {
+        "redbus": 750,
+        "abhibus": 720,
+        "makemytrip": 780,
+        "yatra": 800,
+        "direct": 699
+      },
+      "lowestPrice": 699,
+      "highestPrice": 800,
+      "seatsLeft": 10,
+      "totalSeats": 24,
+      "boardingPoints": [
+        {
+          "name": "Hinjewadi IT Park",
+          "time": "20:00"
+        },
+        {
+          "name": "Baner",
+          "time": "20:00"
+        },
+        {
+          "name": "Shivajinagar Pune",
+          "time": "20:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "BKC Pickup Point",
+          "time": "23:00"
+        },
+        {
+          "name": "Powai",
+          "time": "23:00"
+        },
+        {
+          "name": "Vashi",
+          "time": "23:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 2h before departure",
+        "luggage": "1 small bag"
+      },
+      "featured": true,
+      "badges": [
+        "top-rated",
+        "premium",
+        "fastest"
+      ]
+    },
+    {
+      "id": "bus-rev-008",
+      "slug": "srs-non-ac-sleeper-pune-mumbai-1100",
+      "operator": "SRS Travels",
+      "operatorCode": "SRS",
+      "busType": "Non-AC Sleeper",
+      "busTypeCode": "non-ac-sleeper",
+      "rating": 3.7,
+      "reviewCount": 379,
+      "totalBookings": 10880,
+      "amenities": [
+        "blanket"
+      ],
+      "route": {
+        "from": "Pune",
+        "to": "Mumbai",
+        "routeId": "to-from",
+        "departureTime": "11:00",
+        "arrivalTime": "14:30",
+        "duration": "3h 30m",
+        "durationMinutes": 210,
+        "distance": 148,
+        "departureStop": "Swargate",
+        "arrivalStop": "Dadar"
+      },
+      "prices": {
+        "redbus": 250,
+        "abhibus": 240,
+        "makemytrip": 260,
+        "yatra": 270,
+        "direct": 229
+      },
+      "lowestPrice": 229,
+      "highestPrice": 270,
+      "seatsLeft": 24,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Swargate",
+          "time": "11:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Dadar",
+          "time": "14:30"
+        },
+        {
+          "name": "Thane",
+          "time": "14:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 6h before departure",
+        "luggage": "2 bags"
+      },
+      "featured": false,
+      "badges": [
+        "budget"
+      ]
+    },
+    {
+      "id": "bus-rev-009",
+      "slug": "hmt-ac-seater-jaipur-delhi-1830",
+      "operator": "Himalayan Motors",
+      "operatorCode": "HMT",
+      "busType": "Volvo AC Seater (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4.1,
+      "reviewCount": 710,
+      "totalBookings": 24395,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "entertainment"
+      ],
+      "route": {
+        "from": "Jaipur",
+        "to": "Delhi",
+        "routeId": "to-from",
+        "departureTime": "18:30",
+        "arrivalTime": "23:30",
+        "duration": "5h 00m",
+        "durationMinutes": 300,
+        "distance": 282,
+        "departureStop": "Sindhi Camp Bus Stand",
+        "arrivalStop": "Bikaner House"
+      },
+      "prices": {
+        "redbus": 550,
+        "abhibus": 520,
+        "makemytrip": 570,
+        "yatra": 600,
+        "direct": 499
+      },
+      "lowestPrice": 499,
+      "highestPrice": 600,
+      "seatsLeft": 22,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Sindhi Camp Bus Stand",
+          "time": "18:30"
+        },
+        {
+          "name": "Ajmer Road",
+          "time": "18:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Bikaner House",
+          "time": "23:30"
+        },
+        {
+          "name": "Dhaula Kuan",
+          "time": "23:30"
+        },
+        {
+          "name": "Gurgaon Sector 14",
+          "time": "23:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags (max 15kg)"
+      },
+      "featured": false,
+      "badges": [
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-010",
+      "slug": "chr-luxury-seater-jaipur-delhi-2000",
+      "operator": "Chartered Bus",
+      "operatorCode": "CHR",
+      "busType": "Mercedes AC Seater (2+1)",
+      "busTypeCode": "luxury-seater",
+      "rating": 4.8,
+      "reviewCount": 371,
+      "totalBookings": 12325,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "entertainment",
+        "water-bottle",
+        "snacks",
+        "reading-light",
+        "blanket"
+      ],
+      "route": {
+        "from": "Jaipur",
+        "to": "Delhi",
+        "routeId": "to-from",
+        "departureTime": "20:00",
+        "arrivalTime": "00:30",
+        "duration": "4h 30m",
+        "durationMinutes": 270,
+        "distance": 282,
+        "departureStop": "Jaipur Airport Drop",
+        "arrivalStop": "Aerocity Pickup"
+      },
+      "prices": {
+        "redbus": 1200,
+        "abhibus": 1150,
+        "makemytrip": 1250,
+        "yatra": 1300,
+        "direct": 1099
+      },
+      "lowestPrice": 1099,
+      "highestPrice": 1300,
+      "seatsLeft": 7,
+      "totalSeats": 18,
+      "boardingPoints": [
+        {
+          "name": "Jaipur Airport",
+          "time": "20:00"
+        },
+        {
+          "name": "Sindhi Camp",
+          "time": "20:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Aerocity Pickup",
+          "time": "00:30"
+        },
+        {
+          "name": "Connaught Place",
+          "time": "00:30"
+        },
+        {
+          "name": "Gurgaon Cyber Hub",
+          "time": "00:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 4h before departure",
+        "luggage": "1 bag (max 20kg)"
+      },
+      "featured": true,
+      "badges": [
+        "luxury",
+        "top-rated",
+        "almost-full"
+      ]
+    },
+    {
+      "id": "bus-rev-011",
+      "slug": "ntr-ac-sleeper-bangalore-hyderabad-900",
+      "operator": "NTR Travels",
+      "operatorCode": "NTR",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.2,
+      "reviewCount": 841,
+      "totalBookings": 32130,
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Bangalore",
+        "to": "Hyderabad",
+        "routeId": "to-from",
+        "departureTime": "09:00",
+        "arrivalTime": "19:00",
+        "duration": "10h 00m",
+        "durationMinutes": 600,
+        "distance": 574,
+        "departureStop": "Majestic Bus Stand",
+        "arrivalStop": "Mahatma Gandhi Bus Stand"
+      },
+      "prices": {
+        "redbus": 900,
+        "abhibus": 860,
+        "makemytrip": 950,
+        "yatra": 990,
+        "direct": 829
+      },
+      "lowestPrice": 829,
+      "highestPrice": 990,
+      "seatsLeft": 19,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Majestic Bus Stand",
+          "time": "09:00"
+        },
+        {
+          "name": "Electronic City",
+          "time": "09:00"
+        },
+        {
+          "name": "Silk Board",
+          "time": "09:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Mahatma Gandhi Bus Stand",
+          "time": "19:00"
+        },
+        {
+          "name": "LB Nagar",
+          "time": "19:00"
+        },
+        {
+          "name": "Dilsukhnagar",
+          "time": "19:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags (max 15kg)"
+      },
+      "featured": false,
+      "badges": [
+        "best-value"
+      ]
+    },
+    {
+      "id": "bus-rev-012",
+      "slug": "vrl-ac-sleeper-bangalore-hyderabad-1000",
+      "operator": "VRL Travels",
+      "operatorCode": "VRL",
+      "busType": "Volvo Multi-Axle Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.5,
+      "reviewCount": 1702,
+      "totalBookings": 61285,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "entertainment",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Bangalore",
+        "to": "Hyderabad",
+        "routeId": "to-from",
+        "departureTime": "10:00",
+        "arrivalTime": "20:00",
+        "duration": "10h 00m",
+        "durationMinutes": 600,
+        "distance": 574,
+        "departureStop": "Shivajinagar",
+        "arrivalStop": "Jubilee Bus Station"
+      },
+      "prices": {
+        "redbus": 1400,
+        "abhibus": 1350,
+        "makemytrip": 1450,
+        "yatra": 1500,
+        "direct": 1299
+      },
+      "lowestPrice": 1299,
+      "highestPrice": 1500,
+      "seatsLeft": 13,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Shivajinagar",
+          "time": "10:00"
+        },
+        {
+          "name": "Majestic",
+          "time": "10:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Jubilee Bus Station",
+          "time": "20:00"
+        },
+        {
+          "name": "Secunderabad",
+          "time": "20:00"
+        },
+        {
+          "name": "Mehdipatnam",
+          "time": "20:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 12h before departure",
+        "luggage": "2 bags (max 15kg)"
+      },
+      "featured": true,
+      "badges": [
+        "top-rated",
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-013",
+      "slug": "ksrtc-ac-seater-mysore-bangalore-1900",
+      "operator": "KSRTC",
+      "operatorCode": "KSRTC",
+      "busType": "Rajahamsa Semi-Sleeper AC",
+      "busTypeCode": "ac-seater",
+      "rating": 3.9,
+      "reviewCount": 4069,
+      "totalBookings": 140250,
+      "amenities": [
+        "usb-charging"
+      ],
+      "route": {
+        "from": "Mysore",
+        "to": "Bangalore",
+        "routeId": "to-from",
+        "departureTime": "19:00",
+        "arrivalTime": "22:00",
+        "duration": "3h 00m",
+        "durationMinutes": 180,
+        "distance": 150,
+        "departureStop": "Central Bus Stand Mysore",
+        "arrivalStop": "Majestic KSRTC"
+      },
+      "prices": {
+        "redbus": 220,
+        "abhibus": 210,
+        "makemytrip": 225,
+        "yatra": null,
+        "direct": 199
+      },
+      "lowestPrice": 199,
+      "highestPrice": 225,
+      "seatsLeft": 19,
+      "totalSeats": 56,
+      "boardingPoints": [
+        {
+          "name": "Central Bus Stand Mysore",
+          "time": "19:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Majestic KSRTC",
+          "time": "22:00"
+        },
+        {
+          "name": "Kengeri",
+          "time": "22:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Non-refundable",
+        "luggage": "As per KSRTC norms"
+      },
+      "featured": false,
+      "badges": [
+        "budget",
+        "government",
+        "frequent"
+      ]
+    },
+    {
+      "id": "bus-rev-014",
+      "slug": "ort-ac-sleeper-mysore-bangalore-930",
+      "operator": "Orange Travels",
+      "operatorCode": "ORT",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.4,
+      "reviewCount": 281,
+      "totalBookings": 9180,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
+      "route": {
+        "from": "Mysore",
+        "to": "Bangalore",
+        "routeId": "to-from",
+        "departureTime": "09:30",
+        "arrivalTime": "12:30",
+        "duration": "3h 00m",
+        "durationMinutes": 180,
+        "distance": 150,
+        "departureStop": "Mysore Palace Area",
+        "arrivalStop": "Silk Board"
+      },
+      "prices": {
+        "redbus": 550,
+        "abhibus": 530,
+        "makemytrip": 570,
+        "yatra": 590,
+        "direct": 499
+      },
+      "lowestPrice": 499,
+      "highestPrice": 590,
+      "seatsLeft": 16,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Mysore Palace Area",
+          "time": "09:30"
+        },
+        {
+          "name": "Mysore University",
+          "time": "09:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Silk Board",
+          "time": "12:30"
+        },
+        {
+          "name": "Banashankari",
+          "time": "12:30"
+        },
+        {
+          "name": "JP Nagar",
+          "time": "12:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 6h before departure",
+        "luggage": "1 bag (max 15kg)"
+      },
+      "featured": false,
+      "badges": [
+        "comfortable"
+      ]
+    },
+    {
+      "id": "bus-rev-015",
+      "slug": "pvt-non-ac-seater-goa-pune-800",
+      "operator": "Paulo Travels",
+      "operatorCode": "PVT",
+      "busType": "Non-AC Seater",
+      "busTypeCode": "non-ac-seater",
+      "rating": 3.8,
+      "reviewCount": 610,
+      "totalBookings": 20825,
+      "amenities": [
+        "water-bottle"
+      ],
+      "route": {
+        "from": "Goa",
+        "to": "Pune",
+        "routeId": "to-from",
+        "departureTime": "08:00",
+        "arrivalTime": "16:00",
+        "duration": "8h 00m",
+        "durationMinutes": 480,
+        "distance": 456,
+        "departureStop": "Panaji",
+        "arrivalStop": "Pune Swargate"
+      },
+      "prices": {
+        "redbus": 600,
+        "abhibus": 580,
+        "makemytrip": 620,
+        "yatra": 640,
+        "direct": 549
+      },
+      "lowestPrice": 549,
+      "highestPrice": 640,
+      "seatsLeft": 4,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Panaji",
+          "time": "08:00"
+        },
+        {
+          "name": "Mapusa",
+          "time": "08:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Pune Swargate",
+          "time": "16:00"
+        },
+        {
+          "name": "Katraj",
+          "time": "16:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags"
+      },
+      "featured": false,
+      "badges": [
+        "budget"
+      ]
+    },
+    {
+      "id": "bus-rev-016",
+      "slug": "ort-luxury-sleeper-goa-pune-830",
+      "operator": "Orange Travels",
+      "operatorCode": "ORT",
+      "busType": "Luxury AC Sleeper (1+1)",
+      "busTypeCode": "luxury-sleeper",
+      "rating": 4.6,
+      "reviewCount": 481,
+      "totalBookings": 16065,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "entertainment",
+        "snacks"
+      ],
+      "route": {
+        "from": "Goa",
+        "to": "Pune",
+        "routeId": "to-from",
+        "departureTime": "08:30",
+        "arrivalTime": "16:30",
+        "duration": "8h 00m",
+        "durationMinutes": 480,
+        "distance": 456,
+        "departureStop": "Panaji Bus Stand",
+        "arrivalStop": "Hinjewadi"
+      },
+      "prices": {
+        "redbus": 1600,
+        "abhibus": 1550,
+        "makemytrip": 1650,
+        "yatra": 1700,
+        "direct": 1499
+      },
+      "lowestPrice": 1499,
+      "highestPrice": 1700,
+      "seatsLeft": 9,
+      "totalSeats": 18,
+      "boardingPoints": [
+        {
+          "name": "Panaji Bus Stand",
+          "time": "08:30"
+        },
+        {
+          "name": "Calangute Beach",
+          "time": "08:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Hinjewadi",
+          "time": "16:30"
+        },
+        {
+          "name": "Shivajinagar",
+          "time": "16:30"
+        },
+        {
+          "name": "Swargate",
+          "time": "16:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 48h before departure",
+        "luggage": "2 bags (max 15kg)"
+      },
+      "featured": true,
+      "badges": [
+        "luxury",
+        "top-rated",
+        "almost-full"
+      ]
+    },
+    {
+      "id": "bus-rev-017",
+      "slug": "ntr-ac-sleeper-madurai-chennai-1000",
+      "operator": "NTR Travels",
+      "operatorCode": "NTR",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.1,
+      "reviewCount": 921,
+      "totalBookings": 35020,
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
+      "route": {
+        "from": "Madurai",
+        "to": "Chennai",
+        "routeId": "to-from",
+        "departureTime": "10:00",
+        "arrivalTime": "18:30",
+        "duration": "8h 30m",
+        "durationMinutes": 510,
+        "distance": 461,
+        "departureStop": "Mattuthavani Bus Stand",
+        "arrivalStop": "Koyambedu CMBT"
+      },
+      "prices": {
+        "redbus": 750,
+        "abhibus": 720,
+        "makemytrip": 780,
+        "yatra": 800,
+        "direct": 699
+      },
+      "lowestPrice": 699,
+      "highestPrice": 800,
+      "seatsLeft": 17,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Mattuthavani Bus Stand",
+          "time": "10:00"
+        },
+        {
+          "name": "Anna Nagar Madurai",
+          "time": "10:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "18:30"
+        },
+        {
+          "name": "Tambaram",
+          "time": "18:30"
+        },
+        {
+          "name": "Chrompet",
+          "time": "18:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags"
+      },
+      "featured": false,
+      "badges": [
+        "best-value"
+      ]
+    },
+    {
+      "id": "bus-rev-018",
+      "slug": "srs-ac-sleeper-mumbai-ahmedabad-800",
+      "operator": "SRS Travels",
+      "operatorCode": "SRS",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4,
+      "reviewCount": 739,
+      "totalBookings": 28390,
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
+      "route": {
+        "from": "Mumbai",
+        "to": "Ahmedabad",
+        "routeId": "to-from",
+        "departureTime": "08:00",
+        "arrivalTime": "17:00",
+        "duration": "9h 00m",
+        "durationMinutes": 540,
+        "distance": 528,
+        "departureStop": "Dadar Bus Station",
+        "arrivalStop": "Geeta Mandir Bus Stand"
+      },
+      "prices": {
+        "redbus": 800,
+        "abhibus": 780,
+        "makemytrip": 830,
+        "yatra": 860,
+        "direct": 749
+      },
+      "lowestPrice": 749,
+      "highestPrice": 860,
+      "seatsLeft": 20,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Dadar Bus Station",
+          "time": "08:00"
+        },
+        {
+          "name": "Borivali",
+          "time": "08:00"
+        },
+        {
+          "name": "Andheri",
+          "time": "08:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Geeta Mandir Bus Stand",
+          "time": "17:00"
+        },
+        {
+          "name": "Naroda",
+          "time": "17:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "2 bags"
+      },
+      "featured": false,
+      "badges": [
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-019",
+      "slug": "hmt-ac-seater-agra-delhi-1900",
+      "operator": "Himalayan Motors",
+      "operatorCode": "HMT",
+      "busType": "Volvo AC Seater (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4.3,
+      "reviewCount": 992,
+      "totalBookings": 37825,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "entertainment"
+      ],
+      "route": {
+        "from": "Agra",
+        "to": "Delhi",
+        "routeId": "to-from",
+        "departureTime": "19:00",
+        "arrivalTime": "23:30",
+        "duration": "4h 30m",
+        "durationMinutes": 270,
+        "distance": 233,
+        "departureStop": "Agra Fort Bus Stand",
+        "arrivalStop": "Sarai Kale Khan ISBT"
+      },
+      "prices": {
+        "redbus": 480,
+        "abhibus": 450,
+        "makemytrip": 500,
+        "yatra": 520,
+        "direct": 429
+      },
+      "lowestPrice": 429,
+      "highestPrice": 520,
+      "seatsLeft": 3,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Agra Fort Bus Stand",
+          "time": "19:00"
+        },
+        {
+          "name": "Taj Mahal Gate",
+          "time": "19:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Sarai Kale Khan ISBT",
+          "time": "23:30"
+        },
+        {
+          "name": "Ashram Chowk",
+          "time": "23:30"
+        },
+        {
+          "name": "Faridabad",
+          "time": "23:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before departure",
+        "luggage": "1 bag"
+      },
+      "featured": false,
+      "badges": [
+        "popular"
+      ]
+    },
+    {
+      "id": "bus-rev-020",
+      "slug": "chr-luxury-seater-agra-delhi-2030",
+      "operator": "Chartered Bus",
+      "operatorCode": "CHR",
+      "busType": "Luxury AC (2+1)",
+      "busTypeCode": "luxury-seater",
+      "rating": 4.8,
+      "reviewCount": 260,
+      "totalBookings": 8330,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "entertainment",
+        "water-bottle",
+        "snacks",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Agra",
+        "to": "Delhi",
+        "routeId": "to-from",
+        "departureTime": "20:30",
+        "arrivalTime": "00:30",
+        "duration": "4h 00m",
+        "durationMinutes": 240,
+        "distance": 233,
+        "departureStop": "Taj Mahal West Gate",
+        "arrivalStop": "Aerocity"
+      },
+      "prices": {
+        "redbus": 1200,
+        "abhibus": 1150,
+        "makemytrip": 1250,
+        "yatra": 1300,
+        "direct": 1099
+      },
+      "lowestPrice": 1099,
+      "highestPrice": 1300,
+      "seatsLeft": 11,
+      "totalSeats": 18,
+      "boardingPoints": [
+        {
+          "name": "Taj Mahal West Gate",
+          "time": "20:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Aerocity",
+          "time": "00:30"
+        },
+        {
+          "name": "Connaught Place",
+          "time": "00:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 2h before departure",
+        "luggage": "1 bag"
+      },
+      "featured": true,
+      "badges": [
+        "luxury",
+        "top-rated"
+      ]
+    },
+    {
+      "id": "bus-rev-021",
+      "slug": "zng-ac-seater-chandigarh-delhi-1830",
+      "operator": "Zingbus",
+      "operatorCode": "ZNG",
+      "busType": "Electric AC Seater (2+2)",
+      "busTypeCode": "ac-seater",
+      "rating": 4.7,
+      "reviewCount": 765,
+      "totalBookings": 17850,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Chandigarh",
+        "to": "Delhi",
+        "routeId": "to-from",
+        "departureTime": "18:30",
+        "arrivalTime": "22:45",
+        "duration": "4h 15m",
+        "durationMinutes": 255,
+        "distance": 245,
+        "departureStop": "Sector 43 ISBT",
+        "arrivalStop": "Kashmere Gate ISBT"
+      },
+      "prices": {
+        "redbus": 380,
+        "abhibus": 360,
+        "makemytrip": 395,
+        "yatra": 410,
+        "direct": 349
+      },
+      "lowestPrice": 349,
+      "highestPrice": 410,
+      "seatsLeft": 16,
+      "totalSeats": 44,
+      "boardingPoints": [
+        {
+          "name": "Sector 43 ISBT",
+          "time": "18:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Kashmere Gate ISBT",
+          "time": "22:45"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 6h before",
+        "luggage": "1 bag (max 15kg)"
+      },
+      "featured": true,
+      "badges": [
+        "best-value",
+        "fastest"
+      ]
+    },
+    {
+      "id": "bus-rev-022",
+      "slug": "ics-ac-sleeper-coimbatore-chennai-1000",
+      "operator": "IntrCity SmartBus",
+      "operatorCode": "ICS",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.8,
+      "reviewCount": 1008,
+      "totalBookings": 28900,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "entertainment",
+        "snacks"
+      ],
+      "route": {
+        "from": "Coimbatore",
+        "to": "Chennai",
+        "routeId": "to-from",
+        "departureTime": "10:00",
+        "arrivalTime": "18:00",
+        "duration": "8h 00m",
+        "durationMinutes": 480,
+        "distance": 500,
+        "departureStop": "Gandhipuram",
+        "arrivalStop": "Koyambedu CMBT"
+      },
+      "prices": {
+        "redbus": 790,
+        "abhibus": 750,
+        "makemytrip": 820,
+        "yatra": 850,
+        "direct": 699
+      },
+      "lowestPrice": 699,
+      "highestPrice": 850,
+      "seatsLeft": 10,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Gandhipuram",
+          "time": "10:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Koyambedu CMBT",
+          "time": "18:00"
+        },
+        {
+          "name": "Sriperumbudur",
+          "time": "18:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 12h before",
+        "luggage": "2 bags (max 20kg)"
+      },
+      "featured": true,
+      "badges": [
+        "top-rated",
+        "luxury"
+      ]
+    },
+    {
+      "id": "bus-rev-023",
+      "slug": "srs-ac-sleeper-kalaburagi-jamkhandi-930",
+      "operator": "SRS Travels",
+      "operatorCode": "SRS",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.4,
+      "reviewCount": 279,
+      "totalBookings": 10200,
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Kalaburagi",
+        "to": "Jamkhandi",
+        "routeId": "to-from",
+        "departureTime": "09:30",
+        "arrivalTime": "15:00",
+        "duration": "5h 30m",
+        "durationMinutes": 330,
+        "distance": 280,
+        "departureStop": "Kalaburagi Central Stand",
+        "arrivalStop": "Jamkhandi Old Bus Stand"
+      },
+      "prices": {
+        "redbus": 450,
+        "abhibus": 420,
+        "makemytrip": 460,
+        "yatra": 480,
+        "direct": 399
+      },
+      "lowestPrice": 399,
+      "highestPrice": 480,
+      "seatsLeft": 13,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Kalaburagi Central Stand",
+          "time": "09:30"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Jamkhandi Old Bus Stand",
+          "time": "15:00"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 24h before",
+        "luggage": "2 bags (max 15kg)"
+      },
+      "featured": false,
+      "badges": [
+        "best-value"
+      ]
+    },
+    {
+      "id": "bus-rev-024",
+      "slug": "vrl-ac-sleeper-nagpur-pune-800",
+      "operator": "VRL Travels",
+      "operatorCode": "VRL",
+      "busType": "AC Sleeper (2+1)",
+      "busTypeCode": "ac-sleeper",
+      "rating": 4.5,
+      "reviewCount": 558,
+      "totalBookings": 15725,
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
+      "route": {
+        "from": "Nagpur",
+        "to": "Pune",
+        "routeId": "to-from",
+        "departureTime": "08:00",
+        "arrivalTime": "19:30",
+        "duration": "11h 30m",
+        "durationMinutes": 690,
+        "distance": 710,
+        "departureStop": "Ganeshpeth Bus Stand",
+        "arrivalStop": "Swargate"
+      },
+      "prices": {
+        "redbus": 750,
+        "abhibus": 720,
+        "makemytrip": 780,
+        "yatra": 800,
+        "direct": 680
+      },
+      "lowestPrice": 680,
+      "highestPrice": 800,
+      "seatsLeft": 14,
+      "totalSeats": 36,
+      "boardingPoints": [
+        {
+          "name": "Ganeshpeth Bus Stand",
+          "time": "08:00"
+        }
+      ],
+      "droppingPoints": [
+        {
+          "name": "Swargate",
+          "time": "19:30"
+        },
+        {
+          "name": "Viman Nagar",
+          "time": "19:30"
+        }
+      ],
+      "policies": {
+        "cancellation": "Free cancellation up to 12h before",
+        "luggage": "2 bags (max 20kg)"
+      },
+      "featured": true,
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     }
   ],
   "reviews": [
@@ -2687,7 +5071,7 @@
   ],
   "admin": {
     "totalClicks": 1,
-    "totalSearches": 250,
+    "totalSearches": 254,
     "totalReviews": 10,
     "totalAlerts": 1,
     "revenueEstimate": 80,

@@ -215,6 +215,34 @@ app.get('/api/search', (req, res) => {
     results = results.filter(b => b.operatorCode === operator);
   }
 
+  // Dynamic Date Demand Multiplier (Weekend surge +20%, Midweek discount -10%)
+  let dateMultiplier = 1.0;
+  if (date) {
+    const dayOfWeek = new Date(date + 'T00:00:00').getDay();
+    if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+      dateMultiplier = 1.20; // Weekend surge
+    } else if (dayOfWeek === 2 || dayOfWeek === 3) {
+      dateMultiplier = 0.90; // Midweek discount
+    }
+  }
+
+  // Map results with date demand price adjustment
+  results = results.map(b => {
+    const adjustedPrices = {};
+    Object.entries(b.prices || {}).forEach(([p, val]) => {
+      adjustedPrices[p] = val ? Math.round(val * dateMultiplier) : null;
+    });
+    const lowP = Math.round(b.lowestPrice * dateMultiplier);
+    const highP = Math.round(b.highestPrice * dateMultiplier);
+
+    return {
+      ...b,
+      prices: adjustedPrices,
+      lowestPrice: lowP,
+      highestPrice: highP
+    };
+  });
+
   // Filter by price
   if (minPrice) {
     results = results.filter(b => b.lowestPrice >= parseInt(minPrice));
@@ -548,6 +576,7 @@ app.get('/go/:platform/:busId', (req, res) => {
   };
 
   db.telemetry.push(click);
+  if (db.telemetry.length > 500) db.telemetry = db.telemetry.slice(-500);
   db.admin.totalClicks = (db.admin.totalClicks || 0) + 1;
 
   // Estimate revenue (₹80 avg commission)
