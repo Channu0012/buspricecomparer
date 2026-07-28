@@ -546,11 +546,14 @@ async function loadResults() {
     }
 
     if (d.availableOperators && d.availableOperators.length) {
-      document.getElementById('op-filters').innerHTML = d.availableOperators.map(op => `
-        <label class="sf-opt">
-          <input type="checkbox" class="sf-cb op-cb" value="${op.code}" onchange="applyFilters()"> ${op.name}
-        </label>
-      `).join('');
+      document.getElementById('op-filters').innerHTML = d.availableOperators.map(op => {
+        const count = allBuses.filter(b => b.operatorCode === op.code).length;
+        return `
+          <label class="sf-opt">
+            <input type="checkbox" class="sf-cb op-cb" value="${op.code}" onchange="applyFilters()"> ${op.name} <span style="font-size:10px;color:var(--tm);margin-left:auto">(${count})</span>
+          </label>
+        `;
+      }).join('');
     }
 
     renderBuses(allBuses);

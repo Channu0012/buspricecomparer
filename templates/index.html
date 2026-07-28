@@ -271,6 +271,11 @@
         <div class="field">
           <div class="flabel">📅 Travel Date</div>
           <input type="date" class="finput" id="date-in">
+          <div style="display:flex;gap:4px;margin-top:6px">
+            <button onclick="setDateOffset(0)" style="background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:100px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--ts);cursor:pointer;font-family:inherit">Today</button>
+            <button onclick="setDateOffset(1)" style="background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:100px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--ts);cursor:pointer;font-family:inherit">Tomorrow</button>
+            <button onclick="setNextSaturday()" style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);border-radius:100px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--p);cursor:pointer;font-family:inherit">Saturday</button>
+          </div>
         </div>
         <div class="field">
           <div class="flabel">🚌 Bus Type</div>
@@ -501,10 +506,23 @@ function switchLang(val) {
 }
 
 function setToday() {
+  setDateOffset(0);
+}
+
+function setDateOffset(offsetDays) {
   const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
   const v = d.toISOString().split('T')[0];
   document.getElementById('date-in').value = v;
-  document.getElementById('date-in').min = v;
+  document.getElementById('date-in').min = new Date().toISOString().split('T')[0];
+}
+
+function setNextSaturday() {
+  const d = new Date();
+  const day = d.getDay();
+  const diff = (6 - day + 7) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  document.getElementById('date-in').value = d.toISOString().split('T')[0];
 }
 
 async function loadCities() {

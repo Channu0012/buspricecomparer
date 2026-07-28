@@ -442,26 +442,37 @@
 
 <script>
 /* ── PASSWORD GATE LOGIC ── */
-const ADMIN_PASS = '001200';
-
-function checkPassword() {
+async function checkPassword() {
   const val = document.getElementById('pw-input').value;
   const err = document.getElementById('pw-error');
-  if (val === ADMIN_PASS) {
-    sessionStorage.setItem('bc_admin_auth', '1');
-    unlockDashboard();
-  } else {
-    err.style.display = 'block';
-    // Re-trigger shake animation
-    err.style.animation = 'none';
-    requestAnimationFrame(() => { err.style.animation = ''; });
-    document.getElementById('pw-input').value = '';
-    document.getElementById('pw-input').focus();
-    // Shake the box too
-    const box = document.querySelector('.pw-box');
-    box.style.animation = 'none';
-    requestAnimationFrame(() => { box.style.animation = 'shake .35s cubic-bezier(.36,.07,.19,.97) both'; });
+  try {
+    const res = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: val })
+    });
+    const data = await res.json();
+    if (data.success && data.token) {
+      sessionStorage.setItem('bc_admin_auth', data.token);
+      unlockDashboard();
+    } else {
+      showPwError();
+    }
+  } catch(e) {
+    showPwError();
   }
+}
+
+function showPwError() {
+  const err = document.getElementById('pw-error');
+  err.style.display = 'block';
+  err.style.animation = 'none';
+  requestAnimationFrame(() => { err.style.animation = ''; });
+  document.getElementById('pw-input').value = '';
+  document.getElementById('pw-input').focus();
+  const box = document.querySelector('.pw-box');
+  box.style.animation = 'none';
+  requestAnimationFrame(() => { box.style.animation = 'shake .35s cubic-bezier(.36,.07,.19,.97) both'; });
 }
 
 function unlockDashboard() {
@@ -482,7 +493,7 @@ function toggleVisibility() {
 
 // Auto-unlock if already authenticated this session
 document.addEventListener('DOMContentLoaded', () => {
-  if (sessionStorage.getItem('bc_admin_auth') === '1') {
+  if (sessionStorage.getItem('bc_admin_auth')) {
     unlockDashboard();
   } else {
     document.getElementById('pw-input').focus();

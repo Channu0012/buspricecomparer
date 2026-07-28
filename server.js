@@ -8,6 +8,8 @@ const helmet    = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { v4: uuidv4 } = require('uuid');
 
+const crypto    = require('crypto');
+
 const app  = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '0.0.0.0';   // bind to all interfaces
@@ -31,33 +33,29 @@ function sanitizeInput(str) {
 }
 
 // ─── SECURITY MIDDLEWARE ──────────────────────────────────────────────────────
-// Helmet: Set security HTTP headers
 app.use(helmet({
-  contentSecurityPolicy: false, // allow Google fonts & inline SVGs smoothly
+  contentSecurityPolicy: false,
   crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 
-// Rate Limiting: Prevent DDoS / Brute Force
 const globalLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 300, // max 300 requests per window per IP
+  windowMs: 15 * 60 * 1000,
+  max: 300,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'Too many requests from this IP. Please try again later.' }
 });
 
 const submitLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 hour
-  max: 15, // max 15 submissions per hour per IP (reviews / alerts)
+  windowMs: 60 * 60 * 1000,
+  max: 30,
   message: { error: 'Submission limit reached. Please wait an hour before submitting again.' }
 });
 
 app.use(globalLimiter);
-
-app.use(express.json({ limit: '10kb' })); // limit body payload to 10kb
+app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// CORS — allow requests cleanly
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -68,10 +66,16 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ─── DATABASE HELPERS ────────────────────────────────────────────────────────
+// In-memory cache & atomic queued writer to prevent file corruption / race conditions
+let dbMemoryCache = null;
+let isWriting = false;
+let pendingWrite = false;
+
 function readDB() {
+  if (dbMemoryCache) return dbMemoryCache;
   try {
-    return JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+    dbMemoryCache = JSON.parse(fs.readFileSync(DB_PATH, 'utf8'));
+    return dbMemoryCache;
   } catch (e) {
     console.error('[DB] Read error:', e.message);
     return null;
@@ -79,13 +83,26 @@ function readDB() {
 }
 
 function writeDB(data) {
-  try {
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf8');
+  dbMemoryCache = data; // Update in-memory cache instantly
+  if (isWriting) {
+    pendingWrite = true;
     return true;
-  } catch (e) {
-    console.error('[DB] Write error:', e.message);
-    return false;
   }
+  isWriting = true;
+  setImmediate(() => {
+    try {
+      fs.writeFileSync(DB_PATH, JSON.stringify(dbMemoryCache, null, 2), 'utf8');
+    } catch (e) {
+      console.error('[DB] Write error:', e.message);
+    } finally {
+      isWriting = false;
+      if (pendingWrite) {
+        pendingWrite = false;
+        writeDB(dbMemoryCache);
+      }
+    }
+  });
+  return true;
 }
 
 // ─── TEMPLATE SERVING ────────────────────────────────────────────────────────
@@ -472,6 +489,23 @@ app.get('/api/bus/:slug', (req, res) => {
   res.json({ bus, reviews, route, operator, related });
 });
 
+// Founder password hash (SHA-256 of "001200")
+const ADMIN_HASH = '0b8e34c0992231f59dd2407b5168c5247bffe7b87b6e493a72f15db5d293685e';
+
+// ─── API: ADMIN LOGIN ─────────────────────────────────────────────────────────
+app.post('/api/admin/login', (req, res) => {
+  const { password } = req.body;
+  if (!password) return res.status(400).json({ success: false, error: 'Password required' });
+
+  const hash = crypto.createHash('sha256').update(password).digest('hex');
+  if (hash === ADMIN_HASH) {
+    const token = crypto.createHash('sha256').update(password + Date.now()).digest('hex');
+    return res.json({ success: true, token });
+  }
+
+  res.status(401).json({ success: false, error: 'Invalid password' });
+});
+
 // ─── API: SUBMIT REVIEW ───────────────────────────────────────────────────────
 app.post('/api/review', submitLimiter, (req, res) => {
   const db = readDB();
@@ -483,21 +517,25 @@ app.post('/api/review', submitLimiter, (req, res) => {
     return res.status(400).json({ error: 'busId, userName, rating, comment are required' });
   }
 
+  // Strict character length boundaries
+  if (userName.length > 50) return res.status(400).json({ error: 'Name must be under 50 characters' });
+  if (comment.length > 1000) return res.status(400).json({ error: 'Review comment must be under 1000 characters' });
+
   const bus = db.buses.find(b => b.id === busId);
   if (!bus) return res.status(404).json({ error: 'Bus not found' });
 
   const review = {
     id: `rev-${uuidv4().slice(0, 8)}`,
-    busId: sanitizeInput(busId),
-    userName: sanitizeInput(userName),
-    userCity: sanitizeInput(userCity),
+    busId: sanitizeInput(busId).slice(0, 50),
+    userName: sanitizeInput(userName).slice(0, 50),
+    userCity: sanitizeInput(userCity).slice(0, 50),
     rating: Math.min(5, Math.max(1, parseInt(rating))),
-    title: sanitizeInput(title),
-    comment: sanitizeInput(comment),
+    title: sanitizeInput(title).slice(0, 100),
+    comment: sanitizeInput(comment).slice(0, 1000),
     date: new Date().toISOString().split('T')[0],
     helpfulCount: 0,
     verified: false,
-    platform: sanitizeInput(platform) || 'buscompare'
+    platform: sanitizeInput(platform).slice(0, 30) || 'buscompare'
   };
 
   db.reviews.push(review);
