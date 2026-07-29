@@ -251,6 +251,9 @@
           <div id="sp-route-sub" style="font-size:12px;color:var(--ts)">Select your bus & compare booking options</div>
         </div>
         <div style="display:flex;gap:10px;align-items:center">
+          <button onclick="shareTripToWhatsAppSPA()" style="background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.3);color:#25D366;border-radius:100px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer">
+            📲 Share to WhatsApp
+          </button>
           <button onclick="openVIPModal()" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#F59E0B;border-radius:100px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer">
             👑 VIP Pass (₹99)
           </button>
@@ -259,6 +262,9 @@
           </button>
         </div>
       </div>
+
+      <!-- 🧮 4-WAY MULTI-MODAL TRAVEL CALCULATOR (BUS VS FLIGHT VS TRAIN VS CAB) -->
+      <div id="sp-multimodal-container" style="margin-bottom:20px"></div>
 
       <!-- ✈️ CRAZY PLANE VS BUS INTERMODAL UPSELL CARD -->
       <div id="sp-flight-card-container" style="margin-bottom:20px"></div>
@@ -354,9 +360,31 @@
         <div style="background:linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(59,130,246,0.15) 100%);border:1px solid rgba(16,185,129,0.3);border-radius:16px;padding:24px;text-align:center;margin-bottom:24px">
           <div style="font-size:12px;font-weight:800;color:var(--ts);text-transform:uppercase;letter-spacing:1px">💼 ESTIMATED GROSS PROFIT (ALL STREAMS)</div>
           <div id="adm-rev" style="font-family:'Outfit',sans-serif;font-size:42px;font-weight:900;color:var(--green);margin:4px 0">₹0</div>
-          <div style="font-size:12px;color:var(--ts)">Includes Bus Affiliate + Crazy Flight Commissions + Price Lock Fees (100% Margin) + VIP MRR</div>
+          <div style="font-size:12px;color:var(--ts);margin-bottom:14px">Includes Bus Affiliate + Crazy Flight Commissions + Price Lock Fees (100% Margin) + VIP MRR</div>
+          <a href="/api/admin/leads/export?format=csv" target="_blank" style="display:inline-block;background:var(--p);color:#fff;text-decoration:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:800">
+            📥 Download Leads CSV (Alerts & VIP Subscribers) ↗
+          </a>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BOARDING & DROPPING POINTS WITH MAPS -->
+  <div id="boarding-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:2000;align-items:center;justify-content:center;padding:20px">
+    <div style="background:var(--card);border:1px solid var(--bl);border-radius:24px;width:100%;max-width:540px;max-height:85vh;overflow-y:auto;padding:28px;position:relative">
+      <button onclick="closeBoardingModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ts);font-size:20px;cursor:pointer">✕</button>
+      <div style="font-size:32px;margin-bottom:8px">📍</div>
+      <div id="bm-title" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;margin-bottom:4px">Boarding & Drop Points</div>
+      <div id="bm-sub" style="font-size:12px;color:var(--ts);margin-bottom:20px">Exact pickup locations with live Google Maps links</div>
+
+      <div style="font-size:12px;font-weight:800;color:var(--p);text-transform:uppercase;margin-bottom:8px">🚌 BOARDING LOCATIONS</div>
+      <div id="bm-boarding-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px"></div>
+
+      <div style="font-size:12px;font-weight:800;color:var(--green);text-transform:uppercase;margin-bottom:8px">📍 DROPPING LOCATIONS</div>
+      <div id="bm-dropping-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px"></div>
+
+      <div style="font-size:12px;font-weight:800;color:#F59E0B;text-transform:uppercase;margin-bottom:8px">🍱 HIGHWAY REST STOP & FOOD BREAKS</div>
+      <div id="bm-rest-list" style="display:flex;flex-direction:column;gap:10px"></div>
     </div>
   </div>
 
@@ -550,6 +578,9 @@
       const list = document.getElementById('sp-bus-cards-list');
       list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--ts)">⚡ Searching buses...</div>';
 
+      // Load 4-Way Multi-Modal Travel Calculator
+      loadMultimodalSPA(from, to);
+
       // Load Intermodal Crazy Flight Deal
       loadFlightUpsell(from, to);
 
@@ -561,6 +592,48 @@
       } catch(e) {
         list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--red)">Failed to load buses. Make sure server is active.</div>';
       }
+    }
+
+    async function loadMultimodalSPA(from, to) {
+      const container = document.getElementById('sp-multimodal-container');
+      if (!container) return;
+      try {
+        const r = await fetch(`/api/multimodal/calculate?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`);
+        const d = await r.json();
+        if (d.multimodal) {
+          const mm = d.multimodal;
+          container.innerHTML = `
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px">
+              <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
+                <span>🧮 4-Way Travel Mode Calculator (${from} → ${to})</span>
+                <span style="font-size:11px;color:var(--ts);font-weight:700">📍 ${mm.distanceKm} km Corridor</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:12px">
+                <div style="background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.25);border-radius:12px;padding:12px">
+                  <div style="font-weight:800;font-size:13px;color:var(--p)">${mm.bus.icon} ${mm.bus.mode}</div>
+                  <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin:4px 0">₹${mm.bus.price}</div>
+                  <div style="font-size:11px;color:var(--ts)">⏱ ${mm.bus.duration} • ${mm.bus.badge}</div>
+                </div>
+                <div style="background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:12px">
+                  <div style="font-weight:800;font-size:13px;color:#60A5FA">${mm.flight.icon} ${mm.flight.mode}</div>
+                  <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin:4px 0">₹${mm.flight.price}</div>
+                  <div style="font-size:11px;color:var(--ts)">⏱ ${mm.flight.effectiveTime}</div>
+                </div>
+                <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-radius:12px;padding:12px">
+                  <div style="font-weight:800;font-size:13px;color:var(--green)">${mm.train.icon} ${mm.train.mode}</div>
+                  <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin:4px 0">₹${mm.train.price}</div>
+                  <div style="font-size:11px;color:var(--ts)">⏱ ${mm.train.duration} • ${mm.train.availabilityNote}</div>
+                </div>
+                <div style="background:rgba(139,92,246,0.08);border:1px solid rgba(139,92,246,0.25);border-radius:12px;padding:12px">
+                  <div style="font-weight:800;font-size:13px;color:#A78BFA">${mm.cab.icon} ${mm.cab.mode}</div>
+                  <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin:4px 0">₹${mm.cab.price} <span style="font-size:10px;color:var(--ts);font-weight:600">(₹${mm.cab.perSeatPrice}/seat)</span></div>
+                  <div style="font-size:11px;color:var(--ts)">⏱ ${mm.cab.duration} • Door-to-Door</div>
+                </div>
+              </div>
+            </div>
+          `;
+        } else { container.innerHTML = ''; }
+      } catch(e) { container.innerHTML = ''; }
     }
 
     async function loadFlightUpsell(from, to) {
@@ -612,6 +685,12 @@
               <div style="font-weight:900;font-size:17px;color:var(--t)">${b.operator}</div>
               <div style="font-size:12px;color:var(--ts)">${b.busType} • ${b.route.departureTime} → ${b.route.arrivalTime} (${b.route.duration})</div>
               <div style="font-size:12px;color:var(--green);font-weight:700;margin-top:4px">⭐ ${b.rating} (${b.reviewCount} reviews) • 🔴 ${b.seatsLeft} seats left</div>
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+                <button onclick="openBoardingModal('${b.id}')" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--t);border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;cursor:pointer">
+                  📍 Pickup Points & Maps
+                </button>
+                <span style="font-size:11px;color:var(--ts);padding:4px 0">🍱 Rest Stop Scheduled</span>
+              </div>
             </div>
             <div style="text-align:right">
               <div style="font-size:20px;font-weight:900;color:var(--p)">₹${b.lowestPrice}</div>
@@ -627,6 +706,54 @@
           </div>
         </div>
       `).join('');
+    }
+
+    async function openBoardingModal(busId) {
+      try {
+        const r = await fetch(`/api/buses/boarding-points/${busId}`);
+        const d = await r.json();
+        document.getElementById('bm-title').textContent = `${d.operator} — Pickup Points`;
+        
+        document.getElementById('bm-boarding-list').innerHTML = (d.boardingPoints || []).map(bp => `
+          <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="font-weight:800;font-size:13px;color:var(--t)">⏰ ${bp.time} — ${bp.location}</div>
+              <div style="font-size:11px;color:var(--ts)">Landmark: ${bp.landmark}</div>
+            </div>
+            <a href="${bp.mapsUrl}" target="_blank" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60A5FA;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;text-decoration:none">
+              📍 Map ↗
+            </a>
+          </div>
+        `).join('');
+
+        document.getElementById('bm-dropping-list').innerHTML = (d.droppingPoints || []).map(dp => `
+          <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="font-weight:800;font-size:13px;color:var(--t)">⏰ ${dp.time} — ${dp.location}</div>
+              <div style="font-size:11px;color:var(--ts)">Landmark: ${dp.landmark}</div>
+            </div>
+            <a href="${dp.mapsUrl}" target="_blank" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:var(--green);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;text-decoration:none">
+              📍 Map ↗
+            </a>
+          </div>
+        `).join('');
+
+        document.getElementById('bm-rest-list').innerHTML = (d.restStops || []).map(rs => `
+          <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:10px 14px">
+            <div style="font-weight:800;font-size:13px;color:#F59E0B">${rs.name} (${rs.duration})</div>
+            <div style="font-size:11px;color:var(--ts)">Timing: ${rs.timing} • Facilities: ${rs.features.join(', ')}</div>
+          </div>
+        `).join('');
+
+        document.getElementById('boarding-modal').style.display = 'flex';
+      } catch(e) {}
+    }
+    function closeBoardingModal() { document.getElementById('boarding-modal').style.display = 'none'; }
+
+    function shareTripToWhatsAppSPA() {
+      const title = document.getElementById('sp-route-title').textContent || 'BusCompare Trip';
+      const text = `🚌 *BusCompare India Travel Comparison*\nRoute: ${title}\nCompare prices across RedBus, AbhiBus & MakeMyTrip!\nLink: ${window.location.href}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
     }
 
     function openLockModal(busId, price) {

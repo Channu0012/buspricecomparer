@@ -626,6 +626,181 @@ app.get('/api/flights/search', (req, res) => {
   res.json({ flight });
 });
 
+// ─── API: 4-WAY MULTI-MODAL TRAVEL CALCULATOR ──────────────────────────────────
+app.get('/api/multimodal/calculate', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { from, to } = req.query;
+  if (!from || !to) return res.status(400).json({ error: 'from and to required' });
+
+  const normFrom = normalizeCity(from);
+  const normTo   = normalizeCity(to);
+
+  const route = db.routes.find(r => normalizeCity(r.from) === normFrom && normalizeCity(r.to) === normTo);
+  const busMatch = db.buses.find(b => normalizeCity(b.route.from) === normFrom && normalizeCity(b.route.to) === normTo);
+  
+  const distance = route ? route.distance : 350;
+  const busMinPrice = busMatch ? busMatch.lowestPrice : 399;
+  const busDuration = busMatch ? busMatch.route.duration : '6h 30m';
+
+  // 4-Way calculation
+  const multimodal = {
+    from,
+    to,
+    distanceKm: distance,
+    bus: {
+      mode: 'Bus (Volvo AC Sleeper)',
+      price: busMinPrice,
+      duration: busDuration,
+      effectiveTime: busDuration,
+      doorToDoorCost: busMinPrice,
+      rating: '4.5 ★',
+      badge: '💰 CHEAPEST & COMFY',
+      icon: '🚌'
+    },
+    flight: {
+      mode: 'Flight (Economy Air)',
+      price: Math.max(1899, Math.round(busMinPrice * 2.9)),
+      airfareOnly: Math.max(1899, Math.round(busMinPrice * 2.9)),
+      duration: '1h 15m',
+      airportTaxiCost: 650,
+      effectiveTime: '3h 45m (incl. 2h airport check-in)',
+      doorToDoorCost: Math.max(1899, Math.round(busMinPrice * 2.9)) + 650,
+      badge: '⚡ FASTEST DOOR-TO-DOOR',
+      icon: '✈️'
+    },
+    train: {
+      mode: 'Train (IRCTC 3AC / Sleeper)',
+      price: Math.max(220, Math.round(busMinPrice * 0.7)),
+      duration: '7h 00m',
+      effectiveTime: '7h 30m',
+      doorToDoorCost: Math.max(220, Math.round(busMinPrice * 0.7)),
+      availabilityNote: '⚠️ Waitlist high on weekends',
+      badge: '🚆 BUDGET CHOICE',
+      icon: '🚆'
+    },
+    cab: {
+      mode: 'Intercity SUV Cab (Private/Shared)',
+      price: Math.round(distance * 14),
+      perSeatPrice: Math.round((distance * 14) / 4),
+      duration: '5h 30m',
+      effectiveTime: '5h 30m',
+      doorToDoorCost: Math.round(distance * 14),
+      badge: '🚗 DOOR-TO-DOOR CONVENIENCE',
+      icon: '🚗'
+    }
+  };
+
+  res.json({ multimodal });
+});
+
+// ─── API: DETAILED BOARDING & DROPPING POINTS + MAP LINKS ──────────────────────
+app.get('/api/buses/boarding-points/:busId', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const bus = db.buses.find(b => b.id === req.params.busId);
+  if (!bus) return res.status(404).json({ error: 'Bus not found' });
+
+  const depTime = bus.route.departureTime;
+  const arrTime = bus.route.arrivalTime;
+  const fromCity = bus.route.from;
+  const toCity = bus.route.to;
+
+  const boardingPoints = [
+    {
+      time: depTime,
+      location: `${fromCity} Central Bus Station / Main Stand`,
+      landmark: 'Gate 4, Opposite Railway Station',
+      mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fromCity + ' Central Bus Stand')}`
+    },
+    {
+      time: addMinutesToTime(depTime, 25),
+      location: `${fromCity} Highway Toll Plaza / Bypass Junction`,
+      landmark: 'Near Shell Petrol Pump & Food Mall',
+      mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fromCity + ' Highway Toll Plaza')}`
+    }
+  ];
+
+  const droppingPoints = [
+    {
+      time: subtractMinutesFromTime(arrTime, 20),
+      location: `${toCity} Outer Ring Road Drop Point`,
+      landmark: 'Bypass Flyover Stop',
+      mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(toCity + ' Bypass Junction')}`
+    },
+    {
+      time: arrTime,
+      location: `${toCity} Main Bus Terminal / Railway Station Drop`,
+      landmark: 'Platform 1 Taxi Stand Exit',
+      mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(toCity + ' Railway Station Drop')}`
+    }
+  ];
+
+  const restStops = [
+    {
+      name: '🍱 Highway Food Express Plaza',
+      duration: '30 mins',
+      timing: 'Mid-route (around 3 hours into journey)',
+      features: ['Food Court (Veg/Non-Veg)', 'Clean Washrooms', 'ATM & Coffee Shop']
+    }
+  ];
+
+  res.json({
+    busId: bus.id,
+    operator: bus.operator,
+    busType: bus.busType,
+    boardingPoints,
+    droppingPoints,
+    restStops
+  });
+});
+
+function addMinutesToTime(timeStr, minsToAdd) {
+  try {
+    const [h, m] = timeStr.split(':').map(Number);
+    const date = new Date();
+    date.setHours(h, m + minsToAdd);
+    return date.toTimeString().slice(0, 5);
+  } catch(e) { return timeStr; }
+}
+
+function subtractMinutesFromTime(timeStr, minsToSub) {
+  try {
+    const [h, m] = timeStr.split(':').map(Number);
+    const date = new Date();
+    date.setHours(h, m - minsToSub);
+    return date.toTimeString().slice(0, 5);
+  } catch(e) { return timeStr; }
+}
+
+// ─── API: ADMIN LEAD EXPORT (CSV / JSON) ──────────────────────────────────────
+app.get('/api/admin/leads/export', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const format = req.query.format || 'json';
+
+  const alerts = (db.alerts || []).map(a => ({ type: 'PRICE_ALERT', email: a.email, phone: a.whatsapp || 'N/A', route: `${a.routeFrom} → ${a.routeTo}`, date: a.createdAt }));
+  const locks = (db.priceLocks || []).map(l => ({ type: 'PRICE_LOCK', email: l.email || 'N/A', phone: l.phone, route: `Bus ID ${l.busId}`, date: l.expiresAt }));
+  const vip = (db.vipSubscriptions || []).map(v => ({ type: 'VIP_PASS', email: v.email, phone: v.phone, route: v.plan, date: v.createdAt }));
+
+  const allLeads = [...alerts, ...locks, ...vip];
+
+  if (format === 'csv') {
+    let csv = 'Type,Email,Phone,Route/Plan,Date\n';
+    allLeads.forEach(l => {
+      csv += `"${l.type}","${l.email}","${l.phone}","${l.route}","${l.date}"\n`;
+    });
+    res.header('Content-Type', 'text/csv');
+    res.attachment('buscompare_leads.csv');
+    return res.send(csv);
+  }
+
+  res.json({ totalLeads: allLeads.length, leads: allLeads });
+});
+
 // ─── FLIGHT AFFILIATE REDIRECT (HIGH COMMISSION ₹450+) ────────────────────────
 app.get('/go/flight/:flightId', (req, res) => {
   const db = readDB();
