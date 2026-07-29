@@ -316,6 +316,9 @@
       <button class="pb-copy-btn" onclick="copyCoupon('BUSCOMP100')">Copy Code 📋</button>
     </div>
 
+    <!-- ✈️ CRAZY PLANE VS BUS INTERMODAL UPSELL CARD -->
+    <div id="plane-deal-card" style="margin-bottom:20px"></div>
+
     <!-- ROUTE INFO BAR -->
     <div class="route-info-bar" id="route-info" style="display:none">
       <div class="rib-route" id="rib-route">Mumbai <span class="arr">→</span> Pune</div>
@@ -525,6 +528,7 @@ function setLanguage(lang) {
 
 async function loadResults() {
   try {
+    loadFlightUpsell(params.from, params.to);
     const sp = new URLSearchParams({from:params.from, to:params.to});
     if (params.date) sp.set('date', params.date);
     const r = await fetch(`/api/search?${sp}`);
@@ -561,6 +565,41 @@ async function loadResults() {
     document.getElementById('skeleton-area').style.display = 'none';
     document.getElementById('empty-state').style.display = 'block';
   }
+}
+
+async function loadFlightUpsell(from, to) {
+  const container = document.getElementById('plane-deal-card');
+  if (!container || !from || !to) return;
+  try {
+    const r = await fetch(`/api/flights/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`);
+    const d = await r.json();
+    if (d.flight) {
+      const f = d.flight;
+      container.innerHTML = `
+        <div style="background:linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);border:1px solid rgba(59,130,246,0.3);border-radius:16px;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 8px 24px rgba(59,130,246,0.15)">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:44px;height:44px;background:rgba(59,130,246,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px">✈️</div>
+            <div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:900;color:#60A5FA">${f.airline} (${f.flightNumber})</span>
+                <span style="background:rgba(59,130,246,0.2);color:#93C5FD;font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px">${f.badge}</span>
+              </div>
+              <div style="font-size:12px;color:var(--ts);margin-top:2px">
+                ⏱ <strong>${f.duration} Flight</strong> vs <strong>${f.busDuration} Bus</strong> — Save ${f.hoursSaved} Hours!
+              </div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--ts);font-weight:700">CRAZY FLIGHT DEAL</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:var(--green)">₹${f.flightPrice}</div>
+            <a href="/go/flight/${f.id}" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff;text-decoration:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:800;margin-top:4px">
+              Book Flight & Save Time ↗
+            </a>
+          </div>
+        </div>
+      `;
+    } else { container.innerHTML = ''; }
+  } catch(e) { container.innerHTML = ''; }
 }
 
 async function loadPriceTrends() {

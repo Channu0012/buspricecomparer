@@ -134,6 +134,7 @@
         <ul class="nav-links">
           <li><a onclick="navigateSPA('/')" class="nav-link" id="nl-home">Home</a></li>
           <li><a onclick="navigateSPA('/search')" class="nav-link" id="nl-search">Search</a></li>
+          <li><a onclick="openVIPModal()" class="nav-link" style="color:#F59E0B;font-weight:800">VIP Pass 👑</a></li>
           <li><a onclick="navigateSPA('/alerts')" class="nav-link" id="nl-alerts">Alerts 🔔</a></li>
           <li><a onclick="navigateSPA('/admin')" class="nav-link" id="nl-admin">Admin 📊</a></li>
         </ul>
@@ -163,12 +164,12 @@
       <!-- HERO -->
       <div style="text-align:center;margin-bottom:36px">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:800;color:var(--p);margin-bottom:16px">
-          ⚡ Compare 15,000+ Bus Routes Across India
+          ⚡ Compare 15,000+ Bus & Flight Routes Across India
         </div>
         <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(36px,5vw,56px);font-weight:900;line-height:1.1;margin-bottom:16px">
-          Find Cheapest Bus.<br><span style="color:var(--p)">Travel Smarter. 🇮🇳</span>
+          Find Cheapest Bus.<br><span style="color:var(--p)">Or Fly Fast. ✈️ 🇮🇳</span>
         </h1>
-        <p style="font-size:16px;color:var(--ts);max-width:640px;margin:0 auto">Compare real-time prices across RedBus, AbhiBus, MakeMyTrip & KSRTC. Interactive 2D Seat Map, Price Trends & Instant Booking.</p>
+        <p style="font-size:16px;color:var(--ts);max-width:640px;margin:0 auto">Compare real-time prices across RedBus, AbhiBus, MakeMyTrip & Flight deals. Interactive 2D Seat Map, Price Lock & VIP Alert Pass.</p>
       </div>
 
       <!-- SEARCH WIDGET CARD -->
@@ -193,7 +194,21 @@
           </div>
         </div>
         <button onclick="executeHomeSearch()" style="width:100%;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(249,115,22,.4)">
-          🔍 Compare Buses Now — Instant Fare Search →
+          🔍 Compare Buses & Crazy Flight Deals Now →
+        </button>
+      </div>
+
+      <!-- BUSPASS VIP PROMO CARD -->
+      <div style="margin-top:30px;background:linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(139,92,246,0.15) 100%);border:1px solid rgba(245,158,11,0.3);border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="font-size:36px">👑</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:#F59E0B">BusPass VIP Membership</div>
+            <div style="font-size:13px;color:var(--ts)">Get 0 Convenience Fees + Instant WhatsApp Surge Alerts + Price Lock Pass</div>
+          </div>
+        </div>
+        <button onclick="openVIPModal()" style="background:linear-gradient(135deg, #F59E0B, #D97706);color:#fff;border:none;border-radius:100px;padding:10px 20px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(245,158,11,0.3)">
+          Join VIP @ ₹99/mo →
         </button>
       </div>
 
@@ -230,15 +245,23 @@
   <div id="spa-view-search" class="spa-view">
     <div style="max-width:1280px;margin:20px auto;padding:0 24px">
       <!-- ROUTE & TREND BAR -->
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
         <div>
           <div id="sp-route-title" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900">Mumbai → Pune</div>
           <div id="sp-route-sub" style="font-size:12px;color:var(--ts)">Select your bus & compare booking options</div>
         </div>
-        <button onclick="navigateSPA('/alerts')" style="background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--p);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer">
-          🔔 Set Price Alert For This Route
-        </button>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button onclick="openVIPModal()" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:#F59E0B;border-radius:100px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer">
+            👑 VIP Pass (₹99)
+          </button>
+          <button onclick="navigateSPA('/alerts')" style="background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);color:var(--p);border-radius:100px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer">
+            🔔 Set Price Alert
+          </button>
+        </div>
       </div>
+
+      <!-- ✈️ CRAZY PLANE VS BUS INTERMODAL UPSELL CARD -->
+      <div id="sp-flight-card-container" style="margin-bottom:20px"></div>
 
       <!-- BUS LIST CONTAINER -->
       <div style="display:grid;grid-template-columns:260px 1fr;gap:20px">
@@ -247,12 +270,16 @@
           <div style="font-weight:800;font-size:14px;margin-bottom:12px;color:var(--p)">⚙️ Filter Results</div>
           <div style="margin-bottom:16px">
             <div style="font-size:11px;font-weight:800;color:var(--ts);margin-bottom:6px">BUS TYPE</div>
-            <select id="sp-filter-type" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bl);border-radius:8px;padding:8px;color:var(--t);font-size:12px" onchange="runSPAFilter()">
+            <select id="sp-filter-type" style="width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bl);border-radius:8px;padding:8px;color:var(--t);font-size:12px">
               <option value="all">All Bus Types</option>
               <option value="ac-sleeper">AC Sleeper</option>
               <option value="ac-seater">AC Seater</option>
               <option value="non-ac">Non-AC</option>
             </select>
+          </div>
+          <div style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.2);border-radius:10px;padding:12px;text-align:center">
+            <div style="font-size:12px;font-weight:800;color:var(--p)">🔒 Lock Fare Guarantee</div>
+            <div style="font-size:10px;color:var(--ts);margin-top:2px">Lock any ticket price for 6 hours for just ₹39!</div>
           </div>
         </div>
 
@@ -287,8 +314,8 @@
 
   <!-- ==================== VIEW 4: ADMIN ==================== -->
   <div id="spa-view-admin" class="spa-view">
-    <div style="max-width:900px;margin:40px auto;padding:0 24px">
-      <div style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;margin-bottom:20px">📊 Founder Admin Dashboard</div>
+    <div style="max-width:1000px;margin:40px auto;padding:0 24px">
+      <div style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;margin-bottom:20px">📊 Founder Admin Dashboard & Revenue Calculator</div>
       
       <!-- GATE -->
       <div id="admin-gate" style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:30px;max-width:400px;margin:0 auto;text-align:center">
@@ -300,21 +327,110 @@
 
       <!-- DASHBOARD BODY -->
       <div id="admin-body" style="display:none">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:16px;margin-bottom:24px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:16px;margin-bottom:24px">
           <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px">
             <div style="font-size:11px;color:var(--ts);font-weight:800">TOTAL SEARCHES</div>
             <div id="adm-searches" style="font-size:24px;font-weight:900;color:var(--p)">0</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px">
-            <div style="font-size:11px;color:var(--ts);font-weight:800">AFFILIATE CLICKS</div>
+            <div style="font-size:11px;color:var(--ts);font-weight:800">BUS CLICKS (₹80)</div>
             <div id="adm-clicks" style="font-size:24px;font-weight:900;color:var(--green)">0</div>
           </div>
           <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px">
-            <div style="font-size:11px;color:var(--ts);font-weight:800">ESTIMATED REVENUE</div>
-            <div id="adm-rev" style="font-size:24px;font-weight:900;color:var(--blue)">₹0</div>
+            <div style="font-size:11px;color:var(--ts);font-weight:800">FLIGHT CLICKS (₹450)</div>
+            <div id="adm-flt-clicks" style="font-size:24px;font-weight:900;color:#3B82F6">0</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px">
+            <div style="font-size:11px;color:var(--ts);font-weight:800">PRICE LOCKS (₹39)</div>
+            <div id="adm-locks" style="font-size:24px;font-weight:900;color:#8B5CF6">0</div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px">
+            <div style="font-size:11px;color:var(--ts);font-weight:800">VIP SUBS (₹99+)</div>
+            <div id="adm-vip" style="font-size:24px;font-weight:900;color:#F59E0B">0</div>
           </div>
         </div>
+
+        <!-- GROSS PROFIT SUMMARY BANNER -->
+        <div style="background:linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(59,130,246,0.15) 100%);border:1px solid rgba(16,185,129,0.3);border-radius:16px;padding:24px;text-align:center;margin-bottom:24px">
+          <div style="font-size:12px;font-weight:800;color:var(--ts);text-transform:uppercase;letter-spacing:1px">💼 ESTIMATED GROSS PROFIT (ALL STREAMS)</div>
+          <div id="adm-rev" style="font-family:'Outfit',sans-serif;font-size:42px;font-weight:900;color:var(--green);margin:4px 0">₹0</div>
+          <div style="font-size:12px;color:var(--ts)">Includes Bus Affiliate + Crazy Flight Commissions + Price Lock Fees (100% Margin) + VIP MRR</div>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PRICE LOCK -->
+  <div id="pricelock-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:2000;align-items:center;justify-content:center;padding:20px">
+    <div style="background:var(--card);border:1px solid var(--bl);border-radius:24px;width:100%;max-width:440px;padding:28px;position:relative">
+      <button onclick="closeLockModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ts);font-size:20px;cursor:pointer">✕</button>
+      <div style="font-size:32px;margin-bottom:8px">🔒</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px">Lock Ticket Fare @ ₹39</div>
+      <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Avoid weekend surge! Guarantee this fare for 6 hours while you confirm plans.</p>
+      
+      <div style="background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px">
+        <div style="font-size:11px;color:var(--ts);font-weight:700">LOCKED FARE AMOUNT</div>
+        <div id="pl-modal-amount" style="font-size:20px;font-weight:900;color:var(--green)">₹0</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+        <input type="tel" id="pl-phone" placeholder="Mobile Number (for SMS Lock Pass)" style="background:rgba(255,255,255,0.05);border:1px solid var(--bl);border-radius:8px;padding:10px;color:var(--t);outline:none">
+        <input type="email" id="pl-email" placeholder="Email Address" style="background:rgba(255,255,255,0.05);border:1px solid var(--bl);border-radius:8px;padding:10px;color:var(--t);outline:none">
+      </div>
+
+      <button onclick="confirmPriceLockSPA()" style="width:100%;background:linear-gradient(135deg,var(--green),#059669);color:#fff;border:none;border-radius:10px;padding:14px;font-weight:800;cursor:pointer">
+        Pay ₹39 & Lock Price Now 🔒
+      </button>
+      <div id="pl-res-msg" style="font-size:12px;font-weight:700;text-align:center;margin-top:10px"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: BUSPASS VIP SUBSCRIPTION -->
+  <div id="vip-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:2000;align-items:center;justify-content:center;padding:20px">
+    <div style="background:var(--card);border:1px solid rgba(245,158,11,0.4);border-radius:24px;width:100%;max-width:480px;padding:28px;position:relative">
+      <button onclick="closeVIPModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ts);font-size:20px;cursor:pointer">✕</button>
+      <div style="font-size:36px;margin-bottom:8px">👑</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#F59E0B;margin-bottom:6px">BusPass VIP Membership</div>
+      <p style="font-size:13px;color:var(--ts);margin-bottom:20px">Unlock premium travel perks & price lock protection.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+        <div id="vip-opt-monthly" onclick="selectVIPPlan('monthly')" style="border:2px solid #F59E0B;background:rgba(245,158,11,0.1);border-radius:12px;padding:14px;cursor:pointer;text-align:center">
+          <div style="font-size:12px;font-weight:800">Monthly Pass</div>
+          <div style="font-size:20px;font-weight:900;color:#F59E0B">₹99 / mo</div>
+        </div>
+        <div id="vip-opt-annual" onclick="selectVIPPlan('annual')" style="border:1px solid var(--border);background:rgba(255,255,255,0.04);border-radius:12px;padding:14px;cursor:pointer;text-align:center">
+          <div style="font-size:12px;font-weight:800">Annual Pass</div>
+          <div style="font-size:20px;font-weight:900;color:var(--green)">₹299 / yr</div>
+          <div style="font-size:9px;color:var(--green);font-weight:800">SAVE 75%</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+        <input type="email" id="vip-email" placeholder="Your Email Address" style="background:rgba(255,255,255,0.05);border:1px solid var(--bl);border-radius:8px;padding:10px;color:var(--t);outline:none">
+        <input type="tel" id="vip-phone" placeholder="WhatsApp Number" style="background:rgba(255,255,255,0.05);border:1px solid var(--bl);border-radius:8px;padding:10px;color:var(--t);outline:none">
+      </div>
+
+      <button onclick="confirmVIPSubscriptionSPA()" style="width:100%;background:linear-gradient(135deg, #F59E0B, #D97706);color:#fff;border:none;border-radius:10px;padding:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 15px rgba(245,158,11,0.3)">
+        Activate VIP Pass Now 👑
+      </button>
+      <div id="vip-res-msg" style="font-size:12px;font-weight:700;text-align:center;margin-top:10px"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: GAMIFIED SCRATCH CARD popup -->
+  <div id="scratch-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:2000;align-items:center;justify-content:center;padding:20px">
+    <div style="background:var(--card);border:1px solid var(--p);border-radius:24px;width:100%;max-width:400px;padding:28px;position:relative;text-align:center">
+      <div style="font-size:40px">🎁</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px">Scratch & Win Discount!</div>
+      <p style="font-size:12px;color:var(--ts);margin-bottom:16px">Claim your instant cashback coupon code before redirecting to operator.</p>
+      
+      <div id="scratch-box" onclick="revealScratchCoupon()" style="background:linear-gradient(135deg,var(--p),#C2550B);border-radius:16px;padding:24px;color:#fff;cursor:pointer;font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:16px;box-shadow:0 10px 25px rgba(249,115,22,0.4)">
+        ✨ CLICK TO REVEAL COUPON ✨
+      </div>
+
+      <button id="scratch-continue-btn" onclick="proceedToAffiliateRedirect()" style="width:100%;background:var(--green);color:#fff;border:none;border-radius:10px;padding:12px;font-weight:800;cursor:pointer;display:none">
+        Continue to Partner Booking ↗
+      </button>
     </div>
   </div>
 
@@ -353,6 +469,9 @@
   <script>
     let activeView = 'home';
     let loadedBuses = [];
+    let activeLockBus = null;
+    let selectedVIPPlanType = 'monthly';
+    let pendingAffiliateUrl = null;
 
     document.addEventListener('DOMContentLoaded', () => {
       initSPA();
@@ -431,6 +550,9 @@
       const list = document.getElementById('sp-bus-cards-list');
       list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--ts)">⚡ Searching buses...</div>';
 
+      // Load Intermodal Crazy Flight Deal
+      loadFlightUpsell(from, to);
+
       try {
         const r = await fetch(`/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`);
         const d = await r.json();
@@ -441,6 +563,40 @@
       }
     }
 
+    async function loadFlightUpsell(from, to) {
+      const container = document.getElementById('sp-flight-card-container');
+      try {
+        const r = await fetch(`/api/flights/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`);
+        const d = await r.json();
+        if (d.flight) {
+          const f = d.flight;
+          container.innerHTML = `
+            <div style="background:linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);border:1px solid rgba(59,130,246,0.3);border-radius:16px;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 8px 24px rgba(59,130,246,0.15)">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:44px;height:44px;background:rgba(59,130,246,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px">✈️</div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:900;color:#60A5FA">${f.airline} (${f.flightNumber})</span>
+                    <span style="background:rgba(59,130,246,0.2);color:#93C5FD;font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px">${f.badge}</span>
+                  </div>
+                  <div style="font-size:12px;color:var(--ts);margin-top:2px">
+                    ⏱ <strong>${f.duration} Flight</strong> vs <strong>${f.busDuration} Bus</strong> — Save ${f.hoursSaved} Hours!
+                  </div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:11px;color:var(--ts);font-weight:700">CRAZY FLIGHT DEAL</div>
+                <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:var(--green)">₹${f.flightPrice}</div>
+                <a href="/go/flight/${f.id}" target="_blank" style="display:inline-block;background:linear-gradient(135deg,#3B82F6,#2563EB);color:#fff;text-decoration:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:800;margin-top:4px">
+                  Book Flight & Save Time ↗
+                </a>
+              </div>
+            </div>
+          `;
+        } else { container.innerHTML = ''; }
+      } catch(e) { container.innerHTML = ''; }
+    }
+
     function renderSPABusCards(buses) {
       const list = document.getElementById('sp-bus-cards-list');
       if (!buses || !buses.length) {
@@ -449,18 +605,99 @@
       }
 
       list.innerHTML = buses.map(b => `
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:space-between">
-          <div>
-            <div style="font-weight:900;font-size:17px">${b.operator}</div>
-            <div style="font-size:12px;color:var(--ts)">${b.busType} • ${b.route.departureTime} → ${b.route.arrivalTime} (${b.route.duration})</div>
-            <div style="font-size:12px;color:var(--green);font-weight:700;margin-top:4px">⭐ ${b.rating} (${b.reviewCount} reviews)</div>
-          </div>
-          <div style="text-align:right">
-            <div style="font-size:20px;font-weight:900;color:var(--p)">₹${b.lowestPrice}</div>
-            <a href="/go/redbus/${b.id}" target="_blank" style="display:inline-block;background:var(--p);color:#fff;text-decoration:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:800;margin-top:6px">Book Now ↗</a>
+        <div style="background:var(--card);border:1px solid ${b.sponsored?'#F59E0B':'var(--border)'};border-radius:16px;padding:20px;position:relative">
+          ${b.sponsored ? '<div style="position:absolute;top:10px;right:16px;background:#F59E0B;color:#000;font-size:9px;font-weight:900;padding:2px 8px;border-radius:100px">⭐ PROMOTED LISTING</div>' : ''}
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div>
+              <div style="font-weight:900;font-size:17px;color:var(--t)">${b.operator}</div>
+              <div style="font-size:12px;color:var(--ts)">${b.busType} • ${b.route.departureTime} → ${b.route.arrivalTime} (${b.route.duration})</div>
+              <div style="font-size:12px;color:var(--green);font-weight:700;margin-top:4px">⭐ ${b.rating} (${b.reviewCount} reviews) • 🔴 ${b.seatsLeft} seats left</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:20px;font-weight:900;color:var(--p)">₹${b.lowestPrice}</div>
+              <div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end">
+                <button onclick="openLockModal('${b.id}', ${b.lowestPrice})" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:var(--green);border-radius:8px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer">
+                  🔒 Lock Price @ ₹39
+                </button>
+                <button onclick="triggerScratchPopup('/go/redbus/${b.id}')" style="background:var(--p);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:800;cursor:pointer">
+                  Book Now ↗
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       `).join('');
+    }
+
+    function openLockModal(busId, price) {
+      activeLockBus = { busId, price };
+      document.getElementById('pl-modal-amount').textContent = `₹${price}`;
+      document.getElementById('pricelock-modal').style.display = 'flex';
+    }
+    function closeLockModal() { document.getElementById('pricelock-modal').style.display = 'none'; }
+
+    async function confirmPriceLockSPA() {
+      const phone = document.getElementById('pl-phone').value.trim();
+      const email = document.getElementById('pl-email').value.trim();
+      const msg = document.getElementById('pl-res-msg');
+      if (!phone) { msg.style.color = 'var(--red)'; msg.textContent = 'Please enter mobile number'; return; }
+
+      try {
+        const r = await fetch('/api/pricelock/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ busId: activeLockBus.busId, lockedPrice: activeLockBus.price, phone, email })
+        });
+        const d = await r.json();
+        if (d.success) {
+          msg.style.color = 'var(--green)';
+          msg.textContent = d.message;
+          setTimeout(() => closeLockModal(), 2000);
+        } else { msg.style.color = 'var(--red)'; msg.textContent = d.error || 'Failed'; }
+      } catch(e) { msg.style.color = 'var(--red)'; msg.textContent = 'Server error'; }
+    }
+
+    function openVIPModal() { document.getElementById('vip-modal').style.display = 'flex'; }
+    function closeVIPModal() { document.getElementById('vip-modal').style.display = 'none'; }
+    function selectVIPPlan(type) {
+      selectedVIPPlanType = type;
+      document.getElementById('vip-opt-monthly').style.borderColor = type==='monthly' ? '#F59E0B' : 'var(--border)';
+      document.getElementById('vip-opt-annual').style.borderColor = type==='annual' ? '#10B981' : 'var(--border)';
+    }
+
+    async function confirmVIPSubscriptionSPA() {
+      const email = document.getElementById('vip-email').value.trim();
+      const phone = document.getElementById('vip-phone').value.trim();
+      const msg = document.getElementById('vip-res-msg');
+      if (!email || !phone) { msg.style.color = 'var(--red)'; msg.textContent = 'Email & phone required'; return; }
+
+      try {
+        const r = await fetch('/api/vip/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, phone, plan: selectedVIPPlanType })
+        });
+        const d = await r.json();
+        if (d.success) {
+          msg.style.color = 'var(--green)';
+          msg.textContent = d.message;
+          setTimeout(() => closeVIPModal(), 2000);
+        } else { msg.style.color = 'var(--red)'; msg.textContent = d.error || 'Failed'; }
+      } catch(e) { msg.style.color = 'var(--red)'; msg.textContent = 'Server error'; }
+    }
+
+    function triggerScratchPopup(targetUrl) {
+      pendingAffiliateUrl = targetUrl;
+      document.getElementById('scratch-modal').style.display = 'flex';
+    }
+    function revealScratchCoupon() {
+      const box = document.getElementById('scratch-box');
+      box.innerHTML = '🎉 CONGRATS!<br><span style="font-size:24px;color:#F59E0B">CODE: CRAZYBUS100</span><br><span style="font-size:11px;font-weight:700">Flat ₹100 Cashback Saved!</span>';
+      document.getElementById('scratch-continue-btn').style.display = 'block';
+    }
+    function proceedToAffiliateRedirect() {
+      document.getElementById('scratch-modal').style.display = 'none';
+      if (pendingAffiliateUrl) window.open(pendingAffiliateUrl, '_blank');
     }
 
     async function loginAdminSPA() {
@@ -489,6 +726,9 @@
         const d = await r.json();
         document.getElementById('adm-searches').textContent = d.overview.totalSearches || 0;
         document.getElementById('adm-clicks').textContent = d.overview.totalClicks || 0;
+        document.getElementById('adm-flt-clicks').textContent = d.overview.flightClicks || 0;
+        document.getElementById('adm-locks').textContent = d.overview.priceLocksCount || 0;
+        document.getElementById('adm-vip').textContent = d.overview.vipSubscriptionsCount || 0;
         document.getElementById('adm-rev').textContent = '₹' + (d.overview.revenueEstimate || 0);
       } catch(e) {}
     }

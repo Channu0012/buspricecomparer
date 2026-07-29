@@ -579,6 +579,179 @@ app.post('/api/alert', submitLimiter, (req, res) => {
 });
 
 
+// ─── API: CRAZY PLANE / FLIGHT SEARCH (BUS VS FLIGHT INTERMODAL) ───────────────
+app.get('/api/flights/search', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { from, to } = req.query;
+  if (!from || !to) return res.status(400).json({ error: 'From and To required' });
+
+  const normFrom = normalizeCity(from);
+  const normTo   = normalizeCity(to);
+
+  // Search exact or alias matching flight deal
+  let flight = (db.flights || []).find(f =>
+    normalizeCity(f.routeFrom) === normFrom && normalizeCity(f.routeTo) === normTo
+  );
+
+  // Fallback: If no pre-configured flight deal for city pair, auto-generate dynamic flight deal
+  if (!flight) {
+    const busMatch = db.buses.find(b =>
+      normalizeCity(b.route.from) === normFrom && normalizeCity(b.route.to) === normTo
+    );
+    const busPrice = busMatch ? busMatch.lowestPrice : 500;
+    const busDur = busMatch ? busMatch.route.duration : '8h 00m';
+
+    flight = {
+      id: `flt-dyn-${uuidv4().slice(0,6)}`,
+      routeFrom: from,
+      routeTo: to,
+      airline: 'IndiGo Express',
+      flightNumber: '6E-' + Math.floor(100 + Math.random() * 900),
+      departureTime: '08:30',
+      arrivalTime: '09:45',
+      duration: '1h 15m',
+      busDuration: busDur,
+      hoursSaved: 6.75,
+      busMinPrice: busPrice,
+      flightPrice: Math.max(1799, Math.round(busPrice * 2.8)),
+      commissionEst: 450,
+      affiliateUrl: `https://www.makemytrip.com/flights/?affid=buscompare_crazyplane`,
+      badge: '✈️ CRAZY PLANE DEAL (SAVE ~7 HOURS)',
+      seatsLeft: Math.floor(2 + Math.random() * 5)
+    };
+  }
+
+  res.json({ flight });
+});
+
+// ─── FLIGHT AFFILIATE REDIRECT (HIGH COMMISSION ₹450+) ────────────────────────
+app.get('/go/flight/:flightId', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { flightId } = req.params;
+  const flight = (db.flights || []).find(f => f.id === flightId);
+
+  const click = {
+    id: `clk-flt-${uuidv4().slice(0, 8)}`,
+    platform: 'flight_affiliate',
+    busId: flightId,
+    timestamp: new Date().toISOString(),
+    price: flight ? flight.flightPrice : 2499,
+    route: flight ? `${flight.routeFrom} → ${flight.routeTo} (Plane)` : 'Flight Deal'
+  };
+
+  db.telemetry.push(click);
+  if (db.telemetry.length > 500) db.telemetry = db.telemetry.slice(-500);
+
+  db.admin.flightClicks = (db.admin.flightClicks || 0) + 1;
+  db.admin.flightAffiliateRevenue = (db.admin.flightAffiliateRevenue || 0) + 450;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 450;
+
+  writeDB(db);
+
+  const redirectUrl = flight ? flight.affiliateUrl : 'https://www.makemytrip.com/flights/?affid=buscompare_crazyplane';
+  res.redirect(302, redirectUrl);
+});
+
+// ─── API: PRICE LOCK MICRO-MONETIZATION (₹39 FEE) ──────────────────────────────
+app.post('/api/pricelock/create', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { busId, lockedPrice, phone, email } = req.body;
+  if (!busId || !phone) return res.status(400).json({ error: 'busId and phone required' });
+
+  const lockId = `PL-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const lock = {
+    id: lockId,
+    busId,
+    lockedPrice: parseInt(lockedPrice) || 499,
+    feePaid: 39,
+    phone: sanitizeInput(phone),
+    email: sanitizeInput(email || ''),
+    expiresAt: new Date(Date.now() + 6 * 3600 * 1000).toISOString(),
+    status: 'ACTIVE'
+  };
+
+  if (!db.priceLocks) db.priceLocks = [];
+  db.priceLocks.push(lock);
+
+  db.admin.priceLocksCount = (db.admin.priceLocksCount || 0) + 1;
+  db.admin.priceLockRevenue = (db.admin.priceLockRevenue || 0) + 39;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 39;
+
+  writeDB(db);
+
+  res.json({
+    success: true,
+    lockId,
+    message: `🔒 Ticket price locked at ₹${lock.lockedPrice} for 6 hours! Lock Pass ID: ${lockId}`,
+    lock
+  });
+});
+
+// ─── API: BUSPASS VIP SUBSCRIPTION (RECURRING MRR) ──────────────────────────────
+app.post('/api/vip/subscribe', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { email, phone, plan } = req.body;
+  if (!email || !phone) return res.status(400).json({ error: 'email and phone required' });
+
+  const isAnnual = plan === 'annual';
+  const price = isAnnual ? 299 : 99;
+
+  const vipId = `VIP-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const sub = {
+    id: vipId,
+    email: sanitizeInput(email),
+    phone: sanitizeInput(phone),
+    plan: isAnnual ? 'Annual Pass (₹299/yr)' : 'Monthly Pass (₹99/mo)',
+    pricePaid: price,
+    createdAt: new Date().toISOString(),
+    status: 'ACTIVE'
+  };
+
+  if (!db.vipSubscriptions) db.vipSubscriptions = [];
+  db.vipSubscriptions.push(sub);
+
+  db.admin.vipSubscriptionsCount = (db.admin.vipSubscriptionsCount || 0) + 1;
+  db.admin.vipRevenue = (db.admin.vipRevenue || 0) + price;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + price;
+
+  writeDB(db);
+
+  res.json({
+    success: true,
+    vipId,
+    message: `👑 Welcome to BusPass VIP! Unlimited Instant Price Alerts & 0 Booking Fees unlocked.`,
+    sub
+  });
+});
+
+// ─── API: ADMIN TOGGLE SPONSORED LISTING ──────────────────────────────────────
+app.post('/api/admin/toggle-sponsor', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+
+  const { busId, sponsored } = req.body;
+  const bus = db.buses.find(b => b.id === busId);
+  if (!bus) return res.status(404).json({ error: 'Bus not found' });
+
+  bus.sponsored = !!sponsored;
+  if (bus.sponsored) {
+    db.admin.sponsoredRevenue = (db.admin.sponsoredRevenue || 0) + 1500;
+    db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 1500;
+  }
+
+  writeDB(db);
+  res.json({ success: true, busId, sponsored: bus.sponsored });
+});
+
+
 // ─── AFFILIATE REDIRECT (CLICK TRACKING) ─────────────────────────────────────
 app.get('/go/:platform/:busId', (req, res) => {
   const db = readDB();
@@ -602,6 +775,7 @@ app.get('/go/:platform/:busId', (req, res) => {
   db.admin.totalClicks = (db.admin.totalClicks || 0) + 1;
 
   // Estimate revenue (₹80 avg commission)
+  db.admin.busAffiliateRevenue = (db.admin.busAffiliateRevenue || 0) + 80;
   db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 80;
 
   writeDB(db);
@@ -623,6 +797,21 @@ app.get('/go/:platform/:busId', (req, res) => {
 app.get('/api/admin/stats', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
+
+  // Multi-channel Revenue calculation
+  const busClicks = db.admin.totalClicks || 0;
+  const flightClicks = db.admin.flightClicks || 0;
+  const priceLocks = db.admin.priceLocksCount || (db.priceLocks ? db.priceLocks.length : 0);
+  const vipSubs = db.admin.vipSubscriptionsCount || (db.vipSubscriptions ? db.vipSubscriptions.length : 0);
+
+  const busAffiliateRevenue = busClicks * 80;
+  const flightAffiliateRevenue = flightClicks * 450;
+  const priceLockRevenue = priceLocks * 39;
+  const vipRevenue = (db.vipSubscriptions || []).reduce((sum, s) => sum + (s.pricePaid || 99), 0);
+  const sponsoredRevenue = db.admin.sponsoredRevenue || 0;
+
+  const grandTotalRevenue = busAffiliateRevenue + flightAffiliateRevenue + priceLockRevenue + vipRevenue + sponsoredRevenue;
+  db.admin.revenueEstimate = grandTotalRevenue;
 
   // Click breakdown by platform
   const clicksByPlatform = db.telemetry.reduce((acc, click) => {
@@ -660,11 +849,21 @@ app.get('/api/admin/stats', (req, res) => {
 
   res.json({
     overview: {
-      totalClicks: db.admin.totalClicks || 0,
+      totalClicks: busClicks,
+      flightClicks,
       totalSearches: db.admin.totalSearches || 0,
       totalReviews: db.admin.totalReviews || db.reviews.length,
       totalAlerts: db.admin.totalAlerts || db.alerts.length,
-      revenueEstimate: db.admin.revenueEstimate || 0,
+      priceLocksCount: priceLocks,
+      vipSubscriptionsCount: vipSubs,
+      revenueBreakdown: {
+        busAffiliate: busAffiliateRevenue,
+        flightAffiliate: flightAffiliateRevenue,
+        priceLockFees: priceLockRevenue,
+        vipSubscriptions: vipRevenue,
+        sponsoredAds: sponsoredRevenue
+      },
+      revenueEstimate: grandTotalRevenue,
       totalBuses: db.buses.length,
       totalRoutes: db.routes.length
     },
@@ -674,9 +873,12 @@ app.get('/api/admin/stats', (req, res) => {
     avgRating,
     recentAlerts,
     recentReviews,
+    priceLocks: (db.priceLocks || []).slice(-5).reverse(),
+    vipSubscriptions: (db.vipSubscriptions || []).slice(-5).reverse(),
     lastUpdated: new Date().toISOString()
   });
 });
+
 
 // ─── SEO: SITEMAP ─────────────────────────────────────────────────────────────
 app.get('/sitemap.xml', (req, res) => {
