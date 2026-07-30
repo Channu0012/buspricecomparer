@@ -1511,8 +1511,8 @@
       "operatorCode": "SRS",
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
-      "rating": 4.3,
-      "reviewCount": 1247,
+      "rating": 4.5,
+      "reviewCount": 8,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -5011,6 +5011,75 @@
       "helpfulCount": 29,
       "verified": true,
       "platform": "abhibus"
+    },
+    {
+      "id": "REV-0C150EB1",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-07-30T14:17:49.606Z"
+    },
+    {
+      "id": "rev-71e4338f",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-07-30",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
+    },
+    {
+      "id": "REV-64F8F874",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-07-30T14:37:00.933Z"
+    },
+    {
+      "id": "rev-e97ea8ec",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-07-30",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
+    },
+    {
+      "id": "REV-44E0A85E",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-07-30T14:46:43.433Z"
+    },
+    {
+      "id": "rev-ca8b49c5",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-07-30",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
     }
   ],
   "popularRoutes": [
@@ -5056,6 +5125,78 @@
       "tier": "free",
       "active": true,
       "createdAt": "2026-07-27T16:46:36.173Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-ff0b88f4",
+      "email": "alert_1785421069536@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-07-30T14:17:49.535Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-0f20c94e",
+      "email": "dup_1785421069541@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-07-30T14:17:49.541Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-40681ca7",
+      "email": "alert_1785422220735@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-07-30T14:37:00.754Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-fe129a65",
+      "email": "dup_1785422220752@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-07-30T14:37:00.773Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-568143bf",
+      "email": "alert_1785422803373@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-07-30T14:46:43.368Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-fd3b6fc7",
+      "email": "dup_1785422803374@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-07-30T14:46:43.371Z",
       "triggeredCount": 0
     }
   ],
@@ -5187,6 +5328,36 @@
       "email": "test@example.com",
       "expiresAt": "2026-07-29T22:44:36.163Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "PL-120E01B6",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-07-30T20:17:49.553Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-61ED6905",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-07-30T20:37:00.799Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-BFCC1277",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-07-30T20:46:43.381Z",
+      "status": "ACTIVE"
     }
   ],
   "vipSubscriptions": [
@@ -5198,23 +5369,79 @@
       "pricePaid": 99,
       "createdAt": "2026-07-29T16:44:36.191Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-6308B80A",
+      "email": "vip_1785421069562@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (â‚¹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-07-30T14:17:49.559Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-EE6031B4",
+      "email": "vipa_1785421069564@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (â‚¹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-07-30T14:17:49.562Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-9DE62DDF",
+      "email": "vip_1785422220805@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-07-30T14:37:00.815Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-847AC556",
+      "email": "vipa_1785422220812@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-07-30T14:37:00.830Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-D23E8011",
+      "email": "vip_1785422803393@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-07-30T14:46:43.389Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-A07BD9FB",
+      "email": "vipa_1785422803396@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-07-30T14:46:43.394Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 2,
-    "totalSearches": 262,
-    "totalReviews": 10,
-    "totalAlerts": 1,
+    "totalSearches": 292,
+    "totalReviews": 16,
+    "totalAlerts": 7,
     "flightClicks": 1,
-    "priceLocksCount": 1,
-    "vipSubscriptionsCount": 1,
+    "priceLocksCount": 4,
+    "vipSubscriptionsCount": 7,
     "busAffiliateRevenue": 160,
     "flightAffiliateRevenue": 450,
-    "priceLockRevenue": 39,
-    "vipRevenue": 99,
+    "priceLockRevenue": 156,
+    "vipRevenue": 1293,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 748,
-    "lastReset": "2026-07-27"
+    "revenueEstimate": 2189,
+    "lastReset": "2026-07-27",
+    "insurancePoliciesCount": 3,
+    "insuranceRevenue": 195
   },
   "coupons": [
     {
@@ -5245,5 +5472,443 @@
       "minSpend": 1000,
       "description": "Flat ₹200 OFF on Luxury & Volvo Sleeper buses"
     }
-  ]
+  ],
+  "hotelDeals": [
+    {
+      "id": "hotel-goa-001",
+      "destination": "Goa",
+      "name": "Zostel Goa (North)",
+      "type": "Hostel",
+      "pricePerNight": 599,
+      "originalPrice": 899,
+      "discount": "33% OFF",
+      "rating": 4.6,
+      "reviewCount": 1824,
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Breakfast",
+        "Pool"
+      ],
+      "badge": "🔥 POPULAR",
+      "imageEmoji": "🏖️",
+      "affiliateUrl": "https://www.zostel.com/zostel/goa/?ref=buscompare",
+      "commission": 180
+    },
+    {
+      "id": "hotel-goa-002",
+      "destination": "Goa",
+      "name": "OYO Townhouse — Calangute",
+      "type": "Hotel",
+      "pricePerNight": 1199,
+      "originalPrice": 2500,
+      "discount": "52% OFF",
+      "rating": 4.2,
+      "reviewCount": 3102,
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Parking",
+        "Breakfast"
+      ],
+      "badge": "⭐ STAFF PICK",
+      "imageEmoji": "🏨",
+      "affiliateUrl": "https://www.oyorooms.com/hotels-in-goa/?ref=buscompare",
+      "commission": 360
+    },
+    {
+      "id": "hotel-pune-001",
+      "destination": "Pune",
+      "name": "Treebo Trend — Koregaon Park",
+      "type": "Hotel",
+      "pricePerNight": 849,
+      "originalPrice": 1600,
+      "discount": "47% OFF",
+      "rating": 4.4,
+      "reviewCount": 987,
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Gym"
+      ],
+      "badge": "💰 BEST VALUE",
+      "imageEmoji": "🏩",
+      "affiliateUrl": "https://www.treebo.com/hotels-in-pune/?ref=buscompare",
+      "commission": 255
+    },
+    {
+      "id": "hotel-bangalore-001",
+      "destination": "Bangalore",
+      "name": "Zostel Bangalore",
+      "type": "Hostel",
+      "pricePerNight": 449,
+      "originalPrice": 799,
+      "discount": "44% OFF",
+      "rating": 4.7,
+      "reviewCount": 2415,
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Kitchen",
+        "Rooftop"
+      ],
+      "badge": "🎯 TRAVELER FAV",
+      "imageEmoji": "🌆",
+      "affiliateUrl": "https://www.zostel.com/zostel/bangalore/?ref=buscompare",
+      "commission": 135
+    },
+    {
+      "id": "hotel-mumbai-001",
+      "destination": "Mumbai",
+      "name": "FabHotel Prime — Andheri",
+      "type": "Hotel",
+      "pricePerNight": 1499,
+      "originalPrice": 3200,
+      "discount": "53% OFF",
+      "rating": 4.1,
+      "reviewCount": 5670,
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Room Service",
+        "Bar"
+      ],
+      "badge": "🏆 TOP RATED",
+      "imageEmoji": "🌃",
+      "affiliateUrl": "https://www.fabhotels.com/hotels-in-mumbai/?ref=buscompare",
+      "commission": 450
+    },
+    {
+      "id": "hotel-jaipur-001",
+      "destination": "Jaipur",
+      "name": "OYO Heritage Haveli — Pink City",
+      "type": "Heritage Stay",
+      "pricePerNight": 1899,
+      "originalPrice": 4000,
+      "discount": "53% OFF",
+      "rating": 4.5,
+      "reviewCount": 2330,
+      "amenities": [
+        "WiFi",
+        "Heritage Decor",
+        "Rooftop",
+        "Breakfast"
+      ],
+      "badge": "🏰 HERITAGE",
+      "imageEmoji": "🕌",
+      "affiliateUrl": "https://www.oyorooms.com/hotels-in-jaipur/?ref=buscompare",
+      "commission": 570
+    }
+  ],
+  "insurancePolicies": [
+    {
+      "id": "INS-F4101AB4",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-07-30T14:17:49.582Z"
+    },
+    {
+      "id": "INS-2255C0AB",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-07-30T14:37:00.872Z"
+    },
+    {
+      "id": "INS-A04F42CE",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-07-30T14:46:43.414Z"
+    }
+  ],
+  "loyaltyUsers": [
+    {
+      "id": "loyalty-demo-001",
+      "phone": "9999999999",
+      "coins": 127,
+      "tier": "Silver",
+      "referralCode": "BUSCOMP-DEMO1",
+      "referralCount": 2,
+      "joinedAt": "2026-07-01T00:00:00Z"
+    },
+    {
+      "id": "loyalty-247a4c14",
+      "phone": "91623604630",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-4630-GW2W",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:17:49.588Z"
+    },
+    {
+      "id": "loyalty-b2d1bd2b",
+      "phone": "88535404596",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-4596-4SRP",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:17:49.594Z"
+    },
+    {
+      "id": "loyalty-95581a70",
+      "phone": "9555555555",
+      "coins": 5,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-5555-WL79",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:17:49.601Z"
+    },
+    {
+      "id": "loyalty-f6432a28",
+      "phone": "91512402749",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-2749-V7X4",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:37:00.894Z"
+    },
+    {
+      "id": "loyalty-1714b573",
+      "phone": "88939594363",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-4363-4NX7",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:37:00.908Z"
+    },
+    {
+      "id": "loyalty-3de2ef87",
+      "phone": "91704844906",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-4906-DNSD",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:46:43.419Z"
+    },
+    {
+      "id": "loyalty-ccce6dc4",
+      "phone": "88800952398",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-2398-QL68",
+      "referralCount": 0,
+      "joinedAt": "2026-07-30T14:46:43.423Z"
+    }
+  ],
+  "referrals": [],
+  "corporateLeads": [
+    {
+      "id": "CORP-E25A9C32",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1785421069615@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-07-30T14:17:49.612Z"
+    },
+    {
+      "id": "CORP-428FC6FA",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1785422220942@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-07-30T14:37:00.950Z"
+    },
+    {
+      "id": "CORP-5C3321FB",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1785422803444@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-07-30T14:46:43.439Z"
+    }
+  ],
+  "operatorLeads": [
+    {
+      "id": "OPR-BF3A221A",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1785421069622@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (â‚¹15,000/mo)",
+      "createdAt": "2026-07-30T14:17:49.619Z"
+    },
+    {
+      "id": "OPR-F9FDA282",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1785422220966@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (â‚¹15,000/mo)",
+      "createdAt": "2026-07-30T14:37:00.977Z"
+    },
+    {
+      "id": "OPR-E7A28EAB",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1785422803450@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (â‚¹15,000/mo)",
+      "createdAt": "2026-07-30T14:46:43.445Z"
+    }
+  ],
+  "translations": {
+    "en": {
+      "search_placeholder_from": "From (e.g. Mumbai)",
+      "search_placeholder_to": "To (e.g. Goa)",
+      "search_btn": "Search Buses →",
+      "book_now": "Book Now ↗",
+      "lock_price": "Lock Price @ ₹39",
+      "seats_left": "seats left",
+      "hero_tagline": "India's Smartest Bus & Travel Comparison",
+      "hero_sub": "Compare prices across RedBus, AbhiBus, MakeMyTrip & KSRTC. Save up to 40% on every trip.",
+      "popular_routes": "🔥 Popular Routes",
+      "insurance_title": "🛡️ Add Trip Protection",
+      "insurance_sub": "Covers cancellation, medical emergencies & luggage loss",
+      "hotels_title": "🏨 Where to Stay?",
+      "nav_home": "Home",
+      "nav_search": "Search",
+      "nav_alerts": "Price Alerts",
+      "nav_corporate": "Corporate",
+      "nav_operators": "For Operators",
+      "nav_admin": "Admin"
+    },
+    "hi": {
+      "search_placeholder_from": "कहाँ से (जैसे मुंबई)",
+      "search_placeholder_to": "कहाँ तक (जैसे गोवा)",
+      "search_btn": "बस खोजें →",
+      "book_now": "अभी बुक करें ↗",
+      "lock_price": "₹39 में कीमत लॉक करें",
+      "seats_left": "सीटें बची हैं",
+      "hero_tagline": "भारत का सबसे स्मार्ट बस तुलना",
+      "hero_sub": "RedBus, AbhiBus, MakeMyTrip और KSRTC में कीमतें तुलना करें। हर सफर में 40% तक बचाएं।",
+      "popular_routes": "🔥 लोकप्रिय रूट",
+      "insurance_title": "🛡️ यात्रा सुरक्षा जोड़ें",
+      "insurance_sub": "रद्दीकरण, चिकित्सा आपातकाल और सामान की हानि को कवर करती है",
+      "hotels_title": "🏨 कहाँ रुकें?",
+      "nav_home": "होम",
+      "nav_search": "खोजें",
+      "nav_alerts": "मूल्य अलर्ट",
+      "nav_corporate": "कॉर्पोरेट",
+      "nav_operators": "ऑपरेटर के लिए",
+      "nav_admin": "एडमिन"
+    },
+    "te": {
+      "search_placeholder_from": "నుండి (ఉదా: హైదరాబాద్)",
+      "search_placeholder_to": "వరకు (ఉదా: విశాఖపట్నం)",
+      "search_btn": "బస్సులు వెతకండి →",
+      "book_now": "ఇప్పుడే బుక్ చేయండి ↗",
+      "lock_price": "₹39కి ధర లాక్ చేయండి",
+      "seats_left": "సీట్లు మిగిలాయి",
+      "hero_tagline": "భారతదేశపు స్మార్ట్ బస్సు పోలిక",
+      "hero_sub": "RedBus, AbhiBus, MakeMyTrip అంతటా ధరలు పోల్చండి. ప్రతి ప్రయాణంలో 40% వరకు ఆదా చేయండి.",
+      "popular_routes": "🔥 ప్రముఖ మార్గాలు",
+      "insurance_title": "🛡️ ప్రయాణ రక్షణ జోడించండి",
+      "insurance_sub": "రద్దు, వైద్య అత్యవసర పరిస్థితులు మరియు సామాను నష్టాన్ని కవర్ చేస్తుంది",
+      "hotels_title": "🏨 ఎక్కడ ఉండాలి?",
+      "nav_home": "హోమ్",
+      "nav_search": "వెతకండి",
+      "nav_alerts": "ధర హెచ్చరికలు",
+      "nav_corporate": "కార్పొరేట్",
+      "nav_operators": "ఆపరేటర్ కోసం",
+      "nav_admin": "అడ్మిన్"
+    },
+    "ta": {
+      "search_placeholder_from": "இருந்து (எ.கா: சென்னை)",
+      "search_placeholder_to": "வரை (எ.கா: மதுரை)",
+      "search_btn": "பேருந்துகளை தேடு →",
+      "book_now": "இப்போதே முன்பதிவு ↗",
+      "lock_price": "₹39க்கு விலை பூட்டு",
+      "seats_left": "இருக்கைகள் உள்ளன",
+      "hero_tagline": "இந்தியாவின் திறமையான பேருந்து ஒப்பீடு",
+      "hero_sub": "RedBus, AbhiBus, MakeMyTrip முழுவதும் விலைகளை ஒப்பிடுங்கள். ஒவ்வொரு பயணத்திலும் 40% சேமிக்கலாம்.",
+      "popular_routes": "🔥 பிரபல வழிகள்",
+      "insurance_title": "🛡️ பயண பாதுகாப்பு",
+      "insurance_sub": "ரத்து, மருத்துவ அவசரநிலை மற்றும் சாமான் இழப்பு ஆகியவை உள்ளடக்கியது",
+      "hotels_title": "🏨 எங்கே தங்குவது?",
+      "nav_home": "முகப்பு",
+      "nav_search": "தேடல்",
+      "nav_alerts": "விலை எச்சரிக்கை",
+      "nav_corporate": "கார்ப்பரேட்",
+      "nav_operators": "நடத்துனர்களுக்கு",
+      "nav_admin": "நிர்வாகி"
+    },
+    "kn": {
+      "search_placeholder_from": "ಇಂದ (ಉದಾ: ಬೆಂಗಳೂರು)",
+      "search_placeholder_to": "ವರೆಗೆ (ಉದಾ: ಮೈಸೂರು)",
+      "search_btn": "ಬಸ್ ಹುಡುಕಿ →",
+      "book_now": "ಈಗ ಬುಕ್ ಮಾಡಿ ↗",
+      "lock_price": "₹39ಗೆ ಬೆಲೆ ಲಾಕ್ ಮಾಡಿ",
+      "seats_left": "ಸೀಟುಗಳು ಉಳಿದಿವೆ",
+      "hero_tagline": "ಭಾರತದ ಸ್ಮಾರ್ಟ್ ಬಸ್ ಹೋಲಿಕೆ",
+      "hero_sub": "RedBus, AbhiBus, MakeMyTrip ಉದ್ದಕ್ಕೂ ಬೆಲೆಗಳನ್ನು ಹೋಲಿಕೆ ಮಾಡಿ. ಪ್ರತಿ ಪ್ರಯಾಣದಲ್ಲಿ 40% ವರೆಗೆ ಉಳಿಸಿ.",
+      "popular_routes": "🔥 ಜನಪ್ರಿಯ ಮಾರ್ಗಗಳು",
+      "insurance_title": "🛡️ ಪ್ರಯಾಣ ರಕ್ಷಣೆ",
+      "insurance_sub": "ರದ್ದತಿ, ವೈದ್ಯಕೀಯ ತುರ್ತುಸ್ಥಿತಿ ಮತ್ತು ಲಗೇಜ್ ನಷ್ಟ ಒಳಗೊಂಡಿದೆ",
+      "hotels_title": "🏨 ಎಲ್ಲಿ ಉಳಿಯಬೇಕು?",
+      "nav_home": "ಮನೆ",
+      "nav_search": "ಹುಡುಕಿ",
+      "nav_alerts": "ಬೆಲೆ ಎಚ್ಚರಿಕೆ",
+      "nav_corporate": "ಕಾರ್ಪೊರೇಟ್",
+      "nav_operators": "ಆಪರೇಟರ್ಗಳಿಗೆ",
+      "nav_admin": "ನಿರ್ವಾಹಕ"
+    },
+    "bn": {
+      "search_placeholder_from": "থেকে (যেমন: কলকাতা)",
+      "search_placeholder_to": "পর্যন্ত (যেমন: দিঘা)",
+      "search_btn": "বাস খুঁজুন →",
+      "book_now": "এখনই বুক করুন ↗",
+      "lock_price": "₹৩৯-এ দাম লক করুন",
+      "seats_left": "আসন বাকি",
+      "hero_tagline": "ভারতের সবচেয়ে স্মার্ট বাস তুলনা",
+      "hero_sub": "RedBus, AbhiBus, MakeMyTrip জুড়ে দাম তুলনা করুন। প্রতিটি যাত্রায় ৪০% পর্যন্ত বাঁচুন।",
+      "popular_routes": "🔥 জনপ্রিয় রুট",
+      "insurance_title": "🛡️ ভ্রমণ সুরক্ষা যোগ করুন",
+      "insurance_sub": "বাতিলকরণ, চিকিৎসা জরুরি অবস্থা এবং লাগেজ ক্ষতি কভার করে",
+      "hotels_title": "🏨 কোথায় থাকবেন?",
+      "nav_home": "হোম",
+      "nav_search": "খুঁজুন",
+      "nav_alerts": "দামের সতর্কতা",
+      "nav_corporate": "কর্পোরেট",
+      "nav_operators": "অপারেটরদের জন্য",
+      "nav_admin": "অ্যাডমিন"
+    }
+  }
 }

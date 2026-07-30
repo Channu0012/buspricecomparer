@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '0.0.0.0';   // bind to all interfaces
 const DB_PATH = path.join(__dirname, 'database.json');
 
-// ─── GET LOCAL NETWORK IP ──────────────────────────────────────────────────────
+// â”€â”€â”€ GET LOCAL NETWORK IP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function getLanIP() {
   const ifaces = os.networkInterfaces();
   for (const name of Object.keys(ifaces)) {
@@ -26,13 +26,13 @@ function getLanIP() {
   return 'localhost';
 }
 
-// ─── INPUT SANITIZER (ANTI-XSS) ──────────────────────────────────────────────
+// â”€â”€â”€ INPUT SANITIZER (ANTI-XSS) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function sanitizeInput(str) {
   if (typeof str !== 'string') return '';
   return str.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').trim();
 }
 
-// ─── SECURITY MIDDLEWARE ──────────────────────────────────────────────────────
+// â”€â”€â”€ SECURITY MIDDLEWARE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginResourcePolicy: { policy: 'cross-origin' }
@@ -105,7 +105,7 @@ function writeDB(data) {
   return true;
 }
 
-// ─── UNIFIED SINGLE PAGE APPLICATION (SPA) SERVING ───────────────────────────
+// â”€â”€â”€ UNIFIED SINGLE PAGE APPLICATION (SPA) SERVING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const serveSPA = (req, res) => {
   res.sendFile(path.join(__dirname, 'templates', 'index.html'));
 };
@@ -117,8 +117,10 @@ app.get('/alerts', serveSPA);
 app.get('/privacy', serveSPA);
 app.get('/terms', serveSPA);
 app.get('/admin', serveSPA);
+app.get('/corporate', serveSPA);
+app.get('/operators', serveSPA);
 
-// ─── API: CITIES ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ API: CITIES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/api/cities', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -129,7 +131,7 @@ app.get('/api/cities', (req, res) => {
   res.json({ cities });
 });
 
-// ─── API: POPULAR ROUTES ──────────────────────────────────────────────────────
+// â”€â”€â”€ API: POPULAR ROUTES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/api/popular', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -150,15 +152,15 @@ app.get('/api/popular', (req, res) => {
   res.json({ popular });
 });
 
-// ─── API: ALL ROUTES ──────────────────────────────────────────────────────────
+// â”€â”€â”€ API: ALL ROUTES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/api/routes', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
   res.json({ routes: db.routes });
 });
 
-// ─── API: SEARCH ──────────────────────────────────────────────────────────────
-// ─── CITY NORMALIZATION HELPER ──────────────────────────────────────────────
+// â”€â”€â”€ API: SEARCH â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// â”€â”€â”€ CITY NORMALIZATION HELPER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const CITY_ALIASES = {
   'bengaluru': 'bangalore', 'madras': 'chennai', 'bombay': 'mumbai',
   'poona': 'pune', 'calcutta': 'kolkata', 'gurugram': 'gurgaon',
@@ -171,7 +173,7 @@ function normalizeCity(name) {
   return CITY_ALIASES[clean] || clean;
 }
 
-// ─── API: SEARCH ──────────────────────────────────────────────────────────────
+// â”€â”€â”€ API: SEARCH â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/api/search', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -322,7 +324,7 @@ app.get('/api/search', (req, res) => {
   });
 });
 
-// ─── API: PRICE TRENDS ────────────────────────────────────────────────────────
+// â”€â”€â”€ API: PRICE TRENDS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/api/price-trends', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -356,11 +358,11 @@ app.get('/api/price-trends', (req, res) => {
     avgPrice,
     cheapestDay: minDay.day,
     cheapestPrice: minDay.price,
-    recommendation: `Prices are lowest on ${minDay.day}s (₹${minDay.price}). High demand on Fridays & Saturdays!`
+    recommendation: `Prices are lowest on ${minDay.day}s (â‚¹${minDay.price}). High demand on Fridays & Saturdays!`
   });
 });
 
-// ─── API: SEAT MAP ────────────────────────────────────────────────────────────
+// â”€â”€â”€ API: SEAT MAP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/api/seat-map/:busId', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -412,7 +414,28 @@ app.get('/api/seat-map/:busId', (req, res) => {
   });
 });
 
-// ─── API: COUPON VALIDATION ───────────────────────────────────────────────────
+// ——— VALID ADMIN TOKENS (in-memory, clears on restart) —————————————————————
+const validAdminTokens = new Set();
+
+// Admin auth middleware
+function requireAdmin(req, res, next) {
+  const token = req.headers['x-admin-token'] || req.query.adminToken;
+  if (!token || !validAdminTokens.has(token)) {
+    return res.status(401).json({ error: 'Admin authentication required. Login first.' });
+  }
+  next();
+}
+
+// ——— EMAIL & PHONE VALIDATORS ——————————————————————————————————————————————
+function isValidEmail(email) {
+  return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+function isValidPhone(phone) {
+  if (!phone) return true; // optional
+  return /^[6-9]\d{9}$/.test(phone.replace(/[\s\-+]/g, ''));
+}
+
+// ——— API: COUPON VALIDATION ————————————————————————————————————————————————
 app.post('/api/coupons/validate', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -453,7 +476,7 @@ app.post('/api/coupons/validate', (req, res) => {
   });
 });
 
-// ─── API: BUS DETAIL ─────────────────────────────────────────────────────────
+// ——— API: BUS DETAIL ———————————————————————————————————————————————————————
 app.get('/api/bus/:slug', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -476,21 +499,27 @@ app.get('/api/bus/:slug', (req, res) => {
 // Founder password hash (SHA-256 of "001200")
 const ADMIN_HASH = '0b8e34c0992231f59dd2407b5168c5247bffe7b87b6e493a72f15db5d293685e';
 
-// ─── API: ADMIN LOGIN ─────────────────────────────────────────────────────────
+// ——— API: ADMIN LOGIN ——————————————————————————————————————————————————————
 app.post('/api/admin/login', (req, res) => {
   const { password } = req.body;
   if (!password) return res.status(400).json({ success: false, error: 'Password required' });
 
   const hash = crypto.createHash('sha256').update(password).digest('hex');
   if (hash === ADMIN_HASH) {
-    const token = crypto.createHash('sha256').update(password + Date.now()).digest('hex');
+    const token = crypto.createHash('sha256').update(password + Date.now() + Math.random()).digest('hex');
+    validAdminTokens.add(token);
+    // Keep token store clean (max 10 active sessions)
+    if (validAdminTokens.size > 10) {
+      const oldest = validAdminTokens.values().next().value;
+      validAdminTokens.delete(oldest);
+    }
     return res.json({ success: true, token });
   }
 
   res.status(401).json({ success: false, error: 'Invalid password' });
 });
 
-// ─── API: SUBMIT REVIEW ───────────────────────────────────────────────────────
+// ——— API: SUBMIT REVIEW ————————————————————————————————————————————————————
 app.post('/api/review', submitLimiter, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -537,7 +566,7 @@ app.post('/api/review', submitLimiter, (req, res) => {
   res.status(201).json({ success: true, review });
 });
 
-// ─── API: PRICE ALERT SUBSCRIPTION ───────────────────────────────────────────
+// ——— API: PRICE ALERT SUBSCRIPTION —————————————————————————————————————————
 app.post('/api/alert', submitLimiter, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -579,7 +608,7 @@ app.post('/api/alert', submitLimiter, (req, res) => {
 });
 
 
-// ─── API: CRAZY PLANE / FLIGHT SEARCH (BUS VS FLIGHT INTERMODAL) ───────────────
+// ——— API: CRAZY PLANE / FLIGHT SEARCH (BUS VS FLIGHT INTERMODAL) ———————————
 app.get('/api/flights/search', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -626,7 +655,7 @@ app.get('/api/flights/search', (req, res) => {
   res.json({ flight });
 });
 
-// ─── API: 4-WAY MULTI-MODAL TRAVEL CALCULATOR ──────────────────────────────────
+// ——— API: 4-WAY MULTI-MODAL TRAVEL CALCULATOR ——————————————————————————————
 app.get('/api/multimodal/calculate', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -668,7 +697,7 @@ app.get('/api/multimodal/calculate', (req, res) => {
       effectiveTime: '3h 45m (incl. 2h airport check-in)',
       doorToDoorCost: Math.max(1899, Math.round(busMinPrice * 2.9)) + 650,
       badge: '⚡ FASTEST DOOR-TO-DOOR',
-      icon: '✈️'
+      icon: '✈️ '
     },
     train: {
       mode: 'Train (IRCTC 3AC / Sleeper)',
@@ -677,8 +706,8 @@ app.get('/api/multimodal/calculate', (req, res) => {
       effectiveTime: '7h 30m',
       doorToDoorCost: Math.max(220, Math.round(busMinPrice * 0.7)),
       availabilityNote: '⚠️ Waitlist high on weekends',
-      badge: '🚆 BUDGET CHOICE',
-      icon: '🚆'
+      badge: '🚂 BUDGET CHOICE',
+      icon: '🚂'
     },
     cab: {
       mode: 'Intercity SUV Cab (Private/Shared)',
@@ -695,7 +724,7 @@ app.get('/api/multimodal/calculate', (req, res) => {
   res.json({ multimodal });
 });
 
-// ─── API: DETAILED BOARDING & DROPPING POINTS + MAP LINKS ──────────────────────
+// ——— API: DETAILED BOARDING & DROPPING POINTS + MAP LINKS ——————————————————
 app.get('/api/buses/boarding-points/:busId', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -740,7 +769,7 @@ app.get('/api/buses/boarding-points/:busId', (req, res) => {
 
   const restStops = [
     {
-      name: '🍱 Highway Food Express Plaza',
+      name: '🍴 Highway Food Express Plaza',
       duration: '30 mins',
       timing: 'Mid-route (around 3 hours into journey)',
       features: ['Food Court (Veg/Non-Veg)', 'Clean Washrooms', 'ATM & Coffee Shop']
@@ -775,8 +804,8 @@ function subtractMinutesFromTime(timeStr, minsToSub) {
   } catch(e) { return timeStr; }
 }
 
-// ─── API: ADMIN LEAD EXPORT (CSV / JSON) ──────────────────────────────────────
-app.get('/api/admin/leads/export', (req, res) => {
+// ─── API: ADMIN LEAD EXPORT (CSV / JSON) ───────────────────────────────────
+app.get('/api/admin/leads/export', requireAdmin, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
 
@@ -801,7 +830,7 @@ app.get('/api/admin/leads/export', (req, res) => {
   res.json({ totalLeads: allLeads.length, leads: allLeads });
 });
 
-// ─── FLIGHT AFFILIATE REDIRECT (HIGH COMMISSION ₹450+) ────────────────────────
+// ——— FLIGHT AFFILIATE REDIRECT (HIGH COMMISSION ₹450+) ——————————————————————
 app.get('/go/flight/:flightId', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -831,7 +860,7 @@ app.get('/go/flight/:flightId', (req, res) => {
   res.redirect(302, redirectUrl);
 });
 
-// ─── API: PRICE LOCK MICRO-MONETIZATION (₹39 FEE) ──────────────────────────────
+// ——— API: PRICE LOCK MICRO-MONETIZATION (₹39 FEE) ——————————————————————————
 app.post('/api/pricelock/create', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -863,12 +892,12 @@ app.post('/api/pricelock/create', (req, res) => {
   res.json({
     success: true,
     lockId,
-    message: `🔒 Ticket price locked at ₹${lock.lockedPrice} for 6 hours! Lock Pass ID: ${lockId}`,
+    message: `🔐 Ticket price locked at ₹${lock.lockedPrice} for 6 hours! Lock Pass ID: ${lockId}`,
     lock
   });
 });
 
-// ─── API: BUSPASS VIP SUBSCRIPTION (RECURRING MRR) ──────────────────────────────
+// ——— API: BUSPASS VIP SUBSCRIPTION (RECURRING MRR) —————————————————————————
 app.post('/api/vip/subscribe', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -907,8 +936,8 @@ app.post('/api/vip/subscribe', (req, res) => {
   });
 });
 
-// ─── API: ADMIN TOGGLE SPONSORED LISTING ──────────────────────────────────────
-app.post('/api/admin/toggle-sponsor', (req, res) => {
+// ─── API: ADMIN TOGGLE SPONSORED LISTING ────────────────────────────────────────
+app.post('/api/admin/toggle-sponsor', requireAdmin, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
 
@@ -926,8 +955,13 @@ app.post('/api/admin/toggle-sponsor', (req, res) => {
   res.json({ success: true, busId, sponsored: bus.sponsored });
 });
 
+// ——— CORPORATE INQUIRY —————————————————————————————————————————————————————
+app.post('/api/corporate/inquiry', (req, res) => {
+    // Logic for submitCorporateInquiry
+});
 
-// ─── AFFILIATE REDIRECT (CLICK TRACKING) ─────────────────────────────────────
+
+// ——— AFFILIATE REDIRECT (CLICK TRACKING) ————————————————————————————————————
 app.get('/go/:platform/:busId', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
@@ -969,7 +1003,7 @@ app.get('/go/:platform/:busId', (req, res) => {
 });
 
 // ─── API: ADMIN STATS ─────────────────────────────────────────────────────────
-app.get('/api/admin/stats', (req, res) => {
+app.get('/api/admin/stats', requireAdmin, (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: 'DB error' });
 
@@ -978,14 +1012,18 @@ app.get('/api/admin/stats', (req, res) => {
   const flightClicks = db.admin.flightClicks || 0;
   const priceLocks = db.admin.priceLocksCount || (db.priceLocks ? db.priceLocks.length : 0);
   const vipSubs = db.admin.vipSubscriptionsCount || (db.vipSubscriptions ? db.vipSubscriptions.length : 0);
+  const insuranceCount = db.admin.insurancePoliciesCount || (db.insurancePolicies ? db.insurancePolicies.length : 0);
+  const hotelLeads = (db.corporateLeads || []).length;
+  const operatorLeads = (db.operatorLeads || []).length;
 
   const busAffiliateRevenue = busClicks * 80;
   const flightAffiliateRevenue = flightClicks * 450;
   const priceLockRevenue = priceLocks * 39;
   const vipRevenue = (db.vipSubscriptions || []).reduce((sum, s) => sum + (s.pricePaid || 99), 0);
   const sponsoredRevenue = db.admin.sponsoredRevenue || 0;
+  const insuranceRevenue = db.admin.insuranceRevenue || (insuranceCount * 49);
 
-  const grandTotalRevenue = busAffiliateRevenue + flightAffiliateRevenue + priceLockRevenue + vipRevenue + sponsoredRevenue;
+  const grandTotalRevenue = busAffiliateRevenue + flightAffiliateRevenue + priceLockRevenue + vipRevenue + sponsoredRevenue + insuranceRevenue;
   db.admin.revenueEstimate = grandTotalRevenue;
 
   // Click breakdown by platform
@@ -996,30 +1034,20 @@ app.get('/api/admin/stats', (req, res) => {
 
   // Click breakdown by route
   const clicksByRoute = db.telemetry.reduce((acc, click) => {
-    if (click.route) {
-      acc[click.route] = (acc[click.route] || 0) + 1;
-    }
+    if (click.route) acc[click.route] = (acc[click.route] || 0) + 1;
     return acc;
   }, {});
 
-  // Top 5 routes by clicks
   const topRoutes = Object.entries(clicksByRoute)
-    .sort(([,a],[,b]) => b - a)
-    .slice(0, 5)
+    .sort(([,a],[,b]) => b - a).slice(0, 5)
     .map(([route, clicks]) => ({ route, clicks }));
 
-  // Recent clicks (last 10)
   const recentClicks = db.telemetry.slice(-10).reverse();
 
-  // Review stats
   const avgRating = db.reviews.length > 0
-    ? (db.reviews.reduce((s, r) => s + r.rating, 0) / db.reviews.length).toFixed(1)
-    : 0;
+    ? (db.reviews.reduce((s, r) => s + r.rating, 0) / db.reviews.length).toFixed(1) : 0;
 
-  // Recent alerts
   const recentAlerts = db.alerts.slice(-5).reverse();
-
-  // Recent reviews
   const recentReviews = db.reviews.slice(-5).reverse();
 
   res.json({
@@ -1031,12 +1059,17 @@ app.get('/api/admin/stats', (req, res) => {
       totalAlerts: db.admin.totalAlerts || db.alerts.length,
       priceLocksCount: priceLocks,
       vipSubscriptionsCount: vipSubs,
+      insurancePoliciesCount: insuranceCount,
+      corporateLeads: hotelLeads,
+      operatorLeads,
+      loyaltyUsers: (db.loyaltyUsers || []).length,
       revenueBreakdown: {
         busAffiliate: busAffiliateRevenue,
         flightAffiliate: flightAffiliateRevenue,
         priceLockFees: priceLockRevenue,
         vipSubscriptions: vipRevenue,
-        sponsoredAds: sponsoredRevenue
+        sponsoredAds: sponsoredRevenue,
+        travelInsurance: insuranceRevenue
       },
       revenueEstimate: grandTotalRevenue,
       totalBuses: db.buses.length,
@@ -1050,66 +1083,226 @@ app.get('/api/admin/stats', (req, res) => {
     recentReviews,
     priceLocks: (db.priceLocks || []).slice(-5).reverse(),
     vipSubscriptions: (db.vipSubscriptions || []).slice(-5).reverse(),
+    corporateLeads: (db.corporateLeads || []).slice(-5).reverse(),
+    operatorLeads: (db.operatorLeads || []).slice(-5).reverse(),
     lastUpdated: new Date().toISOString()
   });
 });
 
+// â”€â”€â”€ API: TRANSLATIONS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.get('/api/translations/:lang', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const lang = req.params.lang || 'en';
+  const t = (db.translations || {})[lang] || (db.translations || {})['en'] || {};
+  res.json({ lang, translations: t });
+});
 
-// ─── SEO: SITEMAP ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ API: HOTELS AT DESTINATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.get('/api/hotels/destination', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const dest = (req.query.city || '').toLowerCase();
+  const hotels = (db.hotelDeals || []).filter(h => h.destination.toLowerCase().includes(dest));
+  const results = hotels.length ? hotels : (db.hotelDeals || []).slice(0, 2);
+  res.json({ destination: req.query.city || 'India', hotels: results });
+});
+
+// â”€â”€â”€ API: TRAVEL INSURANCE QUOTE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.get('/api/insurance/quote', (req, res) => {
+  const fareAmount = parseFloat(req.query.fare) || 500;
+  const insuranceFee = Math.min(49 + Math.round(fareAmount * 0.02), 149);
+  res.json({
+    quote: {
+      baseFare: fareAmount,
+      insuranceFee,
+      covers: [
+        { icon: 'ðŸš«', label: 'Trip Cancellation', value: `Up to â‚¹${fareAmount}` },
+        { icon: 'ðŸ¥', label: 'Medical Emergency', value: 'Up to â‚¹25,000' },
+        { icon: 'ðŸ§³', label: 'Luggage Loss', value: 'Up to â‚¹5,000' },
+        { icon: 'â°', label: 'Missed Bus Guarantee', value: '100% Refund' }
+      ],
+      provider: 'Acko Travel Insurance (IRDAI Licensed)',
+      validity: '24 hours from departure'
+    }
+  });
+});
+
+// â”€â”€â”€ API: INSURANCE PURCHASE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.post('/api/insurance/purchase', submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const { phone, email, busId, fare, insuranceFee } = req.body;
+  if (!phone) return res.status(400).json({ error: 'Phone required' });
+  const policy = {
+    id: `INS-${uuidv4().slice(0,8).toUpperCase()}`,
+    phone: sanitizeInput(phone), email: sanitizeInput(email || ''),
+    busId: sanitizeInput(busId || ''), fare: parseFloat(fare) || 0,
+    insuranceFee: parseFloat(insuranceFee) || 49, status: 'ACTIVE',
+    createdAt: new Date().toISOString()
+  };
+  if (!db.insurancePolicies) db.insurancePolicies = [];
+  db.insurancePolicies.push(policy);
+  db.admin.insurancePoliciesCount = (db.admin.insurancePoliciesCount || 0) + 1;
+  db.admin.insuranceRevenue = (db.admin.insuranceRevenue || 0) + policy.insuranceFee;
+  writeDB(db);
+  res.json({ success: true, policyId: policy.id, message: `Trip Protection activated! Policy ID: ${policy.id}` });
+});
+
+// â”€â”€â”€ API: LOYALTY â€” EARN BUSCOINS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.post('/api/loyalty/earn', submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const { phone, action } = req.body;
+  if (!phone) return res.status(400).json({ error: 'Phone required' });
+  const COIN_REWARDS = { search: 2, alert: 5, referral: 50, vip: 25, insurance: 10, review: 15, share: 3 };
+  const coins = COIN_REWARDS[action] || 2;
+  if (!db.loyaltyUsers) db.loyaltyUsers = [];
+  let user = db.loyaltyUsers.find(u => u.phone === phone);
+  if (!user) {
+    const code = `BHARATBUS-${phone.slice(-4)}-${Math.random().toString(36).substring(2,6).toUpperCase()}`;
+    user = { id: `loyalty-${uuidv4().slice(0,8)}`, phone, coins: 0, tier: 'Bronze', referralCode: code, referralCount: 0, joinedAt: new Date().toISOString() };
+    db.loyaltyUsers.push(user);
+  }
+  user.coins += coins;
+  if (user.coins >= 1000) user.tier = 'Platinum';
+  else if (user.coins >= 500) user.tier = 'Gold';
+  else if (user.coins >= 150) user.tier = 'Silver';
+  else user.tier = 'Bronze';
+  writeDB(db);
+  res.json({ success: true, coinsEarned: coins, totalCoins: user.coins, tier: user.tier, referralCode: user.referralCode });
+});
+
+// â”€â”€â”€ API: LOYALTY â€” BALANCE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.get('/api/loyalty/balance', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const phone = req.query.phone;
+  if (!phone) return res.status(400).json({ error: 'Phone required' });
+  const user = (db.loyaltyUsers || []).find(u => u.phone === phone);
+  if (!user) return res.json({ found: false, coins: 0, tier: 'Bronze' });
+  res.json({ found: true, coins: user.coins, tier: user.tier, referralCode: user.referralCode, referralCount: user.referralCount });
+});
+
+// â”€â”€â”€ API: REFERRAL GENERATE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.post('/api/referral/generate', submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const { phone } = req.body;
+  if (!phone) return res.status(400).json({ error: 'Phone required' });
+  if (!db.loyaltyUsers) db.loyaltyUsers = [];
+  let user = db.loyaltyUsers.find(u => u.phone === phone);
+  if (!user) {
+    const code = `BHARATBUS-${phone.slice(-4)}-${Math.random().toString(36).substring(2,6).toUpperCase()}`;
+    user = { id: `loyalty-${uuidv4().slice(0,8)}`, phone, coins: 5, tier: 'Bronze', referralCode: code, referralCount: 0, joinedAt: new Date().toISOString() };
+    db.loyaltyUsers.push(user);
+    writeDB(db);
+  }
+  res.json({ success: true, referralCode: user.referralCode, shareUrl: `https://buscompare.in?ref=${user.referralCode}`, coinsOnJoin: 50 });
+});
+
+// â”€â”€â”€ API: REVIEWS â€” SUBMIT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.post('/api/reviews/submit', submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const { busId, rating, comment, travelerName, route } = req.body;
+  if (!busId || !rating) return res.status(400).json({ error: 'busId and rating required' });
+  const review = {
+    id: `REV-${uuidv4().slice(0,8).toUpperCase()}`,
+    busId: sanitizeInput(busId), rating: Math.min(5, Math.max(1, parseInt(rating))),
+    comment: sanitizeInput(comment || ''), travelerName: sanitizeInput(travelerName || 'Anonymous Traveler'),
+    route: sanitizeInput(route || ''), verified: false, createdAt: new Date().toISOString()
+  };
+  if (!db.reviews) db.reviews = [];
+  db.reviews.push(review);
+  db.admin.totalReviews = (db.admin.totalReviews || 0) + 1;
+  writeDB(db);
+  res.json({ success: true, reviewId: review.id, message: 'Review submitted! Thank you for helping fellow travelers.' });
+});
+
+// â”€â”€â”€ API: REVIEWS â€” FETCH BY BUS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.get('/api/reviews/bus/:busId', (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const busReviews = (db.reviews || []).filter(r => r.busId === req.params.busId);
+  const avgRating = busReviews.length ? (busReviews.reduce((s, r) => s + r.rating, 0) / busReviews.length).toFixed(1) : null;
+  res.json({ busId: req.params.busId, reviews: busReviews.slice(-10).reverse(), avgRating, totalReviews: busReviews.length });
+});
+
+// â”€â”€â”€ API: CORPORATE INQUIRY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.post('/api/corporate/inquire', submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const { companyName, contactName, email, phone, employees, monthlyTrips, message } = req.body;
+  if (!email || !companyName) return res.status(400).json({ error: 'Company name and email required' });
+  const lead = {
+    id: `CORP-${uuidv4().slice(0,8).toUpperCase()}`,
+    companyName: sanitizeInput(companyName), contactName: sanitizeInput(contactName || ''),
+    email: sanitizeInput(email), phone: sanitizeInput(phone || ''),
+    employees: sanitizeInput(employees || ''), monthlyTrips: sanitizeInput(monthlyTrips || ''),
+    message: sanitizeInput(message || ''), status: 'NEW_LEAD',
+    estimatedMRR: parseInt(employees || 10) * 500, createdAt: new Date().toISOString()
+  };
+  if (!db.corporateLeads) db.corporateLeads = [];
+  db.corporateLeads.push(lead);
+  writeDB(db);
+  res.json({ success: true, leadId: lead.id, message: 'Thank you! Our corporate travel specialist will contact you within 24 hours.' });
+});
+
+// â”€â”€â”€ API: OPERATOR SAAS INQUIRY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+app.post('/api/operator/inquire', submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: 'DB error' });
+  const { operatorName, contactName, email, phone, fleetSize, routes, message } = req.body;
+  if (!email || !operatorName) return res.status(400).json({ error: 'Operator name and email required' });
+  const lead = {
+    id: `OPR-${uuidv4().slice(0,8).toUpperCase()}`,
+    operatorName: sanitizeInput(operatorName), contactName: sanitizeInput(contactName || ''),
+    email: sanitizeInput(email), phone: sanitizeInput(phone || ''),
+    fleetSize: sanitizeInput(fleetSize || ''), routes: sanitizeInput(routes || ''),
+    message: sanitizeInput(message || ''), status: 'NEW_LEAD',
+    estimatedPlan: parseInt(fleetSize || 5) > 20 ? 'Enterprise (â‚¹15,000/mo)' : parseInt(fleetSize || 5) > 5 ? 'Growth (â‚¹7,500/mo)' : 'Starter (â‚¹2,999/mo)',
+    createdAt: new Date().toISOString()
+  };
+  if (!db.operatorLeads) db.operatorLeads = [];
+  db.operatorLeads.push(lead);
+  writeDB(db);
+  res.json({ success: true, leadId: lead.id, message: 'Welcome aboard! Our operator success team will onboard you within 48 hours.' });
+});
+
+// â”€â”€â”€ SEO: SITEMAP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.get('/sitemap.xml', (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).send('Error');
-
   const baseUrl = 'https://buscompare.in';
   const today = new Date().toISOString().split('T')[0];
-
-  const staticUrls = ['/', '/alerts'].map(u => `
-  <url>
-    <loc>${baseUrl}${u}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>`).join('');
-
+  const staticUrls = ['/', '/alerts', '/corporate', '/operators'].map(u => `
+  <url><loc>${baseUrl}${u}</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url>`).join('');
   const routeUrls = db.routes.map(r => `
-  <url>
-    <loc>${baseUrl}/search?from=${r.from}&amp;to=${r.to}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.8</priority>
-  </url>`).join('');
-
+  <url><loc>${baseUrl}/search?from=${r.from}&amp;to=${r.to}</loc><lastmod>${today}</lastmod><changefreq>hourly</changefreq><priority>0.8</priority></url>`).join('');
   const busUrls = db.buses.map(b => `
-  <url>
-    <loc>${baseUrl}/bus/${b.slug}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>`).join('');
-
+  <url><loc>${baseUrl}/bus/${b.slug}</loc><lastmod>${today}</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>`).join('');
   res.header('Content-Type', 'application/xml');
-  res.send(`<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls}
-${routeUrls}
-${busUrls}
-</urlset>`);
+  res.send(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticUrls}${routeUrls}${busUrls}</urlset>`);
 });
 
-// ─── START SERVER ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ START SERVER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 app.listen(PORT, HOST, () => {
   const lan = getLanIP();
   console.log('');
-  console.log('  🚌 BusCompare India — Server Running');
-  console.log('  ─────────────────────────────────────────────────────');
-  console.log(`  🌐 Local:    http://localhost:${PORT}`);
-  console.log(`  📡 Network:  http://${lan}:${PORT}   ← open on any device on WiFi`);
-  console.log(`  🔍 Search:   http://localhost:${PORT}/search?from=Mumbai&to=Pune`);
-  console.log(`  📊 Admin:    http://localhost:${PORT}/admin`);
-  console.log(`  ⚡ Alerts:   http://localhost:${PORT}/alerts`);
-  console.log('  ─────────────────────────────────────────────────────');
-  console.log(`  🗂️  DB:      ${DB_PATH}`);
+  console.log('  ðŸŒ BharatTravel Super-Platform â€” Server Running');
+  console.log('  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
+  console.log(`  ðŸŒ Local:      http://localhost:${PORT}`);
+  console.log(`  ðŸ“¡ Network:    http://${lan}:${PORT}`);
+  console.log(`  ðŸ” Search:     http://localhost:${PORT}/search?from=Mumbai&to=Goa`);
+  console.log(`  ðŸ’¼ Corporate:  http://localhost:${PORT}/corporate`);
+  console.log(`  ðŸšŒ Operators:  http://localhost:${PORT}/operators`);
+  console.log(`  ðŸ“Š Admin:      http://localhost:${PORT}/admin`);
+  console.log('  â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
+  console.log('  ðŸ’° Revenue Streams:');
+  console.log('     ðŸ›¡ï¸ Insurance  ðŸ¨ Hotels  ðŸª™ BusCoins  ðŸ”— Referrals');
+  console.log('     â­ Reviews   ðŸ’¼ Corporate  ðŸšŒ Operator SaaS');
   console.log('');
-  console.log('  ⚠️  Do NOT use VS Code Live Server — always use node server.js');
+  console.log('  âš ï¸  Do NOT use VS Code Live Server â€” always use node server.js');
   console.log('');
 });
