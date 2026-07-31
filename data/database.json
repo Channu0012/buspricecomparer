@@ -5271,6 +5271,14 @@
       "timestamp": "2026-07-29T16:44:36.070Z",
       "price": 2199,
       "route": "Bangalore → Chennai (Plane)"
+    },
+    {
+      "id": "clk-flt-e41278bb",
+      "platform": "flight_affiliate",
+      "busId": "flt-dyn-89e5e8",
+      "timestamp": "2026-07-30T16:31:15.114Z",
+      "price": 2499,
+      "route": "Flight Deal"
     }
   ],
   "flights": [
@@ -5502,21 +5510,21 @@
   ],
   "admin": {
     "totalClicks": 2,
-    "totalSearches": 302,
+    "totalSearches": 307,
     "totalReviews": 18,
     "totalAlerts": 9,
-    "flightClicks": 1,
+    "flightClicks": 2,
     "priceLocksCount": 5,
     "vipSubscriptionsCount": 9,
     "busAffiliateRevenue": 160,
-    "flightAffiliateRevenue": 450,
+    "flightAffiliateRevenue": 900,
     "priceLockRevenue": 195,
     "vipRevenue": 1691,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 2691,
+    "revenueEstimate": 3141,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 4,
-    "insuranceRevenue": 260
+    "insurancePoliciesCount": 5,
+    "insuranceRevenue": 321
   },
   "coupons": [
     {
@@ -5715,6 +5723,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-07-30T16:23:40.930Z"
+    },
+    {
+      "id": "INS-CB28B684",
+      "phone": "6363890658",
+      "email": "",
+      "busId": "search-page",
+      "fare": 0,
+      "insuranceFee": 61,
+      "status": "ACTIVE",
+      "createdAt": "2026-07-30T16:31:37.823Z"
     }
   ],
   "loyaltyUsers": [
