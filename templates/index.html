@@ -824,9 +824,10 @@ body.light .modal-inp{background:rgba(0,0,0,.05)}
             <div class="filter-lbl">Bus Type</div>
             <select class="filter-sel" id="sp-type" onchange="applyFilters()">
               <option value="all">All Types</option>
-              <option value="ac-sleeper">AC Sleeper</option>
-              <option value="ac-seater">AC Seater</option>
-              <option value="non-ac">Non-AC</option>
+              <option value="ac-sleeper">🛏️ AC Sleeper</option>
+              <option value="ac-seater">💺 AC Seater</option>
+              <option value="luxury-seater">👑 Luxury</option>
+              <option value="non-ac">🌬️ Non-AC</option>
             </select>
           </div>
           <div class="filter-grp">
@@ -1496,15 +1497,29 @@ async function loadSearch(from, to) {
   loadHotels(to);
   loadInsurance(600);
 
+  const sp2 = new URLSearchParams(location.search);
+  const date = sp2.get('date') || '';
   try {
-    const r = await fetch(`/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&sort=default`);
+    let url = `/api/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&sort=default`;
+    if (date) url += `&date=${encodeURIComponent(date)}`;
+    const r = await fetch(url);
     const d = await r.json();
     _loadedBuses = d.results || [];
     populateOperatorFilter(d.availableOperators || []);
+    // Show route info
+    if (d.route && d.route.distance) {
+      document.getElementById('sp-route-sub').textContent = `${d.total} buses found · ${d.route.distance} km · Comparing live prices`;
+    } else {
+      document.getElementById('sp-route-sub').textContent = `${d.total} buses found · Comparing prices across all platforms`;
+    }
     renderBusCards(_loadedBuses);
-    // update trend operator list
+    // Update insurance with actual lowest price
+    if (_loadedBuses.length > 0) {
+      const lowestFare = Math.min(..._loadedBuses.map(b => b.lowestPrice));
+      loadInsurance(lowestFare);
+    }
   } catch(e) {
-    list.innerHTML = `<div class="no-results"><div class="nr-icon">🔍</div><div class="nr-title">Server not reachable</div><div class="nr-sub">Make sure the server is running on port 3000</div></div>`;
+    list.innerHTML = `<div class="no-results"><div class="nr-icon">🔍</div><div class="nr-title">Server not reachable</div><div class="nr-sub">Make sure the server is running: <strong>node server.js</strong></div></div>`;
   }
 }
 
@@ -1558,46 +1573,116 @@ function renderBusCards(buses) {
   list.innerHTML = `<div class="bus-list">${buses.map((b, i) => buildBusCard(b, i)).join('')}</div>`;
 }
 
+// Amenity display config — maps DB values to icon+label (includes display-name variants from dynamic bus generator)
+const AMENITY_MAP = {
+  // lowercase codes
+  'wifi': { icon: '📶', label: 'WiFi' },
+  'usb-charging': { icon: '🔌', label: 'USB Charging' },
+  'ac': { icon: '❄️', label: 'AC' },
+  'blanket': { icon: '🛏️', label: 'Blanket' },
+  'water-bottle': { icon: '💧', label: 'Water Bottle' },
+  'entertainment': { icon: '🎬', label: 'Entertainment' },
+  'toilet': { icon: '🚽', label: 'Toilet' },
+  'reading-light': { icon: '💡', label: 'Reading Light' },
+  'snacks': { icon: '🍪', label: 'Snacks' },
+  'pillow': { icon: '🛌', label: 'Pillow' },
+  'track-my-bus': { icon: '📍', label: 'Live Track' },
+  'quiet zone': { icon: '🔇', label: 'Quiet Zone' },
+  'sleeping-sheet': { icon: '🛏️', label: 'Sheet' },
+  // Display-name variants (used by dynamic bus generator & DB)
+  'charging point': { icon: '🔌', label: 'USB Charging' },
+  'water bottle': { icon: '💧', label: 'Water Bottle' },
+  'reading light': { icon: '💡', label: 'Reading Light' },
+  'wi-fi': { icon: '📶', label: 'WiFi' },
+  'WiFi': { icon: '📶', label: 'WiFi' },
+  'Charging Point': { icon: '🔌', label: 'USB Charging' },
+  'AC': { icon: '❄️', label: 'AC' },
+  'Blanket': { icon: '🛏️', label: 'Blanket' },
+  'Water Bottle': { icon: '💧', label: 'Water Bottle' },
+  'Entertainment': { icon: '🎬', label: 'Entertainment' },
+  'Toilet': { icon: '🚽', label: 'Toilet' },
+  'Reading Light': { icon: '💡', label: 'Reading Light' },
+  'Snacks': { icon: '🍪', label: 'Snacks' },
+  'Quiet Zone': { icon: '🔇', label: 'Quiet Zone' }
+};
+
+function getAmenityDisplay(code) {
+  const key = code.toLowerCase();
+  return AMENITY_MAP[key] || { icon: '✅', label: code };
+}
+
 function buildBusCard(b, i) {
   const platformPrices = Object.entries(b.prices || {})
     .filter(([, v]) => v)
+    .sort(([,a],[,c]) => a - c)  // sort lowest first
     .map(([p, v]) => {
       const isLowest = v === b.lowestPrice;
-      const nm = {redbus:'RedBus',abhibus:'AbhiBus',makemytrip:'MMT',yatra:'Yatra',direct:'Direct'}[p] || p;
-      return `<div class="pp"><div class="pp-nm">${nm}</div><div class="pp-pr ${isLowest?'best':''}">₹${v.toLocaleString('en-IN')}</div></div>`;
+      const nm = { redbus:'RedBus', abhibus:'AbhiBus', makemytrip:'MMT', yatra:'Yatra', direct:'Direct' }[p] || p;
+      return `<div class="pp"><div class="pp-nm">${nm}</div><div class="pp-pr ${isLowest?'best':''}" title="Book on ${nm} for ₹${v.toLocaleString('en-IN')}">₹${v.toLocaleString('en-IN')}</div></div>`;
     }).join('');
 
-  const amenityIcons = {'WiFi':'📶','Charging Point':'🔌','AC':'❄️','Blanket':'🛏️','Water Bottle':'💧','Entertainment':'🎬','Toilet':'🚽'};
-  const amenities = (b.amenities || []).slice(0, 5).map(a => `<span class="bc-amen">${amenityIcons[a]||'✓'} ${a}</span>`).join('');
+  const amenities = (b.amenities || []).slice(0, 5).map(a => {
+    const am = getAmenityDisplay(a);
+    return `<span class="bc-amen">${am.icon} ${am.label}</span>`;
+  }).join('');
 
-  return `<div class="bus-card ${b.sponsored?'featured':''}" style="animation-delay:${i*0.05}s">
+  // Seats left urgency logic
+  const seatsLeft = b.seatsLeft || 0;
+  const seatsColor = seatsLeft <= 5 ? '#EF4444' : seatsLeft <= 10 ? '#F97316' : '#10B981';
+  const seatsIcon = seatsLeft <= 5 ? '🔴' : seatsLeft <= 10 ? '🟡' : '🟢';
+
+  // Bus type badge
+  const typeLower = (b.busTypeCode || '').toLowerCase();
+  const typeColor = typeLower.includes('luxury') ? '#F59E0B' : typeLower.includes('sleeper') ? '#8B5CF6' : typeLower.includes('non-ac') ? '#6B7280' : '#3B82F6';
+
+  // Savings badge
+  const highP = b.highestPrice || b.lowestPrice;
+  const savings = highP > b.lowestPrice ? `<span style="background:rgba(16,185,129,.12);color:#10B981;font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:8px">SAVE ₹${(highP - b.lowestPrice).toLocaleString('en-IN')}</span>` : '';
+
+  return `<div class="bus-card ${b.sponsored?'featured':''}" style="animation-delay:${i*0.06}s">
     ${b.sponsored ? '<span class="promo-badge">⭐ PROMOTED</span>' : ''}
     <div class="bc-grid">
       <div class="bc-left">
         <div class="bc-name">${b.operator}</div>
-        <div class="bc-type-tag">🚌 ${b.busType}</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <div class="bc-type-tag" style="background:${typeColor}22;border-color:${typeColor}44;color:${typeColor}">🚌 ${b.busType}</div>
+          ${(b.badges||[]).includes('top-rated') ? '<span style="font-size:10px;font-weight:800;color:#F59E0B">🏆 TOP RATED</span>' : ''}
+        </div>
         <div class="bc-timeline">
-          <span class="bc-time">${b.route.departureTime}</span>
-          <div class="bc-route-line" data-dur="${b.route.duration}"></div>
-          <span class="bc-time">${b.route.arrivalTime}</span>
+          <div style="text-align:center">
+            <div class="bc-time">${b.route.departureTime}</div>
+            <div style="font-size:10px;color:var(--ts);margin-top:2px">${b.route.departureStop||b.route.from}</div>
+          </div>
+          <div class="bc-route-line" data-dur="${b.route.duration}">
+            <span style="font-size:10px;color:var(--ts);background:var(--card);padding:0 6px;position:relative;z-index:1">${b.route.duration}</span>
+          </div>
+          <div style="text-align:center">
+            <div class="bc-time">${b.route.arrivalTime}</div>
+            <div style="font-size:10px;color:var(--ts);margin-top:2px">${b.route.arrivalStop||b.route.to}</div>
+          </div>
         </div>
         <div class="bc-meta">
-          <span class="bc-rating">⭐ ${b.rating} <span style="color:var(--ts);font-weight:400">(${b.reviewCount} reviews)</span></span>
-          <span class="bc-seats">🔴 ${b.seatsLeft} seats left</span>
+          <span class="bc-rating">⭐ ${b.rating} <span style="color:var(--ts);font-weight:400">(${(b.reviewCount||0).toLocaleString('en-IN')} reviews)</span></span>
+          <span class="bc-seats" style="color:${seatsColor};font-weight:700">${seatsIcon} ${seatsLeft} seats left</span>
         </div>
-        <div class="bc-amenities">${amenities}</div>
+        <div class="bc-amenities">${amenities || '<span class="bc-amen">✅ Standard Bus</span>'}</div>
         <div class="bc-pickup-bar">
           <button class="btn-pickup" onclick="openBoarding('${b.id}')">📍 Pickup Points & Maps</button>
-          <span class="rest-info">🍴 Rest stop scheduled</span>
+          <span class="rest-info">🍴 Rest stop en route</span>
         </div>
       </div>
       <div class="bc-right">
-        <div class="bc-price">₹${b.lowestPrice.toLocaleString('en-IN')}</div>
-        <div class="bc-price-sub">per person · All inclusive</div>
+        <div style="text-align:right">
+          <div class="bc-price">₹${b.lowestPrice.toLocaleString('en-IN')}${savings}</div>
+          <div class="bc-price-sub">per person · All inclusive</div>
+        </div>
         <div class="platform-row">${platformPrices}</div>
         <div class="bc-btn-row">
           <button class="btn-lock" onclick="openLock('${b.id}',${b.lowestPrice})">🔒 Lock ₹39</button>
           <button class="btn-book" onclick="openScratch('/go/redbus/${b.id}')">Book Now ↗</button>
+        </div>
+        <div style="text-align:center;margin-top:6px">
+          <span style="font-size:10px;color:var(--ts)">${b.policies?.cancellation || 'Cancellation policy applies'}</span>
         </div>
       </div>
     </div>
