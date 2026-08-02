@@ -37,12 +37,13 @@ input,select,textarea,button{font-family:inherit}a{text-decoration:none;color:in
 .navbar{position:sticky;top:0;z-index:1000;height:68px;padding:0 24px;background:rgba(6,10,19,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--border);display:flex;align-items:center}
 body.light .navbar{background:rgba(255,255,255,.88)}
 .nav-in{width:100%;max-width:1320px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer;flex-shrink:0;transition:opacity .2s}
-.nav-logo:hover{opacity:.85}
-.nav-logo-img{height:48px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 12px rgba(201,162,39,.45));transition:filter .25s,transform .25s}
-.nav-logo:hover .nav-logo-img{filter:drop-shadow(0 4px 20px rgba(201,162,39,.7));transform:scale(1.04)}
-.nav-logo-text{font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;line-height:1}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;transition:transform .25s,opacity .2s}
+.nav-logo:hover{opacity:.9;transform:scale(1.02)}
+.nav-logo-icon{width:40px;height:40px;flex-shrink:0;filter:drop-shadow(0 2px 10px rgba(249,115,22,.4));transition:filter .25s,transform .25s}
+.nav-logo:hover .nav-logo-icon{filter:drop-shadow(0 4px 18px rgba(249,115,22,.65));transform:rotate(-3deg) scale(1.06)}
+.nav-logo-text{font-family:'Outfit',sans-serif;font-size:21px;font-weight:900;line-height:1;letter-spacing:-0.5px}
 .nav-logo-text em{color:var(--p);font-style:normal}
+.nav-logo-india{display:block;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ts);margin-top:1px}
 .nav-links{display:flex;align-items:center;gap:2px;list-style:none}
 .nav-link{padding:7px 13px;border-radius:9px;color:var(--ts);font-size:13px;font-weight:600;cursor:pointer;transition:var(--tr);white-space:nowrap;border:none;background:none}
 .nav-link:hover,.nav-link.active{color:var(--t);background:rgba(255,255,255,.07)}
@@ -553,8 +554,48 @@ body.light .modal-inp{background:rgba(0,0,0,.05)}
   <div class="nav-in">
     <div class="nav-left" style="display:flex;align-items:center;gap:20px">
       <div class="nav-logo" onclick="nav('/')">
-        <img src="/logo.png" alt="BusCompare India Logo" class="nav-logo-img">
-        <span class="nav-logo-text">Bus<em>Compare</em></span>
+        <svg class="nav-logo-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="nl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E3A5F"/>
+              <stop offset="100%" stop-color="#0C1A35"/>
+            </linearGradient>
+            <linearGradient id="nl-bus" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#3B82F6"/>
+              <stop offset="100%" stop-color="#1D4ED8"/>
+            </linearGradient>
+            <linearGradient id="nl-org" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F97316"/>
+              <stop offset="100%" stop-color="#EA580C"/>
+            </linearGradient>
+          </defs>
+          <!-- BG circle -->
+          <circle cx="32" cy="32" r="31" fill="url(#nl-bg)"/>
+          <circle cx="32" cy="32" r="31" fill="none" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+          <!-- Bus body -->
+          <rect x="8" y="31" width="40" height="17" rx="3.5" fill="url(#nl-bus)"/>
+          <!-- Bus roof -->
+          <path d="M12 31 Q13 24 17 23 L44 23 Q48 24 48 31 Z" fill="#2563EB"/>
+          <!-- Windshield -->
+          <rect x="42" y="25" width="6" height="8" rx="2" fill="#BFDBFE" opacity="0.95"/>
+          <!-- Windows -->
+          <rect x="11" y="25" width="6" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+          <rect x="19" y="25" width="6" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+          <rect x="27" y="25" width="6" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+          <rect x="35" y="25" width="5" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+          <!-- Orange accent stripe -->
+          <rect x="8" y="38.5" width="40" height="3" rx="1" fill="url(#nl-org)"/>
+          <!-- Wheels -->
+          <circle cx="17" cy="49" r="4.5" fill="#0F172A" stroke="#94A3B8" stroke-width="1.2"/>
+          <circle cx="17" cy="49" r="1.8" fill="#CBD5E1"/>
+          <circle cx="37" cy="49" r="4.5" fill="#0F172A" stroke="#94A3B8" stroke-width="1.2"/>
+          <circle cx="37" cy="49" r="1.8" fill="#CBD5E1"/>
+          <!-- Price badge top-right -->
+          <circle cx="50" cy="15" r="10" fill="url(#nl-org)" opacity="0.95"/>
+          <circle cx="50" cy="15" r="10" fill="none" stroke="#FED7AA" stroke-width="1" stroke-opacity="0.5"/>
+          <text x="50" y="19.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="900" fill="white">₹</text>
+        </svg>
+        <span class="nav-logo-text">Bus<em>Compare</em><span class="nav-logo-india">India</span></span>
       </div>
       <ul class="nav-links">
         <li><button class="nav-link" id="nl-home" onclick="nav('/')">Home</button></li>
@@ -1186,7 +1227,29 @@ body.light .modal-inp{background:rgba(0,0,0,.05)}
     <div class="ft-grid">
       <div>
         <div class="ft-brand">
-          <img src="/logo.png" alt="BusCompare Logo" style="height:44px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(201,162,39,.4))">
+          <svg style="width:38px;height:38px;flex-shrink:0;filter:drop-shadow(0 2px 12px rgba(249,115,22,.5))" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ft-bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1E3A5F"/><stop offset="100%" stop-color="#0C1A35"/></linearGradient>
+              <linearGradient id="ft-bus" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#3B82F6"/><stop offset="100%" stop-color="#1D4ED8"/></linearGradient>
+              <linearGradient id="ft-org" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#EA580C"/></linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="31" fill="url(#ft-bg)"/>
+            <circle cx="32" cy="32" r="31" fill="none" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+            <rect x="8" y="31" width="40" height="17" rx="3.5" fill="url(#ft-bus)"/>
+            <path d="M12 31 Q13 24 17 23 L44 23 Q48 24 48 31 Z" fill="#2563EB"/>
+            <rect x="42" y="25" width="6" height="8" rx="2" fill="#BFDBFE" opacity="0.95"/>
+            <rect x="11" y="25" width="6" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+            <rect x="19" y="25" width="6" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+            <rect x="27" y="25" width="6" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+            <rect x="35" y="25" width="5" height="6" rx="1.5" fill="#DBEAFE" opacity="0.8"/>
+            <rect x="8" y="38.5" width="40" height="3" rx="1" fill="url(#ft-org)"/>
+            <circle cx="17" cy="49" r="4.5" fill="#0F172A" stroke="#94A3B8" stroke-width="1.2"/>
+            <circle cx="17" cy="49" r="1.8" fill="#CBD5E1"/>
+            <circle cx="37" cy="49" r="4.5" fill="#0F172A" stroke="#94A3B8" stroke-width="1.2"/>
+            <circle cx="37" cy="49" r="1.8" fill="#CBD5E1"/>
+            <circle cx="50" cy="15" r="10" fill="url(#ft-org)" opacity="0.95"/>
+            <text x="50" y="19.5" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="900" fill="white">₹</text>
+          </svg>
           Bus<em style="color:var(--p);font-style:normal">Compare</em> India
         </div>
         <div class="ft-desc">India's #1 multi-modal travel comparison platform. Compare buses, flights, trains & cabs instantly. Save up to 40% on every trip.</div>
