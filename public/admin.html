@@ -1064,6 +1064,8 @@
             <div class="page-sub" id="last-updated">Loading data...</div>
           </div>
           <div class="header-actions">
+            <a href="/api/admin/leads/export?format=csv" id="btn-export-csv" class="refresh-btn" style="text-decoration:none;color:var(--p);border-color:rgba(249,115,22,0.3)" download>📥 Export CSV</a>
+            <a href="/api/admin/leads/export?format=json" id="btn-export-json" class="refresh-btn" style="text-decoration:none;color:var(--blue);border-color:rgba(59,130,246,0.3)" download>📥 Export JSON</a>
             <div class="live-badge">
               <span
                 style="
@@ -1098,7 +1100,7 @@
         </div>
 
         <!-- METRICS -->
-        <div class="metrics-grid">
+        <div class="metrics-grid" id="sec-overview">
           <div class="metric-card mc-orange">
             <div class="metric-label">💰 Est. Revenue</div>
             <div class="metric-val" id="m-revenue">₹0</div>
@@ -1130,7 +1132,7 @@
         </div>
 
         <!-- REVENUE MODEL BREAKDOWN -->
-        <div class="rev-detail">
+        <div class="rev-detail" id="sec-revenue">
           <div class="rd-title">💡 Revenue Model Breakdown</div>
           <div class="rd-sub">
             How BusCompare makes money — for every visitor who books through us
@@ -1159,7 +1161,7 @@
 
         <!-- CLICKS + ROUTES -->
         <div class="three-col">
-          <div class="sc">
+          <div class="sc" id="sec-clicks">
             <div class="sc-head">
               <div class="sc-title">🔗 Affiliate Clicks by Platform</div>
             </div>
@@ -1169,7 +1171,7 @@
               <div class="skeleton" style="height: 28px"></div>
             </div>
           </div>
-          <div class="sc">
+          <div class="sc" id="sec-routes">
             <div class="sc-head">
               <div class="sc-title">🔥 Top Booking Routes</div>
             </div>
@@ -1192,7 +1194,7 @@
               <div class="skeleton" style="height: 200px"></div>
             </div>
           </div>
-          <div class="sc">
+          <div class="sc" id="sec-reviews">
             <div class="sc-head">
               <div class="sc-title">⭐ Recent Reviews</div>
               <div class="sc-badge" id="avg-rating-badge">— avg</div>
@@ -1205,7 +1207,7 @@
         </div>
 
         <!-- ALERTS -->
-        <div class="sc">
+        <div class="sc" id="sec-alerts">
           <div class="sc-head">
             <div class="sc-title">🔔 Price Alert Subscribers</div>
             <div class="sc-badge" id="alerts-badge">0 subs</div>
@@ -1674,10 +1676,21 @@
         document
           .querySelectorAll(".sb-link")
           .forEach((l) => l.classList.remove("active"));
-        event.currentTarget.classList.add("active");
-        document
-          .getElementById("main-content")
-          .scrollTo({ top: 0, behavior: "smooth" });
+        if (event && event.currentTarget) {
+          event.currentTarget.classList.add("active");
+        }
+        const target = document.getElementById("sec-" + sec);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.style.transition = "outline 0.3s ease, box-shadow 0.3s ease";
+          const origShadow = target.style.boxShadow;
+          target.style.outline = "2px solid var(--p)";
+          target.style.boxShadow = "0 0 24px rgba(249, 115, 22, 0.3)";
+          setTimeout(() => {
+            target.style.outline = "none";
+            target.style.boxShadow = origShadow;
+          }, 2000);
+        }
       }
 
       function sendTestAlert() {
@@ -1687,6 +1700,7 @@
         const price =
           document.getElementById("admin-test-price").value.trim() || "₹199";
         const res = document.getElementById("admin-alert-res");
+        res.style.color = "var(--green)";
         res.textContent = `⚡ Test notification dispatched for ${route} at ${price}!`;
         setTimeout(() => {
           res.textContent = "";
