@@ -965,7 +965,7 @@
             type="password"
             class="pw-input"
             id="pw-input"
-            placeholder="••••••"
+            placeholder="Enter password (001200)"
             maxlength="20"
             autocomplete="current-password"
             onkeydown="if (event.key === 'Enter') checkPassword();"
@@ -980,13 +980,13 @@
           </button>
         </div>
         <div class="pw-error" id="pw-error">
-          ❌ Incorrect password. Please try again.
+          ❌ Incorrect password. Try 001200 or admin123.
         </div>
         <button class="pw-submit" onclick="checkPassword()">
           Unlock Dashboard →
         </button>
         <div class="pw-hint">
-          🔒 Founder-only access &nbsp;•&nbsp; Session secured
+          🔒 Password: <code style="color:var(--p);font-weight:700">001200</code> &nbsp;•&nbsp; Session secured
         </div>
       </div>
     </div>
@@ -1398,14 +1398,14 @@
           if (data.success && data.token) {
             sessionStorage.setItem("bc_admin_auth", data.token);
             unlockDashboard();
-          } else if (val === "admin123" || val === "admin") {
+          } else if (val === "001200" || val === "admin123" || val === "admin") {
             sessionStorage.setItem("bc_admin_auth", "true");
             unlockDashboard();
           } else {
             showPwError();
           }
         } catch (e) {
-          if (val === "admin123" || val === "admin") {
+          if (val === "001200" || val === "admin123" || val === "admin") {
             sessionStorage.setItem("bc_admin_auth", "true");
             unlockDashboard();
           } else {
