@@ -1512,7 +1512,7 @@
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
       "rating": 4.5,
-      "reviewCount": 14,
+      "reviewCount": 16,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -1577,7 +1577,10 @@
         "luggage": "2 bags (max 15kg each)"
       },
       "featured": true,
-      "badges": ["best-value", "popular"]
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     },
     {
       "id": "bus-002",
@@ -1653,7 +1656,10 @@
         "luggage": "1 bag (max 20kg)"
       },
       "featured": false,
-      "badges": ["top-rated", "fastest"]
+      "badges": [
+        "top-rated",
+        "fastest"
+      ]
     },
     {
       "id": "bus-003",
@@ -1665,7 +1671,11 @@
       "rating": 4,
       "reviewCount": 3891,
       "totalBookings": 125000,
-      "amenities": ["usb-charging", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Bangalore",
         "to": "Chennai",
@@ -1706,7 +1716,10 @@
         "luggage": "As per KSRTC norms"
       },
       "featured": false,
-      "badges": ["government", "budget"]
+      "badges": [
+        "government",
+        "budget"
+      ]
     },
     {
       "id": "bus-004",
@@ -1784,7 +1797,11 @@
         "luggage": "2 bags (max 15kg each)"
       },
       "featured": true,
-      "badges": ["top-rated", "luxury", "almost-full"]
+      "badges": [
+        "top-rated",
+        "luxury",
+        "almost-full"
+      ]
     },
     {
       "id": "bus-005",
@@ -1796,7 +1813,12 @@
       "rating": 4.1,
       "reviewCount": 1456,
       "totalBookings": 52300,
-      "amenities": ["usb-charging", "blanket", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Mumbai",
         "to": "Goa",
@@ -1849,7 +1871,10 @@
         "luggage": "2 bags (max 15kg each)"
       },
       "featured": false,
-      "badges": ["best-value", "popular"]
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     },
     {
       "id": "bus-006",
@@ -1861,7 +1886,10 @@
       "rating": 4,
       "reviewCount": 8921,
       "totalBookings": 380000,
-      "amenities": ["usb-charging", "water-bottle"],
+      "amenities": [
+        "usb-charging",
+        "water-bottle"
+      ],
       "route": {
         "from": "Mumbai",
         "to": "Pune",
@@ -1906,7 +1934,11 @@
         "luggage": "Hand luggage only"
       },
       "featured": false,
-      "badges": ["government", "budget", "frequent"]
+      "badges": [
+        "government",
+        "budget",
+        "frequent"
+      ]
     },
     {
       "id": "bus-007",
@@ -1982,7 +2014,11 @@
         "luggage": "1 small bag"
       },
       "featured": true,
-      "badges": ["top-rated", "premium", "fastest"]
+      "badges": [
+        "top-rated",
+        "premium",
+        "fastest"
+      ]
     },
     {
       "id": "bus-008",
@@ -1994,7 +2030,9 @@
       "rating": 3.7,
       "reviewCount": 421,
       "totalBookings": 12800,
-      "amenities": ["blanket"],
+      "amenities": [
+        "blanket"
+      ],
       "route": {
         "from": "Mumbai",
         "to": "Pune",
@@ -2039,7 +2077,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["budget"]
+      "badges": [
+        "budget"
+      ]
     },
     {
       "id": "bus-009",
@@ -2051,7 +2091,12 @@
       "rating": 4.1,
       "reviewCount": 789,
       "totalBookings": 28700,
-      "amenities": ["wifi", "usb-charging", "water-bottle", "entertainment"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "entertainment"
+      ],
       "route": {
         "from": "Delhi",
         "to": "Jaipur",
@@ -2104,7 +2149,9 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": false,
-      "badges": ["popular"]
+      "badges": [
+        "popular"
+      ]
     },
     {
       "id": "bus-010",
@@ -2177,7 +2224,11 @@
         "luggage": "1 bag (max 20kg)"
       },
       "featured": true,
-      "badges": ["luxury", "top-rated", "almost-full"]
+      "badges": [
+        "luxury",
+        "top-rated",
+        "almost-full"
+      ]
     },
     {
       "id": "bus-011",
@@ -2189,7 +2240,12 @@
       "rating": 4.2,
       "reviewCount": 934,
       "totalBookings": 37800,
-      "amenities": ["usb-charging", "blanket", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Hyderabad",
         "to": "Bangalore",
@@ -2246,7 +2302,9 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": false,
-      "badges": ["best-value"]
+      "badges": [
+        "best-value"
+      ]
     },
     {
       "id": "bus-012",
@@ -2318,7 +2376,10 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": true,
-      "badges": ["top-rated", "popular"]
+      "badges": [
+        "top-rated",
+        "popular"
+      ]
     },
     {
       "id": "bus-013",
@@ -2330,7 +2391,9 @@
       "rating": 3.9,
       "reviewCount": 4521,
       "totalBookings": 165000,
-      "amenities": ["usb-charging"],
+      "amenities": [
+        "usb-charging"
+      ],
       "route": {
         "from": "Bangalore",
         "to": "Mysore",
@@ -2375,7 +2438,11 @@
         "luggage": "As per KSRTC norms"
       },
       "featured": false,
-      "badges": ["budget", "government", "frequent"]
+      "badges": [
+        "budget",
+        "government",
+        "frequent"
+      ]
     },
     {
       "id": "bus-014",
@@ -2387,7 +2454,12 @@
       "rating": 4.4,
       "reviewCount": 312,
       "totalBookings": 10800,
-      "amenities": ["wifi", "usb-charging", "blanket", "water-bottle"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
       "route": {
         "from": "Bangalore",
         "to": "Mysore",
@@ -2440,7 +2512,9 @@
         "luggage": "1 bag (max 15kg)"
       },
       "featured": false,
-      "badges": ["comfortable"]
+      "badges": [
+        "comfortable"
+      ]
     },
     {
       "id": "bus-015",
@@ -2452,7 +2526,9 @@
       "rating": 3.8,
       "reviewCount": 678,
       "totalBookings": 24500,
-      "amenities": ["water-bottle"],
+      "amenities": [
+        "water-bottle"
+      ],
       "route": {
         "from": "Pune",
         "to": "Goa",
@@ -2501,7 +2577,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["budget"]
+      "badges": [
+        "budget"
+      ]
     },
     {
       "id": "bus-016",
@@ -2573,7 +2651,11 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": true,
-      "badges": ["luxury", "top-rated", "almost-full"]
+      "badges": [
+        "luxury",
+        "top-rated",
+        "almost-full"
+      ]
     },
     {
       "id": "bus-017",
@@ -2585,7 +2667,11 @@
       "rating": 4.1,
       "reviewCount": 1023,
       "totalBookings": 41200,
-      "amenities": ["usb-charging", "blanket", "water-bottle"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
       "route": {
         "from": "Chennai",
         "to": "Madurai",
@@ -2638,7 +2724,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["best-value"]
+      "badges": [
+        "best-value"
+      ]
     },
     {
       "id": "bus-018",
@@ -2650,7 +2738,11 @@
       "rating": 4,
       "reviewCount": 821,
       "totalBookings": 33400,
-      "amenities": ["usb-charging", "blanket", "water-bottle"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
       "route": {
         "from": "Ahmedabad",
         "to": "Mumbai",
@@ -2703,7 +2795,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["popular"]
+      "badges": [
+        "popular"
+      ]
     },
     {
       "id": "bus-019",
@@ -2715,7 +2809,12 @@
       "rating": 4.3,
       "reviewCount": 1102,
       "totalBookings": 44500,
-      "amenities": ["wifi", "usb-charging", "water-bottle", "entertainment"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "entertainment"
+      ],
       "route": {
         "from": "Delhi",
         "to": "Agra",
@@ -2768,7 +2867,9 @@
         "luggage": "1 bag"
       },
       "featured": false,
-      "badges": ["popular"]
+      "badges": [
+        "popular"
+      ]
     },
     {
       "id": "bus-020",
@@ -2832,7 +2933,10 @@
         "luggage": "1 bag"
       },
       "featured": true,
-      "badges": ["luxury", "top-rated"]
+      "badges": [
+        "luxury",
+        "top-rated"
+      ]
     },
     {
       "id": "bus-021",
@@ -2844,7 +2948,12 @@
       "rating": 4.7,
       "reviewCount": 850,
       "totalBookings": 21000,
-      "amenities": ["wifi", "usb-charging", "water-bottle", "reading-light"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Delhi",
         "to": "Chandigarh",
@@ -2885,7 +2994,10 @@
         "luggage": "1 bag (max 15kg)"
       },
       "featured": true,
-      "badges": ["best-value", "fastest"]
+      "badges": [
+        "best-value",
+        "fastest"
+      ]
     },
     {
       "id": "bus-022",
@@ -2949,7 +3061,10 @@
         "luggage": "2 bags (max 20kg)"
       },
       "featured": true,
-      "badges": ["top-rated", "luxury"]
+      "badges": [
+        "top-rated",
+        "luxury"
+      ]
     },
     {
       "id": "bus-023",
@@ -2961,7 +3076,12 @@
       "rating": 4.4,
       "reviewCount": 310,
       "totalBookings": 12000,
-      "amenities": ["usb-charging", "blanket", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Jamkhandi",
         "to": "Kalaburagi",
@@ -3002,7 +3122,9 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": false,
-      "badges": ["best-value"]
+      "badges": [
+        "best-value"
+      ]
     },
     {
       "id": "bus-024",
@@ -3065,7 +3187,10 @@
         "luggage": "2 bags (max 20kg)"
       },
       "featured": true,
-      "badges": ["best-value", "popular"]
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-001",
@@ -3140,7 +3265,10 @@
         "luggage": "2 bags (max 15kg each)"
       },
       "featured": true,
-      "badges": ["best-value", "popular"]
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-002",
@@ -3216,7 +3344,10 @@
         "luggage": "1 bag (max 20kg)"
       },
       "featured": false,
-      "badges": ["top-rated", "fastest"]
+      "badges": [
+        "top-rated",
+        "fastest"
+      ]
     },
     {
       "id": "bus-rev-003",
@@ -3228,7 +3359,11 @@
       "rating": 4,
       "reviewCount": 3502,
       "totalBookings": 106250,
-      "amenities": ["usb-charging", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Chennai",
         "to": "Bangalore",
@@ -3269,7 +3404,10 @@
         "luggage": "As per KSRTC norms"
       },
       "featured": false,
-      "badges": ["government", "budget"]
+      "badges": [
+        "government",
+        "budget"
+      ]
     },
     {
       "id": "bus-rev-004",
@@ -3347,7 +3485,11 @@
         "luggage": "2 bags (max 15kg each)"
       },
       "featured": true,
-      "badges": ["top-rated", "luxury", "almost-full"]
+      "badges": [
+        "top-rated",
+        "luxury",
+        "almost-full"
+      ]
     },
     {
       "id": "bus-rev-005",
@@ -3359,7 +3501,12 @@
       "rating": 4.1,
       "reviewCount": 1310,
       "totalBookings": 44455,
-      "amenities": ["usb-charging", "blanket", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Goa",
         "to": "Mumbai",
@@ -3412,7 +3559,10 @@
         "luggage": "2 bags (max 15kg each)"
       },
       "featured": false,
-      "badges": ["best-value", "popular"]
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-006",
@@ -3424,7 +3574,10 @@
       "rating": 4,
       "reviewCount": 8029,
       "totalBookings": 323000,
-      "amenities": ["usb-charging", "water-bottle"],
+      "amenities": [
+        "usb-charging",
+        "water-bottle"
+      ],
       "route": {
         "from": "Pune",
         "to": "Mumbai",
@@ -3469,7 +3622,11 @@
         "luggage": "Hand luggage only"
       },
       "featured": false,
-      "badges": ["government", "budget", "frequent"]
+      "badges": [
+        "government",
+        "budget",
+        "frequent"
+      ]
     },
     {
       "id": "bus-rev-007",
@@ -3545,7 +3702,11 @@
         "luggage": "1 small bag"
       },
       "featured": true,
-      "badges": ["top-rated", "premium", "fastest"]
+      "badges": [
+        "top-rated",
+        "premium",
+        "fastest"
+      ]
     },
     {
       "id": "bus-rev-008",
@@ -3557,7 +3718,9 @@
       "rating": 3.7,
       "reviewCount": 379,
       "totalBookings": 10880,
-      "amenities": ["blanket"],
+      "amenities": [
+        "blanket"
+      ],
       "route": {
         "from": "Pune",
         "to": "Mumbai",
@@ -3602,7 +3765,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["budget"]
+      "badges": [
+        "budget"
+      ]
     },
     {
       "id": "bus-rev-009",
@@ -3614,7 +3779,12 @@
       "rating": 4.1,
       "reviewCount": 710,
       "totalBookings": 24395,
-      "amenities": ["wifi", "usb-charging", "water-bottle", "entertainment"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "entertainment"
+      ],
       "route": {
         "from": "Jaipur",
         "to": "Delhi",
@@ -3667,7 +3837,9 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": false,
-      "badges": ["popular"]
+      "badges": [
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-010",
@@ -3740,7 +3912,11 @@
         "luggage": "1 bag (max 20kg)"
       },
       "featured": true,
-      "badges": ["luxury", "top-rated", "almost-full"]
+      "badges": [
+        "luxury",
+        "top-rated",
+        "almost-full"
+      ]
     },
     {
       "id": "bus-rev-011",
@@ -3752,7 +3928,12 @@
       "rating": 4.2,
       "reviewCount": 841,
       "totalBookings": 32130,
-      "amenities": ["usb-charging", "blanket", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Bangalore",
         "to": "Hyderabad",
@@ -3809,7 +3990,9 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": false,
-      "badges": ["best-value"]
+      "badges": [
+        "best-value"
+      ]
     },
     {
       "id": "bus-rev-012",
@@ -3881,7 +4064,10 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": true,
-      "badges": ["top-rated", "popular"]
+      "badges": [
+        "top-rated",
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-013",
@@ -3893,7 +4079,9 @@
       "rating": 3.9,
       "reviewCount": 4069,
       "totalBookings": 140250,
-      "amenities": ["usb-charging"],
+      "amenities": [
+        "usb-charging"
+      ],
       "route": {
         "from": "Mysore",
         "to": "Bangalore",
@@ -3938,7 +4126,11 @@
         "luggage": "As per KSRTC norms"
       },
       "featured": false,
-      "badges": ["budget", "government", "frequent"]
+      "badges": [
+        "budget",
+        "government",
+        "frequent"
+      ]
     },
     {
       "id": "bus-rev-014",
@@ -3950,7 +4142,12 @@
       "rating": 4.4,
       "reviewCount": 281,
       "totalBookings": 9180,
-      "amenities": ["wifi", "usb-charging", "blanket", "water-bottle"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
       "route": {
         "from": "Mysore",
         "to": "Bangalore",
@@ -4003,7 +4200,9 @@
         "luggage": "1 bag (max 15kg)"
       },
       "featured": false,
-      "badges": ["comfortable"]
+      "badges": [
+        "comfortable"
+      ]
     },
     {
       "id": "bus-rev-015",
@@ -4015,7 +4214,9 @@
       "rating": 3.8,
       "reviewCount": 610,
       "totalBookings": 20825,
-      "amenities": ["water-bottle"],
+      "amenities": [
+        "water-bottle"
+      ],
       "route": {
         "from": "Goa",
         "to": "Pune",
@@ -4064,7 +4265,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["budget"]
+      "badges": [
+        "budget"
+      ]
     },
     {
       "id": "bus-rev-016",
@@ -4136,7 +4339,11 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": true,
-      "badges": ["luxury", "top-rated", "almost-full"]
+      "badges": [
+        "luxury",
+        "top-rated",
+        "almost-full"
+      ]
     },
     {
       "id": "bus-rev-017",
@@ -4148,7 +4355,11 @@
       "rating": 4.1,
       "reviewCount": 921,
       "totalBookings": 35020,
-      "amenities": ["usb-charging", "blanket", "water-bottle"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
       "route": {
         "from": "Madurai",
         "to": "Chennai",
@@ -4201,7 +4412,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["best-value"]
+      "badges": [
+        "best-value"
+      ]
     },
     {
       "id": "bus-rev-018",
@@ -4213,7 +4426,11 @@
       "rating": 4,
       "reviewCount": 739,
       "totalBookings": 28390,
-      "amenities": ["usb-charging", "blanket", "water-bottle"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle"
+      ],
       "route": {
         "from": "Mumbai",
         "to": "Ahmedabad",
@@ -4266,7 +4483,9 @@
         "luggage": "2 bags"
       },
       "featured": false,
-      "badges": ["popular"]
+      "badges": [
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-019",
@@ -4278,7 +4497,12 @@
       "rating": 4.3,
       "reviewCount": 992,
       "totalBookings": 37825,
-      "amenities": ["wifi", "usb-charging", "water-bottle", "entertainment"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "entertainment"
+      ],
       "route": {
         "from": "Agra",
         "to": "Delhi",
@@ -4331,7 +4555,9 @@
         "luggage": "1 bag"
       },
       "featured": false,
-      "badges": ["popular"]
+      "badges": [
+        "popular"
+      ]
     },
     {
       "id": "bus-rev-020",
@@ -4395,7 +4621,10 @@
         "luggage": "1 bag"
       },
       "featured": true,
-      "badges": ["luxury", "top-rated"]
+      "badges": [
+        "luxury",
+        "top-rated"
+      ]
     },
     {
       "id": "bus-rev-021",
@@ -4407,7 +4636,12 @@
       "rating": 4.7,
       "reviewCount": 765,
       "totalBookings": 17850,
-      "amenities": ["wifi", "usb-charging", "water-bottle", "reading-light"],
+      "amenities": [
+        "wifi",
+        "usb-charging",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Chandigarh",
         "to": "Delhi",
@@ -4448,7 +4682,10 @@
         "luggage": "1 bag (max 15kg)"
       },
       "featured": true,
-      "badges": ["best-value", "fastest"]
+      "badges": [
+        "best-value",
+        "fastest"
+      ]
     },
     {
       "id": "bus-rev-022",
@@ -4512,7 +4749,10 @@
         "luggage": "2 bags (max 20kg)"
       },
       "featured": true,
-      "badges": ["top-rated", "luxury"]
+      "badges": [
+        "top-rated",
+        "luxury"
+      ]
     },
     {
       "id": "bus-rev-023",
@@ -4524,7 +4764,12 @@
       "rating": 4.4,
       "reviewCount": 279,
       "totalBookings": 10200,
-      "amenities": ["usb-charging", "blanket", "water-bottle", "reading-light"],
+      "amenities": [
+        "usb-charging",
+        "blanket",
+        "water-bottle",
+        "reading-light"
+      ],
       "route": {
         "from": "Kalaburagi",
         "to": "Jamkhandi",
@@ -4565,7 +4810,9 @@
         "luggage": "2 bags (max 15kg)"
       },
       "featured": false,
-      "badges": ["best-value"]
+      "badges": [
+        "best-value"
+      ]
     },
     {
       "id": "bus-rev-024",
@@ -4628,7 +4875,10 @@
         "luggage": "2 bags (max 20kg)"
       },
       "featured": true,
-      "badges": ["best-value", "popular"]
+      "badges": [
+        "best-value",
+        "popular"
+      ]
     }
   ],
   "reviews": [
@@ -4899,6 +5149,29 @@
       "helpfulCount": 0,
       "verified": false,
       "platform": "buscompare"
+    },
+    {
+      "id": "REV-34B67857",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-08-02T17:00:02.254Z"
+    },
+    {
+      "id": "rev-ef5e5ae1",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-08-02",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
     }
   ],
   "popularRoutes": [
@@ -5088,6 +5361,30 @@
       "tier": "free",
       "active": true,
       "createdAt": "2026-07-31T13:48:07.091Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-ed4980d1",
+      "email": "alert_1785690001951@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-02T17:00:01.958Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-2fc6114f",
+      "email": "dup_1785690001961@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-02T17:00:01.984Z",
       "triggeredCount": 0
     }
   ],
@@ -5287,6 +5584,16 @@
       "email": "",
       "expiresAt": "2026-07-31T19:48:07.097Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "PL-CD15B182",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-02T23:00:02.020Z",
+      "status": "ACTIVE"
     }
   ],
   "vipSubscriptions": [
@@ -5406,25 +5713,43 @@
       "pricePaid": 299,
       "createdAt": "2026-07-31T13:48:07.104Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-51F3948C",
+      "email": "vip_1785690002031@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-02T17:00:02.037Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-146234C7",
+      "email": "vipa_1785690002040@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-02T17:00:02.043Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 2,
-    "totalSearches": 327,
-    "totalReviews": 22,
-    "totalAlerts": 13,
+    "totalSearches": 337,
+    "totalReviews": 24,
+    "totalAlerts": 15,
     "flightClicks": 2,
-    "priceLocksCount": 7,
-    "vipSubscriptionsCount": 13,
+    "priceLocksCount": 8,
+    "vipSubscriptionsCount": 15,
     "busAffiliateRevenue": 160,
     "flightAffiliateRevenue": 900,
-    "priceLockRevenue": 273,
-    "vipRevenue": 2487,
+    "priceLockRevenue": 312,
+    "vipRevenue": 2885,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 4206,
+    "revenueEstimate": 4708,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 7,
-    "insuranceRevenue": 451
+    "insurancePoliciesCount": 8,
+    "insuranceRevenue": 516
   },
   "coupons": [
     {
@@ -5467,7 +5792,12 @@
       "discount": "33% OFF",
       "rating": 4.6,
       "reviewCount": 1824,
-      "amenities": ["WiFi", "AC", "Breakfast", "Pool"],
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Breakfast",
+        "Pool"
+      ],
       "badge": "🔥 POPULAR",
       "imageEmoji": "🏖️",
       "affiliateUrl": "https://www.zostel.com/zostel/goa/?ref=buscompare",
@@ -5483,7 +5813,12 @@
       "discount": "52% OFF",
       "rating": 4.2,
       "reviewCount": 3102,
-      "amenities": ["WiFi", "AC", "Parking", "Breakfast"],
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Parking",
+        "Breakfast"
+      ],
       "badge": "⭐ STAFF PICK",
       "imageEmoji": "🏨",
       "affiliateUrl": "https://www.oyorooms.com/hotels-in-goa/?ref=buscompare",
@@ -5499,7 +5834,11 @@
       "discount": "47% OFF",
       "rating": 4.4,
       "reviewCount": 987,
-      "amenities": ["WiFi", "AC", "Gym"],
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Gym"
+      ],
       "badge": "💰 BEST VALUE",
       "imageEmoji": "🏩",
       "affiliateUrl": "https://www.treebo.com/hotels-in-pune/?ref=buscompare",
@@ -5515,7 +5854,12 @@
       "discount": "44% OFF",
       "rating": 4.7,
       "reviewCount": 2415,
-      "amenities": ["WiFi", "AC", "Kitchen", "Rooftop"],
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Kitchen",
+        "Rooftop"
+      ],
       "badge": "🎯 TRAVELER FAV",
       "imageEmoji": "🌆",
       "affiliateUrl": "https://www.zostel.com/zostel/bangalore/?ref=buscompare",
@@ -5531,7 +5875,12 @@
       "discount": "53% OFF",
       "rating": 4.1,
       "reviewCount": 5670,
-      "amenities": ["WiFi", "AC", "Room Service", "Bar"],
+      "amenities": [
+        "WiFi",
+        "AC",
+        "Room Service",
+        "Bar"
+      ],
       "badge": "🏆 TOP RATED",
       "imageEmoji": "🌃",
       "affiliateUrl": "https://www.fabhotels.com/hotels-in-mumbai/?ref=buscompare",
@@ -5547,7 +5896,12 @@
       "discount": "53% OFF",
       "rating": 4.5,
       "reviewCount": 2330,
-      "amenities": ["WiFi", "Heritage Decor", "Rooftop", "Breakfast"],
+      "amenities": [
+        "WiFi",
+        "Heritage Decor",
+        "Rooftop",
+        "Breakfast"
+      ],
       "badge": "🏰 HERITAGE",
       "imageEmoji": "🕌",
       "affiliateUrl": "https://www.oyorooms.com/hotels-in-jaipur/?ref=buscompare",
@@ -5624,6 +5978,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-07-31T13:48:07.114Z"
+    },
+    {
+      "id": "INS-C4C582A4",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-02T17:00:02.166Z"
     }
   ],
   "loyaltyUsers": [
@@ -5752,6 +6116,24 @@
       "referralCode": "BHARATBUS-0395-JUJA",
       "referralCount": 0,
       "joinedAt": "2026-07-31T13:48:07.119Z"
+    },
+    {
+      "id": "loyalty-fe61831f",
+      "phone": "91568183025",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-3025-Q3P1",
+      "referralCount": 0,
+      "joinedAt": "2026-08-02T17:00:02.175Z"
+    },
+    {
+      "id": "loyalty-65e05ecd",
+      "phone": "88346379445",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-9445-0GH8",
+      "referralCount": 0,
+      "joinedAt": "2026-08-02T17:00:02.208Z"
     }
   ],
   "referrals": [],
@@ -5833,6 +6215,19 @@
       "status": "NEW_LEAD",
       "estimatedMRR": 15000,
       "createdAt": "2026-07-31T13:48:07.132Z"
+    },
+    {
+      "id": "CORP-2D75CF7B",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1785690002282@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-08-02T17:00:02.286Z"
     }
   ],
   "operatorLeads": [
@@ -5913,6 +6308,19 @@
       "status": "NEW_LEAD",
       "estimatedPlan": "Enterprise (₹15,000/mo)",
       "createdAt": "2026-07-31T13:48:07.136Z"
+    },
+    {
+      "id": "OPR-CF77AB3A",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1785690002319@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (₹15,000/mo)",
+      "createdAt": "2026-08-02T17:00:02.320Z"
     }
   ],
   "translations": {
