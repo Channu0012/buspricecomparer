@@ -18,12 +18,14 @@
 ## 🚀 Quick Start
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/Channu0012/buspricecomparer.git
    cd buspricecomparer
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```

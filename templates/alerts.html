@@ -1,454 +1,1366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Price Alerts — BusCompare India | Get WhatsApp & Email Bus Alerts</title>
-  <meta name="description" content="Get instant WhatsApp and Email alerts when bus prices drop on your favourite routes. Free price alerts for Indian bus travel.">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#070B14;--s1:#0D1221;--card:#161E2E;--ch:#1C2640;--border:rgba(255,255,255,0.07);--bl:rgba(255,255,255,0.12);--p:#F97316;--pd:#C2550B;--pg:rgba(249,115,22,0.25);--blue:#3B82F6;--green:#10B981;--gg:rgba(16,185,129,0.12);--gold:#F59E0B;--red:#EF4444;--wa:#25D366;--t:#F1F5F9;--ts:#94A3B8;--tm:#475569;--r:12px;--rl:20px;--rx:28px;--tr:0.2s cubic-bezier(0.4,0,0.2,1);--trs:0.4s cubic-bezier(0.4,0,0.2,1)}
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--s1);border-radius:3px}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Price Alerts — BusCompare India | Get WhatsApp & Email Bus Alerts
+    </title>
+    <meta
+      name="description"
+      content="Get instant WhatsApp and Email alerts when bus prices drop on your favourite routes. Free price alerts for Indian bus travel."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #070b14;
+        --s1: #0d1221;
+        --card: #161e2e;
+        --ch: #1c2640;
+        --border: rgba(255, 255, 255, 0.07);
+        --bl: rgba(255, 255, 255, 0.12);
+        --p: #f97316;
+        --pd: #c2550b;
+        --pg: rgba(249, 115, 22, 0.25);
+        --blue: #3b82f6;
+        --green: #10b981;
+        --gg: rgba(16, 185, 129, 0.12);
+        --gold: #f59e0b;
+        --red: #ef4444;
+        --wa: #25d366;
+        --t: #f1f5f9;
+        --ts: #94a3b8;
+        --tm: #475569;
+        --r: 12px;
+        --rl: 20px;
+        --rx: 28px;
+        --tr: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --trs: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          system-ui,
+          sans-serif;
+        background: var(--bg);
+        color: var(--t);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--s1);
+        border-radius: 3px;
+      }
 
-    .navbar{position:sticky;top:0;z-index:100;padding:12px 24px;background:rgba(7,11,20,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-    .nav-in{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-    .nav-logo{font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--t);text-decoration:none;display:flex;align-items:center;gap:8px}
-    .nav-logo-icon{width:34px;height:34px;background:var(--p);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
-    .nav-logo em{color:var(--p);font-style:normal}
-    .nav-back{color:var(--ts);text-decoration:none;font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid var(--bl);border-radius:100px;transition:var(--tr)}
-    .nav-back:hover{color:var(--t);background:rgba(255,255,255,.06)}
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 12px 24px;
+        background: rgba(7, 11, 20, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-in {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        font-family: "Outfit", sans-serif;
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--t);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .nav-logo-icon {
+        width: 34px;
+        height: 34px;
+        background: var(--p);
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+      }
+      .nav-logo em {
+        color: var(--p);
+        font-style: normal;
+      }
+      .nav-back {
+        color: var(--ts);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 16px;
+        border: 1px solid var(--bl);
+        border-radius: 100px;
+        transition: var(--tr);
+      }
+      .nav-back:hover {
+        color: var(--t);
+        background: rgba(255, 255, 255, 0.06);
+      }
 
-    /* HERO */
-    .hero{padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden}
-    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(249,115,22,.1) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 20% 100%,rgba(37,211,102,.06) 0%,transparent 50%);pointer-events:none}
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:var(--wa);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 20px;border-radius:100px;margin-bottom:24px}
-    .hero-title{font-family:'Outfit',sans-serif;font-size:clamp(36px,5.5vw,68px);font-weight:900;line-height:1.1;letter-spacing:-2px;margin-bottom:16px}
-    .ht-p{color:var(--p)}
-    .ht-g{color:var(--wa)}
-    .hero-sub{font-size:18px;color:var(--ts);max-width:560px;margin:0 auto;line-height:1.65;font-weight:500}
+      /* HERO */
+      .hero {
+        padding: 80px 24px 60px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse 70% 50% at 50% 0%,
+            rgba(249, 115, 22, 0.1) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 40% at 20% 100%,
+            rgba(37, 211, 102, 0.06) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(37, 211, 102, 0.1);
+        border: 1px solid rgba(37, 211, 102, 0.25);
+        color: var(--wa);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 6px 20px;
+        border-radius: 100px;
+        margin-bottom: 24px;
+      }
+      .hero-title {
+        font-family: "Outfit", sans-serif;
+        font-size: clamp(36px, 5.5vw, 68px);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -2px;
+        margin-bottom: 16px;
+      }
+      .ht-p {
+        color: var(--p);
+      }
+      .ht-g {
+        color: var(--wa);
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: var(--ts);
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.65;
+        font-weight: 500;
+      }
 
-    /* TIERS */
-    .tiers-section{padding:0 24px 60px}
-    .tiers-in{max-width:900px;margin:0 auto}
-    .tiers-title{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;text-align:center;margin-bottom:8px}
-    .tiers-sub{text-align:center;font-size:15px;color:var(--ts);margin-bottom:40px}
-    .tiers-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .tier-card{border-radius:var(--rx);padding:32px;border:1px solid var(--border);position:relative;transition:var(--trs)}
-    .tier-free{background:var(--card)}
-    .tier-pro{background:linear-gradient(135deg,rgba(249,115,22,.12) 0%,rgba(139,92,246,.08) 100%);border-color:rgba(249,115,22,.3)}
-    .tier-tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:4px 16px;border-radius:100px}
-    .tag-pop{background:var(--p);color:#fff}
-    .tag-new{background:var(--green);color:#fff}
-    .tier-icon{font-size:40px;margin-bottom:16px}
-    .tier-name{font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px}
-    .tier-price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:20px}
-    .tier-price{font-family:'Outfit',sans-serif;font-size:42px;font-weight:900;color:var(--p);line-height:1}
-    .tier-period{font-size:14px;color:var(--tm);font-weight:600}
-    .tier-free .tier-price{color:var(--green)}
-    .tier-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-    .tf-item{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--ts)}
-    .tf-item .icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
-    .tf-item.yes{color:var(--t)}
-    .tf-item.no{opacity:.4;text-decoration:line-through}
-    .tier-btn{width:100%;border:none;border-radius:100px;padding:14px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;transition:var(--tr)}
-    .tier-free-btn{background:rgba(255,255,255,.06);border:1px solid var(--bl);color:var(--ts)}
-    .tier-free-btn:hover{background:rgba(255,255,255,.1);color:var(--t)}
-    .tier-pro-btn{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;box-shadow:0 8px 24px var(--pg)}
-    .tier-pro-btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(249,115,22,.4)}
+      /* TIERS */
+      .tiers-section {
+        padding: 0 24px 60px;
+      }
+      .tiers-in {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .tiers-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .tiers-sub {
+        text-align: center;
+        font-size: 15px;
+        color: var(--ts);
+        margin-bottom: 40px;
+      }
+      .tiers-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .tier-card {
+        border-radius: var(--rx);
+        padding: 32px;
+        border: 1px solid var(--border);
+        position: relative;
+        transition: var(--trs);
+      }
+      .tier-free {
+        background: var(--card);
+      }
+      .tier-pro {
+        background: linear-gradient(
+          135deg,
+          rgba(249, 115, 22, 0.12) 0%,
+          rgba(139, 92, 246, 0.08) 100%
+        );
+        border-color: rgba(249, 115, 22, 0.3);
+      }
+      .tier-tag {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 4px 16px;
+        border-radius: 100px;
+      }
+      .tag-pop {
+        background: var(--p);
+        color: #fff;
+      }
+      .tag-new {
+        background: var(--green);
+        color: #fff;
+      }
+      .tier-icon {
+        font-size: 40px;
+        margin-bottom: 16px;
+      }
+      .tier-name {
+        font-family: "Outfit", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
+      .tier-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+        margin-bottom: 20px;
+      }
+      .tier-price {
+        font-family: "Outfit", sans-serif;
+        font-size: 42px;
+        font-weight: 900;
+        color: var(--p);
+        line-height: 1;
+      }
+      .tier-period {
+        font-size: 14px;
+        color: var(--tm);
+        font-weight: 600;
+      }
+      .tier-free .tier-price {
+        color: var(--green);
+      }
+      .tier-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 28px;
+      }
+      .tf-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ts);
+      }
+      .tf-item .icon {
+        font-size: 16px;
+        width: 20px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .tf-item.yes {
+        color: var(--t);
+      }
+      .tf-item.no {
+        opacity: 0.4;
+        text-decoration: line-through;
+      }
+      .tier-btn {
+        width: 100%;
+        border: none;
+        border-radius: 100px;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+        font-family: inherit;
+        transition: var(--tr);
+      }
+      .tier-free-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--bl);
+        color: var(--ts);
+      }
+      .tier-free-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--t);
+      }
+      .tier-pro-btn {
+        background: linear-gradient(135deg, var(--p), var(--pd));
+        color: #fff;
+        box-shadow: 0 8px 24px var(--pg);
+      }
+      .tier-pro-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(249, 115, 22, 0.4);
+      }
 
-    /* FORM */
-    .form-section{padding:0 24px 60px}
-    .form-in{max-width:680px;margin:0 auto}
-    .form-card{background:var(--card);border:1px solid var(--bl);border-radius:var(--rx);padding:40px}
-    .form-title{font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;margin-bottom:6px}
-    .form-sub{font-size:14px;color:var(--ts);margin-bottom:32px}
-    .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
-    .form-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--tm);display:flex;align-items:center;gap:6px}
-    .form-input,.form-select{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:var(--r);padding:14px 18px;color:var(--t);font-size:15px;font-family:inherit;outline:none;transition:var(--tr)}
-    .form-input:focus,.form-select:focus{border-color:var(--p);background:rgba(249,115,22,.06);box-shadow:0 0 0 3px var(--pg)}
-    .form-input::placeholder{color:var(--tm)}
-    .form-select option{background:var(--card)}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .wa-input-wrap{position:relative}
-    .wa-prefix{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:700;color:var(--ts)}
-    .wa-input{padding-left:54px}
-    .form-note{font-size:12px;color:var(--tm);display:flex;align-items:center;gap:6px;margin-top:4px}
-    .form-divider{border:none;border-top:1px solid var(--border);margin:24px 0}
-    .form-submit{width:100%;background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border:none;border-radius:100px;padding:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:var(--tr);box-shadow:0 8px 24px var(--pg);display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
-    .form-submit:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(249,115,22,.4)}
-    .form-submit:active{transform:translateY(0)}
-    .form-success{background:var(--gg);border:1px solid rgba(16,185,129,.2);border-radius:var(--r);padding:24px;text-align:center;display:none}
-    .fs-emoji{font-size:40px;margin-bottom:12px}
-    .fs-title{font-size:20px;font-weight:800;color:var(--green);margin-bottom:6px}
-    .fs-sub{font-size:14px;color:var(--ts)}
+      /* FORM */
+      .form-section {
+        padding: 0 24px 60px;
+      }
+      .form-in {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+      .form-card {
+        background: var(--card);
+        border: 1px solid var(--bl);
+        border-radius: var(--rx);
+        padding: 40px;
+      }
+      .form-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 26px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
+      .form-sub {
+        font-size: 14px;
+        color: var(--ts);
+        margin-bottom: 32px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+      .form-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--tm);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .form-input,
+      .form-select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--bl);
+        border-radius: var(--r);
+        padding: 14px 18px;
+        color: var(--t);
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+        transition: var(--tr);
+      }
+      .form-input:focus,
+      .form-select:focus {
+        border-color: var(--p);
+        background: rgba(249, 115, 22, 0.06);
+        box-shadow: 0 0 0 3px var(--pg);
+      }
+      .form-input::placeholder {
+        color: var(--tm);
+      }
+      .form-select option {
+        background: var(--card);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .wa-input-wrap {
+        position: relative;
+      }
+      .wa-prefix {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ts);
+      }
+      .wa-input {
+        padding-left: 54px;
+      }
+      .form-note {
+        font-size: 12px;
+        color: var(--tm);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 4px;
+      }
+      .form-divider {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 24px 0;
+      }
+      .form-submit {
+        width: 100%;
+        background: linear-gradient(135deg, var(--p), var(--pd));
+        color: #fff;
+        border: none;
+        border-radius: 100px;
+        padding: 16px;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        font-family: inherit;
+        transition: var(--tr);
+        box-shadow: 0 8px 24px var(--pg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .form-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px rgba(249, 115, 22, 0.4);
+      }
+      .form-submit:active {
+        transform: translateY(0);
+      }
+      .form-success {
+        background: var(--gg);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: var(--r);
+        padding: 24px;
+        text-align: center;
+        display: none;
+      }
+      .fs-emoji {
+        font-size: 40px;
+        margin-bottom: 12px;
+      }
+      .fs-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--green);
+        margin-bottom: 6px;
+      }
+      .fs-sub {
+        font-size: 14px;
+        color: var(--ts);
+      }
 
-    /* POPULAR ALERT ROUTES */
-    .pop-alerts{padding:0 24px 60px}
-    .pop-in{max-width:900px;margin:0 auto}
-    .pop-title{font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px}
-    .pop-sub{font-size:14px;color:var(--ts);margin-bottom:28px}
-    .pop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-    .pop-route-chip{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;cursor:pointer;transition:var(--trs);display:flex;align-items:center;justify-content:space-between}
-    .pop-route-chip:hover{border-color:rgba(249,115,22,.25);background:rgba(249,115,22,.05);transform:translateY(-2px)}
-    .pop-route-name{font-size:13px;font-weight:800;color:var(--t)}
-    .pop-route-price{font-size:12px;color:var(--p);font-weight:700}
-    .pop-add-btn{font-size:11px;font-weight:700;color:var(--ts);background:none;border:none;cursor:pointer;padding:4px;transition:var(--tr)}
-    .pop-route-chip:hover .pop-add-btn{color:var(--p)}
+      /* POPULAR ALERT ROUTES */
+      .pop-alerts {
+        padding: 0 24px 60px;
+      }
+      .pop-in {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .pop-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 24px;
+        font-weight: 900;
+        margin-bottom: 6px;
+      }
+      .pop-sub {
+        font-size: 14px;
+        color: var(--ts);
+        margin-bottom: 28px;
+      }
+      .pop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+      .pop-route-chip {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 16px;
+        cursor: pointer;
+        transition: var(--trs);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .pop-route-chip:hover {
+        border-color: rgba(249, 115, 22, 0.25);
+        background: rgba(249, 115, 22, 0.05);
+        transform: translateY(-2px);
+      }
+      .pop-route-name {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--t);
+      }
+      .pop-route-price {
+        font-size: 12px;
+        color: var(--p);
+        font-weight: 700;
+      }
+      .pop-add-btn {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--ts);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        transition: var(--tr);
+      }
+      .pop-route-chip:hover .pop-add-btn {
+        color: var(--p);
+      }
 
-    /* HOW ALERTS WORK */
-    .how-section{padding:0 24px 60px;background:var(--s1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-    .how-in{max-width:900px;margin:0 auto;padding:60px 0}
-    .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
-    .how-step{text-align:center}
-    .how-icon{font-size:40px;margin-bottom:14px}
-    .how-num{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--p);margin-bottom:6px}
-    .how-step-title{font-size:16px;font-weight:800;color:var(--t);margin-bottom:8px}
-    .how-step-desc{font-size:13px;color:var(--ts);line-height:1.6}
+      /* HOW ALERTS WORK */
+      .how-section {
+        padding: 0 24px 60px;
+        background: var(--s1);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+      .how-in {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 0;
+      }
+      .how-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 32px;
+      }
+      .how-step {
+        text-align: center;
+      }
+      .how-icon {
+        font-size: 40px;
+        margin-bottom: 14px;
+      }
+      .how-num {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--p);
+        margin-bottom: 6px;
+      }
+      .how-step-title {
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--t);
+        margin-bottom: 8px;
+      }
+      .how-step-desc {
+        font-size: 13px;
+        color: var(--ts);
+        line-height: 1.6;
+      }
 
-    /* FAQ */
-    .faq-section{padding:60px 24px 80px}
-    .faq-in{max-width:720px;margin:0 auto}
-    .faq-title{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;text-align:center;margin-bottom:32px}
-    .faq-item{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
-    .faq-q{padding:18px 20px;font-size:15px;font-weight:700;color:var(--t);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:var(--tr)}
-    .faq-q:hover{background:rgba(255,255,255,.03)}
-    .faq-icon{font-size:18px;color:var(--p);transition:var(--tr);flex-shrink:0}
-    .faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
-    .faq-a.open{max-height:200px;padding:0 20px 18px}
-    .faq-a p{font-size:14px;color:var(--ts);line-height:1.65}
-    .faq-item.open .faq-icon{transform:rotate(45deg)}
-    .faq-item.open{border-color:rgba(249,115,22,.2)}
+      /* FAQ */
+      .faq-section {
+        padding: 60px 24px 80px;
+      }
+      .faq-in {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .faq-title {
+        font-family: "Outfit", sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .faq-item {
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        overflow: hidden;
+        margin-bottom: 10px;
+      }
+      .faq-q {
+        padding: 18px 20px;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--t);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        transition: var(--tr);
+      }
+      .faq-q:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .faq-icon {
+        font-size: 18px;
+        color: var(--p);
+        transition: var(--tr);
+        flex-shrink: 0;
+      }
+      .faq-a {
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.3s ease,
+          padding 0.3s ease;
+      }
+      .faq-a.open {
+        max-height: 200px;
+        padding: 0 20px 18px;
+      }
+      .faq-a p {
+        font-size: 14px;
+        color: var(--ts);
+        line-height: 1.65;
+      }
+      .faq-item.open .faq-icon {
+        transform: rotate(45deg);
+      }
+      .faq-item.open {
+        border-color: rgba(249, 115, 22, 0.2);
+      }
 
-    /* CITY DROPDOWN */
-    .cdrop{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--bl);border-radius:var(--r);overflow:hidden;display:none;z-index:600;box-shadow:0 24px 60px rgba(0,0,0,.6)}
-    .cdrop.open{display:block}
-    .cdrop-item{padding:12px 18px;cursor:pointer;font-size:14px;font-weight:600;color:var(--ts);transition:var(--tr);display:flex;justify-content:space-between}
-    .cdrop-item:hover{background:rgba(249,115,22,.1);color:var(--t)}
-    .cdrop-state{font-size:11px;color:var(--tm)}
+      /* CITY DROPDOWN */
+      .cdrop {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: var(--card);
+        border: 1px solid var(--bl);
+        border-radius: var(--r);
+        overflow: hidden;
+        display: none;
+        z-index: 600;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      }
+      .cdrop.open {
+        display: block;
+      }
+      .cdrop-item {
+        padding: 12px 18px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ts);
+        transition: var(--tr);
+        display: flex;
+        justify-content: space-between;
+      }
+      .cdrop-item:hover {
+        background: rgba(249, 115, 22, 0.1);
+        color: var(--t);
+      }
+      .cdrop-state {
+        font-size: 11px;
+        color: var(--tm);
+      }
 
-    /* ANIMATIONS */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-    .fade-in{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-    .fade-in.visible{opacity:1;transform:translateY(0)}
+      /* ANIMATIONS */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-    @media(max-width:768px){.tiers-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.how-grid{grid-template-columns:1fr}}
-  </style>
-</head>
-<body>
-
-<nav class="navbar">
-  <div class="nav-in">
-    <a href="/" class="nav-logo"><div class="nav-logo-icon">🚌</div>Bus<em>Compare</em></a>
-    <a href="/" class="nav-back">← Home</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div style="position:relative;z-index:1">
-    <div class="hero-badge">⚡ Free Price Alerts</div>
-    <h1 class="hero-title">
-      Never Pay <span class="ht-p">Full Price</span><br>For a Bus Again
-    </h1>
-    <p class="hero-sub">Get instant <span style="color:var(--wa);font-weight:700">WhatsApp</span> & Email alerts the moment bus prices drop on your favourite routes. 100% free.</p>
-  </div>
-</section>
-
-<!-- TIERS -->
-<section class="tiers-section">
-  <div class="tiers-in">
-    <h2 class="tiers-title fade-in">Choose Your Plan</h2>
-    <p class="tiers-sub fade-in">Start free. Upgrade when you need more alerts.</p>
-    <div class="tiers-grid fade-in">
-      <div class="tier-card tier-free">
-        <div class="tier-tag tag-new">Start Here</div>
-        <div class="tier-icon">🔔</div>
-        <div class="tier-name">Free Plan</div>
-        <div class="tier-price-row"><div class="tier-price">₹0</div><div class="tier-period">/month forever</div></div>
-        <ul class="tier-features">
-          <li class="tf-item yes"><span class="icon">✅</span> 1 Route Alert</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Email Notifications</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Daily Price Check</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Price History View</li>
-          <li class="tf-item no"><span class="icon">❌</span> WhatsApp Alerts</li>
-          <li class="tf-item no"><span class="icon">❌</span> Instant Notifications</li>
-          <li class="tf-item no"><span class="icon">❌</span> Custom Price Threshold</li>
-        </ul>
-        <button class="tier-btn tier-free-btn" onclick="scrollToForm()">Get Free Alerts</button>
+      @media (max-width: 768px) {
+        .tiers-grid {
+          grid-template-columns: 1fr;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .how-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-in">
+        <a href="/" class="nav-logo"
+          ><div class="nav-logo-icon">🚌</div>
+          Bus<em>Compare</em></a
+        >
+        <a href="/" class="nav-back">← Home</a>
       </div>
-      <div class="tier-card tier-pro">
-        <div class="tier-tag tag-pop">🔥 Most Popular</div>
-        <div class="tier-icon">⚡</div>
-        <div class="tier-name">Pro Plan</div>
-        <div class="tier-price-row"><div class="tier-price">₹99</div><div class="tier-period">/month</div></div>
-        <ul class="tier-features">
-          <li class="tf-item yes"><span class="icon">✅</span> Unlimited Routes</li>
-          <li class="tf-item yes"><span class="icon">✅</span> WhatsApp Alerts</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Email Notifications</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Instant Alerts (< 5 min)</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Custom Price Threshold</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Price Trend Charts</li>
-          <li class="tf-item yes"><span class="icon">✅</span> Priority Support</li>
-        </ul>
-        <button class="tier-btn tier-pro-btn" onclick="scrollToForm('pro')">Start Pro — ₹99/mo</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div style="position: relative; z-index: 1">
+        <div class="hero-badge">⚡ Free Price Alerts</div>
+        <h1 class="hero-title">
+          Never Pay <span class="ht-p">Full Price</span><br />For a Bus Again
+        </h1>
+        <p class="hero-sub">
+          Get instant
+          <span style="color: var(--wa); font-weight: 700">WhatsApp</span> &
+          Email alerts the moment bus prices drop on your favourite routes. 100%
+          free.
+        </p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FORM -->
-<section class="form-section" id="alert-form-section">
-  <div class="form-in">
-    <div class="form-card fade-in">
-      <h2 class="form-title">🔔 Set Up Your Alert</h2>
-      <p class="form-sub">Fill in the details below and we'll notify you the moment prices drop on your route.</p>
-
-      <div class="form-row">
-        <div class="form-group" style="position:relative">
-          <div class="form-label">🚌 From City</div>
-          <input type="text" class="form-input" id="alert-from" placeholder="Departure city" autocomplete="off">
-          <div class="cdrop" id="from-drop"></div>
+    <!-- TIERS -->
+    <section class="tiers-section">
+      <div class="tiers-in">
+        <h2 class="tiers-title fade-in">Choose Your Plan</h2>
+        <p class="tiers-sub fade-in">
+          Start free. Upgrade when you need more alerts.
+        </p>
+        <div class="tiers-grid fade-in">
+          <div class="tier-card tier-free">
+            <div class="tier-tag tag-new">Start Here</div>
+            <div class="tier-icon">🔔</div>
+            <div class="tier-name">Free Plan</div>
+            <div class="tier-price-row">
+              <div class="tier-price">₹0</div>
+              <div class="tier-period">/month forever</div>
+            </div>
+            <ul class="tier-features">
+              <li class="tf-item yes">
+                <span class="icon">✅</span> 1 Route Alert
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Email Notifications
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Daily Price Check
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Price History View
+              </li>
+              <li class="tf-item no">
+                <span class="icon">❌</span> WhatsApp Alerts
+              </li>
+              <li class="tf-item no">
+                <span class="icon">❌</span> Instant Notifications
+              </li>
+              <li class="tf-item no">
+                <span class="icon">❌</span> Custom Price Threshold
+              </li>
+            </ul>
+            <button class="tier-btn tier-free-btn" onclick="scrollToForm()">
+              Get Free Alerts
+            </button>
+          </div>
+          <div class="tier-card tier-pro">
+            <div class="tier-tag tag-pop">🔥 Most Popular</div>
+            <div class="tier-icon">⚡</div>
+            <div class="tier-name">Pro Plan</div>
+            <div class="tier-price-row">
+              <div class="tier-price">₹99</div>
+              <div class="tier-period">/month</div>
+            </div>
+            <ul class="tier-features">
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Unlimited Routes
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> WhatsApp Alerts
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Email Notifications
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Instant Alerts (< 5 min)
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Custom Price Threshold
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Price Trend Charts
+              </li>
+              <li class="tf-item yes">
+                <span class="icon">✅</span> Priority Support
+              </li>
+            </ul>
+            <button class="tier-btn tier-pro-btn" onclick="scrollToForm('pro')">
+              Start Pro — ₹99/mo
+            </button>
+          </div>
         </div>
-        <div class="form-group" style="position:relative">
-          <div class="form-label">📍 To City</div>
-          <input type="text" class="form-input" id="alert-to" placeholder="Destination city" autocomplete="off">
-          <div class="cdrop" id="to-drop"></div>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="form-section" id="alert-form-section">
+      <div class="form-in">
+        <div class="form-card fade-in">
+          <h2 class="form-title">🔔 Set Up Your Alert</h2>
+          <p class="form-sub">
+            Fill in the details below and we'll notify you the moment prices
+            drop on your route.
+          </p>
+
+          <div class="form-row">
+            <div class="form-group" style="position: relative">
+              <div class="form-label">🚌 From City</div>
+              <input
+                type="text"
+                class="form-input"
+                id="alert-from"
+                placeholder="Departure city"
+                autocomplete="off"
+              />
+              <div class="cdrop" id="from-drop"></div>
+            </div>
+            <div class="form-group" style="position: relative">
+              <div class="form-label">📍 To City</div>
+              <input
+                type="text"
+                class="form-input"
+                id="alert-to"
+                placeholder="Destination city"
+                autocomplete="off"
+              />
+              <div class="cdrop" id="to-drop"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">📧 Email Address</div>
+            <input
+              type="email"
+              class="form-input"
+              id="alert-email"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">📱 WhatsApp Number (Optional)</div>
+            <div class="wa-input-wrap" style="position: relative">
+              <span class="wa-prefix">🇮🇳 +91</span>
+              <input
+                type="tel"
+                class="form-input wa-input"
+                id="alert-wa"
+                placeholder="9876543210"
+                maxlength="10"
+              />
+            </div>
+            <div class="form-note">
+              📲 Get instant WhatsApp alerts when price drops
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">
+              💰 Alert When Price Goes Below (Optional)
+            </div>
+            <input
+              type="number"
+              class="form-input"
+              id="alert-max"
+              placeholder="e.g. ₹800 — Leave blank for any drop"
+            />
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">📋 Plan</div>
+            <select class="form-select" id="alert-tier">
+              <option value="free">Free Plan — 1 Route, Email Only</option>
+              <option value="pro">
+                Pro Plan — ₹99/mo, Unlimited + WhatsApp
+              </option>
+            </select>
+          </div>
+
+          <hr class="form-divider" />
+
+          <div id="form-success" class="form-success">
+            <div class="fs-emoji">🎉</div>
+            <div class="fs-title">Alert Set Successfully!</div>
+            <div class="fs-sub">
+              We'll notify you via Email <span id="success-wa-text"></span> when
+              prices drop on your route.
+            </div>
+          </div>
+
+          <!-- WHATSAPP PREVIEW CARD -->
+          <div
+            style="
+              background: rgba(37, 211, 102, 0.08);
+              border: 1px solid rgba(37, 211, 102, 0.25);
+              border-radius: var(--r);
+              padding: 16px;
+              margin-bottom: 20px;
+            "
+          >
+            <div
+              style="
+                font-size: 11px;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--wa);
+                margin-bottom: 8px;
+              "
+            >
+              📲 WhatsApp Alert Preview
+            </div>
+            <div
+              style="
+                background: rgba(7, 11, 20, 0.6);
+                border-radius: 12px;
+                padding: 12px;
+                font-size: 12px;
+                color: var(--t);
+                line-height: 1.5;
+                border-left: 3px solid var(--wa);
+              "
+            >
+              <strong>🚌 BusCompare Alert: Price Drop!</strong><br />
+              <span id="prev-route">Mumbai → Pune</span> price dropped to
+              <strong>₹199</strong> (Save ₹150)!<br />
+              <span style="color: var(--wa); font-weight: 700"
+                >⚡ Tap to book before seats fill up →</span
+              >
+            </div>
+          </div>
+
+          <button class="form-submit" onclick="submitAlert()">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.524 5.855L0 24l6.337-1.499A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.66-.517-5.177-1.418l-.37-.22-3.76.889.946-3.667-.241-.378A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Set Alert — Get Notified on WhatsApp
+          </button>
+          <p
+            style="
+              font-size: 12px;
+              color: var(--tm);
+              text-align: center;
+              margin-top: 12px;
+            "
+          >
+            ✓ Free &nbsp;•&nbsp; ✓ No spam &nbsp;•&nbsp; ✓ Unsubscribe anytime
+          </p>
         </div>
       </div>
+    </section>
 
-      <div class="form-group">
-        <div class="form-label">📧 Email Address</div>
-        <input type="email" class="form-input" id="alert-email" placeholder="your@email.com">
-      </div>
-
-      <div class="form-group">
-        <div class="form-label">📱 WhatsApp Number (Optional)</div>
-        <div class="wa-input-wrap" style="position:relative">
-          <span class="wa-prefix">🇮🇳 +91</span>
-          <input type="tel" class="form-input wa-input" id="alert-wa" placeholder="9876543210" maxlength="10">
+    <!-- POPULAR ROUTES TO ALERT -->
+    <section class="pop-alerts">
+      <div class="pop-in">
+        <h3 class="pop-title fade-in">⚡ Popular Alert Routes</h3>
+        <p class="pop-sub fade-in">Click any route to auto-fill the form</p>
+        <div class="pop-grid fade-in">
+          <div class="pop-route-chip" onclick="fillRoute('Mumbai', 'Pune')">
+            <div>
+              <div class="pop-route-name">Mumbai → Pune</div>
+              <div class="pop-route-price">From ₹199</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div
+            class="pop-route-chip"
+            onclick="fillRoute('Bangalore', 'Chennai')"
+          >
+            <div>
+              <div class="pop-route-name">Bangalore → Chennai</div>
+              <div class="pop-route-price">From ₹499</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div class="pop-route-chip" onclick="fillRoute('Delhi', 'Jaipur')">
+            <div>
+              <div class="pop-route-name">Delhi → Jaipur</div>
+              <div class="pop-route-price">From ₹499</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div
+            class="pop-route-chip"
+            onclick="fillRoute('Hyderabad', 'Bangalore')"
+          >
+            <div>
+              <div class="pop-route-name">Hyderabad → Bangalore</div>
+              <div class="pop-route-price">From ₹829</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div class="pop-route-chip" onclick="fillRoute('Mumbai', 'Goa')">
+            <div>
+              <div class="pop-route-name">Mumbai → Goa</div>
+              <div class="pop-route-price">From ₹999</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div
+            class="pop-route-chip"
+            onclick="fillRoute('Bangalore', 'Mysore')"
+          >
+            <div>
+              <div class="pop-route-name">Bangalore → Mysore</div>
+              <div class="pop-route-price">From ₹199</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div class="pop-route-chip" onclick="fillRoute('Pune', 'Goa')">
+            <div>
+              <div class="pop-route-name">Pune → Goa</div>
+              <div class="pop-route-price">From ₹549</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
+          <div class="pop-route-chip" onclick="fillRoute('Delhi', 'Agra')">
+            <div>
+              <div class="pop-route-name">Delhi → Agra</div>
+              <div class="pop-route-price">From ₹429</div>
+            </div>
+            <div class="pop-add-btn">+ Add</div>
+          </div>
         </div>
-        <div class="form-note">📲 Get instant WhatsApp alerts when price drops</div>
       </div>
+    </section>
 
-      <div class="form-group">
-        <div class="form-label">💰 Alert When Price Goes Below (Optional)</div>
-        <input type="number" class="form-input" id="alert-max" placeholder="e.g. ₹800 — Leave blank for any drop">
-      </div>
-
-      <div class="form-group">
-        <div class="form-label">📋 Plan</div>
-        <select class="form-select" id="alert-tier">
-          <option value="free">Free Plan — 1 Route, Email Only</option>
-          <option value="pro">Pro Plan — ₹99/mo, Unlimited + WhatsApp</option>
-        </select>
-      </div>
-
-      <hr class="form-divider">
-
-      <div id="form-success" class="form-success">
-        <div class="fs-emoji">🎉</div>
-        <div class="fs-title">Alert Set Successfully!</div>
-        <div class="fs-sub">We'll notify you via Email <span id="success-wa-text"></span> when prices drop on your route.</div>
-      </div>
-
-      <!-- WHATSAPP PREVIEW CARD -->
-      <div style="background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.25);border-radius:var(--r);padding:16px;margin-bottom:20px">
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--wa);margin-bottom:8px">📲 WhatsApp Alert Preview</div>
-        <div style="background:rgba(7,11,20,.6);border-radius:12px;padding:12px;font-size:12px;color:var(--t);line-height:1.5;border-left:3px solid var(--wa)">
-          <strong>🚌 BusCompare Alert: Price Drop!</strong><br>
-          <span id="prev-route">Mumbai → Pune</span> price dropped to <strong>₹199</strong> (Save ₹150)!<br>
-          <span style="color:var(--wa);font-weight:700">⚡ Tap to book before seats fill up →</span>
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+      <div class="how-in">
+        <h3 class="tiers-title fade-in" style="text-align: center">
+          How Alerts Work
+        </h3>
+        <div class="how-grid fade-in">
+          <div class="how-step">
+            <div class="how-icon">🔔</div>
+            <div class="how-num">Step 1</div>
+            <div class="how-step-title">Set Your Alert</div>
+            <p class="how-step-desc">
+              Enter your route, email and optional WhatsApp number. Set a target
+              price or monitor all drops.
+            </p>
+          </div>
+          <div class="how-step">
+            <div class="how-icon">🤖</div>
+            <div class="how-num">Step 2</div>
+            <div class="how-step-title">We Monitor 24/7</div>
+            <p class="how-step-desc">
+              Our system checks prices across RedBus, AbhiBus, MakeMyTrip every
+              hour automatically.
+            </p>
+          </div>
+          <div class="how-step">
+            <div class="how-icon">📲</div>
+            <div class="how-num">Step 3</div>
+            <div class="how-step-title">Get Instant Alert</div>
+            <p class="how-step-desc">
+              The moment a price drops, you get a WhatsApp message + Email with
+              the direct booking link.
+            </p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <button class="form-submit" onclick="submitAlert()">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.524 5.855L0 24l6.337-1.499A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.66-.517-5.177-1.418l-.37-.22-3.76.889.946-3.667-.241-.378A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Set Alert — Get Notified on WhatsApp
-      </button>
-      <p style="font-size:12px;color:var(--tm);text-align:center;margin-top:12px">✓ Free &nbsp;•&nbsp; ✓ No spam &nbsp;•&nbsp; ✓ Unsubscribe anytime</p>
-    </div>
-  </div>
-</section>
-
-<!-- POPULAR ROUTES TO ALERT -->
-<section class="pop-alerts">
-  <div class="pop-in">
-    <h3 class="pop-title fade-in">⚡ Popular Alert Routes</h3>
-    <p class="pop-sub fade-in">Click any route to auto-fill the form</p>
-    <div class="pop-grid fade-in">
-      <div class="pop-route-chip" onclick="fillRoute('Mumbai','Pune')"><div><div class="pop-route-name">Mumbai → Pune</div><div class="pop-route-price">From ₹199</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Bangalore','Chennai')"><div><div class="pop-route-name">Bangalore → Chennai</div><div class="pop-route-price">From ₹499</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Delhi','Jaipur')"><div><div class="pop-route-name">Delhi → Jaipur</div><div class="pop-route-price">From ₹499</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Hyderabad','Bangalore')"><div><div class="pop-route-name">Hyderabad → Bangalore</div><div class="pop-route-price">From ₹829</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Mumbai','Goa')"><div><div class="pop-route-name">Mumbai → Goa</div><div class="pop-route-price">From ₹999</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Bangalore','Mysore')"><div><div class="pop-route-name">Bangalore → Mysore</div><div class="pop-route-price">From ₹199</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Pune','Goa')"><div><div class="pop-route-name">Pune → Goa</div><div class="pop-route-price">From ₹549</div></div><div class="pop-add-btn">+ Add</div></div>
-      <div class="pop-route-chip" onclick="fillRoute('Delhi','Agra')"><div><div class="pop-route-name">Delhi → Agra</div><div class="pop-route-price">From ₹429</div></div><div class="pop-add-btn">+ Add</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how-section">
-  <div class="how-in">
-    <h3 class="tiers-title fade-in" style="text-align:center">How Alerts Work</h3>
-    <div class="how-grid fade-in">
-      <div class="how-step">
-        <div class="how-icon">🔔</div>
-        <div class="how-num">Step 1</div>
-        <div class="how-step-title">Set Your Alert</div>
-        <p class="how-step-desc">Enter your route, email and optional WhatsApp number. Set a target price or monitor all drops.</p>
+    <!-- FAQ -->
+    <section class="faq-section">
+      <div class="faq-in">
+        <h3 class="faq-title fade-in">Frequently Asked Questions</h3>
+        <div class="fade-in">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q">
+              Is BusCompare price alert really free?
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Yes! The Free plan is 100% free forever. You can set 1 route
+                alert and receive email notifications at no cost. The Pro plan
+                (₹99/month) gives you unlimited routes and WhatsApp alerts.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q">
+              How fast will I get notified when prices drop?
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Free plan users get daily email notifications. Pro plan users
+                get instant alerts within 5 minutes of a price drop via WhatsApp
+                and Email.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q">
+              What platforms do you monitor for price alerts?
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                We monitor RedBus, AbhiBus, MakeMyTrip, Yatra, and direct
+                operator bookings. When any platform drops its price, you get
+                notified with the direct booking link.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q">
+              Can I cancel my price alert subscription?
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                Absolutely. You can unsubscribe from alerts at any time by
+                clicking the "Unsubscribe" link in any email we send. No
+                questions asked.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q">
+              Will you spam my WhatsApp or email?
+              <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-a">
+              <p>
+                We respect your privacy. We only send alerts when prices
+                actually drop. No promotional spam, no third-party sharing.
+                Average user gets 2-3 alerts per week.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="how-step">
-        <div class="how-icon">🤖</div>
-        <div class="how-num">Step 2</div>
-        <div class="how-step-title">We Monitor 24/7</div>
-        <p class="how-step-desc">Our system checks prices across RedBus, AbhiBus, MakeMyTrip every hour automatically.</p>
-      </div>
-      <div class="how-step">
-        <div class="how-icon">📲</div>
-        <div class="how-num">Step 3</div>
-        <div class="how-step-title">Get Instant Alert</div>
-        <p class="how-step-desc">The moment a price drops, you get a WhatsApp message + Email with the direct booking link.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-in">
-    <h3 class="faq-title fade-in">Frequently Asked Questions</h3>
-    <div class="fade-in">
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Is BusCompare price alert really free? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>Yes! The Free plan is 100% free forever. You can set 1 route alert and receive email notifications at no cost. The Pro plan (₹99/month) gives you unlimited routes and WhatsApp alerts.</p></div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">How fast will I get notified when prices drop? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>Free plan users get daily email notifications. Pro plan users get instant alerts within 5 minutes of a price drop via WhatsApp and Email.</p></div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">What platforms do you monitor for price alerts? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>We monitor RedBus, AbhiBus, MakeMyTrip, Yatra, and direct operator bookings. When any platform drops its price, you get notified with the direct booking link.</p></div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Can I cancel my price alert subscription? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>Absolutely. You can unsubscribe from alerts at any time by clicking the "Unsubscribe" link in any email we send. No questions asked.</p></div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Will you spam my WhatsApp or email? <span class="faq-icon">+</span></div>
-        <div class="faq-a"><p>We respect your privacy. We only send alerts when prices actually drop. No promotional spam, no third-party sharing. Average user gets 2-3 alerts per week.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+    <script>
+      let cities = [];
 
-<script>
-let cities = [];
+      document.addEventListener("DOMContentLoaded", async () => {
+        await loadCities();
+        initScroll();
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadCities();
-  initScroll();
+        // Pre-fill from URL
+        const sp = new URLSearchParams(location.search);
+        if (sp.get("email"))
+          document.getElementById("alert-email").value = sp.get("email");
+        if (sp.get("from"))
+          document.getElementById("alert-from").value = sp.get("from");
+        if (sp.get("to"))
+          document.getElementById("alert-to").value = sp.get("to");
+      });
 
-  // Pre-fill from URL
-  const sp = new URLSearchParams(location.search);
-  if (sp.get('email')) document.getElementById('alert-email').value = sp.get('email');
-  if (sp.get('from')) document.getElementById('alert-from').value = sp.get('from');
-  if (sp.get('to')) document.getElementById('alert-to').value = sp.get('to');
-});
+      async function loadCities() {
+        try {
+          const r = await fetch("/api/cities");
+          const d = await r.json();
+          cities = d.cities || [];
+        } catch (e) {}
+      }
 
-async function loadCities() {
-  try { const r = await fetch('/api/cities'); const d = await r.json(); cities = d.cities || []; } catch(e) {}
-}
+      function setupAC(inId, dropId) {
+        const inp = document.getElementById(inId);
+        const drop = document.getElementById(dropId);
+        inp.addEventListener("input", () => {
+          const q = inp.value.trim().toLowerCase();
+          if (q.length < 1) {
+            drop.classList.remove("open");
+            return;
+          }
+          const m = cities
+            .filter((c) => c.name.toLowerCase().includes(q))
+            .slice(0, 6);
+          if (!m.length) {
+            drop.classList.remove("open");
+            return;
+          }
+          drop.innerHTML = m
+            .map(
+              (c) =>
+                `<div class="cdrop-item" onclick="pickCity('${inId}','${dropId}','${c.name}')">${c.name}<span class="cdrop-state">${c.state}</span></div>`,
+            )
+            .join("");
+          drop.classList.add("open");
+        });
+        inp.addEventListener("blur", () =>
+          setTimeout(() => drop.classList.remove("open"), 200),
+        );
+      }
 
-function setupAC(inId, dropId) {
-  const inp = document.getElementById(inId);
-  const drop = document.getElementById(dropId);
-  inp.addEventListener('input', () => {
-    const q = inp.value.trim().toLowerCase();
-    if (q.length < 1) { drop.classList.remove('open'); return; }
-    const m = cities.filter(c => c.name.toLowerCase().includes(q)).slice(0, 6);
-    if (!m.length) { drop.classList.remove('open'); return; }
-    drop.innerHTML = m.map(c => `<div class="cdrop-item" onclick="pickCity('${inId}','${dropId}','${c.name}')">${c.name}<span class="cdrop-state">${c.state}</span></div>`).join('');
-    drop.classList.add('open');
-  });
-  inp.addEventListener('blur', () => setTimeout(() => drop.classList.remove('open'), 200));
-}
+      function pickCity(inId, dropId, name) {
+        document.getElementById(inId).value = name;
+        document.getElementById(dropId).classList.remove("open");
+      }
 
-function pickCity(inId, dropId, name) {
-  document.getElementById(inId).value = name;
-  document.getElementById(dropId).classList.remove('open');
-}
+      setupAC("alert-from", "from-drop");
+      setupAC("alert-to", "to-drop");
 
-setupAC('alert-from', 'from-drop');
-setupAC('alert-to', 'to-drop');
+      function fillRoute(from, to) {
+        document.getElementById("alert-from").value = from;
+        document.getElementById("alert-to").value = to;
+        scrollToForm();
+      }
 
-function fillRoute(from, to) {
-  document.getElementById('alert-from').value = from;
-  document.getElementById('alert-to').value = to;
-  scrollToForm();
-}
+      function scrollToForm(tier) {
+        if (tier === "pro") document.getElementById("alert-tier").value = "pro";
+        document
+          .getElementById("alert-form-section")
+          .scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => document.getElementById("alert-email").focus(), 500);
+      }
 
-function scrollToForm(tier) {
-  if (tier === 'pro') document.getElementById('alert-tier').value = 'pro';
-  document.getElementById('alert-form-section').scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => document.getElementById('alert-email').focus(), 500);
-}
+      async function submitAlert() {
+        const from = document.getElementById("alert-from").value.trim();
+        const to = document.getElementById("alert-to").value.trim();
+        const email = document.getElementById("alert-email").value.trim();
+        const wa = document.getElementById("alert-wa").value.trim();
+        const max = document.getElementById("alert-max").value.trim();
+        const tier = document.getElementById("alert-tier").value;
 
-async function submitAlert() {
-  const from = document.getElementById('alert-from').value.trim();
-  const to = document.getElementById('alert-to').value.trim();
-  const email = document.getElementById('alert-email').value.trim();
-  const wa = document.getElementById('alert-wa').value.trim();
-  const max = document.getElementById('alert-max').value.trim();
-  const tier = document.getElementById('alert-tier').value;
+        if (!from) {
+          alert("Please enter departure city");
+          document.getElementById("alert-from").focus();
+          return;
+        }
+        if (!to) {
+          alert("Please enter destination city");
+          document.getElementById("alert-to").focus();
+          return;
+        }
+        if (!email || !email.includes("@")) {
+          alert("Please enter a valid email address");
+          document.getElementById("alert-email").focus();
+          return;
+        }
 
-  if (!from) { alert('Please enter departure city'); document.getElementById('alert-from').focus(); return; }
-  if (!to) { alert('Please enter destination city'); document.getElementById('alert-to').focus(); return; }
-  if (!email || !email.includes('@')) { alert('Please enter a valid email address'); document.getElementById('alert-email').focus(); return; }
+        const btn = document.querySelector(".form-submit");
+        btn.textContent = "Setting up alert...";
+        btn.disabled = true;
 
-  const btn = document.querySelector('.form-submit');
-  btn.textContent = 'Setting up alert...';
-  btn.disabled = true;
+        try {
+          const r = await fetch("/api/alert", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email,
+              whatsapp: wa ? "+91" + wa : "",
+              routeFrom: from,
+              routeTo: to,
+              maxPrice: max || null,
+              tier,
+            }),
+          });
+          const d = await r.json();
 
-  try {
-    const r = await fetch('/api/alert', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email, whatsapp: wa ? '+91' + wa : '', routeFrom: from, routeTo: to, maxPrice: max || null, tier })
-    });
-    const d = await r.json();
+          if (
+            d.success ||
+            d.error === "Alert already exists for this route and email"
+          ) {
+            document.getElementById("form-success").style.display = "block";
+            document.getElementById("success-wa-text").textContent = wa
+              ? `& WhatsApp (+91${wa})`
+              : "";
+            btn.style.display = "none";
+            document.querySelector(".form-card > p").style.display = "none";
+          } else {
+            throw new Error(d.error || "Unknown error");
+          }
+        } catch (e) {
+          alert("Error setting alert: " + e.message);
+          btn.textContent = "Set Alert — Get Notified on WhatsApp";
+          btn.disabled = false;
+        }
+      }
 
-    if (d.success || d.error === 'Alert already exists for this route and email') {
-      document.getElementById('form-success').style.display = 'block';
-      document.getElementById('success-wa-text').textContent = wa ? `& WhatsApp (+91${wa})` : '';
-      btn.style.display = 'none';
-      document.querySelector('.form-card > p').style.display = 'none';
-    } else {
-      throw new Error(d.error || 'Unknown error');
-    }
-  } catch(e) {
-    alert('Error setting alert: ' + e.message);
-    btn.textContent = 'Set Alert — Get Notified on WhatsApp';
-    btn.disabled = false;
-  }
-}
+      function toggleFaq(item) {
+        const isOpen = item.classList.contains("open");
+        document.querySelectorAll(".faq-item").forEach((i) => {
+          i.classList.remove("open");
+          i.querySelector(".faq-a").classList.remove("open");
+        });
+        if (!isOpen) {
+          item.classList.add("open");
+          item.querySelector(".faq-a").classList.add("open");
+        }
+      }
 
-function toggleFaq(item) {
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').classList.remove('open'); });
-  if (!isOpen) { item.classList.add('open'); item.querySelector('.faq-a').classList.add('open'); }
-}
-
-function initScroll() {
-  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-}
-</script>
-</body>
+      function initScroll() {
+        const obs = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                obs.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.1 },
+        );
+        document.querySelectorAll(".fade-in").forEach((el) => obs.observe(el));
+      }
+    </script>
+  </body>
 </html>

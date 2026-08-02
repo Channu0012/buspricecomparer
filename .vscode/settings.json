@@ -1,9 +1,5 @@
 {
-  "liveServer.settings.ignoreFiles": [
-    "**/*.html",
-    "templates/**",
-    "public/**"
-  ],
+  "liveServer.settings.ignoreFiles": ["**/*.html", "templates/**", "public/**"],
   "liveServer.settings.NoBrowser": true,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
