@@ -127,41 +127,102 @@
         flex: 1;
         display: flex;
         align-items: center;
-        gap: 10px;
-        background: rgba(255, 255, 255, 0.04);
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.05);
         border: 1px solid var(--bl);
         border-radius: 100px;
-        padding: 6px 6px 6px 18px;
-        max-width: 640px;
+        padding: 4px 6px 4px 14px;
+        max-width: 680px;
+        position: relative;
       }
-      .cs-from,
-      .cs-to {
+      .cs-input {
+        background: transparent;
+        border: none;
+        color: var(--t);
         font-size: 13px;
         font-weight: 700;
-        color: var(--t);
-        cursor: pointer;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 130px;
+        outline: none;
+        width: 110px;
+        font-family: inherit;
       }
-      .cs-arrow {
+      .cs-input::placeholder {
+        color: var(--ts);
+      }
+      .cs-swap-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
         color: var(--p);
+        border-radius: 50%;
+        width: 26px;
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+      .cs-swap-btn:hover {
+        background: var(--pg);
+      }
+      .cs-date-inp {
+        background: transparent;
+        border: none;
+        color: var(--ts);
+        font-size: 12px;
+        font-weight: 600;
+        outline: none;
+        font-family: inherit;
+        width: 110px;
+      }
+      .cs-search-btn {
+        background: linear-gradient(135deg, var(--p), var(--pd));
+        color: #fff;
+        border: none;
+        border-radius: 100px;
+        padding: 6px 16px;
         font-size: 12px;
         font-weight: 800;
-        flex-shrink: 0;
+        cursor: pointer;
+        font-family: inherit;
+        transition: transform 0.2s;
       }
-      .cs-divider {
-        width: 1px;
-        height: 16px;
-        background: var(--border);
-        flex-shrink: 0;
+      .cs-search-btn:hover {
+        transform: scale(1.04);
       }
-      .cs-date {
+
+      /* ROUTE PILLS BAR */
+      .route-pills-bar {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        margin-bottom: 16px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .route-pills-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .rp-chip {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 6px 14px;
         font-size: 12px;
+        font-weight: 700;
         color: var(--ts);
-        font-weight: 600;
+        cursor: pointer;
         white-space: nowrap;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .rp-chip:hover,
+      .rp-chip.active {
+        background: var(--pg);
+        border-color: rgba(249, 115, 22, 0.35);
+        color: var(--p);
       }
       .cs-change-btn {
         background: var(--p);
@@ -1274,13 +1335,28 @@
             Bus<em>Compare</em></a
           >
           <div class="cs-bar" id="cs-bar">
-            <span class="cs-from" id="cs-from">Loading...</span>
-            <span class="cs-arrow">→</span>
-            <span class="cs-to" id="cs-to">Loading...</span>
+            <input
+              class="cs-input"
+              id="search-from"
+              placeholder="From (e.g. Mumbai)"
+            />
+            <button
+              class="cs-swap-btn"
+              id="cs-swap-btn"
+              onclick="swapSearchCities()"
+              title="Swap Cities"
+            >
+              ⇆
+            </button>
+            <input
+              class="cs-input"
+              id="search-to"
+              placeholder="To (e.g. Goa)"
+            />
             <span class="cs-divider"></span>
-            <span class="cs-date" id="cs-date">Today</span>
-            <button class="cs-change-btn" onclick="window.location.href = '/'">
-              Change
+            <input class="cs-date-inp" type="date" id="search-date" />
+            <button class="cs-search-btn" onclick="executeNewSearch()">
+              🔍 Search
             </button>
           </div>
         </div>
@@ -1312,6 +1388,28 @@
 
     <!-- MAIN LAYOUT -->
     <div class="main-layout">
+      <!-- QUICK POPULAR ROUTE PILLS -->
+      <div class="route-pills-bar" style="grid-column: 1 / -1">
+        <div class="rp-chip" onclick="quickRoute('Mumbai', 'Goa')">
+          🏖️ Mumbai → Goa
+        </div>
+        <div class="rp-chip" onclick="quickRoute('Bangalore', 'Chennai')">
+          💻 Bangalore → Chennai
+        </div>
+        <div class="rp-chip" onclick="quickRoute('Delhi', 'Jaipur')">
+          🏰 Delhi → Jaipur
+        </div>
+        <div class="rp-chip" onclick="quickRoute('Hyderabad', 'Bangalore')">
+          🏛️ Hyderabad → Bangalore
+        </div>
+        <div class="rp-chip" onclick="quickRoute('Pune', 'Mumbai')">
+          🌆 Pune → Mumbai
+        </div>
+        <div class="rp-chip" onclick="quickRoute('Chennai', 'Madurai')">
+          🌴 Chennai → Madurai
+        </div>
+      </div>
+
       <!-- SIDEBAR -->
       <aside class="sidebar" id="sidebar">
         <div class="sf-title">
@@ -1913,8 +2011,45 @@
         showToast(`Language set to ${lang}`, "🌐");
       }
 
+      function swapSearchCities() {
+        const f = document.getElementById("search-from");
+        const t = document.getElementById("search-to");
+        const btn = document.getElementById("cs-swap-btn");
+        if (f && t) {
+          const tmp = f.value;
+          f.value = t.value;
+          t.value = tmp;
+          if (btn) {
+            btn.style.transform =
+              btn.style.transform === "rotate(180deg)"
+                ? "rotate(0deg)"
+                : "rotate(180deg)";
+          }
+        }
+      }
+
+      function executeNewSearch() {
+        const from =
+          document.getElementById("search-from").value.trim() || "Mumbai";
+        const to = document.getElementById("search-to").value.trim() || "Goa";
+        const date = document.getElementById("search-date").value;
+        window.location.href = `/search?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${encodeURIComponent(date)}`;
+      }
+
+      function quickRoute(from, to) {
+        document.getElementById("search-from").value = from;
+        document.getElementById("search-to").value = to;
+        executeNewSearch();
+      }
+
       async function loadResults() {
         try {
+          document.getElementById("search-from").value =
+            params.from || "Mumbai";
+          document.getElementById("search-to").value = params.to || "Goa";
+          if (params.date)
+            document.getElementById("search-date").value = params.date;
+
           loadFlightUpsell(params.from, params.to);
           const sp = new URLSearchParams({ from: params.from, to: params.to });
           if (params.date) sp.set("date", params.date);

@@ -1512,7 +1512,7 @@
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
       "rating": 4.5,
-      "reviewCount": 30,
+      "reviewCount": 32,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -5333,6 +5333,29 @@
       "helpfulCount": 0,
       "verified": false,
       "platform": "buscompare"
+    },
+    {
+      "id": "REV-3994EF1A",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-08-03T16:16:12.196Z"
+    },
+    {
+      "id": "rev-d36b8978",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-08-03",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
     }
   ],
   "popularRoutes": [
@@ -5715,6 +5738,30 @@
       "active": true,
       "createdAt": "2026-08-03T16:11:57.753Z",
       "triggeredCount": 0
+    },
+    {
+      "id": "alert-f93ae2aa",
+      "email": "alert_1785773772071@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-03T16:16:12.072Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-bfd3b337",
+      "email": "dup_1785773772074@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-03T16:16:12.083Z",
+      "triggeredCount": 0
     }
   ],
   "telemetry": [
@@ -6022,6 +6069,16 @@
       "phone": "9876543210",
       "email": "",
       "expiresAt": "2026-08-03T22:11:57.761Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-7F64F52E",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-03T22:16:12.100Z",
       "status": "ACTIVE"
     }
   ],
@@ -6340,25 +6397,43 @@
       "pricePaid": 299,
       "createdAt": "2026-08-03T16:11:57.771Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-D93CFC02",
+      "email": "vip_1785773772111@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-03T16:16:12.112Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-1FE38027",
+      "email": "vipa_1785773772114@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-03T16:16:12.122Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 2,
-    "totalSearches": 437,
-    "totalReviews": 38,
-    "totalAlerts": 29,
+    "totalSearches": 447,
+    "totalReviews": 40,
+    "totalAlerts": 31,
     "flightClicks": 2,
-    "priceLocksCount": 18,
-    "vipSubscriptionsCount": 35,
+    "priceLocksCount": 19,
+    "vipSubscriptionsCount": 37,
     "busAffiliateRevenue": 160,
     "flightAffiliateRevenue": 900,
-    "priceLockRevenue": 702,
-    "vipRevenue": 6865,
+    "priceLockRevenue": 741,
+    "vipRevenue": 7263,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 9533,
+    "revenueEstimate": 10035,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 15,
-    "insuranceRevenue": 971
+    "insurancePoliciesCount": 16,
+    "insuranceRevenue": 1036
   },
   "coupons": [
     {
@@ -6667,6 +6742,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-08-03T16:11:57.786Z"
+    },
+    {
+      "id": "INS-5800AACC",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-03T16:16:12.151Z"
     }
   ],
   "loyaltyUsers": [
@@ -6939,6 +7024,24 @@
       "referralCode": "BHARATBUS-3562-XZ1Z",
       "referralCount": 0,
       "joinedAt": "2026-08-03T16:11:57.794Z"
+    },
+    {
+      "id": "loyalty-257a8dba",
+      "phone": "91067381315",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-1315-BWWW",
+      "referralCount": 0,
+      "joinedAt": "2026-08-03T16:16:12.163Z"
+    },
+    {
+      "id": "loyalty-a2af7dbe",
+      "phone": "88534403080",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-3080-06NJ",
+      "referralCount": 0,
+      "joinedAt": "2026-08-03T16:16:12.173Z"
     }
   ],
   "referrals": [],
@@ -7124,6 +7227,19 @@
       "status": "NEW_LEAD",
       "estimatedMRR": 15000,
       "createdAt": "2026-08-03T16:11:57.808Z"
+    },
+    {
+      "id": "CORP-CEBD6D21",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1785773772211@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-08-03T16:16:12.214Z"
     }
   ],
   "operatorLeads": [
@@ -7308,6 +7424,19 @@
       "status": "NEW_LEAD",
       "estimatedPlan": "Enterprise (₹15,000/mo)",
       "createdAt": "2026-08-03T16:11:57.816Z"
+    },
+    {
+      "id": "OPR-A824EF87",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1785773772231@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (₹15,000/mo)",
+      "createdAt": "2026-08-03T16:16:12.233Z"
     }
   ],
   "translations": {
