@@ -751,33 +751,102 @@
         }
       }
 
-      /* RESPONSIVE */
-      @media (max-width: 1100px) {
-        .metrics-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .two-col,
-        .three-col {
-          grid-template-columns: 1fr;
-        }
-        .rd-formula {
-          grid-template-columns: 1fr;
-        }
-      }
-      @media (max-width: 768px) {
+      /* ── COMPREHENSIVE MOBILE & TABLET RESPONSIVENESS ── */
+      @media (max-width: 992px) {
         .layout {
           grid-template-columns: 1fr;
         }
         .sidebar {
+          position: sticky;
+          top: 0;
+          height: auto;
+          z-index: 1000;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding: 8px 12px;
+          background: rgba(10, 14, 26, 0.96);
+          backdrop-filter: blur(16px);
+        }
+        .sb-logo {
+          padding: 8px 0 10px;
+        }
+        .sb-section,
+        .sb-divider {
           display: none;
         }
+        .sb-nav {
+          display: flex;
+          flex-direction: row;
+          gap: 6px;
+          overflow-x: auto;
+          padding: 4px 0;
+          -webkit-overflow-scrolling: touch;
+        }
+        .sb-nav::-webkit-scrollbar {
+          display: none;
+        }
+        .sb-nav li {
+          margin-bottom: 0;
+          flex-shrink: 0;
+        }
+        .sb-link {
+          white-space: nowrap;
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+        .sb-bottom {
+          display: none;
+        }
+        .main {
+          padding: 16px;
+        }
         .metrics-grid {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+        .two-col,
+        .three-col,
+        .rd-formula {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .header-actions {
+          width: 100%;
+          justify-content: flex-start;
+          flex-wrap: wrap;
         }
       }
-      @media (max-width: 480px) {
+
+      @media (max-width: 600px) {
         .metrics-grid {
           grid-template-columns: 1fr;
+        }
+        .main-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .header-actions {
+          gap: 6px;
+        }
+        .refresh-btn {
+          padding: 6px 12px;
+          font-size: 11px;
+        }
+        .pw-box {
+          padding: 28px 20px;
+          max-width: 92vw;
+        }
+        .pw-input {
+          font-size: 16px;
+          letter-spacing: 3px;
+          padding: 14px 40px 14px 14px;
+        }
+        table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
         }
       }
 
@@ -986,7 +1055,9 @@
           Unlock Dashboard →
         </button>
         <div class="pw-hint">
-          🔒 Password: <code style="color:var(--p);font-weight:700">001200</code> &nbsp;•&nbsp; Session secured
+          🔒 Password:
+          <code style="color: var(--p); font-weight: 700">001200</code>
+          &nbsp;•&nbsp; Session secured
         </div>
       </div>
     </div>
@@ -1064,8 +1135,30 @@
             <div class="page-sub" id="last-updated">Loading data...</div>
           </div>
           <div class="header-actions">
-            <a href="/api/admin/leads/export?format=csv" id="btn-export-csv" class="refresh-btn" style="text-decoration:none;color:var(--p);border-color:rgba(249,115,22,0.3)" download>📥 Export CSV</a>
-            <a href="/api/admin/leads/export?format=json" id="btn-export-json" class="refresh-btn" style="text-decoration:none;color:var(--blue);border-color:rgba(59,130,246,0.3)" download>📥 Export JSON</a>
+            <a
+              href="/api/admin/leads/export?format=csv"
+              id="btn-export-csv"
+              class="refresh-btn"
+              style="
+                text-decoration: none;
+                color: var(--p);
+                border-color: rgba(249, 115, 22, 0.3);
+              "
+              download
+              >📥 Export CSV</a
+            >
+            <a
+              href="/api/admin/leads/export?format=json"
+              id="btn-export-json"
+              class="refresh-btn"
+              style="
+                text-decoration: none;
+                color: var(--blue);
+                border-color: rgba(59, 130, 246, 0.3);
+              "
+              download
+              >📥 Export JSON</a
+            >
             <div class="live-badge">
               <span
                 style="
@@ -1400,7 +1493,11 @@
           if (data.success && data.token) {
             sessionStorage.setItem("bc_admin_auth", data.token);
             unlockDashboard();
-          } else if (val === "001200" || val === "admin123" || val === "admin") {
+          } else if (
+            val === "001200" ||
+            val === "admin123" ||
+            val === "admin"
+          ) {
             sessionStorage.setItem("bc_admin_auth", "true");
             unlockDashboard();
           } else {
@@ -1496,9 +1593,14 @@
       function updateExportLinks(token) {
         const csvBtn = document.getElementById("btn-export-csv");
         const jsonBtn = document.getElementById("btn-export-json");
-        const tokenParam = (token && token !== "true") ? `&adminToken=${encodeURIComponent(token)}` : "";
-        if (csvBtn) csvBtn.href = `/api/admin/leads/export?format=csv${tokenParam}`;
-        if (jsonBtn) jsonBtn.href = `/api/admin/leads/export?format=json${tokenParam}`;
+        const tokenParam =
+          token && token !== "true"
+            ? `&adminToken=${encodeURIComponent(token)}`
+            : "";
+        if (csvBtn)
+          csvBtn.href = `/api/admin/leads/export?format=csv${tokenParam}`;
+        if (jsonBtn)
+          jsonBtn.href = `/api/admin/leads/export?format=json${tokenParam}`;
       }
 
       async function loadStats() {
@@ -1509,7 +1611,10 @@
           if (token && token !== "true") {
             headers["x-admin-token"] = token;
           }
-          const url = (token && token !== "true") ? `/api/admin/stats?adminToken=${encodeURIComponent(token)}` : "/api/admin/stats";
+          const url =
+            token && token !== "true"
+              ? `/api/admin/stats?adminToken=${encodeURIComponent(token)}`
+              : "/api/admin/stats";
           const r = await fetch(url, { headers });
           if (r.status === 401) {
             sessionStorage.removeItem("bc_admin_auth");
@@ -1699,13 +1804,23 @@
 
         // Milestones
         const ms1 = document.getElementById("ms1");
-        if (ms1) ms1.textContent = ov.totalClicks >= 100 ? "✅ Done!" : `${ov.totalClicks || 0}/100`;
+        if (ms1)
+          ms1.textContent =
+            ov.totalClicks >= 100 ? "✅ Done!" : `${ov.totalClicks || 0}/100`;
         const ms2 = document.getElementById("ms2");
-        if (ms2) ms2.textContent = ov.revenueEstimate >= 10000 ? "✅ Done!" : `₹${ov.revenueEstimate || 0}/₹10,000`;
+        if (ms2)
+          ms2.textContent =
+            ov.revenueEstimate >= 10000
+              ? "✅ Done!"
+              : `₹${ov.revenueEstimate || 0}/₹10,000`;
         const ms3 = document.getElementById("ms3");
-        if (ms3) ms3.textContent = ov.totalAlerts >= 100 ? "✅ Done!" : `${ov.totalAlerts || 0}/100`;
+        if (ms3)
+          ms3.textContent =
+            ov.totalAlerts >= 100 ? "✅ Done!" : `${ov.totalAlerts || 0}/100`;
         const ms4 = document.getElementById("ms4");
-        if (ms4) ms4.textContent = ov.totalReviews >= 50 ? "✅ Done!" : `${ov.totalReviews || 0}/50`;
+        if (ms4)
+          ms4.textContent =
+            ov.totalReviews >= 50 ? "✅ Done!" : `${ov.totalReviews || 0}/50`;
       }
 
       function showSection(sec) {

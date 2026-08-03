@@ -3649,25 +3649,151 @@
         }
       }
 
-      @media (max-width: 480px) {
-        .hero-stats {
-          gap: 14px;
+      /* ── COMPREHENSIVE MOBILE, TABLET & DESKTOP RESPONSIVENESS ── */
+      @media (max-width: 992px) {
+        .navbar {
+          padding: 10px 16px;
         }
-
-        .section {
-          padding: 36px 0;
+        .nav-in {
+          flex-wrap: wrap;
+          gap: 12px;
         }
-
-        .routes-grid {
-          grid-template-columns: 1fr;
+        .nav-left {
+          flex: 1;
+          justify-content: space-between;
         }
-
-        .adm-metrics {
+        .nav-links {
+          display: flex;
+          overflow-x: auto;
+          max-width: 100%;
+          padding-bottom: 4px;
+          gap: 6px;
+          -webkit-overflow-scrolling: touch;
+        }
+        .nav-links::-webkit-scrollbar {
+          display: none;
+        }
+        .nav-right {
+          gap: 6px;
+          margin-left: auto;
+        }
+        .hero {
+          padding: 40px 16px 30px;
+        }
+        .hero-title {
+          font-size: clamp(28px, 6vw, 44px);
+        }
+        .hero-sub {
+          font-size: 15px;
+        }
+        .sw-grid {
           grid-template-columns: 1fr 1fr;
+          gap: 12px;
         }
-
-        .mm-grid {
+        .sw-field:last-child {
+          grid-column: span 2;
+        }
+        .pricing-grid,
+        .feat-grid,
+        .multimodal-grid {
           grid-template-columns: 1fr;
+        }
+        .ft-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-in {
+          gap: 8px;
+        }
+        .nav-logo-text {
+          font-size: 17px;
+        }
+        .btn-coins,
+        .btn-vip {
+          padding: 5px 10px;
+          font-size: 11px;
+        }
+        .lang-sel {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+        .sw-grid {
+          grid-template-columns: 1fr;
+        }
+        .sw-field:last-child {
+          grid-column: span 1;
+        }
+        .hero-stats {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        .hs-div {
+          display: none;
+        }
+        .bc-top {
+          padding: 16px;
+        }
+        .bc-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        .bc-badges {
+          margin-left: 0;
+        }
+        .bc-route-row {
+          flex-direction: column;
+          gap: 12px;
+          align-items: center;
+        }
+        .bc-line {
+          width: 100%;
+        }
+        .bc-rating {
+          margin-left: 0;
+          align-self: flex-start;
+        }
+        .prices-row {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          padding-bottom: 8px;
+          -webkit-overflow-scrolling: touch;
+        }
+        .price-chip {
+          min-width: 110px;
+          flex-shrink: 0;
+        }
+        .bc-cta {
+          padding: 14px 16px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+        .bc-btns {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .bc-book-btn {
+          flex: 1;
+          justify-content: center;
+        }
+        .ft-grid {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .ft-bottom {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 12px;
+        }
+        .modal-box {
+          padding: 20px 16px;
+          max-width: 94vw;
         }
       }
     </style>
@@ -3846,10 +3972,14 @@
               <a class="nav-link" id="nl-alerts" href="/alerts">🔔 Alerts</a>
             </li>
             <li>
-              <a class="nav-link" id="nl-corporate" href="/corporate">💼 Corporate</a>
+              <a class="nav-link" id="nl-corporate" href="/corporate"
+                >💼 Corporate</a
+              >
             </li>
             <li>
-              <a class="nav-link" id="nl-operators" href="/operators">🚌 Operators</a>
+              <a class="nav-link" id="nl-operators" href="/operators"
+                >🚌 Operators</a
+              >
             </li>
           </ul>
         </div>
@@ -5429,13 +5559,17 @@
                 <a href="/search?from=Mumbai&to=Goa">Mumbai → Goa</a>
               </li>
               <li>
-                <a href="/search?from=Bangalore&to=Chennai">Bangalore → Chennai</a>
+                <a href="/search?from=Bangalore&to=Chennai"
+                  >Bangalore → Chennai</a
+                >
               </li>
               <li>
                 <a href="/search?from=Delhi&to=Jaipur">Delhi → Jaipur</a>
               </li>
               <li>
-                <a href="/search?from=Hyderabad&to=Bangalore">Hyderabad → Bangalore</a>
+                <a href="/search?from=Hyderabad&to=Bangalore"
+                  >Hyderabad → Bangalore</a
+                >
               </li>
               <li><a href="/alerts">Price Alerts</a></li>
             </ul>
