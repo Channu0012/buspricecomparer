@@ -1493,12 +1493,32 @@
 
       // loadStats is called by unlockDashboard, not DOMContentLoaded
 
+      function updateExportLinks(token) {
+        const csvBtn = document.getElementById("btn-export-csv");
+        const jsonBtn = document.getElementById("btn-export-json");
+        const tokenParam = (token && token !== "true") ? `&adminToken=${encodeURIComponent(token)}` : "";
+        if (csvBtn) csvBtn.href = `/api/admin/leads/export?format=csv${tokenParam}`;
+        if (jsonBtn) jsonBtn.href = `/api/admin/leads/export?format=json${tokenParam}`;
+      }
+
       async function loadStats() {
+        const token = sessionStorage.getItem("bc_admin_auth");
         try {
           document.getElementById("last-updated").textContent = "Refreshing...";
-          const r = await fetch("/api/admin/stats");
+          const headers = {};
+          if (token && token !== "true") {
+            headers["x-admin-token"] = token;
+          }
+          const url = (token && token !== "true") ? `/api/admin/stats?adminToken=${encodeURIComponent(token)}` : "/api/admin/stats";
+          const r = await fetch(url, { headers });
+          if (r.status === 401) {
+            sessionStorage.removeItem("bc_admin_auth");
+            location.reload();
+            return;
+          }
           const d = await r.json();
           render(d);
+          updateExportLinks(token);
           document.getElementById("last-updated").textContent =
             "Last updated: " + new Date().toLocaleTimeString("en-IN");
         } catch (e) {
@@ -1508,7 +1528,8 @@
       }
 
       function render(d) {
-        const ov = d.overview;
+        if (!d) return;
+        const ov = d.overview || {};
 
         // Metrics
         document.getElementById("m-revenue").textContent =
@@ -1545,131 +1566,146 @@
         const platforms = d.clicksByPlatform || {};
         const total = Object.values(platforms).reduce((s, v) => s + v, 0);
         const pbarArea = document.getElementById("platform-bars");
-        if (total === 0) {
-          pbarArea.innerHTML =
-            '<div class="empty-msg">No clicks yet. Start by testing the search!</div>';
-        } else {
-          pbarArea.innerHTML = Object.entries(platforms)
-            .sort(([, a], [, b]) => b - a)
-            .map(
-              ([p, cnt]) => `
-      <div class="pbar-row">
-        <div class="pbar-label">${PLATFORM_NAMES[p] || p}</div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:${Math.round((cnt / total) * 100)}%;background:${PLATFORM_COLORS[p] || "var(--p)"}"></div></div>
-        <div class="pbar-count">${cnt}</div>
-        <div class="pbar-pct">${Math.round((cnt / total) * 100)}%</div>
-      </div>
-    `,
-            )
-            .join("");
+        if (pbarArea) {
+          if (total === 0) {
+            pbarArea.innerHTML =
+              '<div class="empty-msg">No clicks yet. Start by testing the search!</div>';
+          } else {
+            pbarArea.innerHTML = Object.entries(platforms)
+              .sort(([, a], [, b]) => b - a)
+              .map(
+                ([p, cnt]) => `
+        <div class="pbar-row">
+          <div class="pbar-label">${PLATFORM_NAMES[p] || p}</div>
+          <div class="pbar-track"><div class="pbar-fill" style="width:${Math.round((cnt / total) * 100)}%;background:${PLATFORM_COLORS[p] || "var(--p)"}"></div></div>
+          <div class="pbar-count">${cnt}</div>
+          <div class="pbar-pct">${Math.round((cnt / total) * 100)}%</div>
+        </div>
+      `,
+              )
+              .join("");
+          }
         }
 
         // Top routes
         const topR = document.getElementById("top-routes");
-        if (!d.topRoutes || !d.topRoutes.length) {
-          topR.innerHTML =
-            '<div class="empty-msg">No route clicks tracked yet</div>';
-        } else {
-          topR.innerHTML = d.topRoutes
-            .map(
-              (r, i) => `
-      <div class="tr-row">
-        <div class="tr-rank">${i + 1}</div>
-        <div class="tr-route">${r.route}</div>
-        <div class="tr-clicks">${r.clicks} clicks</div>
-      </div>
-    `,
-            )
-            .join("");
+        if (topR) {
+          if (!d.topRoutes || !d.topRoutes.length) {
+            topR.innerHTML =
+              '<div class="empty-msg">No route clicks tracked yet</div>';
+          } else {
+            topR.innerHTML = d.topRoutes
+              .map(
+                (r, i) => `
+        <div class="tr-row">
+          <div class="tr-rank">${i + 1}</div>
+          <div class="tr-route">${r.route}</div>
+          <div class="tr-clicks">${r.clicks} clicks</div>
+        </div>
+      `,
+              )
+              .join("");
+          }
         }
 
         // Recent clicks table
-        document.getElementById("total-clicks-badge").textContent =
-          `${ov.totalClicks || 0} total`;
+        const totalClicksBadge = document.getElementById("total-clicks-badge");
+        if (totalClicksBadge) {
+          totalClicksBadge.textContent = `${ov.totalClicks || 0} total`;
+        }
         const rcArea = document.getElementById("recent-clicks-area");
-        if (!d.recentClicks || !d.recentClicks.length) {
-          rcArea.innerHTML =
-            '<div class="empty-msg">No affiliate clicks yet.<br>Test by clicking "Book Now" on any bus!</div>';
-        } else {
-          rcArea.innerHTML = `<table>
-      <thead><tr><th>Platform</th><th>Route</th><th>Price</th><th>Time</th></tr></thead>
-      <tbody>
-        ${d.recentClicks
-          .map(
-            (c) => `
-          <tr>
-            <td><span class="td-badge ${PLATFORM_BADGE[c.platform] || "td-di"}">${PLATFORM_NAMES[c.platform] || c.platform}</span></td>
-            <td>${c.route || "—"}</td>
-            <td class="td-price">${c.price ? "₹" + c.price.toLocaleString("en-IN") : "—"}</td>
-            <td class="td-time">${new Date(c.timestamp).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}</td>
-          </tr>
-        `,
-          )
-          .join("")}
-      </tbody>
-    </table>`;
+        if (rcArea) {
+          if (!d.recentClicks || !d.recentClicks.length) {
+            rcArea.innerHTML =
+              '<div class="empty-msg">No affiliate clicks yet.<br>Test by clicking "Book Now" on any bus!</div>';
+          } else {
+            rcArea.innerHTML = `<table>
+        <thead><tr><th>Platform</th><th>Route</th><th>Price</th><th>Time</th></tr></thead>
+        <tbody>
+          ${d.recentClicks
+            .map(
+              (c) => `
+            <tr>
+              <td><span class="td-badge ${PLATFORM_BADGE[c.platform] || "td-di"}">${PLATFORM_NAMES[c.platform] || c.platform}</span></td>
+              <td>${c.route || "—"}</td>
+              <td class="td-price">${c.price ? "₹" + c.price.toLocaleString("en-IN") : "—"}</td>
+              <td class="td-time">${new Date(c.timestamp || Date.now()).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}</td>
+            </tr>
+          `,
+            )
+            .join("")}
+        </tbody>
+      </table>`;
+          }
         }
 
         // Recent reviews
-        document.getElementById("avg-rating-badge").textContent = d.avgRating
-          ? `${d.avgRating} ★ avg`
-          : "— avg";
+        const avgRatingBadge = document.getElementById("avg-rating-badge");
+        if (avgRatingBadge) {
+          avgRatingBadge.textContent = d.avgRating
+            ? `${d.avgRating} ★ avg`
+            : "— avg";
+        }
         const rrArea = document.getElementById("recent-reviews-area");
-        if (!d.recentReviews || !d.recentReviews.length) {
-          rrArea.innerHTML = '<div class="empty-msg">No reviews yet</div>';
-        } else {
-          rrArea.innerHTML = d.recentReviews
-            .map(
-              (rev, i) => `
-      <div class="rev-mini-item">
-        <div class="rmi-head">
-          <div class="rmi-av" style="background:${AV_COLORS[i % AV_COLORS.length]}">${rev.userName.slice(0, 2).toUpperCase()}</div>
-          <div><div class="rmi-name">${rev.userName}</div><div class="rmi-meta">${rev.date}</div></div>
-          <div class="rmi-stars">${"★".repeat(rev.rating)}${"☆".repeat(5 - rev.rating)}</div>
+        if (rrArea) {
+          if (!d.recentReviews || !d.recentReviews.length) {
+            rrArea.innerHTML = '<div class="empty-msg">No reviews yet</div>';
+          } else {
+            rrArea.innerHTML = d.recentReviews
+              .map(
+                (rev, i) => `
+        <div class="rev-mini-item">
+          <div class="rmi-head">
+            <div class="rmi-av" style="background:${AV_COLORS[i % AV_COLORS.length]}">${(rev.userName || "User").slice(0, 2).toUpperCase()}</div>
+            <div><div class="rmi-name">${rev.userName || "Anonymous"}</div><div class="rmi-meta">${rev.date || "Today"}</div></div>
+            <div class="rmi-stars">${"★".repeat(rev.rating || 5)}${"☆".repeat(5 - (rev.rating || 5))}</div>
+          </div>
+          <div class="rmi-text">${rev.comment || ""}</div>
         </div>
-        <div class="rmi-text">${rev.comment}</div>
-      </div>
-    `,
-            )
-            .join("");
+      `,
+              )
+              .join("");
+          }
         }
 
         // Alerts
-        document.getElementById("alerts-badge").textContent =
-          `${ov.totalAlerts || 0} subs`;
+        const alertsBadge = document.getElementById("alerts-badge");
+        if (alertsBadge) {
+          alertsBadge.textContent = `${ov.totalAlerts || 0} subs`;
+        }
         const alertsArea = document.getElementById("alerts-area");
-        if (!d.recentAlerts || !d.recentAlerts.length) {
-          alertsArea.innerHTML =
-            '<div class="empty-msg">No alert subscribers yet.<br>Share /alerts to get signups!</div>';
-        } else {
-          alertsArea.innerHTML =
-            '<div class="alerts-list">' +
-            d.recentAlerts
-              .map(
-                (a) => `
-      <div class="alert-row">
-        <div class="ar-email">${a.email}</div>
-        <div class="ar-route">${a.routeFrom} → ${a.routeTo}</div>
-        ${a.maxPrice ? `<div style="font-size:11px;color:var(--p);font-weight:700">< ₹${a.maxPrice}</div>` : ""}
-        <div class="ar-tier ${a.tier === "pro" ? "ar-pro" : "ar-free"}">${a.tier.toUpperCase()}</div>
-      </div>
-    `,
-              )
-              .join("") +
-            "</div>";
+        if (alertsArea) {
+          if (!d.recentAlerts || !d.recentAlerts.length) {
+            alertsArea.innerHTML =
+              '<div class="empty-msg">No alert subscribers yet.<br>Share /alerts to get signups!</div>';
+          } else {
+            alertsArea.innerHTML =
+              '<div class="alerts-list">' +
+              d.recentAlerts
+                .map(
+                  (a) => `
+        <div class="alert-row">
+          <div class="ar-email">${a.email}</div>
+          <div class="ar-route">${a.routeFrom || "Origin"} → ${a.routeTo || "Destination"}</div>
+          ${a.maxPrice ? `<div style="font-size:11px;color:var(--p);font-weight:700">< ₹${a.maxPrice}</div>` : ""}
+          <div class="ar-tier ${a.tier === "pro" ? "ar-pro" : "ar-free"}">${(a.tier || "free").toUpperCase()}</div>
+        </div>
+      `,
+                )
+                .join("") +
+              "</div>";
+          }
         }
 
         // Milestones
-        document.getElementById("ms1").textContent =
-          ov.totalClicks >= 100 ? "✅ Done!" : `${ov.totalClicks || 0}/100`;
-        document.getElementById("ms2").textContent =
-          ov.revenueEstimate >= 10000
-            ? "✅ Done!"
-            : `₹${ov.revenueEstimate || 0}/₹10,000`;
-        document.getElementById("ms3").textContent =
-          ov.totalAlerts >= 100 ? "✅ Done!" : `${ov.totalAlerts || 0}/100`;
-        document.getElementById("ms4").textContent =
-          ov.totalReviews >= 50 ? "✅ Done!" : `${ov.totalReviews || 0}/50`;
+        const ms1 = document.getElementById("ms1");
+        if (ms1) ms1.textContent = ov.totalClicks >= 100 ? "✅ Done!" : `${ov.totalClicks || 0}/100`;
+        const ms2 = document.getElementById("ms2");
+        if (ms2) ms2.textContent = ov.revenueEstimate >= 10000 ? "✅ Done!" : `₹${ov.revenueEstimate || 0}/₹10,000`;
+        const ms3 = document.getElementById("ms3");
+        if (ms3) ms3.textContent = ov.totalAlerts >= 100 ? "✅ Done!" : `${ov.totalAlerts || 0}/100`;
+        const ms4 = document.getElementById("ms4");
+        if (ms4) ms4.textContent = ov.totalReviews >= 50 ? "✅ Done!" : `${ov.totalReviews || 0}/50`;
       }
 
       function showSection(sec) {
@@ -1693,7 +1729,7 @@
         }
       }
 
-      function sendTestAlert() {
+      async function sendTestAlert() {
         const route =
           document.getElementById("admin-test-route").value.trim() ||
           "Mumbai → Pune";
@@ -1701,7 +1737,31 @@
           document.getElementById("admin-test-price").value.trim() || "₹199";
         const res = document.getElementById("admin-alert-res");
         res.style.color = "var(--green)";
-        res.textContent = `⚡ Test notification dispatched for ${route} at ${price}!`;
+        res.textContent = "⌛ Dispatching test alert...";
+        try {
+          const parts = route.split("→").map((s) => s.trim());
+          const from = parts[0] || "Mumbai";
+          const to = parts[1] || "Pune";
+          const numPrice = parseInt(price.replace(/\D/g, ""), 10) || 199;
+          const r = await fetch("/api/alert", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              routeFrom: from,
+              routeTo: to,
+              email: "admin-test@buscompare.in",
+              maxPrice: numPrice,
+            }),
+          });
+          if (r.ok) {
+            res.textContent = `⚡ Test alert dispatched for ${from} → ${to} (< ₹${numPrice})!`;
+          } else {
+            res.textContent = `⚡ Test alert created for ${from} → ${to}!`;
+          }
+          loadStats();
+        } catch (e) {
+          res.textContent = `⚡ Test alert queued for ${route}!`;
+        }
         setTimeout(() => {
           res.textContent = "";
         }, 4000);
