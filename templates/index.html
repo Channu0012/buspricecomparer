@@ -18,6 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
       :root {
         --bg: #060a13;
@@ -3649,6 +3650,48 @@
         }
       }
 
+      /* MOBILE FLOATING DOCK STYLING */
+      .mobile-floating-dock {
+        display: none;
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 990;
+        background: rgba(12, 18, 32, 0.92);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 6px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        gap: 6px;
+      }
+      .mfd-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border);
+        color: var(--t);
+        border-radius: 100px;
+        padding: 8px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        font-family: inherit;
+      }
+      .mfd-btn.primary {
+        background: linear-gradient(135deg, var(--p), var(--pd));
+        color: #fff;
+        border: none;
+      }
+      @media (max-width: 768px) {
+        .mobile-floating-dock {
+          display: flex;
+        }
+      }
+
       /* ── MILLION DOLLAR MOBILE DRAWER & RESPONSIVE SYSTEM ── */
       .nav-hamburger {
         display: none;
@@ -4288,6 +4331,29 @@
                   />
                   <div class="ac-dd" id="ac-to"></div>
                 </div>
+              </div>
+              <div
+                class="sw-field"
+                style="display: flex; align-items: flex-end"
+              >
+                <button
+                  class="btn-swap-cities"
+                  id="btn-swap-cities"
+                  onclick="swapCities()"
+                  title="Swap Cities"
+                  style="
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.06);
+                    border: 1px solid var(--border);
+                    border-radius: 12px;
+                    padding: 12px;
+                    color: var(--p);
+                    font-size: 18px;
+                    cursor: pointer;
+                  "
+                >
+                  ⇆
+                </button>
               </div>
               <div class="sw-field">
                 <label class="sw-label">📅 Date</label>
@@ -5593,6 +5659,22 @@
       </div>
     </div>
 
+    <!-- MOBILE FLOATING QUICK ACTION DOCK -->
+    <div class="mobile-floating-dock" id="mobile-floating-dock">
+      <button class="mfd-btn" onclick="openModal('modal-spin-win')">
+        <span>🎡</span> Spin & Win
+      </button>
+      <button
+        class="mfd-btn primary"
+        onclick="window.location.href = '/search'"
+      >
+        <span>🔍</span> Search Buses
+      </button>
+      <button class="mfd-btn" onclick="openModal('modal-coins')">
+        <span>🪙</span> Rewards
+      </button>
+    </div>
+
     <!-- FOOTER -->
     <footer>
       <div class="ft-in">
@@ -5811,6 +5893,83 @@
     </footer>
 
     <!-- ===================== MODALS ===================== -->
+
+    <!-- SPIN & WIN MODAL -->
+    <div class="modal-ov" id="modal-spin-win">
+      <div class="modal-box" style="text-align: center; max-width: 440px">
+        <button class="modal-close" onclick="closeModal('modal-spin-win')">
+          ✕
+        </button>
+        <div style="font-size: 36px; margin-bottom: 8px">🎡</div>
+        <h2
+          style="
+            font-family: &quot;Outfit&quot;, sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--t);
+          "
+        >
+          Spin & Win Rewards!
+        </h2>
+        <p style="font-size: 13px; color: var(--ts); margin-bottom: 20px">
+          Wager 20 BusCoins to spin the Fortune Wheel & win instant discount
+          vouchers!
+        </p>
+
+        <div
+          style="
+            position: relative;
+            width: 260px;
+            height: 260px;
+            margin: 0 auto 20px;
+          "
+        >
+          <canvas
+            id="wheel-canvas"
+            width="260"
+            height="260"
+            style="
+              width: 260px;
+              height: 260px;
+              border-radius: 50%;
+              box-shadow: 0 0 30px rgba(249, 115, 22, 0.3);
+            "
+          ></canvas>
+          <div
+            style="
+              position: absolute;
+              top: -10px;
+              left: 50%;
+              transform: translateX(-50%);
+              width: 0;
+              height: 0;
+              border-left: 12px solid transparent;
+              border-right: 12px solid transparent;
+              border-top: 20px solid var(--p);
+              z-index: 10;
+            "
+          ></div>
+        </div>
+
+        <button
+          class="btn-primary"
+          id="btn-spin-wheel"
+          onclick="spinFortuneWheel()"
+          style="width: 100%; padding: 14px; font-size: 16px"
+        >
+          🎡 Spin Wheel (Costs 20 🪙)
+        </button>
+        <div
+          id="wheel-result-msg"
+          style="
+            margin-top: 14px;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--green);
+          "
+        ></div>
+      </div>
+    </div>
 
     <!-- VIP MODAL -->
     <div class="modal-ov" id="modal-vip">
@@ -7294,6 +7453,132 @@
         const ov = document.getElementById("mobile-nav-overlay");
         if (ov) ov.classList.toggle("active");
       }
+
+      /* ── FORTUNE WHEEL GAMIFICATION LOGIC ── */
+      const WHEEL_ITEMS = [
+        { label: "🎟️ ₹100 OFF", code: "BUSCOMP100", color: "#F97316" },
+        { label: "👑 VIP Pass", code: "VIP-PASS", color: "#3B82F6" },
+        { label: "🪙 +100 Coins", code: "COINS100", color: "#10B981" },
+        { label: "🎟️ ₹50 OFF", code: "SUPERBUS50", color: "#8B5CF6" },
+        { label: "⚡ 10% Cashback", code: "CASHBACK10", color: "#F59E0B" },
+        { label: "🎟️ ₹150 OFF", code: "FIRSTBUS150", color: "#EC4899" },
+      ];
+      let _wheelAngle = 0;
+      let _isSpinning = false;
+
+      function drawWheel() {
+        const canvas = document.getElementById("wheel-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const cx = 130,
+          cy = 130,
+          radius = 120;
+        const slice = (2 * Math.PI) / WHEEL_ITEMS.length;
+
+        ctx.clearRect(0, 0, 260, 260);
+
+        WHEEL_ITEMS.forEach((item, i) => {
+          const startAngle = _wheelAngle + i * slice;
+          const endAngle = startAngle + slice;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, radius, startAngle, endAngle);
+          ctx.fillStyle = item.color;
+          ctx.fill();
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = "#0F172A";
+          ctx.stroke();
+
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(startAngle + slice / 2);
+          ctx.textAlign = "right";
+          ctx.fillStyle = "#FFF";
+          ctx.font = "bold 11px Outfit, sans-serif";
+          ctx.fillText(item.label, radius - 12, 4);
+          ctx.restore();
+        });
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, 22, 0, 2 * Math.PI);
+        ctx.fillStyle = "#0C1220";
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#F97316";
+        ctx.stroke();
+        ctx.fillStyle = "#FFF";
+        ctx.font = "bold 14px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("🚌", cx, cy + 5);
+      }
+
+      function spinFortuneWheel() {
+        if (_isSpinning) return;
+        _isSpinning = true;
+        const btn = document.getElementById("btn-spin-wheel");
+        const resMsg = document.getElementById("wheel-result-msg");
+        btn.disabled = true;
+        resMsg.textContent = "🌀 Spinning the wheel...";
+
+        const spinRotations = 5 + Math.floor(Math.random() * 5);
+        const winIndex = Math.floor(Math.random() * WHEEL_ITEMS.length);
+        const slice = (2 * Math.PI) / WHEEL_ITEMS.length;
+        const targetAngle =
+          spinRotations * 2 * Math.PI +
+          (WHEEL_ITEMS.length - winIndex - 0.5) * slice -
+          Math.PI / 2;
+
+        const start = performance.now();
+        const duration = 4000;
+        const initialAngle = _wheelAngle;
+
+        function animate(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          _wheelAngle = initialAngle + (targetAngle - initialAngle) * easeOut;
+          drawWheel();
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            _isSpinning = false;
+            btn.disabled = false;
+            const won = WHEEL_ITEMS[winIndex];
+            resMsg.textContent = `🎉 WINNER! You unlocked: ${won.label}! Code: ${won.code}`;
+            if (window.confetti) {
+              window.confetti({
+                particleCount: 100,
+                spread: 80,
+                origin: { y: 0.6 },
+              });
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+
+      function swapCities() {
+        const f = document.getElementById("home-from");
+        const t = document.getElementById("home-to");
+        const btn = document.getElementById("btn-swap-cities");
+        if (f && t) {
+          const tmp = f.value;
+          f.value = t.value;
+          t.value = tmp;
+          if (btn) {
+            btn.style.transition = "transform 0.4s ease";
+            btn.style.transform =
+              btn.style.transform === "rotate(180deg)"
+                ? "rotate(0deg)"
+                : "rotate(180deg)";
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(drawWheel, 300);
+      });
     </script>
   </body>
 </html>
