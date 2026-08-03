@@ -7393,12 +7393,21 @@
 
       // ── MODAL SYSTEM ─────────────────────────────────────────────────────────
       function openModal(id) {
-        document.getElementById(id).classList.add("open");
-        document.body.style.overflow = "hidden";
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.add("open");
+          document.body.style.overflow = "hidden";
+          if (id === "modal-spin-win" && typeof drawWheel === "function") {
+            setTimeout(drawWheel, 100);
+          }
+        }
       }
       function closeModal(id) {
-        document.getElementById(id).classList.remove("open");
-        document.body.style.overflow = "";
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.remove("open");
+          document.body.style.overflow = "";
+        }
       }
       document.querySelectorAll(".modal-ov").forEach((ov) => {
         ov.addEventListener("click", (e) => {
