@@ -1314,13 +1314,60 @@
         padding: 5px 14px;
       }
 
-      @media (max-width: 900px) {
+      /* RESPONSIVE SYSTEM FOR MOBILE & TABLETS */
+      @media (max-width: 992px) {
         .main-layout {
           grid-template-columns: 1fr;
         }
         .sidebar {
           position: static;
           max-height: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .cs-bar {
+          flex-wrap: wrap;
+          border-radius: 18px;
+          padding: 8px 12px;
+          gap: 6px;
+        }
+        .cs-input {
+          width: 42%;
+        }
+        .cs-date-inp {
+          width: 55%;
+        }
+        .cs-search-btn {
+          width: 40%;
+        }
+        .sp-topbar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .bus-card {
+          padding: 16px;
+        }
+        .bc-route-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .price-chips-container {
+          overflow-x: auto;
+          padding-bottom: 4px;
+        }
+      }
+      @media (max-width: 480px) {
+        .cs-input {
+          width: 100%;
+        }
+        .cs-date-inp,
+        .cs-search-btn {
+          width: 100%;
+        }
+        .sp-route-title {
+          font-size: 20px;
         }
       }
     </style>
