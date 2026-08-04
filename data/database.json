@@ -5991,6 +5991,22 @@
       "timestamp": "2026-08-04T16:48:38.244Z",
       "price": 2499,
       "route": "Flight Deal"
+    },
+    {
+      "id": "clk-cd355c4a",
+      "platform": "abhibus",
+      "busId": "bus-004",
+      "timestamp": "2026-08-04T17:06:00.333Z",
+      "price": 1750,
+      "route": "Mumbai → Goa"
+    },
+    {
+      "id": "clk-21ab6b87",
+      "platform": "abhibus",
+      "busId": "dyn-bus-kal-goa-vrl-1",
+      "timestamp": "2026-08-04T17:06:39.915Z",
+      "price": null,
+      "route": "unknown"
     }
   ],
   "flights": [
@@ -6725,19 +6741,19 @@
     }
   ],
   "admin": {
-    "totalClicks": 2,
-    "totalSearches": 492,
+    "totalClicks": 4,
+    "totalSearches": 495,
     "totalReviews": 47,
     "totalAlerts": 40,
     "flightClicks": 3,
     "priceLocksCount": 23,
     "vipSubscriptionsCount": 45,
-    "busAffiliateRevenue": 160,
+    "busAffiliateRevenue": 320,
     "flightAffiliateRevenue": 1350,
     "priceLockRevenue": 897,
     "vipRevenue": 8855,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 12493,
+    "revenueEstimate": 12653,
     "lastReset": "2026-07-27",
     "insurancePoliciesCount": 20,
     "insuranceRevenue": 1296
