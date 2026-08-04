@@ -246,6 +246,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        flex-shrink: 0;
       }
       .top-select {
         background: rgba(255, 255, 255, 0.06);
@@ -262,6 +263,127 @@
       .top-select option {
         background: var(--card);
         color: var(--t);
+      }
+
+      /* ── LANGUAGE PICKER ── */
+      .lang-picker {
+        position: relative;
+      }
+      .lang-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--bl);
+        border-radius: 100px;
+        padding: 6px 14px 6px 10px;
+        color: var(--t);
+        font-size: 12px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all var(--tr);
+        white-space: nowrap;
+        user-select: none;
+      }
+      .lang-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(249, 115, 22, 0.4);
+        color: var(--p);
+      }
+      .lang-btn.active {
+        background: var(--pg);
+        border-color: rgba(249, 115, 22, 0.5);
+        color: var(--p);
+      }
+      .lang-btn-flag { font-size: 15px; line-height: 1; }
+      .lang-btn-label { letter-spacing: 0.02em; }
+      .lang-btn-arrow {
+        font-size: 9px;
+        opacity: 0.6;
+        transition: transform var(--tr);
+        margin-left: 2px;
+      }
+      .lang-btn.active .lang-btn-arrow { transform: rotate(180deg); }
+
+      .lang-dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        min-width: 210px;
+        background: #1a2236;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 16px;
+        padding: 8px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(249,115,22,0.1);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+      .lang-dropdown.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+      }
+      .lang-dd-header {
+        font-size: 10px;
+        font-weight: 800;
+        color: var(--ts);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 4px 10px 8px;
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background var(--tr);
+        position: relative;
+      }
+      .lang-option:hover {
+        background: rgba(255,255,255,0.06);
+      }
+      .lang-option.selected {
+        background: var(--pg);
+      }
+      .lang-option-flag { font-size: 20px; line-height: 1; flex-shrink: 0; }
+      .lang-option-info { flex: 1; }
+      .lang-option-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--t);
+        display: block;
+      }
+      .lang-option-native {
+        font-size: 11px;
+        color: var(--ts);
+        display: block;
+        margin-top: 1px;
+      }
+      .lang-option-check {
+        font-size: 14px;
+        color: var(--p);
+        opacity: 0;
+        transition: opacity 0.15s;
+      }
+      .lang-option.selected .lang-option-check { opacity: 1; }
+      .lang-option.en-lock { cursor: default; }
+      .lang-option.en-lock .lang-option-name::after {
+        content: ' (Default)';
+        font-size: 10px;
+        color: var(--p);
+        font-weight: 600;
+        opacity: 0.8;
+      }
+      .lang-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 6px 2px;
       }
 
       /* ── LAYOUT ── */
@@ -1329,6 +1451,11 @@
           align-items: stretch;
           gap: 10px;
         }
+        /* Language dropdown opens downward on tablet too */
+        .lang-dropdown {
+          right: auto;
+          left: 0;
+        }
       }
 
       @media (max-width: 768px) {
@@ -1473,16 +1600,83 @@
             <option value="GBP">£ GBP</option>
             <option value="AED">د.إ AED</option>
           </select>
-          <select
-            id="lang-sel"
-            class="top-select"
-            onchange="setLanguage(this.value)"
-          >
-            <option value="EN">🌐 EN</option>
-            <option value="HI">🇮🇳 हिंदी</option>
-            <option value="KA">🇮🇳 ಕನ್ನಡ</option>
-            <option value="TA">🇮🇳 தமிழ்</option>
-          </select>
+
+          <!-- PREMIUM LANGUAGE PICKER -->
+          <div class="lang-picker" id="lang-picker">
+            <button class="lang-btn" id="lang-btn" onclick="toggleLangDropdown()" aria-label="Select language" aria-expanded="false">
+              <span class="lang-btn-flag" id="lang-btn-flag">🌐</span>
+              <span class="lang-btn-label" id="lang-btn-label">EN</span>
+              <span class="lang-btn-arrow">▾</span>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown" role="listbox" aria-label="Language options">
+              <div class="lang-dd-header">Choose Language</div>
+
+              <!-- English – always default, always shown first -->
+              <div class="lang-option en-lock selected" id="lang-opt-en" role="option"
+                   data-lang="en" data-flag="🌐" data-label="EN" onclick="selectLanguage('en','🌐','EN')">
+                <span class="lang-option-flag">🌐</span>
+                <div class="lang-option-info">
+                  <span class="lang-option-name">English</span>
+                  <span class="lang-option-native">Always available</span>
+                </div>
+                <span class="lang-option-check">✓</span>
+              </div>
+
+              <div class="lang-divider"></div>
+
+              <!-- Other Indian languages -->
+              <div class="lang-option" id="lang-opt-hi" role="option"
+                   data-lang="hi" data-flag="🇮🇳" data-label="हिंदी" onclick="selectLanguage('hi','🇮🇳','HI')">
+                <span class="lang-option-flag">🇮🇳</span>
+                <div class="lang-option-info">
+                  <span class="lang-option-name">Hindi</span>
+                  <span class="lang-option-native">हिंदी</span>
+                </div>
+                <span class="lang-option-check">✓</span>
+              </div>
+
+              <div class="lang-option" id="lang-opt-te" role="option"
+                   data-lang="te" data-flag="🏛️" data-label="తెలుగు" onclick="selectLanguage('te','🏛️','TE')">
+                <span class="lang-option-flag">🏛️</span>
+                <div class="lang-option-info">
+                  <span class="lang-option-name">Telugu</span>
+                  <span class="lang-option-native">తెలుగు</span>
+                </div>
+                <span class="lang-option-check">✓</span>
+              </div>
+
+              <div class="lang-option" id="lang-opt-ta" role="option"
+                   data-lang="ta" data-flag="🌺" data-label="தமிழ்" onclick="selectLanguage('ta','🌺','TA')">
+                <span class="lang-option-flag">🌺</span>
+                <div class="lang-option-info">
+                  <span class="lang-option-name">Tamil</span>
+                  <span class="lang-option-native">தமிழ்</span>
+                </div>
+                <span class="lang-option-check">✓</span>
+              </div>
+
+              <div class="lang-option" id="lang-opt-kn" role="option"
+                   data-lang="kn" data-flag="🌸" data-label="ಕನ್ನಡ" onclick="selectLanguage('kn','🌸','KN')">
+                <span class="lang-option-flag">🌸</span>
+                <div class="lang-option-info">
+                  <span class="lang-option-name">Kannada</span>
+                  <span class="lang-option-native">ಕನ್ನಡ</span>
+                </div>
+                <span class="lang-option-check">✓</span>
+              </div>
+
+              <div class="lang-option" id="lang-opt-bn" role="option"
+                   data-lang="bn" data-flag="🐟" data-label="বাংলা" onclick="selectLanguage('bn','🐟','BN')">
+                <span class="lang-option-flag">🐟</span>
+                <div class="lang-option-info">
+                  <span class="lang-option-name">Bengali</span>
+                  <span class="lang-option-native">বাংলা</span>
+                </div>
+                <span class="lang-option-check">✓</span>
+              </div>
+            </div>
+          </div>
+          <!-- END LANGUAGE PICKER -->
         </div>
       </div>
     </nav>
@@ -2118,9 +2312,131 @@
         renderBuses(sortBuses(allBuses, currentSort));
       }
 
+      /* ── PREMIUM LANGUAGE PICKER LOGIC ── */
+      let _langDropdownOpen = false;
+      let _currentLangCode = 'en';
+      // Cached translations so we don't re-fetch on every toggle
+      const _translationCache = {};
+
+      function toggleLangDropdown() {
+        _langDropdownOpen = !_langDropdownOpen;
+        const dd  = document.getElementById('lang-dropdown');
+        const btn = document.getElementById('lang-btn');
+        if (!dd || !btn) return;
+        dd.classList.toggle('open', _langDropdownOpen);
+        btn.classList.toggle('active', _langDropdownOpen);
+        btn.setAttribute('aria-expanded', String(_langDropdownOpen));
+      }
+
+      // Close picker when clicking outside
+      document.addEventListener('click', function(e) {
+        const picker = document.getElementById('lang-picker');
+        if (picker && !picker.contains(e.target) && _langDropdownOpen) {
+          _langDropdownOpen = false;
+          const dd  = document.getElementById('lang-dropdown');
+          const btn = document.getElementById('lang-btn');
+          if (dd)  dd.classList.remove('open');
+          if (btn) { btn.classList.remove('active'); btn.setAttribute('aria-expanded','false'); }
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && _langDropdownOpen) toggleLangDropdown();
+      });
+
+      async function selectLanguage(langCode, flag, shortLabel) {
+        // Mark all options deselected, mark chosen one selected
+        document.querySelectorAll('.lang-option').forEach(el => el.classList.remove('selected'));
+        const chosen = document.getElementById('lang-opt-' + langCode);
+        if (chosen) chosen.classList.add('selected');
+
+        // Update button face
+        const btnFlag  = document.getElementById('lang-btn-flag');
+        const btnLabel = document.getElementById('lang-btn-label');
+        if (btnFlag)  btnFlag.textContent  = flag;
+        if (btnLabel) btnLabel.textContent = shortLabel;
+
+        _currentLangCode = langCode;
+        currentLang = langCode.toUpperCase();
+
+        // Close dropdown
+        toggleLangDropdown();
+
+        // English = reset everything to English defaults (no API needed)
+        if (langCode === 'en') {
+          _applyTranslations({
+            search_placeholder_from : 'From (e.g. Mumbai)',
+            search_placeholder_to   : 'To (e.g. Goa)',
+            search_btn              : '🔍 Search',
+            book_now                : 'Book Now ↗',
+            lock_price              : 'Lock Price @ ₹39',
+            nav_home                : 'Home',
+            nav_search              : 'Search',
+            nav_alerts              : 'Price Alerts',
+            nav_corporate           : 'Corporate',
+            nav_operators           : 'For Operators',
+            nav_admin               : 'Admin'
+          });
+          showToast('Switched to English 🌐', '✅');
+          return;
+        }
+
+        // Fetch from API (with cache)
+        try {
+          if (!_translationCache[langCode]) {
+            const res  = await fetch('/api/translations/' + langCode);
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            _translationCache[langCode] = await res.json();
+          }
+          _applyTranslations(_translationCache[langCode]);
+          const names = { hi:'Hindi हिंदी', te:'Telugu తెలుగు', ta:'Tamil தமிழ்', kn:'Kannada ಕನ್ನಡ', bn:'Bengali বাংলা' };
+          showToast('Switched to ' + (names[langCode] || langCode) + ' 🌐', '✅');
+        } catch(err) {
+          console.error('Language load failed:', err);
+          showToast('Language unavailable, using English', '⚠️');
+          selectLanguage('en','🌐','EN');
+        }
+      }
+
+      function _applyTranslations(t) {
+        // Search bar placeholders
+        const fromInput = document.getElementById('search-from');
+        const toInput   = document.getElementById('search-to');
+        if (fromInput && t.search_placeholder_from) fromInput.placeholder = t.search_placeholder_from;
+        if (toInput   && t.search_placeholder_to)   toInput.placeholder   = t.search_placeholder_to;
+
+        // Search button text
+        const searchBtnEl = document.querySelector('.cs-search-btn');
+        if (searchBtnEl && t.search_btn) searchBtnEl.textContent = t.search_btn;
+
+        // All "Book Now" buttons
+        if (t.book_now) {
+          document.querySelectorAll('[data-i18n="book_now"]').forEach(el => el.textContent = t.book_now);
+        }
+        // All "Lock Price" buttons
+        if (t.lock_price) {
+          document.querySelectorAll('[data-i18n="lock_price"]').forEach(el => el.textContent = t.lock_price);
+        }
+
+        // Nav links
+        const navMap = {
+          'nav-link-home'      : t.nav_home,
+          'nav-link-search'    : t.nav_search,
+          'nav-link-alerts'    : t.nav_alerts,
+          'nav-link-corporate' : t.nav_corporate,
+          'nav-link-operators' : t.nav_operators,
+          'nav-link-admin'     : t.nav_admin
+        };
+        Object.entries(navMap).forEach(([id, val]) => {
+          const el = document.getElementById(id);
+          if (el && val) el.textContent = val;
+        });
+      }
+
+      // Legacy shim — keep backward-compat if anything calls setLanguage directly
       function setLanguage(lang) {
-        currentLang = lang;
-        showToast(`Language set to ${lang}`, "🌐");
+        selectLanguage(lang.toLowerCase(), '🌐', lang.toUpperCase());
       }
 
       function swapSearchCities() {

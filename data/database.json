@@ -1512,7 +1512,7 @@
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
       "rating": 4.5,
-      "reviewCount": 41,
+      "reviewCount": 43,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -5458,6 +5458,29 @@
       "helpfulCount": 0,
       "verified": false,
       "platform": "buscompare"
+    },
+    {
+      "id": "REV-A130C605",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-08-04T17:19:10.138Z"
+    },
+    {
+      "id": "rev-e7711605",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-08-04",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
     }
   ],
   "popularRoutes": [
@@ -5996,6 +6019,30 @@
       "active": true,
       "createdAt": "2026-08-04T17:12:00.210Z",
       "triggeredCount": 0
+    },
+    {
+      "id": "alert-91265420",
+      "email": "alert_1785863950084@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-04T17:19:10.085Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-08ccdbde",
+      "email": "dup_1785863950087@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-04T17:19:10.088Z",
+      "triggeredCount": 0
     }
   ],
   "telemetry": [
@@ -6387,6 +6434,26 @@
       "phone": "9876543210",
       "email": "",
       "expiresAt": "2026-08-04T23:12:00.221Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-F2BAC970",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-04T23:18:39.908Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-1B14FB54",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-04T23:19:10.094Z",
       "status": "ACTIVE"
     }
   ],
@@ -6813,25 +6880,61 @@
       "pricePaid": 299,
       "createdAt": "2026-08-04T17:12:00.237Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-5636BED9",
+      "email": "vip_1785863919916@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-04T17:18:39.912Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-86B13F88",
+      "email": "vipa_1785863919917@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-04T17:18:39.915Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-F80275A1",
+      "email": "vip_1785863950100@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-04T17:19:10.100Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-33AD88AD",
+      "email": "vipa_1785863950102@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-04T17:19:10.104Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 4,
-    "totalSearches": 505,
-    "totalReviews": 49,
-    "totalAlerts": 42,
+    "totalSearches": 533,
+    "totalReviews": 51,
+    "totalAlerts": 44,
     "flightClicks": 3,
-    "priceLocksCount": 24,
-    "vipSubscriptionsCount": 47,
+    "priceLocksCount": 26,
+    "vipSubscriptionsCount": 51,
     "busAffiliateRevenue": 320,
     "flightAffiliateRevenue": 1350,
-    "priceLockRevenue": 936,
-    "vipRevenue": 9253,
+    "priceLockRevenue": 1014,
+    "vipRevenue": 10049,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 13155,
+    "revenueEstimate": 14094,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 21,
-    "insuranceRevenue": 1361
+    "insurancePoliciesCount": 22,
+    "insuranceRevenue": 1426
   },
   "coupons": [
     {
@@ -7200,6 +7303,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-08-04T17:12:00.262Z"
+    },
+    {
+      "id": "INS-6085D0F5",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-04T17:19:10.120Z"
     }
   ],
   "loyaltyUsers": [
@@ -7580,6 +7693,24 @@
       "referralCode": "BHARATBUS-1193-7TUE",
       "referralCount": 0,
       "joinedAt": "2026-08-04T17:12:00.276Z"
+    },
+    {
+      "id": "loyalty-3916979f",
+      "phone": "91024825166",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-5166-HVEY",
+      "referralCount": 0,
+      "joinedAt": "2026-08-04T17:19:10.124Z"
+    },
+    {
+      "id": "loyalty-0536739a",
+      "phone": "88807007802",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-7802-L1W0",
+      "referralCount": 0,
+      "joinedAt": "2026-08-04T17:19:10.129Z"
     }
   ],
   "referrals": [],
@@ -7856,6 +7987,19 @@
       "status": "NEW_LEAD",
       "estimatedMRR": 15000,
       "createdAt": "2026-08-04T17:12:00.293Z"
+    },
+    {
+      "id": "CORP-47C4FE6E",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1785863950144@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-08-04T17:19:10.144Z"
     }
   ],
   "operatorLeads": [
@@ -8131,6 +8275,19 @@
       "status": "NEW_LEAD",
       "estimatedPlan": "Enterprise (₹15,000/mo)",
       "createdAt": "2026-08-04T17:12:00.299Z"
+    },
+    {
+      "id": "OPR-217510A5",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1785863950150@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (₹15,000/mo)",
+      "createdAt": "2026-08-04T17:19:10.149Z"
     }
   ],
   "translations": {
