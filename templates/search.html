@@ -2015,17 +2015,28 @@
 
         const sp = new URLSearchParams(location.search);
         params = {
-          from: sp.get("from") || "",
-          to: sp.get("to") || "",
+          from: sp.get("from") || "Mumbai",
+          to: sp.get("to") || "Goa",
           date: sp.get("date") || "",
           busType: sp.get("busType") || "all",
         };
 
-        document.getElementById("cs-from").textContent = params.from || "—";
-        document.getElementById("cs-to").textContent = params.to || "—";
-        document.getElementById("cs-date").textContent = params.date
-          ? fmtDate(params.date)
-          : "Today";
+        if (document.getElementById("cs-from"))
+          document.getElementById("cs-from").textContent = params.from;
+        if (document.getElementById("cs-to"))
+          document.getElementById("cs-to").textContent = params.to;
+        if (document.getElementById("cs-date"))
+          document.getElementById("cs-date").textContent = params.date
+            ? fmtDate(params.date)
+            : "Today";
+
+        if (document.getElementById("search-from"))
+          document.getElementById("search-from").value = params.from;
+        if (document.getElementById("search-to"))
+          document.getElementById("search-to").value = params.to;
+        if (document.getElementById("search-date") && params.date)
+          document.getElementById("search-date").value = params.date;
+
         document.title = `${params.from} to ${params.to} Buses — BusCompare India`;
 
         loadResults();
