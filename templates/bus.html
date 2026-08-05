@@ -703,12 +703,85 @@
         padding: 12px 16px;
         text-align: center;
         margin-bottom: 16px;
+        animation: urgency-pulse 2s ease-in-out infinite;
+      }
+      @keyframes urgency-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3); }
+        50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
       }
       .bp-seats-text {
         font-size: 13px;
         font-weight: 700;
         color: var(--red);
       }
+
+      /* BUS PAGE WA FLOAT */
+      .b-wa-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 9000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+      .b-wa-tooltip {
+        background: #1a2236;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--t);
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(12px);
+        transition: all 0.25s;
+        pointer-events: none;
+      }
+      .b-wa-float:hover .b-wa-tooltip { opacity: 1; transform: translateX(0); }
+      .b-wa-btn {
+        width: 50px;
+        height: 50px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+        transition: all 0.2s;
+        animation: b-wa-pulse 3s ease-in-out infinite;
+      }
+      @keyframes b-wa-pulse {
+        0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+        50% { box-shadow: 0 6px 28px rgba(37,211,102,0.65), 0 0 0 6px rgba(37,211,102,0.1); }
+      }
+      .b-wa-btn:hover { transform: scale(1.1); }
+      .b-back-top {
+        position: fixed;
+        bottom: 90px;
+        right: 28px;
+        z-index: 9000;
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all 0.25s;
+        backdrop-filter: blur(10px);
+      }
+      .b-back-top.visible { opacity: 1; transform: translateY(0); }
+      .b-back-top:hover { background: var(--pg); border-color: rgba(249,115,22,0.4); }
       .bp-info-rows {
         display: flex;
         flex-direction: column;
@@ -1418,6 +1491,26 @@
           "_blank",
         );
       }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const bBackTop = document.getElementById('b-back-top');
+        window.addEventListener('scroll', () => {
+          if (bBackTop) bBackTop.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+      });
     </script>
+
+    <!-- FLOATING WHATSAPP CTA (Bus Page) -->
+    <div class="b-wa-float">
+      <div class="b-wa-tooltip">💬 Share this bus deal on WhatsApp</div>
+      <a href="javascript:void(0)" onclick="shareWhatsApp()" class="b-wa-btn" aria-label="Share deal on WhatsApp">
+        💬
+      </a>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="b-back-top" id="b-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+      ↑
+    </button>
   </body>
 </html>

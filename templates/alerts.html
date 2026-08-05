@@ -479,6 +479,12 @@
       .fs-emoji {
         font-size: 40px;
         margin-bottom: 12px;
+        animation: bounce 0.6s ease;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        40% { transform: translateY(-12px); }
+        70% { transform: translateY(-6px); }
       }
       .fs-title {
         font-size: 20px;
@@ -490,6 +496,141 @@
         font-size: 14px;
         color: var(--ts);
       }
+
+      /* ── LIVE PREVIEW CARD ── */
+      .live-preview-card {
+        background: linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(249,115,22,0.04) 100%);
+        border: 1px solid rgba(59,130,246,0.2);
+        border-radius: var(--r);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        animation: fadeUp 0.3s ease;
+      }
+      .lpc-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--blue);
+      }
+      .lpc-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--blue);
+        border-radius: 50%;
+        animation: blink 1.2s ease-in-out infinite;
+      }
+      .lpc-body {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .lpc-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .lpc-label {
+        font-size: 11px;
+        color: var(--ts);
+        font-weight: 600;
+        flex-shrink: 0;
+        width: 90px;
+      }
+      .lpc-value {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--t);
+        text-align: right;
+        flex: 1;
+        transition: color 0.2s;
+      }
+      .lpc-value.filled { color: var(--p); }
+      .lpc-route-display {
+        font-size: 16px;
+        font-weight: 900;
+        font-family: 'Outfit', sans-serif;
+        color: var(--t);
+        text-align: center;
+        margin: 4px 0 8px;
+        padding: 8px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 8px;
+      }
+      .lpc-sep { font-size: 20px; color: var(--p); }
+
+      /* ALERTS PAGE WA FLOAT */
+      .al-wa-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 9000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+      .al-wa-tooltip {
+        background: #1a2236;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--t);
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(12px);
+        transition: all 0.25s;
+        pointer-events: none;
+      }
+      .al-wa-float:hover .al-wa-tooltip { opacity: 1; transform: translateX(0); }
+      .al-wa-btn {
+        width: 50px;
+        height: 50px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        text-decoration: none;
+        box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+        transition: all 0.2s;
+        animation: al-wa-pulse 3s ease-in-out infinite;
+      }
+      @keyframes al-wa-pulse {
+        0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+        50% { box-shadow: 0 6px 28px rgba(37,211,102,0.65), 0 0 0 6px rgba(37,211,102,0.1); }
+      }
+      .al-wa-btn:hover { transform: scale(1.1); }
+      .al-back-top {
+        position: fixed;
+        bottom: 90px;
+        right: 28px;
+        z-index: 9000;
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all 0.25s;
+        backdrop-filter: blur(10px);
+      }
+      .al-back-top.visible { opacity: 1; transform: translateY(0); }
+      .al-back-top:hover { background: var(--pg); border-color: rgba(249,115,22,0.4); }
 
       /* POPULAR ALERT ROUTES */
       .pop-alerts {
@@ -934,6 +1075,34 @@
 
           <hr class="form-divider" />
 
+          <!-- LIVE PREVIEW CARD -->
+          <div class="live-preview-card" id="live-preview-card">
+            <div class="lpc-header"><div class="lpc-dot"></div> Live Preview — Your Alert</div>
+            <div class="lpc-route-display">
+              <span id="lpc-from" style="opacity:0.5">From</span>
+              <span class="lpc-sep"> → </span>
+              <span id="lpc-to" style="opacity:0.5">To</span>
+            </div>
+            <div class="lpc-body">
+              <div class="lpc-row">
+                <span class="lpc-label">📧 Email</span>
+                <span class="lpc-value" id="lpc-email">Not set</span>
+              </div>
+              <div class="lpc-row">
+                <span class="lpc-label">📱 WhatsApp</span>
+                <span class="lpc-value" id="lpc-wa">Not set</span>
+              </div>
+              <div class="lpc-row">
+                <span class="lpc-label">💰 Max Price</span>
+                <span class="lpc-value" id="lpc-price">Any drop</span>
+              </div>
+              <div class="lpc-row">
+                <span class="lpc-label">📋 Plan</span>
+                <span class="lpc-value" id="lpc-tier">Free</span>
+              </div>
+            </div>
+          </div>
+
           <div id="form-success" class="form-success">
             <div class="fs-emoji">🎉</div>
             <div class="fs-title">Alert Set Successfully!</div>
@@ -1361,6 +1530,77 @@
         );
         document.querySelectorAll(".fade-in").forEach((el) => obs.observe(el));
       }
+
+      // ── LIVE PREVIEW UPDATER ──
+      function updateLivePreview() {
+        const fromVal = document.getElementById("alert-from")?.value.trim();
+        const toVal = document.getElementById("alert-to")?.value.trim();
+        const emailVal = document.getElementById("alert-email")?.value.trim();
+        const waVal = document.getElementById("alert-wa")?.value.trim();
+        const maxVal = document.getElementById("alert-max")?.value.trim();
+        const tierVal = document.getElementById("alert-tier")?.value;
+
+        const lpcFrom = document.getElementById("lpc-from");
+        const lpcTo = document.getElementById("lpc-to");
+        const lpcEmail = document.getElementById("lpc-email");
+        const lpcWa = document.getElementById("lpc-wa");
+        const lpcPrice = document.getElementById("lpc-price");
+        const lpcTier = document.getElementById("lpc-tier");
+
+        if (lpcFrom) {
+          lpcFrom.textContent = fromVal || "From";
+          lpcFrom.style.opacity = fromVal ? "1" : "0.5";
+        }
+        if (lpcTo) {
+          lpcTo.textContent = toVal || "To";
+          lpcTo.style.opacity = toVal ? "1" : "0.5";
+        }
+        if (lpcEmail) {
+          lpcEmail.textContent = emailVal || "Not set";
+          lpcEmail.classList.toggle("filled", !!emailVal);
+        }
+        if (lpcWa) {
+          lpcWa.textContent = waVal ? `+91 ${waVal}` : "Not set";
+          lpcWa.classList.toggle("filled", !!waVal);
+        }
+        if (lpcPrice) {
+          lpcPrice.textContent = maxVal ? `< ₹${maxVal}` : "Any price drop";
+          lpcPrice.classList.toggle("filled", !!maxVal);
+        }
+        if (lpcTier) {
+          lpcTier.textContent = tierVal === "pro" ? "⭐ Pro Plan (₹99/mo)" : "Free Plan";
+          lpcTier.style.color = tierVal === "pro" ? "var(--gold)" : "var(--green)";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        ["alert-from", "alert-to", "alert-email", "alert-wa", "alert-max", "alert-tier"].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener("input", updateLivePreview);
+            el.addEventListener("change", updateLivePreview);
+          }
+        });
+        updateLivePreview();
+
+        const alBackTop = document.getElementById('al-back-top');
+        window.addEventListener('scroll', () => {
+          if (alBackTop) alBackTop.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+      });
     </script>
+
+    <!-- FLOATING WHATSAPP CTA (Alerts Page) -->
+    <div class="al-wa-float">
+      <div class="al-wa-tooltip">💬 Direct WhatsApp price alerts</div>
+      <a href="https://wa.me/919999000000?text=Hi%20BusCompare%2C%20I%20want%20to%20set%20a%20price%20alert!" target="_blank" class="al-wa-btn" aria-label="WhatsApp price alerts">
+        💬
+      </a>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="al-back-top" id="al-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+      ↑
+    </button>
   </body>
 </html>

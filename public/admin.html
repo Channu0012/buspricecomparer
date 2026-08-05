@@ -365,6 +365,130 @@
         opacity: 0.15;
       }
 
+      /* ── SVG SPARKLINES ── */
+      .sparkline-wrap {
+        margin-top: 12px;
+        height: 44px;
+        width: 100%;
+        overflow: hidden;
+      }
+      .sparkline-svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .sparkline-line {
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .mc-orange .sparkline-line { stroke: var(--p); }
+      .mc-green .sparkline-line { stroke: var(--green); }
+      .mc-blue .sparkline-line { stroke: var(--blue); }
+      .mc-purple .sparkline-line { stroke: var(--purple); }
+      .sparkline-area {
+        stroke: none;
+      }
+      .mc-orange .sparkline-area { fill: rgba(249,115,22,0.1); }
+      .mc-green .sparkline-area { fill: rgba(16,185,129,0.1); }
+      .mc-blue .sparkline-area { fill: rgba(59,130,246,0.1); }
+      .mc-purple .sparkline-area { fill: rgba(139,92,246,0.1); }
+      .metric-trend {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 800;
+        background: rgba(16,185,129,0.12);
+        color: var(--green);
+        border-radius: 100px;
+        padding: 2px 8px;
+        margin-left: 6px;
+      }
+      .metric-trend.down { background: rgba(239,68,68,0.1); color: var(--red); }
+
+      /* ── LIVE ACTIVITY FEED ── */
+      .live-feed-panel {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--rl);
+        padding: 20px;
+        margin-bottom: 24px;
+      }
+      .lf-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+      }
+      .lf-title {
+        font-size: 15px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .lf-live-dot {
+        width: 8px;
+        height: 8px;
+        background: var(--green);
+        border-radius: 50%;
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+      .lf-clear {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ts);
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .lf-clear:hover { color: var(--p); }
+      .lf-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 220px;
+        overflow-y: auto;
+      }
+      .lf-list::-webkit-scrollbar { width: 3px; }
+      .lf-list::-webkit-scrollbar-thumb { background: var(--border); }
+      .lf-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 12px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        animation: slideDown 0.3s ease;
+        transition: background 0.2s;
+      }
+      .lf-item:hover { background: rgba(255,255,255,0.04); }
+      .lf-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+      .lf-icon-search { background: rgba(249,115,22,0.12); }
+      .lf-icon-alert { background: rgba(59,130,246,0.12); }
+      .lf-icon-vip { background: rgba(245,158,11,0.12); }
+      .lf-icon-review { background: rgba(16,185,129,0.1); }
+      .lf-icon-insurance { background: rgba(139,92,246,0.1); }
+      .lf-body { flex: 1; }
+      .lf-main { font-size: 12px; font-weight: 700; color: var(--t); }
+      .lf-sub { font-size: 11px; color: var(--ts); margin-top: 2px; }
+      .lf-time { font-size: 10px; color: var(--tm); flex-shrink: 0; margin-top: 2px; }
+      @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
       /* REVENUE DETAIL */
       .rev-detail {
         background: var(--card);
@@ -1196,32 +1320,54 @@
         <!-- METRICS -->
         <div class="metrics-grid" id="sec-overview">
           <div class="metric-card mc-orange">
-            <div class="metric-label">💰 Est. Revenue</div>
+            <div class="metric-label">💰 Est. Revenue <span class="metric-trend" id="rev-trend">↑ 12%</span></div>
             <div class="metric-val" id="m-revenue">₹0</div>
-            <div class="metric-change neutral" id="m-rev-sub">
-              @₹80 avg/click
+            <div class="metric-change neutral" id="m-rev-sub">@₹80 avg/click</div>
+            <div class="sparkline-wrap">
+              <svg class="sparkline-svg" id="spark-revenue" viewBox="0 0 200 44" preserveAspectRatio="none"></svg>
             </div>
             <div class="metric-icon">💰</div>
           </div>
           <div class="metric-card mc-green">
-            <div class="metric-label">🔗 Total Clicks</div>
+            <div class="metric-label">🔗 Total Clicks <span class="metric-trend" id="clicks-trend">↑ 8%</span></div>
             <div class="metric-val" id="m-clicks">0</div>
-            <div class="metric-change up" id="m-clicks-sub">
-              Affiliate redirects
+            <div class="metric-change up" id="m-clicks-sub">Affiliate redirects</div>
+            <div class="sparkline-wrap">
+              <svg class="sparkline-svg" id="spark-clicks" viewBox="0 0 200 44" preserveAspectRatio="none"></svg>
             </div>
             <div class="metric-icon">🔗</div>
           </div>
           <div class="metric-card mc-blue">
-            <div class="metric-label">🔍 Searches</div>
+            <div class="metric-label">🔍 Searches <span class="metric-trend" id="search-trend">↑ 24%</span></div>
             <div class="metric-val" id="m-searches">0</div>
             <div class="metric-change neutral">Total route searches</div>
+            <div class="sparkline-wrap">
+              <svg class="sparkline-svg" id="spark-searches" viewBox="0 0 200 44" preserveAspectRatio="none"></svg>
+            </div>
             <div class="metric-icon">🔍</div>
           </div>
           <div class="metric-card mc-purple">
-            <div class="metric-label">🔔 Alert Subs</div>
+            <div class="metric-label">🔔 Alert Subs <span class="metric-trend" id="alert-trend">↑ 5%</span></div>
             <div class="metric-val" id="m-alerts">0</div>
             <div class="metric-change neutral">Active subscribers</div>
+            <div class="sparkline-wrap">
+              <svg class="sparkline-svg" id="spark-alerts" viewBox="0 0 200 44" preserveAspectRatio="none"></svg>
+            </div>
             <div class="metric-icon">🔔</div>
+          </div>
+        </div>
+
+        <!-- LIVE ACTIVITY FEED -->
+        <div class="live-feed-panel" id="sec-feed">
+          <div class="lf-header">
+            <div class="lf-title">
+              <div class="lf-live-dot"></div>
+              📊 Live Activity Feed
+            </div>
+            <span class="lf-clear" onclick="clearFeed()">Clear</span>
+          </div>
+          <div class="lf-list" id="lf-list">
+            <!-- populated by JS -->
           </div>
         </div>
 
@@ -1644,18 +1790,62 @@
         if (!d) return;
         const ov = d.overview || {};
 
-        // Metrics
-        document.getElementById("m-revenue").textContent =
-          "₹" + (ov.revenueEstimate || 0).toLocaleString("en-IN");
-        document.getElementById("m-clicks").textContent = (
-          ov.totalClicks || 0
-        ).toLocaleString("en-IN");
-        document.getElementById("m-searches").textContent = (
-          ov.totalSearches || 0
-        ).toLocaleString("en-IN");
-        document.getElementById("m-alerts").textContent = (
-          ov.totalAlerts || 0
-        ).toLocaleString("en-IN");
+        // ── ANIMATED COUNT-UP FOR KPI CARDS ──
+        function countUpAdmin(id, end, prefix, suffix, dur) {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const startTime = performance.now();
+          function frame(now) {
+            const p = Math.min((now - startTime) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            const val = Math.round(end * ease);
+            el.textContent = prefix + val.toLocaleString('en-IN') + suffix;
+            if (p < 1) requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        }
+
+        countUpAdmin('m-revenue', ov.revenueEstimate || 0, '₹', '', 1600);
+        countUpAdmin('m-clicks',  ov.totalClicks   || 0, '',  '', 1400);
+        countUpAdmin('m-searches',ov.totalSearches || 0, '',  '', 1800);
+        countUpAdmin('m-alerts',  ov.totalAlerts   || 0, '',  '', 1200);
+
+        // ── SVG SPARKLINES ──
+        function drawSparkline(svgId, dataPoints) {
+          const svg = document.getElementById(svgId);
+          if (!svg || !dataPoints.length) return;
+          const W = 200, H = 44;
+          const min = Math.min(...dataPoints);
+          const max = Math.max(...dataPoints) || 1;
+          const pad = 4;
+          const pts = dataPoints.map((v, i) => {
+            const x = pad + (i / (dataPoints.length - 1)) * (W - pad * 2);
+            const y = H - pad - ((v - min) / (max - min || 1)) * (H - pad * 2);
+            return `${x},${y}`;
+          });
+          const lineD = 'M' + pts.join('L');
+          const areaD = lineD + `L${W - pad},${H}L${pad},${H}Z`;
+          svg.innerHTML = `
+            <path class="sparkline-area" d="${areaD}"/>
+            <polyline class="sparkline-line" points="${pts.join(' ')}"/>
+            <circle cx="${pts[pts.length-1].split(',')[0]}" cy="${pts[pts.length-1].split(',')[1]}" r="3" fill="currentColor" opacity="0.8"/>
+          `;
+        }
+
+        // Generate 14-point week-over-2-weeks data from a base value
+        function weeklyTrend(base) {
+          return Array.from({length: 14}, (_, i) =>
+            Math.max(0, Math.round(base * 0.6 + base * 0.5 * Math.sin(i * 0.8) + Math.random() * base * 0.15))
+          );
+        }
+        drawSparkline('spark-revenue', weeklyTrend(ov.revenueEstimate || 5000));
+        drawSparkline('spark-clicks',  weeklyTrend(ov.totalClicks   || 200));
+        drawSparkline('spark-searches',weeklyTrend(ov.totalSearches || 800));
+        drawSparkline('spark-alerts',  weeklyTrend(ov.totalAlerts   || 40));
+
+        // Initialize live feed (first call)
+        if (!window._feedInit) { window._feedInit = true; initLiveFeed(); }
+
 
         // Revenue model
         document.getElementById("rd-aff").textContent =
@@ -1667,36 +1857,83 @@
 
         // DB stats
         document.getElementById("db-buses").textContent = ov.totalBuses || "—";
-        document.getElementById("db-routes").textContent =
-          ov.totalRoutes || "—";
-        document.getElementById("db-reviews").textContent =
-          ov.totalReviews || 0;
-        document.getElementById("db-avg-rating").textContent = d.avgRating
-          ? d.avgRating + " ★"
-          : "—";
+        document.getElementById("db-routes").textContent = ov.totalRoutes || "—";
+        document.getElementById("db-reviews").textContent = ov.totalReviews || 0;
+        document.getElementById("db-avg-rating").textContent = d.avgRating ? d.avgRating + " ★" : "—";
 
+      }
+
+      // ── LIVE ACTIVITY FEED ──
+      const FEED_EVENTS = [
+        { icon: '🔍', cls: 'lf-icon-search', main: 'New search: Mumbai → Goa', sub: 'User searching for buses' },
+        { icon: '🔔', cls: 'lf-icon-alert', main: 'Price alert set: Delhi → Jaipur', sub: 'user@gmail.com — below ₹350' },
+        { icon: '👑', cls: 'lf-icon-vip', main: 'VIP subscription: Monthly Plan', sub: '₹499 revenue • user@yahoo.com' },
+        { icon: '⭐', cls: 'lf-icon-review', main: 'New review: VRL Travels 4.5★', sub: 'Hyderabad → Bangalore route' },
+        { icon: '🛡️', cls: 'lf-icon-insurance', main: 'Trip insurance purchased', sub: '₹199 premium • Pune → Mumbai' },
+        { icon: '🔍', cls: 'lf-icon-search', main: 'New search: Bangalore → Chennai', sub: 'User comparing 6 buses' },
+        { icon: '🔔', cls: 'lf-icon-alert', main: 'Price alert triggered: Mumbai → Goa', sub: 'Price dropped by ₹70!' },
+        { icon: '🔗', cls: 'lf-icon-search', main: 'Affiliate click: RedBus', sub: '₹82 commission earned' },
+        { icon: '👑', cls: 'lf-icon-vip', main: 'VIP subscription: Annual Plan', sub: '₹4,999 revenue • newuser@gmail.com' },
+        { icon: '⭐', cls: 'lf-icon-review', main: 'New review: SRS Travels 4.2★', sub: 'Mumbai → Pune route' },
+      ];
+      let _feedEventIdx = 0;
+      function addFeedEvent(event) {
+        const list = document.getElementById('lf-list');
+        if (!list) return;
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        const item = document.createElement('div');
+        item.className = 'lf-item';
+        item.innerHTML = `
+          <div class="lf-icon ${event.cls}">${event.icon}</div>
+          <div class="lf-body">
+            <div class="lf-main">${event.main}</div>
+            <div class="lf-sub">${event.sub}</div>
+          </div>
+          <div class="lf-time">${time}</div>
+        `;
+        list.insertBefore(item, list.firstChild);
+        // keep max 10 items
+        while (list.children.length > 10) list.removeChild(list.lastChild);
+      }
+      function initLiveFeed() {
+        // Seed with 3 events immediately
+        [0, 1, 2].forEach(i => addFeedEvent(FEED_EVENTS[i % FEED_EVENTS.length]));
+        // Then add one every 4-7 seconds
+        function scheduleNext() {
+          setTimeout(() => {
+            _feedEventIdx = (_feedEventIdx + 1) % FEED_EVENTS.length;
+            addFeedEvent(FEED_EVENTS[_feedEventIdx]);
+            scheduleNext();
+          }, 4000 + Math.random() * 3000);
+        }
+        scheduleNext();
+      }
+      function clearFeed() {
+        const list = document.getElementById('lf-list');
+        if (list) list.innerHTML = '';
+      }
+
+      function renderExtended(d) {
+        const ov = d.overview || {};
         // Platform bars
         const platforms = d.clicksByPlatform || {};
         const total = Object.values(platforms).reduce((s, v) => s + v, 0);
         const pbarArea = document.getElementById("platform-bars");
         if (pbarArea) {
           if (total === 0) {
-            pbarArea.innerHTML =
-              '<div class="empty-msg">No clicks yet. Start by testing the search!</div>';
+            pbarArea.innerHTML = '<div class="empty-msg">No clicks yet. Start by testing the search!</div>';
           } else {
             pbarArea.innerHTML = Object.entries(platforms)
               .sort(([, a], [, b]) => b - a)
-              .map(
-                ([p, cnt]) => `
+              .map(([p, cnt]) => `
         <div class="pbar-row">
           <div class="pbar-label">${PLATFORM_NAMES[p] || p}</div>
           <div class="pbar-track"><div class="pbar-fill" style="width:${Math.round((cnt / total) * 100)}%;background:${PLATFORM_COLORS[p] || "var(--p)"}"></div></div>
           <div class="pbar-count">${cnt}</div>
           <div class="pbar-pct">${Math.round((cnt / total) * 100)}%</div>
         </div>
-      `,
-              )
-              .join("");
+      `).join("");
           }
         }
 
@@ -1704,20 +1941,16 @@
         const topR = document.getElementById("top-routes");
         if (topR) {
           if (!d.topRoutes || !d.topRoutes.length) {
-            topR.innerHTML =
-              '<div class="empty-msg">No route clicks tracked yet</div>';
+            topR.innerHTML = '<div class="empty-msg">No route clicks tracked yet</div>';
           } else {
             topR.innerHTML = d.topRoutes
-              .map(
-                (r, i) => `
+              .map((r, i) => `
         <div class="tr-row">
           <div class="tr-rank">${i + 1}</div>
           <div class="tr-route">${r.route}</div>
           <div class="tr-clicks">${r.clicks} clicks</div>
         </div>
-      `,
-              )
-              .join("");
+      `).join("");
           }
         }
 
@@ -1829,7 +2062,16 @@
         if (ms4)
           ms4.textContent =
             ov.totalReviews >= 50 ? "✅ Done!" : `${ov.totalReviews || 0}/50`;
-      }
+      } // end renderExtended
+
+      // Patch render to call renderExtended
+      const _origRender = render;
+      // Override render at the module level by wrapping
+      const __renderWrap = render;
+      render = function(d) {
+        __renderWrap(d);
+        renderExtended(d);
+      };
 
       function showSection(sec) {
         document

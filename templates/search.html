@@ -1342,12 +1342,8 @@
         border-radius: var(--r);
       }
       @keyframes shimmer {
-        0% {
-          background-position: 200% 0;
-        }
-        100% {
-          background-position: -200% 0;
-        }
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
       }
       .skel-card {
         background: var(--card);
@@ -1356,8 +1352,119 @@
         padding: 24px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
       }
+      .skel-row { display: flex; gap: 12px; align-items: center; }
+      .skel-circle { border-radius: 50%; flex-shrink: 0; }
+      .skel-btn-row { display: flex; gap: 10px; margin-top: 4px; }
+
+      /* AI INSIGHT BANNER */
+      .ai-insight-banner {
+        display: none;
+        background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.06) 100%);
+        border: 1px solid rgba(59,130,246,0.2);
+        border-radius: var(--rl);
+        padding: 16px 20px;
+        margin-bottom: 16px;
+        align-items: center;
+        gap: 14px;
+        animation: fadeUp 0.4s ease both;
+      }
+      .ai-insight-banner.show { display: flex; }
+      .ai-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .ai-text { flex: 1; }
+      .ai-title { font-size: 13px; font-weight: 800; color: var(--t); margin-bottom: 3px; }
+      .ai-sub { font-size: 12px; color: var(--ts); line-height: 1.5; }
+      .ai-best-day {
+        font-size: 11px;
+        font-weight: 800;
+        background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(16,185,129,0.08));
+        border: 1px solid rgba(16,185,129,0.25);
+        border-radius: 100px;
+        padding: 4px 12px;
+        color: var(--green);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      /* WHATSAPP + BACK-TO-TOP (search page) */
+      .s-wa-float {
+        position: fixed;
+        bottom: 28px;
+        right: 28px;
+        z-index: 9000;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+      .s-wa-tooltip {
+        background: #1a2236;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--t);
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(12px);
+        transition: all 0.25s;
+        pointer-events: none;
+      }
+      .s-wa-float:hover .s-wa-tooltip { opacity: 1; transform: translateX(0); }
+      .s-wa-btn {
+        width: 50px;
+        height: 50px;
+        background: #25d366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        text-decoration: none;
+        border: none;
+        box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+        transition: all 0.2s;
+        animation: wa-pulse-s 3s ease-in-out infinite;
+      }
+      @keyframes wa-pulse-s {
+        0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
+        50% { box-shadow: 0 6px 28px rgba(37,211,102,0.65), 0 0 0 6px rgba(37,211,102,0.1); }
+      }
+      .s-wa-btn:hover { transform: scale(1.1); }
+      .s-back-top {
+        position: fixed;
+        bottom: 90px;
+        right: 28px;
+        z-index: 9000;
+        width: 40px;
+        height: 40px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all 0.25s;
+        backdrop-filter: blur(10px);
+      }
+      .s-back-top.visible { opacity: 1; transform: translateY(0); }
+      .s-back-top:hover { background: var(--pg); border-color: rgba(249,115,22,0.4); }
 
       /* EMPTY STATE */
       .empty-state {
@@ -1981,21 +2088,82 @@
 
         <!-- SKELETON CARDS -->
         <div id="skeleton-area">
+          <!-- Skeleton card 1 -->
           <div class="skel-card" style="margin-bottom: 16px">
-            <div class="skeleton" style="height: 20px; width: 40%"></div>
-            <div class="skeleton" style="height: 60px"></div>
-            <div class="skeleton" style="height: 40px"></div>
+            <div class="skel-row">
+              <div class="skeleton skel-circle" style="width:40px;height:40px"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                <div class="skeleton" style="height:14px;width:55%"></div>
+                <div class="skeleton" style="height:11px;width:30%"></div>
+              </div>
+              <div class="skeleton" style="height:24px;width:80px;border-radius:100px"></div>
+            </div>
+            <div class="skel-row" style="justify-content:space-between">
+              <div class="skeleton" style="height:36px;width:80px"></div>
+              <div class="skeleton" style="height:8px;flex:1;margin:0 16px;border-radius:4px"></div>
+              <div class="skeleton" style="height:36px;width:80px"></div>
+            </div>
+            <div class="skeleton" style="height:16px;width:70%"></div>
+            <div class="skel-btn-row">
+              <div class="skeleton" style="height:40px;flex:1;border-radius:10px"></div>
+              <div class="skeleton" style="height:40px;flex:1;border-radius:10px"></div>
+              <div class="skeleton" style="height:40px;flex:2;border-radius:10px"></div>
+            </div>
           </div>
+          <!-- Skeleton card 2 -->
           <div class="skel-card" style="margin-bottom: 16px">
-            <div class="skeleton" style="height: 20px; width: 55%"></div>
-            <div class="skeleton" style="height: 60px"></div>
-            <div class="skeleton" style="height: 40px"></div>
+            <div class="skel-row">
+              <div class="skeleton skel-circle" style="width:40px;height:40px"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                <div class="skeleton" style="height:14px;width:45%"></div>
+                <div class="skeleton" style="height:11px;width:25%"></div>
+              </div>
+              <div class="skeleton" style="height:24px;width:70px;border-radius:100px"></div>
+            </div>
+            <div class="skel-row" style="justify-content:space-between">
+              <div class="skeleton" style="height:36px;width:80px"></div>
+              <div class="skeleton" style="height:8px;flex:1;margin:0 16px;border-radius:4px"></div>
+              <div class="skeleton" style="height:36px;width:80px"></div>
+            </div>
+            <div class="skeleton" style="height:16px;width:60%"></div>
+            <div class="skel-btn-row">
+              <div class="skeleton" style="height:40px;flex:1;border-radius:10px"></div>
+              <div class="skeleton" style="height:40px;flex:1;border-radius:10px"></div>
+              <div class="skeleton" style="height:40px;flex:2;border-radius:10px"></div>
+            </div>
           </div>
+          <!-- Skeleton card 3 -->
           <div class="skel-card">
-            <div class="skeleton" style="height: 20px; width: 35%"></div>
-            <div class="skeleton" style="height: 60px"></div>
-            <div class="skeleton" style="height: 40px"></div>
+            <div class="skel-row">
+              <div class="skeleton skel-circle" style="width:40px;height:40px"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+                <div class="skeleton" style="height:14px;width:50%"></div>
+                <div class="skeleton" style="height:11px;width:28%"></div>
+              </div>
+              <div class="skeleton" style="height:24px;width:90px;border-radius:100px"></div>
+            </div>
+            <div class="skel-row" style="justify-content:space-between">
+              <div class="skeleton" style="height:36px;width:80px"></div>
+              <div class="skeleton" style="height:8px;flex:1;margin:0 16px;border-radius:4px"></div>
+              <div class="skeleton" style="height:36px;width:80px"></div>
+            </div>
+            <div class="skeleton" style="height:16px;width:65%"></div>
+            <div class="skel-btn-row">
+              <div class="skeleton" style="height:40px;flex:1;border-radius:10px"></div>
+              <div class="skeleton" style="height:40px;flex:1;border-radius:10px"></div>
+              <div class="skeleton" style="height:40px;flex:2;border-radius:10px"></div>
+            </div>
           </div>
+        </div>
+
+        <!-- AI INSIGHT BANNER -->
+        <div class="ai-insight-banner" id="ai-insight-banner">
+          <div class="ai-icon">🧠</div>
+          <div class="ai-text">
+            <div class="ai-title" id="ai-title">💡 Price Intelligence — Loading...</div>
+            <div class="ai-sub" id="ai-sub">Analyzing fare trends for this route...</div>
+          </div>
+          <div class="ai-best-day" id="ai-best-day">Checking...</div>
         </div>
 
         <!-- RESULTS LIST -->
@@ -2487,6 +2655,7 @@
 
           document.getElementById("skeleton-area").style.display = "none";
           document.getElementById("results-list").style.display = "flex";
+          loadAIInsight(); // populate AI insight banner
 
           if (d.route) {
             document.getElementById("route-info").style.display = "flex";
@@ -3048,6 +3217,49 @@
         toast.classList.add("show");
         setTimeout(() => toast.classList.remove("show"), 3000);
       }
+
+      // ── AI INSIGHT BANNER ──
+      async function loadAIInsight() {
+        if (!params.from || !params.to) return;
+        try {
+          const res = await fetch(`/api/price-trends?from=${encodeURIComponent(params.from)}&to=${encodeURIComponent(params.to)}`);
+          if (!res.ok) return;
+          const data = await res.json();
+          const banner = document.getElementById('ai-insight-banner');
+          const titleEl = document.getElementById('ai-title');
+          const subEl   = document.getElementById('ai-sub');
+          const dayEl   = document.getElementById('ai-best-day');
+          if (!banner || !data.cheapestDay) return;
+          const today = new Date().toLocaleDateString('en-US',{weekday:'long'});
+          const isBestToday = data.cheapestDay === today.slice(0,3);
+          titleEl.textContent = `💡 AI Insight — ${params.from} → ${params.to}`;
+          subEl.textContent = `${data.recommendation || ''} ${isBestToday ? '✅ Today is the best day to book!' : ''}`;
+          dayEl.textContent = `Best: ${data.cheapestDay} @ ₹${data.cheapestPrice}`;
+          banner.classList.add('show');
+        } catch(e) { /* fail silently */ }
+      }
+
+      // Back-to-top scroll handler
+      const sBackTop = document.getElementById('s-back-top');
+      window.addEventListener('scroll', () => {
+        if (sBackTop) sBackTop.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+
     </script>
+
+    <!-- FLOATING WHATSAPP CTA (Search Page) -->
+    <div class="s-wa-float">
+      <div class="s-wa-tooltip">💬 Get price alerts on WhatsApp</div>
+      <a href="https://wa.me/919999000000?text=Hi%20BusCompare%2C%20I%20want%20price%20alerts%20for%20buses!" target="_blank" class="s-wa-btn" aria-label="WhatsApp alerts">
+        💬
+      </a>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <button class="s-back-top" id="s-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+      ↑
+    </button>
+
   </body>
+
 </html>
