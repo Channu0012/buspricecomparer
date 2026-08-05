@@ -1787,6 +1787,14 @@
         }
       }
 
+      function updateExportLinks(token) {
+        const query = token && token !== "true" ? `?adminToken=${encodeURIComponent(token)}` : "";
+        const csvBtn = document.getElementById("export-csv-btn");
+        const jsonBtn = document.getElementById("export-json-btn");
+        if (csvBtn) csvBtn.href = `/api/admin/leads/export?format=csv${query ? "&adminToken=" + encodeURIComponent(token) : ""}`;
+        if (jsonBtn) jsonBtn.href = `/api/admin/leads/export?format=json${query ? "&adminToken=" + encodeURIComponent(token) : ""}`;
+      }
+
       function render(d) {
         if (!d) return;
         const ov = d.overview || {};
