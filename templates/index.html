@@ -6461,49 +6461,25 @@
         renderRoute();
       });
 
-      // ── SPA ROUTER ──────────────────────────────────────────────────────────
-      function nav(url, push = true) {
-        if (push) history.pushState({}, "", url);
-        renderRoute();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      // ── ROUTER ──────────────────────────────────────────────────────────────
+      function nav(url) {
+        if (!url) return;
+        window.location.href = url;
       }
 
       function renderRoute() {
         const path = location.pathname;
-        const sp = new URLSearchParams(location.search);
-
-        document
-          .querySelectorAll(".view")
-          .forEach((v) => v.classList.remove("active"));
-        document
-          .querySelectorAll(".nav-link")
-          .forEach((l) => l.classList.remove("active"));
-
-        const routes = {
-          "/": ["view-home", "nl-home"],
-          "/search": ["view-search", "nl-search"],
-          "/alerts": ["view-alerts", "nl-alerts"],
-          "/admin": ["view-admin", "nl-admin"],
-          "/corporate": ["view-corporate", "nl-corporate"],
-          "/operators": ["view-operators", "nl-operators"],
-          "/privacy": ["view-privacy", null],
-          "/terms": ["view-terms", null],
+        const links = {
+          "/": "nl-home",
+          "/search": "nl-search",
+          "/alerts": "nl-alerts",
+          "/admin": "nl-admin",
+          "/corporate": "nl-corporate",
+          "/operators": "nl-operators",
         };
-
-        let matched = routes[path];
-        if (!matched && path.startsWith("/search")) matched = routes["/search"];
-        if (!matched && path.startsWith("/bus/")) matched = routes["/"];
-        if (!matched) matched = routes["/"];
-
-        const [viewId, linkId] = matched;
-        document.getElementById(viewId)?.classList.add("active");
+        const linkId = links[path] || (path.startsWith("/search") ? "nl-search" : "nl-home");
+        document.querySelectorAll(".nav-link").forEach((l) => l.classList.remove("active"));
         if (linkId) document.getElementById(linkId)?.classList.add("active");
-
-        if (viewId === "view-search") {
-          const from = sp.get("from") || "Mumbai";
-          const to = sp.get("to") || "Goa";
-          loadSearch(from, to);
-        }
       }
 
       // ── THEME ────────────────────────────────────────────────────────────────
