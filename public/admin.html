@@ -1777,6 +1777,7 @@
           }
           const d = await r.json();
           render(d);
+          renderExtended(d);
           updateExportLinks(token);
           document.getElementById("last-updated").textContent =
             "Last updated: " + new Date().toLocaleTimeString("en-IN");
@@ -2064,14 +2065,9 @@
             ov.totalReviews >= 50 ? "✅ Done!" : `${ov.totalReviews || 0}/50`;
       } // end renderExtended
 
-      // Patch render to call renderExtended
-      const _origRender = render;
-      // Override render at the module level by wrapping
-      const __renderWrap = render;
-      render = function(d) {
-        __renderWrap(d);
-        renderExtended(d);
-      };
+      // renderExtended is called directly from render() — no override needed
+      // (render already ends at line 1864, renderExtended at 2065)
+      // We patch loadStats to call both after fetch completes:
 
       function showSection(sec) {
         document

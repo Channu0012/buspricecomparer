@@ -943,11 +943,66 @@
         font-size: 13px;
         font-weight: 700;
       }
-      .bc-seats.urgent {
+      .bc-seats.urgent-critical {
         color: var(--red);
+        animation: seats-pulse 1.5s ease-in-out infinite;
+      }
+      @keyframes seats-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+      }
+      .bc-seats.urgent {
+        color: var(--gold, #f59e0b);
       }
       .bc-seats.ok {
         color: var(--green);
+      }
+
+      /* \u2500\u2500 RESULTS SUMMARY BAR \u2500\u2500 */
+      .results-summary-bar {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--bl);
+        border-radius: var(--rl);
+        padding: 12px 20px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+        animation: fadeUp 0.4s ease both;
+      }
+      .rsb-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex: 1;
+        min-width: 80px;
+        justify-content: center;
+      }
+      .rsb-icon { font-size: 14px; }
+      .rsb-val {
+        font-family: 'Outfit', sans-serif;
+        font-size: 16px;
+        font-weight: 900;
+        color: var(--t);
+      }
+      .rsb-lbl {
+        font-size: 11px;
+        color: var(--ts);
+        font-weight: 600;
+      }
+      .rsb-divider {
+        width: 1px;
+        height: 28px;
+        background: var(--bl);
+        flex-shrink: 0;
+      }
+      @media (max-width: 480px) {
+        .results-summary-bar { padding: 10px 12px; }
+        .rsb-item { min-width: 60px; }
+        .rsb-val { font-size: 14px; }
+        .rsb-divider { display: none; }
       }
       .bc-btns {
         display: flex;
@@ -2382,14 +2437,24 @@
         direct: "Direct",
       };
       const BADGE_MAP = {
-        "best-value": { cls: "badge-best", label: "Best Value" },
-        popular: { cls: "badge-top", label: "Popular" },
-        "top-rated": { cls: "badge-top", label: "Top Rated" },
-        luxury: { cls: "badge-lux", label: "Luxury" },
-        government: { cls: "badge-gov", label: "Govt" },
-        budget: { cls: "badge-best", label: "Budget" },
-        fastest: { cls: "badge-best", label: "Fastest" },
-        "almost-full": { cls: "badge-full", label: "Almost Full" },
+        "best-value":    { cls: "badge-best",  label: "⚡ Best Deal Today" },
+        "budget-pick":   { cls: "badge-best",  label: "💰 Budget Pick" },
+        "cheapest":      { cls: "badge-best",  label: "💰 Cheapest" },
+        "earliest":      { cls: "badge-gov",   label: "⏰ Earliest" },
+        "eco-friendly":  { cls: "badge-lux",   label: "🌱 Eco-Friendly" },
+        "best-seller":   { cls: "badge-top",   label: "🔥 Best Seller" },
+        popular:         { cls: "badge-top",   label: "🔥 Popular" },
+        "top-rated":     { cls: "badge-top",   label: "⭐ Top Rated" },
+        luxury:          { cls: "badge-lux",   label: "👑 Luxury" },
+        "luxury-sleeper":{ cls: "badge-lux",   label: "👑 Luxury" },
+        government:      { cls: "badge-gov",   label: "🏛️ Govt" },
+        budget:          { cls: "badge-best",  label: "💰 Budget" },
+        fastest:         { cls: "badge-gov",   label: "⚡ Fastest" },
+        featured:        { cls: "badge-top",   label: "✨ Featured" },
+        "almost-full":   { cls: "badge-full",  label: "🔴 Almost Full" },
+        "smart-best-deal":{ cls: "badge-best", label: "⚡ Best Deal" },
+        "smart-top-rated":{ cls: "badge-top",  label: "⭐ Top Rated" },
+        "smart-fastest":  { cls: "badge-gov",  label: "⚡ Fastest" },
       };
 
       const CURR_RATES = {
@@ -2887,9 +2952,41 @@
           return;
         }
 
+        const cheapestId = buses.reduce((a, b) => (b.lowestPrice < a.lowestPrice ? b : a)).id;
+        const topRatedId = buses.reduce((a, b) => (b.rating > a.rating ? b : a)).id;
+        const fastestId = buses.reduce((a, b) => (b.route.durationMinutes < a.route.durationMinutes ? b : a)).id;
+
+        buses.forEach(b => {
+          b._smartBadges = [];
+          if (b.id === cheapestId) b._smartBadges.push('smart-best-deal');
+          if (b.id === topRatedId) b._smartBadges.push('smart-top-rated');
+          if (b.id === fastestId) b._smartBadges.push('smart-fastest');
+        });
+
+        const cheapestPrice = Math.min(...buses.map(b => b.lowestPrice));
+        const maxRoutePrice = Math.max(...buses.map(b => b.highestPrice || b.lowestPrice));
+        const avgSavings = maxRoutePrice - cheapestPrice;
+
+        let summaryBar = document.getElementById('results-summary-bar');
+        if (!summaryBar) {
+          summaryBar = document.createElement('div');
+          summaryBar.id = 'results-summary-bar';
+          summaryBar.className = 'results-summary-bar';
+          list.parentNode.insertBefore(summaryBar, list);
+        }
+        summaryBar.innerHTML = `
+          <div class="rsb-item"><span class="rsb-icon">🚌</span><span class="rsb-val">${buses.length}</span><span class="rsb-lbl">found</span></div>
+          <div class="rsb-divider"></div>
+          <div class="rsb-item"><span class="rsb-icon">💰</span><span class="rsb-val" style="color:var(--green)">₹${cheapestPrice.toLocaleString('en-IN')}</span><span class="rsb-lbl">cheapest</span></div>
+          <div class="rsb-divider"></div>
+          <div class="rsb-item"><span class="rsb-icon">💸</span><span class="rsb-val" style="color:var(--p)">₹${avgSavings.toLocaleString('en-IN')}</span><span class="rsb-lbl">avg savings</span></div>
+          <div class="rsb-divider"></div>
+          <div class="rsb-item"><span class="rsb-icon">⭐</span><span class="rsb-val">${(buses.reduce((a,b)=>a+b.rating,0)/buses.length).toFixed(1)}</span><span class="rsb-lbl">avg rating</span></div>
+        `;
+
         list.style.display = "flex";
         empty.style.display = "none";
-        cnt.innerHTML = `<em>${buses.length} bus${buses.length > 1 ? "es" : ""}</em> found — Compare & save!`;
+        cnt.innerHTML = `<em>${buses.length} bus${buses.length > 1 ? "es" : ""}</em> found — Compare & save up to <strong style="color:var(--green)">₹${avgSavings.toLocaleString('en-IN')}</strong>!`;
         list.innerHTML = buses.map((bus, idx) => buildCard(bus, idx)).join("");
       }
 
@@ -2901,8 +2998,14 @@
         const maxPrice = prices[prices.length - 1][1];
         const savings = cheapest ? maxPrice - cheapest[1] : 0;
 
+        const seatsUrgency = b.seatsLeft <= 3
+          ? `<div class="bc-seats urgent-critical">🔴 Only ${b.seatsLeft} seats! Book now</div>`
+          : b.seatsLeft <= 8
+            ? `<div class="bc-seats urgent">🟡 ${b.seatsLeft} seats left — filling fast</div>`
+            : `<div class="bc-seats ok">🟢 ${b.seatsLeft} seats available</div>`;
+
         const isChecked = selectedCompareIds.includes(b.id);
-        const badgesHtml = (b.badges || [])
+        const badgesHtml = [...(b.badges || []), ...(b._smartBadges || [])]
           .map((badge) => {
             const m = BADGE_MAP[badge];
             return m ? `<span class="badge ${m.cls}">${m.label}</span>` : "";
@@ -2974,7 +3077,7 @@
         <div class="prices-row">${priceChipsHtml}</div>
       </div>
       <div class="bc-cta">
-        <div class="bc-seats ok">🟢 ${b.seatsLeft} seats left</div>
+        ${seatsUrgency}
         <div class="bc-btns">
           <button class="bc-btn-secondary" onclick="openSeatModal('${b.id}')">🛋️ Preview Seats</button>
           <a href="/bus/${b.slug}" class="bc-btn-secondary">View Details</a>
@@ -3230,11 +3333,13 @@
           const subEl   = document.getElementById('ai-sub');
           const dayEl   = document.getElementById('ai-best-day');
           if (!banner || !data.cheapestDay) return;
-          const today = new Date().toLocaleDateString('en-US',{weekday:'long'});
-          const isBestToday = data.cheapestDay === today.slice(0,3);
+          // Fix: compare 3-letter abbreviations (Mon/Tue/Wed etc.)
+          const DAY_ABBR = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+          const todayAbbr = DAY_ABBR[new Date().getDay()];
+          const isBestToday = data.cheapestDay === todayAbbr;
           titleEl.textContent = `💡 AI Insight — ${params.from} → ${params.to}`;
-          subEl.textContent = `${data.recommendation || ''} ${isBestToday ? '✅ Today is the best day to book!' : ''}`;
-          dayEl.textContent = `Best: ${data.cheapestDay} @ ₹${data.cheapestPrice}`;
+          subEl.textContent = `${data.recommendation || ''} ${isBestToday ? ' ✅ Today is the best day to book!' : ''}`;
+          dayEl.textContent = `Best: ${data.cheapestDay} @ ₹${(data.cheapestPrice||0).toLocaleString('en-IN')}`;
           banner.classList.add('show');
         } catch(e) { /* fail silently */ }
       }

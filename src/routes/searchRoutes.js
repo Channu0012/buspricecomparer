@@ -87,152 +87,169 @@ router.get("/routes", (req, res) => {
   res.json({ routes: db.routes });
 });
 
-// Helper: Generate dynamic real-time buses for any city pair when no pre-seeded bus matches
+// Helper: Generate dynamic real-time buses for any city pair — returns 10 varied buses
 function generateDynamicBuses(from, to, normFrom, normTo, db) {
   const operators = [
-    { code: "VRL", name: "VRL Travels", rating: 4.5, reviewCount: 3420 },
-    { code: "SRS", name: "SRS Travels", rating: 4.3, reviewCount: 2150 },
-    { code: "ZNG", name: "Zingbus Premium", rating: 4.7, reviewCount: 1890 },
-    { code: "ICS", name: "IntrCity SmartBus", rating: 4.6, reviewCount: 4100 },
-    { code: "ORT", name: "Orange Travels", rating: 4.4, reviewCount: 1670 },
-    { code: "NEU", name: "NeuGo Electric Bus", rating: 4.8, reviewCount: 950 },
+    { code: "VRL", name: "VRL Travels",          rating: 4.5, reviewCount: 3420, bookings: 84200 },
+    { code: "SRS", name: "SRS Travels",           rating: 4.3, reviewCount: 2150, bookings: 62100 },
+    { code: "ZNG", name: "Zingbus Premium",        rating: 4.7, reviewCount: 1890, bookings: 31500 },
+    { code: "ICS", name: "IntrCity SmartBus",      rating: 4.6, reviewCount: 4100, bookings: 95600 },
+    { code: "ORT", name: "Orange Travels",         rating: 4.4, reviewCount: 1670, bookings: 43200 },
+    { code: "NEU", name: "NeuGo Electric Bus",     rating: 4.8, reviewCount:  950, bookings: 18700 },
+    { code: "KPN", name: "KPN Travels",            rating: 4.2, reviewCount: 5100, bookings: 120400 },
+    { code: "SHV", name: "Shivneri Express",       rating: 4.4, reviewCount: 2850, bookings: 57300 },
+    { code: "PVT", name: "Paulo Travels",          rating: 4.3, reviewCount: 1340, bookings: 29800 },
+    { code: "SVK", name: "Skylark Travels",        rating: 4.1, reviewCount:  780, bookings: 14200 },
   ];
 
   const busTemplates = [
     {
-      type: "Volvo Multi-Axle AC Sleeper (2+1)",
-      code: "ac-sleeper",
-      basePrice: 850,
-      dep: "21:00",
-      arr: "06:30",
-      dur: "9h 30m",
-      mins: 570,
-      am: [
-        "AC",
-        "WiFi",
-        "Charging Point",
-        "Blanket",
-        "Water Bottle",
-        "Reading Light",
-      ],
+      type: "Volvo Multi-Axle AC Sleeper (2+1)", code: "ac-sleeper",
+      baseFactor: 1.0, dep: "21:00", depMins: 0,
+      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Reading Light"],
+      badges: ["top-rated", "featured"], seats: [3, 8], totalSeats: 18,
     },
     {
-      type: "Scania Metrolink AC Seater (2+2)",
-      code: "ac-seater",
-      basePrice: 499,
-      dep: "07:30",
-      arr: "16:00",
-      dur: "8h 30m",
-      mins: 510,
+      type: "Scania AC Semi-Sleeper (2+1)", code: "ac-sleeper",
+      baseFactor: 0.85, dep: "20:00", depMins: 0,
+      am: ["AC", "Charging Point", "Blanket", "Water Bottle"],
+      badges: ["best-seller"], seats: [6, 14], totalSeats: 26,
+    },
+    {
+      type: "AC Seater (2+2) Express", code: "ac-seater",
+      baseFactor: 0.55, dep: "07:30", depMins: 0,
       am: ["AC", "Charging Point", "Water Bottle", "Entertainment"],
+      badges: ["budget-pick"], seats: [8, 22], totalSeats: 40,
     },
     {
-      type: "Luxury AC Sleeper (2+1)",
-      code: "ac-sleeper",
-      basePrice: 999,
-      dep: "22:15",
-      arr: "07:45",
-      dur: "9h 30m",
-      mins: 570,
-      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Toilet"],
+      type: "Luxury Sleeper (1+1)", code: "luxury-sleeper",
+      baseFactor: 1.45, dep: "22:15", depMins: 0,
+      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Toilet", "Entertainment", "Snacks"],
+      badges: ["luxury", "top-rated"], seats: [2, 5], totalSeats: 14,
     },
     {
-      type: "Express Non-AC Seater (2+2)",
-      code: "non-ac",
-      basePrice: 350,
-      dep: "06:00",
-      arr: "14:30",
-      dur: "8h 30m",
-      mins: 510,
-      am: ["Water Bottle", "Reading Light"],
+      type: "Non-AC Sleeper (2+1)", code: "non-ac",
+      baseFactor: 0.42, dep: "19:30", depMins: 0,
+      am: ["Water Bottle", "Reading Light", "Charging Point"],
+      badges: ["budget-pick"], seats: [10, 24], totalSeats: 36,
     },
     {
-      type: "IntrCity SmartBus AC Sleeper (2+1)",
-      code: "ac-sleeper",
-      basePrice: 899,
-      dep: "20:30",
-      arr: "06:00",
-      dur: "9h 30m",
-      mins: 570,
-      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Snacks"],
+      type: "Volvo AC Seater (2+3) Express", code: "ac-seater",
+      baseFactor: 0.48, dep: "06:00", depMins: 0,
+      am: ["AC", "Water Bottle", "Charging Point"],
+      badges: ["earliest"], seats: [9, 20], totalSeats: 45,
     },
     {
-      type: "NeuGo 100% Electric AC Seater (2+2)",
-      code: "ac-seater",
-      basePrice: 599,
-      dep: "10:00",
-      arr: "18:15",
-      dur: "8h 15m",
-      mins: 495,
+      type: "NeuGo 100% Electric AC (2+2)", code: "ac-seater",
+      baseFactor: 0.65, dep: "10:00", depMins: 0,
       am: ["AC", "WiFi", "Charging Point", "Water Bottle", "Quiet Zone"],
+      badges: ["eco-friendly", "featured"], seats: [5, 16], totalSeats: 36,
+    },
+    {
+      type: "IntrCity SmartBus AC Sleeper", code: "ac-sleeper",
+      baseFactor: 0.95, dep: "23:00", depMins: 0,
+      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Snacks"],
+      badges: ["top-rated"], seats: [4, 12], totalSeats: 22,
+    },
+    {
+      type: "AC Sleeper Corporate (2+1)", code: "ac-sleeper",
+      baseFactor: 1.1, dep: "22:45", depMins: 0,
+      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Reading Light"],
+      badges: ["featured"], seats: [3, 9], totalSeats: 18,
+    },
+    {
+      type: "Budget Non-AC Seater (2+3)", code: "non-ac",
+      baseFactor: 0.35, dep: "05:30", depMins: 0,
+      am: ["Water Bottle"],
+      badges: ["cheapest"], seats: [12, 32], totalSeats: 52,
     },
   ];
+
+  // Estimate distance from city name length hash (deterministic, realistic range 200-900km)
+  const distHash = (normFrom.length * 37 + normTo.length * 53) % 700 + 200;
+
+  // Base price based on distance
+  const baseDistancePrice = Math.round(distHash * 1.4);
 
   const dynamicBuses = [];
 
   operators.forEach((op, idx) => {
     const tmpl = busTemplates[idx % busTemplates.length];
     const busId = `dyn-bus-${normFrom.slice(0, 3)}-${normTo.slice(0, 3)}-${op.code.toLowerCase()}-${idx + 1}`;
-    const slug = `${op.name.toLowerCase().replace(/\s+/g, "-")}-${tmpl.code}-${normFrom}-to-${normTo}`;
+    const slug = `${op.name.toLowerCase().replace(/\s+/g, "-")}-${tmpl.code}-${normFrom}-to-${normTo}-${idx + 1}`;
 
-    const baseP = tmpl.basePrice + idx * 50;
+    // Vary base price per template factor + small random delta (seed-based)
+    const baseP = Math.round(baseDistancePrice * tmpl.baseFactor * (0.9 + (idx * 0.023)));
     const prices = {
-      redbus: Math.round(baseP * 1.08),
-      abhibus: Math.round(baseP * 1.04),
-      makemytrip: Math.round(baseP * 1.1),
-      yatra: Math.round(baseP * 1.12),
-      direct: baseP,
+      redbus:      Math.round(baseP * 1.08),
+      abhibus:     Math.round(baseP * 1.03),
+      makemytrip:  Math.round(baseP * 1.11),
+      yatra:       Math.round(baseP * 1.13),
+      direct:      baseP,
     };
 
-    const busObj = {
+    // Stagger departure times
+    const depHour  = (parseInt(tmpl.dep.split(":")[0]) + Math.floor(idx / 3)) % 24;
+    const depMin   = (parseInt(tmpl.dep.split(":")[1]) + (idx % 3) * 15) % 60;
+    const depStr   = `${String(depHour).padStart(2,"0")}:${String(depMin).padStart(2,"0")}`;
+    const durationMins = Math.round(distHash / 60 * 60 + 30); // ~1hr/60km
+    const durH = Math.floor(durationMins / 60);
+    const durM = durationMins % 60;
+    const arrMins   = depHour * 60 + depMin + durationMins;
+    const arrHour   = Math.floor(arrMins / 60) % 24;
+    const arrMinute = arrMins % 60;
+    const arrStr    = `${String(arrHour).padStart(2,"0")}:${String(arrMinute).padStart(2,"0")}`;
+
+    // Realistic seats
+    const seatRange   = tmpl.seats;
+    const seatsLeft   = Math.floor(seatRange[0] + Math.random() * (seatRange[1] - seatRange[0]));
+    const totalSeats  = tmpl.totalSeats;
+
+    dynamicBuses.push({
       id: busId,
       slug,
-      operator: op.name,
-      operatorCode: op.code,
-      busType: tmpl.type,
-      busTypeCode: tmpl.code,
-      rating: op.rating,
-      reviewCount: op.reviewCount,
-      totalBookings: 12000 + idx * 3400,
-      amenities: tmpl.am,
+      operator:      op.name,
+      operatorCode:  op.code,
+      busType:       tmpl.type,
+      busTypeCode:   tmpl.code,
+      rating:        op.rating,
+      reviewCount:   op.reviewCount,
+      totalBookings: op.bookings,
+      amenities:     tmpl.am,
       route: {
-        from: from.charAt(0).toUpperCase() + from.slice(1),
-        to: to.charAt(0).toUpperCase() + to.slice(1),
-        routeId: `${normFrom.slice(0, 3)}-${normTo.slice(0, 3)}`,
-        departureTime: tmpl.dep,
-        arrivalTime: tmpl.arr,
-        duration: tmpl.dur,
-        durationMinutes: tmpl.mins,
-        distance: 380,
-        departureStop: `${from} Central Bus Stand`,
-        arrivalStop: `${to} Main Bus Terminal`,
+        from:          from.charAt(0).toUpperCase() + from.slice(1),
+        to:            to.charAt(0).toUpperCase()   + to.slice(1),
+        routeId:       `${normFrom.slice(0, 3)}-${normTo.slice(0, 3)}`,
+        departureTime: depStr,
+        arrivalTime:   arrStr,
+        duration:      `${durH}h ${String(durM).padStart(2,"0")}m`,
+        durationMinutes: durationMins,
+        distance:      distHash,
+        departureStop: `${from.charAt(0).toUpperCase() + from.slice(1)} Central Bus Stand`,
+        arrivalStop:   `${to.charAt(0).toUpperCase() + to.slice(1)} Main Terminal`,
       },
       prices,
-      lowestPrice: baseP,
+      lowestPrice:  baseP,
       highestPrice: prices.yatra,
-      seatsLeft: Math.floor(4 + Math.random() * 20),
-      totalSeats: 36,
+      seatsLeft,
+      totalSeats,
       boardingPoints: [
-        { name: `${from} Central Stand`, time: tmpl.dep },
-        { name: `${from} Toll Plaza`, time: addMinutesToTime(tmpl.dep, 25) },
+        { name: `${from.charAt(0).toUpperCase() + from.slice(1)} Central Stand`, time: depStr },
+        { name: `${from.charAt(0).toUpperCase() + from.slice(1)} Toll Plaza`, time: addMinutesToTime(depStr, 25) },
+        { name: `${from.charAt(0).toUpperCase() + from.slice(1)} Highway Entry`, time: addMinutesToTime(depStr, 45) },
       ],
       droppingPoints: [
-        {
-          name: `${to} Ring Road`,
-          time: subtractMinutesFromTime(tmpl.arr, 20),
-        },
-        { name: `${to} Bus Terminal`, time: tmpl.arr },
+        { name: `${to.charAt(0).toUpperCase() + to.slice(1)} Ring Road`, time: subtractMinutesFromTime(arrStr, 20) },
+        { name: `${to.charAt(0).toUpperCase() + to.slice(1)} Bus Terminal`, time: arrStr },
       ],
       policies: {
         cancellation: "Free cancellation up to 12h before departure",
-        luggage: "2 bags (max 15kg each)",
+        luggage:      "2 bags (max 15kg each)",
       },
-      featured: idx === 0 || idx === 2,
+      featured:  idx === 0 || idx === 2,
       sponsored: idx === 0,
-      badges: idx === 0 ? ["featured", "top-rated"] : ["best-seller"],
-    };
-
-    dynamicBuses.push(busObj);
+      badges:    tmpl.badges,
+    });
   });
 
   return dynamicBuses;
@@ -284,9 +301,13 @@ router.get("/search", (req, res) => {
     });
   }
 
-  // Dynamic Real-Time Generator Fallback if no static bus exists for city pair
-  if (results.length === 0) {
-    results = generateDynamicBuses(from, to, normFrom, normTo, db);
+  // Always pad to 10+ buses so users see a rich result set (never just 2)
+  const dynamicPad = generateDynamicBuses(from, to, normFrom, normTo, db);
+  if (results.length < 10) {
+    // Only add dynamic buses whose IDs don't already exist in static results
+    const existingIds = new Set(results.map((b) => b.id));
+    const toAdd = dynamicPad.filter((b) => !existingIds.has(b.id));
+    results = [...results, ...toAdd].slice(0, 12); // cap at 12
   }
 
   // Filter by bus type (flexible matching)
@@ -502,12 +523,32 @@ router.get("/price-trends", (req, res) => {
   });
 });
 
+// Helper to find a bus by ID or slug across static DB and dynamic buses
+function findBusByIdOrSlug(idOrSlug, db) {
+  let bus = db.buses.find((b) => b.id === idOrSlug || b.slug === idOrSlug);
+  if (!bus && idOrSlug.startsWith("dyn-bus-")) {
+    const parts = idOrSlug.split("-");
+    const fromCode = parts[2] || "mum";
+    const toCode = parts[3] || "goa";
+    const dyns = generateDynamicBuses(fromCode, toCode, fromCode, toCode, db);
+    bus = dyns.find((b) => b.id === idOrSlug) || dyns[0];
+  }
+  if (!bus && idOrSlug.includes("-to-")) {
+    const parts = idOrSlug.split("-to-");
+    const fromPart = parts[0].split("-").pop() || "mumbai";
+    const toPart = parts[1].split("-")[0] || "goa";
+    const dyns = generateDynamicBuses(fromPart, toPart, fromPart, toPart, db);
+    bus = dyns.find((b) => b.slug === idOrSlug) || dyns[0];
+  }
+  return bus;
+}
+
 // GET /api/seat-map/:busId
 router.get("/seat-map/:busId", (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: "DB error" });
 
-  const bus = db.buses.find((b) => b.id === req.params.busId);
+  const bus = findBusByIdOrSlug(req.params.busId, db);
   if (!bus) return res.status(404).json({ error: "Bus not found" });
 
   const isSleeper = bus.busTypeCode
@@ -893,7 +934,7 @@ router.get("/bus/:slug", (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: "DB error" });
 
-  const bus = db.buses.find((b) => b.slug === req.params.slug);
+  const bus = findBusByIdOrSlug(req.params.slug, db);
   if (!bus) return res.status(404).json({ error: "Bus not found" });
 
   const reviews = db.reviews.filter((r) => r.busId === bus.id);
@@ -1037,7 +1078,7 @@ router.get("/buses/boarding-points/:busId", (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: "DB error" });
 
-  const bus = db.buses.find((b) => b.id === req.params.busId);
+  const bus = findBusByIdOrSlug(req.params.busId, db);
   if (!bus) return res.status(404).json({ error: "Bus not found" });
 
   const depTime = bus.route.departureTime;
