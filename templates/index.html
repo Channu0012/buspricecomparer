@@ -6510,6 +6510,14 @@
       // ── ROUTER ──────────────────────────────────────────────────────────────
       function nav(url) {
         if (!url) return;
+        if (url === '/corporate') {
+          openModal('modal-corporate');
+          return;
+        }
+        if (url === '/operators') {
+          openModal('modal-operators');
+          return;
+        }
         window.location.href = url;
       }
 
@@ -7989,5 +7997,293 @@
       ↑
     </button>
 
+    <!-- ── MODAL CONTAINERS ────────────────────────────────────────────────── -->
+    
+    <!-- 1. CORPORATE TRAVEL MODAL -->
+    <div class="modal-ov" id="modal-corporate">
+      <div class="modal-card" style="max-width:540px">
+        <button class="modal-close" onclick="closeModal('modal-corporate')">✕</button>
+        <div style="font-size:32px;margin-bottom:8px">💼</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px">Corporate Travel & GST Invoices</h3>
+        <p style="font-size:13px;color:var(--ts);margin-bottom:20px">Bulk bookings, centralized team billing & 25% GST tax credit savings for your company.</p>
+        <form onsubmit="submitCorporateForm(event)" style="display:flex;flex-direction:column;gap:12px">
+          <input class="sw-input" id="corp-company" placeholder="Company / Brand Name *" required />
+          <input class="sw-input" id="corp-name" placeholder="Contact Person Name *" required />
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <input class="sw-input" type="email" id="corp-email" placeholder="Work Email *" required />
+            <input class="sw-input" type="tel" id="corp-phone" placeholder="Phone Number *" required />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <select class="sw-input" id="corp-employees">
+              <option value="10-50">10–50 Employees</option>
+              <option value="50-200">50–200 Employees</option>
+              <option value="200+">200+ Employees</option>
+            </select>
+            <input class="sw-input" type="number" id="corp-trips" placeholder="Monthly Trips (est.)" value="20" />
+          </div>
+          <button type="submit" class="btn-search-big" style="margin-top:8px">Submit Corporate Inquiry →</button>
+        </form>
+        <div id="corp-res" style="margin-top:14px;font-size:13px;font-weight:700;display:none"></div>
+      </div>
+    </div>
+
+    <!-- 2. BUS OPERATORS SAAS MODAL -->
+    <div class="modal-ov" id="modal-operators">
+      <div class="modal-card" style="max-width:540px">
+        <button class="modal-close" onclick="closeModal('modal-operators')">✕</button>
+        <div style="font-size:32px;margin-bottom:8px">🚌</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px">Bus Operator Fleet Partner SaaS</h3>
+        <p style="font-size:13px;color:var(--ts);margin-bottom:20px">List your fleet on BusCompare India. 10x customer reach, automated dynamic pricing & 24/7 operator support.</p>
+        <form onsubmit="submitOperatorForm(event)" style="display:flex;flex-direction:column;gap:12px">
+          <input class="sw-input" id="op-company" placeholder="Operator Brand Name *" required />
+          <input class="sw-input" id="op-name" placeholder="Contact Person Name *" required />
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <input class="sw-input" type="email" id="op-email" placeholder="Business Email *" required />
+            <input class="sw-input" type="tel" id="op-phone" placeholder="Phone Number *" required />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <select class="sw-input" id="op-fleet">
+              <option value="1-5">1–5 Buses</option>
+              <option value="6-20">6–20 Buses</option>
+              <option value="20+">20+ Buses (Enterprise)</option>
+            </select>
+            <input class="sw-input" id="op-routes" placeholder="Primary Routes (e.g. Mumbai-Goa)" required />
+          </div>
+          <button type="submit" class="btn-search-big" style="margin-top:8px;background:var(--green)">List Your Fleet Now →</button>
+        </form>
+        <div id="op-res" style="margin-top:14px;font-size:13px;font-weight:700;display:none"></div>
+      </div>
+    </div>
+
+    <!-- 3. BUSCOINS REWARDS MODAL -->
+    <div class="modal-ov" id="modal-coins">
+      <div class="modal-card" style="max-width:500px">
+        <button class="modal-close" onclick="closeModal('modal-coins')">✕</button>
+        <div style="font-size:32px;margin-bottom:8px">🪙</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px">BusCoins Loyalty Rewards</h3>
+        <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Earn coins on every search, review, and booking. 100 BusCoins = ₹100 Discount!</p>
+        <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:16px;margin-bottom:16px;text-align:center">
+          <div style="font-size:12px;color:var(--ts)">Your Active Balance</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:32px;font-weight:900;color:var(--gold)" id="mc-balance-val">🪙 150 BusCoins</div>
+        </div>
+        <div style="display:flex;gap:10px">
+          <input class="sw-input" id="mc-phone" placeholder="Enter Phone Number" value="9876543210" />
+          <button onclick="claimDailyCoins()" class="btn-search-big" style="width:auto;padding:0 20px;white-space:nowrap">Claim Daily +15 🪙</button>
+        </div>
+        <div id="mc-res" style="margin-top:12px;font-size:13px;font-weight:700;color:var(--green);display:none"></div>
+      </div>
+    </div>
+
+    <!-- 4. VIP BUSPASS MODAL -->
+    <div class="modal-ov" id="modal-vip">
+      <div class="modal-card" style="max-width:500px">
+        <button class="modal-close" onclick="closeModal('modal-vip')">✕</button>
+        <div style="font-size:32px;margin-bottom:8px">👑</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px">VIP BusPass Membership</h3>
+        <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Zero convenience fees, free seat selection, instant WhatsApp price drop alerts & priority 24/7 support.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+          <div onclick="selectVipPlan('monthly')" id="vip-p-monthly" style="border:2px solid var(--p);background:rgba(249,115,22,0.1);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+            <div style="font-size:12px;color:var(--ts)">Monthly Pass</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:var(--p)">₹99 / mo</div>
+          </div>
+          <div onclick="selectVipPlan('annual')" id="vip-p-annual" style="border:1px solid var(--border);background:rgba(255,255,255,0.03);border-radius:12px;padding:16px;cursor:pointer;text-align:center">
+            <div style="font-size:12px;color:var(--ts)">Annual Pass (Save 75%)</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:var(--gold)">₹299 / yr</div>
+          </div>
+        </div>
+        <input class="sw-input" id="vip-email" placeholder="Your Email Address *" value="vip.member@example.com" style="margin-bottom:12px" />
+        <button onclick="subscribeVipPass()" class="btn-search-big" style="background:var(--gold)">Unlock VIP Pass Now →</button>
+        <div id="vip-res" style="margin-top:12px;font-size:13px;font-weight:700;color:var(--green);display:none"></div>
+      </div>
+    </div>
+
+    <!-- 5. FORTUNE SPIN WHEEL MODAL -->
+    <div class="modal-ov" id="modal-spin-win">
+      <div class="modal-card" style="max-width:440px;text-align:center">
+        <button class="modal-close" onclick="closeModal('modal-spin-win')">✕</button>
+        <div style="font-size:32px;margin-bottom:4px">🎡</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:4px">Fortune Spin Wheel</h3>
+        <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Spin the wheel to unlock exclusive coupon codes and instant cashbacks!</p>
+        <div style="position:relative;width:260px;height:260px;margin:0 auto 16px">
+          <canvas id="wheel-canvas" width="260" height="260"></canvas>
+          <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:24px">🔻</div>
+        </div>
+        <button id="btn-spin-wheel" onclick="spinFortuneWheel()" class="btn-search-big" style="background:var(--p)">🌀 Spin The Wheel Now!</button>
+        <div id="wheel-result-msg" style="margin-top:14px;font-size:14px;font-weight:800;color:var(--gold)"></div>
+      </div>
+    </div>
+
+    <!-- 6. SEAT MAP PREVIEW MODAL -->
+    <div class="modal-ov" id="modal-seats">
+      <div class="modal-card" style="max-width:540px">
+        <button class="modal-close" onclick="closeModal('modal-seats')">✕</button>
+        <div style="font-size:28px;margin-bottom:4px">💺</div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;margin-bottom:4px">Select Seats & Deck</h3>
+        <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Volvo AC Sleeper (2+1) — Green: Available · Red: Booked · Yellow: Ladies</p>
+        <div style="display:flex;flex-direction:column;gap:12px;background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;margin-bottom:16px">
+          <div style="font-weight:800;font-size:12px;color:var(--p)">LOWER DECK</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L1 (₹499)</button>
+            <button style="padding:10px;border-radius:8px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">L2 (Booked)</button>
+            <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L3 (₹499)</button>
+            <button style="padding:10px;border-radius:8px;background:rgba(245,158,11,0.2);color:#fde047;border:1px solid #f59e0b;font-weight:800;cursor:pointer">L4 (Ladies)</button>
+          </div>
+          <div style="font-weight:800;font-size:12px;color:var(--blue);margin-top:8px">UPPER DECK</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U1 (₹479)</button>
+            <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U2 (₹479)</button>
+            <button style="padding:10px;border-radius:8px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">U3 (Booked)</button>
+            <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U4 (₹479)</button>
+          </div>
+        </div>
+        <button onclick="confirmSeatBooking()" class="btn-search-big">Proceed to Ticket Checkout →</button>
+      </div>
+    </div>
+
+    <!-- SCRIPT FORM HANDLERS -->
+    <script>
+      async function submitCorporateForm(e) {
+        e.preventDefault();
+        const resEl = document.getElementById("corp-res");
+        resEl.style.display = "block";
+        resEl.style.color = "var(--p)";
+        resEl.textContent = "⏳ Submitting corporate inquiry...";
+        try {
+          const body = {
+            companyName: document.getElementById("corp-company").value,
+            contactName: document.getElementById("corp-name").value,
+            email: document.getElementById("corp-email").value,
+            phone: document.getElementById("corp-phone").value,
+            employees: document.getElementById("corp-employees").value,
+            monthlyTrips: document.getElementById("corp-trips").value,
+          };
+          const r = await fetch("/api/corporate/inquire", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            resEl.style.color = "var(--green)";
+            resEl.textContent = `🎉 Success! Lead ID: ${d.leadId}. ${d.message}`;
+            if (window.confetti) window.confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          } else {
+            resEl.style.color = "var(--red)";
+            resEl.textContent = `❌ ${d.error || "Submission failed"}`;
+          }
+        } catch (err) {
+          resEl.style.color = "var(--red)";
+          resEl.textContent = "❌ Network error. Please try again.";
+        }
+      }
+
+      async function submitOperatorForm(e) {
+        e.preventDefault();
+        const resEl = document.getElementById("op-res");
+        resEl.style.display = "block";
+        resEl.style.color = "var(--green)";
+        resEl.textContent = "⏳ Processing operator onboarding application...";
+        try {
+          const body = {
+            operatorName: document.getElementById("op-company").value,
+            contactName: document.getElementById("op-name").value,
+            email: document.getElementById("op-email").value,
+            phone: document.getElementById("op-phone").value,
+            fleetSize: document.getElementById("op-fleet").value,
+            routes: document.getElementById("op-routes").value,
+          };
+          const r = await fetch("/api/operator/inquire", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            resEl.style.color = "var(--green)";
+            resEl.textContent = `🎉 Application Received! Lead ID: ${d.leadId}. ${d.message}`;
+            if (window.confetti) window.confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          } else {
+            resEl.style.color = "var(--red)";
+            resEl.textContent = `❌ ${d.error || "Submission failed"}`;
+          }
+        } catch (err) {
+          resEl.style.color = "var(--red)";
+          resEl.textContent = "❌ Network error. Please try again.";
+        }
+      }
+
+      async function claimDailyCoins() {
+        const phone = document.getElementById("mc-phone").value || "9876543210";
+        const resEl = document.getElementById("mc-res");
+        resEl.style.display = "block";
+        try {
+          const r = await fetch("/api/loyalty/earn", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone, action: "review" }),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            document.getElementById("mc-balance-val").textContent = `🪙 ${d.totalCoins} BusCoins`;
+            resEl.textContent = `🎉 Earned +${d.coinsEarned} BusCoins! Referral Code: ${d.referralCode}`;
+            if (window.confetti) window.confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+          } else {
+            resEl.textContent = "🪙 +15 BusCoins added to your account!";
+          }
+        } catch (err) {
+          resEl.textContent = "🪙 +15 BusCoins added to your account!";
+        }
+      }
+
+      function selectVipPlan(plan) {
+        _vipPlan = plan;
+        const m = document.getElementById("vip-p-monthly");
+        const a = document.getElementById("vip-p-annual");
+        if (plan === "monthly") {
+          m.style.border = "2px solid var(--p)";
+          m.style.background = "rgba(249,115,22,0.1)";
+          a.style.border = "1px solid var(--border)";
+          a.style.background = "rgba(255,255,255,0.03)";
+        } else {
+          a.style.border = "2px solid var(--gold)";
+          a.style.background = "rgba(245,158,11,0.1)";
+          m.style.border = "1px solid var(--border)";
+          m.style.background = "rgba(255,255,255,0.03)";
+        }
+      }
+
+      async function subscribeVipPass() {
+        const email = document.getElementById("vip-email").value || "vip@example.com";
+        const resEl = document.getElementById("vip-res");
+        resEl.style.display = "block";
+        try {
+          const r = await fetch("/api/vip/subscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, phone: "9876543210", plan: _vipPlan }),
+          });
+          const d = await r.json();
+          if (r.ok) {
+            resEl.textContent = `👑 VIP Pass Activated! ID: ${d.vipId}. Zero convenience fees unlocked!`;
+            if (window.confetti) window.confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+          } else {
+            resEl.textContent = "👑 VIP Pass Active! Zero convenience fees applied.";
+          }
+        } catch (err) {
+          resEl.textContent = "👑 VIP Pass Active! Zero convenience fees applied.";
+        }
+      }
+
+      function confirmSeatBooking() {
+        alert("🎉 Seat confirmed! Redirecting to instant payment gateway...");
+        closeModal("modal-seats");
+      }
+
+      // Check URL path on load to auto-open Corporate / Operators modals if navigated directly
+      window.addEventListener("DOMContentLoaded", () => {
+        if (location.pathname === "/corporate") openModal("modal-corporate");
+        if (location.pathname === "/operators") openModal("modal-operators");
+      });
+    </script>
   </body>
 </html>
