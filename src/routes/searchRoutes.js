@@ -87,89 +87,122 @@ router.get("/routes", (req, res) => {
   res.json({ routes: db.routes });
 });
 
-// Helper: Generate dynamic real-time buses for any city pair — returns 10 varied buses
+// Helper: Generate dynamic real-time buses for any city/district/town/taluk pair across India (15-20 buses)
 function generateDynamicBuses(from, to, normFrom, normTo, db) {
   const operators = [
-    { code: "VRL", name: "VRL Travels",          rating: 4.5, reviewCount: 3420, bookings: 84200 },
-    { code: "SRS", name: "SRS Travels",           rating: 4.3, reviewCount: 2150, bookings: 62100 },
-    { code: "ZNG", name: "Zingbus Premium",        rating: 4.7, reviewCount: 1890, bookings: 31500 },
-    { code: "ICS", name: "IntrCity SmartBus",      rating: 4.6, reviewCount: 4100, bookings: 95600 },
-    { code: "ORT", name: "Orange Travels",         rating: 4.4, reviewCount: 1670, bookings: 43200 },
-    { code: "NEU", name: "NeuGo Electric Bus",     rating: 4.8, reviewCount:  950, bookings: 18700 },
-    { code: "KPN", name: "KPN Travels",            rating: 4.2, reviewCount: 5100, bookings: 120400 },
-    { code: "SHV", name: "Shivneri Express",       rating: 4.4, reviewCount: 2850, bookings: 57300 },
-    { code: "PVT", name: "Paulo Travels",          rating: 4.3, reviewCount: 1340, bookings: 29800 },
-    { code: "SVK", name: "Skylark Travels",        rating: 4.1, reviewCount:  780, bookings: 14200 },
+    { code: "VRL",   name: "VRL Travels",             rating: 4.5, reviewCount: 3420, bookings: 84200 },
+    { code: "SRS",   name: "SRS Travels",              rating: 4.3, reviewCount: 2150, bookings: 62100 },
+    { code: "ZNG",   name: "Zingbus Premium",           rating: 4.7, reviewCount: 1890, bookings: 31500 },
+    { code: "ICS",   name: "IntrCity SmartBus",         rating: 4.6, reviewCount: 4100, bookings: 95600 },
+    { code: "ORT",   name: "Orange Travels",            rating: 4.4, reviewCount: 1670, bookings: 43200 },
+    { code: "NEU",   name: "NeuGo Electric Bus",        rating: 4.8, reviewCount:  950, bookings: 18700 },
+    { code: "KPN",   name: "KPN Travels",               rating: 4.2, reviewCount: 5100, bookings: 120400 },
+    { code: "SHV",   name: "Shivneri Express",          rating: 4.4, reviewCount: 2850, bookings: 57300 },
+    { code: "PVT",   name: "Paulo Travels",             rating: 4.3, reviewCount: 1340, bookings: 29800 },
+    { code: "SVK",   name: "Skylark Travels",           rating: 4.1, reviewCount:  780, bookings: 14200 },
+    { code: "KSRTC", name: "KSRTC FlyBus AC",           rating: 4.5, reviewCount: 8900, bookings: 185000 },
+    { code: "MSRTC", name: "MSRTC Shivshahi AC",        rating: 4.3, reviewCount: 7400, bookings: 162000 },
+    { code: "SETC",  name: "SETC Tamil Nadu Ultra",     rating: 4.2, reviewCount: 4300, bookings: 98000 },
+    { code: "CHR",   name: "Chartered Bus Luxury",      rating: 4.6, reviewCount: 2100, bookings: 48000 },
+    { code: "HMT",   name: "Himalayan Motors AC",       rating: 4.4, reviewCount: 1560, bookings: 36000 },
   ];
 
   const busTemplates = [
     {
       type: "Volvo Multi-Axle AC Sleeper (2+1)", code: "ac-sleeper",
-      baseFactor: 1.0, dep: "21:00", depMins: 0,
+      baseFactor: 1.0, dep: "21:00",
       am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Reading Light"],
       badges: ["top-rated", "featured"], seats: [3, 8], totalSeats: 18,
     },
     {
       type: "Scania AC Semi-Sleeper (2+1)", code: "ac-sleeper",
-      baseFactor: 0.85, dep: "20:00", depMins: 0,
+      baseFactor: 0.85, dep: "20:00",
       am: ["AC", "Charging Point", "Blanket", "Water Bottle"],
       badges: ["best-seller"], seats: [6, 14], totalSeats: 26,
     },
     {
       type: "AC Seater (2+2) Express", code: "ac-seater",
-      baseFactor: 0.55, dep: "07:30", depMins: 0,
+      baseFactor: 0.55, dep: "07:30",
       am: ["AC", "Charging Point", "Water Bottle", "Entertainment"],
       badges: ["budget-pick"], seats: [8, 22], totalSeats: 40,
     },
     {
-      type: "Luxury Sleeper (1+1)", code: "luxury-sleeper",
-      baseFactor: 1.45, dep: "22:15", depMins: 0,
+      type: "Luxury Single Sleeper (1+1)", code: "luxury-sleeper",
+      baseFactor: 1.45, dep: "22:15",
       am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Toilet", "Entertainment", "Snacks"],
       badges: ["luxury", "top-rated"], seats: [2, 5], totalSeats: 14,
     },
     {
       type: "Non-AC Sleeper (2+1)", code: "non-ac",
-      baseFactor: 0.42, dep: "19:30", depMins: 0,
+      baseFactor: 0.42, dep: "19:30",
       am: ["Water Bottle", "Reading Light", "Charging Point"],
       badges: ["budget-pick"], seats: [10, 24], totalSeats: 36,
     },
     {
       type: "Volvo AC Seater (2+3) Express", code: "ac-seater",
-      baseFactor: 0.48, dep: "06:00", depMins: 0,
+      baseFactor: 0.48, dep: "06:00",
       am: ["AC", "Water Bottle", "Charging Point"],
       badges: ["earliest"], seats: [9, 20], totalSeats: 45,
     },
     {
       type: "NeuGo 100% Electric AC (2+2)", code: "ac-seater",
-      baseFactor: 0.65, dep: "10:00", depMins: 0,
+      baseFactor: 0.65, dep: "10:00",
       am: ["AC", "WiFi", "Charging Point", "Water Bottle", "Quiet Zone"],
       badges: ["eco-friendly", "featured"], seats: [5, 16], totalSeats: 36,
     },
     {
       type: "IntrCity SmartBus AC Sleeper", code: "ac-sleeper",
-      baseFactor: 0.95, dep: "23:00", depMins: 0,
+      baseFactor: 0.95, dep: "23:00",
       am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Snacks"],
       badges: ["top-rated"], seats: [4, 12], totalSeats: 22,
     },
     {
       type: "AC Sleeper Corporate (2+1)", code: "ac-sleeper",
-      baseFactor: 1.1, dep: "22:45", depMins: 0,
+      baseFactor: 1.1, dep: "22:45",
       am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle", "Reading Light"],
       badges: ["featured"], seats: [3, 9], totalSeats: 18,
     },
     {
       type: "Budget Non-AC Seater (2+3)", code: "non-ac",
-      baseFactor: 0.35, dep: "05:30", depMins: 0,
+      baseFactor: 0.35, dep: "05:30",
       am: ["Water Bottle"],
       badges: ["cheapest"], seats: [12, 32], totalSeats: 52,
     },
+    {
+      type: "State Express AC Airavat (2+2)", code: "ac-seater",
+      baseFactor: 0.60, dep: "08:15",
+      am: ["AC", "Water Bottle", "Charging Point"],
+      badges: ["government", "popular"], seats: [7, 18], totalSeats: 42,
+    },
+    {
+      type: "Shivshahi AC Express (2+2)", code: "ac-seater",
+      baseFactor: 0.58, dep: "14:00",
+      am: ["AC", "Water Bottle", "Charging Point"],
+      badges: ["government", "best-seller"], seats: [5, 15], totalSeats: 44,
+    },
+    {
+      type: "Ultra Deluxe AC Sleeper (2+1)", code: "ac-sleeper",
+      baseFactor: 1.05, dep: "21:45",
+      am: ["AC", "WiFi", "Charging Point", "Blanket", "Water Bottle"],
+      badges: ["luxury", "featured"], seats: [2, 7], totalSeats: 20,
+    },
+    {
+      type: "Night Rider Non-AC Sleeper (2+1)", code: "non-ac",
+      baseFactor: 0.40, dep: "23:30",
+      am: ["Water Bottle", "Reading Light"],
+      badges: ["budget-pick"], seats: [8, 20], totalSeats: 36,
+    },
+    {
+      type: "Intercity EV Executive AC (2+2)", code: "ac-seater",
+      baseFactor: 0.70, dep: "11:30",
+      am: ["AC", "WiFi", "Charging Point", "Water Bottle", "Quiet Zone"],
+      badges: ["eco-friendly", "top-rated"], seats: [4, 11], totalSeats: 34,
+    },
   ];
 
-  // Estimate distance from city name length hash (deterministic, realistic range 200-900km)
-  const distHash = (normFrom.length * 37 + normTo.length * 53) % 700 + 200;
-
-  // Base price based on distance
-  const baseDistancePrice = Math.round(distHash * 1.4);
+  // Estimate distance from city name length hash (deterministic, realistic range 180-950km)
+  const distHash = ((normFrom.length * 37 + normTo.length * 53) % 750) + 180;
+  const baseDistancePrice = Math.round(distHash * 1.35);
 
   const dynamicBuses = [];
 
@@ -178,8 +211,7 @@ function generateDynamicBuses(from, to, normFrom, normTo, db) {
     const busId = `dyn-bus-${normFrom.slice(0, 3)}-${normTo.slice(0, 3)}-${op.code.toLowerCase()}-${idx + 1}`;
     const slug = `${op.name.toLowerCase().replace(/\s+/g, "-")}-${tmpl.code}-${normFrom}-to-${normTo}-${idx + 1}`;
 
-    // Vary base price per template factor + small random delta (seed-based)
-    const baseP = Math.round(baseDistancePrice * tmpl.baseFactor * (0.9 + (idx * 0.023)));
+    const baseP = Math.round(baseDistancePrice * tmpl.baseFactor * (0.88 + (idx * 0.021)));
     const prices = {
       redbus:      Math.round(baseP * 1.08),
       abhibus:     Math.round(baseP * 1.03),
@@ -188,11 +220,10 @@ function generateDynamicBuses(from, to, normFrom, normTo, db) {
       direct:      baseP,
     };
 
-    // Stagger departure times
-    const depHour  = (parseInt(tmpl.dep.split(":")[0]) + Math.floor(idx / 3)) % 24;
-    const depMin   = (parseInt(tmpl.dep.split(":")[1]) + (idx % 3) * 15) % 60;
+    const depHour  = (parseInt(tmpl.dep.split(":")[0]) + Math.floor(idx / 2)) % 24;
+    const depMin   = (parseInt(tmpl.dep.split(":")[1]) + (idx % 2) * 20) % 60;
     const depStr   = `${String(depHour).padStart(2,"0")}:${String(depMin).padStart(2,"0")}`;
-    const durationMins = Math.round(distHash / 60 * 60 + 30); // ~1hr/60km
+    const durationMins = Math.round((distHash / 60) * 60 + 25);
     const durH = Math.floor(durationMins / 60);
     const durM = durationMins % 60;
     const arrMins   = depHour * 60 + depMin + durationMins;
@@ -200,7 +231,6 @@ function generateDynamicBuses(from, to, normFrom, normTo, db) {
     const arrMinute = arrMins % 60;
     const arrStr    = `${String(arrHour).padStart(2,"0")}:${String(arrMinute).padStart(2,"0")}`;
 
-    // Realistic seats
     const seatRange   = tmpl.seats;
     const seatsLeft   = Math.floor(seatRange[0] + Math.random() * (seatRange[1] - seatRange[0]));
     const totalSeats  = tmpl.totalSeats;
@@ -246,7 +276,7 @@ function generateDynamicBuses(from, to, normFrom, normTo, db) {
         cancellation: "Free cancellation up to 12h before departure",
         luggage:      "2 bags (max 15kg each)",
       },
-      featured:  idx === 0 || idx === 2,
+      featured:  idx === 0 || idx === 2 || idx === 6,
       sponsored: idx === 0,
       badges:    tmpl.badges,
     });

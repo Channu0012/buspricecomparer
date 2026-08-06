@@ -685,4 +685,62 @@ test("GET /api/buses/boarding-points/:busId returns boarding data", async () => 
   }
 });
 
+// ─── DISTRICT & TOWN EXPANDED ROUTE TESTS ─────────────────────────────
+test("GET /api/search for Jamkhandi->Bangalore (Town/Taluk route)", async () => {
+  const r = await req("GET", "/api/search?from=Jamkhandi&to=Bangalore");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!Array.isArray(r.body.results) || r.body.results.length < 10)
+    throw new Error("Expected at least 10 dynamic buses for district route");
+});
+
+test("GET /api/search for Kalaburagi->Hyderabad (District route)", async () => {
+  const r = await req("GET", "/api/search?from=Kalaburagi&to=Hyderabad");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!Array.isArray(r.body.results) || r.body.results.length < 10)
+    throw new Error("Expected at least 10 buses for Kalaburagi route");
+});
+
+test("GET /api/search for Coimbatore->Madurai (South District route)", async () => {
+  const r = await req("GET", "/api/search?from=Coimbatore&to=Madurai");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!Array.isArray(r.body.results) || r.body.results.length < 10)
+    throw new Error("Expected at least 10 buses for Coimbatore route");
+});
+
+test("GET /api/search for Agra->Delhi (Tourist route)", async () => {
+  const r = await req("GET", "/api/search?from=Agra&to=Delhi");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!Array.isArray(r.body.results) || r.body.results.length < 10)
+    throw new Error("Expected at least 10 buses for Agra route");
+});
+
+test("GET /api/search for Durgapur->Kolkata (East District route)", async () => {
+  const r = await req("GET", "/api/search?from=Durgapur&to=Kolkata");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!Array.isArray(r.body.results) || r.body.results.length < 10)
+    throw new Error("Expected at least 10 buses for Durgapur route");
+});
+
+test("POST /api/alert with XSS payload is safely sanitized", async () => {
+  const email = `xss_${Date.now()}@test.com`;
+  const r = await req("POST", "/api/alert", {
+    email,
+    routeFrom: "<script>alert('xss')</script>Mumbai",
+    routeTo: "Pune",
+    maxPrice: 500,
+  });
+  if (r.status !== 201) throw new Error("Expected 201, got " + r.status);
+});
+
+test("GET /robots.txt returns valid plain text rules", async () => {
+  const r = await req("GET", "/robots.txt");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+});
+
+test("GET /api/admin/stats with invalid token returns 401", async () => {
+  const r = await adminReq("GET", "/api/admin/stats", null, "invalid-token-xyz");
+  if (r.status !== 401) throw new Error("Expected 401, got " + r.status);
+});
+
 run();
+
