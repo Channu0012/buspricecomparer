@@ -1267,6 +1267,32 @@
           </div>
           <div class="header-actions">
             <a
+              href="/"
+              target="_blank"
+              class="refresh-btn"
+              style="
+                text-decoration: none;
+                color: var(--green);
+                border-color: rgba(16, 185, 129, 0.3);
+                background: rgba(16, 185, 129, 0.1);
+                font-weight: 800;
+              "
+              >🌐 View Live Website</a
+            >
+            <a
+              href="/search?from=Mumbai&to=Goa"
+              target="_blank"
+              class="refresh-btn"
+              style="
+                text-decoration: none;
+                color: var(--gold);
+                border-color: rgba(245, 158, 11, 0.3);
+                background: rgba(245, 158, 11, 0.1);
+                font-weight: 800;
+              "
+              >🔍 Test Search Workable</a
+            >
+            <a
               href="/api/admin/leads/export?format=csv"
               id="btn-export-csv"
               class="refresh-btn"
@@ -2142,8 +2168,8 @@
         }, 4000);
       }
 
-      // Auto-refresh every 30 seconds
-      setInterval(loadStats, 30000);
+      // Auto-refresh every 3 seconds for real-time live updates
+      setInterval(loadStats, 3000);
     </script>
   </body>
 </html>
