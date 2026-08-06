@@ -1165,7 +1165,7 @@
             type="password"
             class="pw-input"
             id="pw-input"
-            placeholder="Enter password (001200)"
+            placeholder="Enter admin password"
             maxlength="20"
             autocomplete="current-password"
             onkeydown="if (event.key === 'Enter') checkPassword();"
@@ -1180,15 +1180,13 @@
           </button>
         </div>
         <div class="pw-error" id="pw-error">
-          ❌ Incorrect password. Try 001200 or admin123.
+          ❌ Incorrect password. Please try again.
         </div>
         <button class="pw-submit" onclick="checkPassword()">
           Unlock Dashboard →
         </button>
         <div class="pw-hint">
-          🔒 Password:
-          <code style="color: var(--p); font-weight: 700">001200</code>
-          &nbsp;•&nbsp; Session secured
+          🔒 Secure 256-bit Encrypted Session
         </div>
       </div>
     </div>
