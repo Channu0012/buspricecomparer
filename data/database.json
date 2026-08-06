@@ -1512,7 +1512,7 @@
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
       "rating": 4.5,
-      "reviewCount": 63,
+      "reviewCount": 65,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -5711,6 +5711,29 @@
       "helpfulCount": 0,
       "verified": false,
       "platform": "buscompare"
+    },
+    {
+      "id": "REV-85735FEB",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-08-06T16:03:02.937Z"
+    },
+    {
+      "id": "rev-5f9d5d7c",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-08-06",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
     }
   ],
   "popularRoutes": [
@@ -6525,6 +6548,42 @@
       "active": true,
       "createdAt": "2026-08-06T13:58:41.435Z",
       "triggeredCount": 0
+    },
+    {
+      "id": "alert-7aee98cb",
+      "email": "alert_1786032182813@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-06T16:03:02.815Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-07926270",
+      "email": "dup_1786032182818@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-06T16:03:02.823Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-7630ce14",
+      "email": "xss_1786032183096@test.com",
+      "whatsapp": "",
+      "routeFrom": "&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": 500,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-06T16:03:03.099Z",
+      "triggeredCount": 0
     }
   ],
   "telemetry": [
@@ -7126,6 +7185,16 @@
       "phone": "9876543210",
       "email": "",
       "expiresAt": "2026-08-06T19:58:41.327Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-4DBF55E4",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-06T22:03:02.841Z",
       "status": "ACTIVE"
     }
   ],
@@ -7858,25 +7927,43 @@
       "pricePaid": 299,
       "createdAt": "2026-08-06T13:58:41.337Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-22039040",
+      "email": "vip_1786032182855@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-06T16:03:02.857Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-1E49EEB9",
+      "email": "vipa_1786032182860@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-06T16:03:02.867Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 7,
-    "totalSearches": 698,
-    "totalReviews": 71,
-    "totalAlerts": 65,
+    "totalSearches": 713,
+    "totalReviews": 73,
+    "totalAlerts": 68,
     "flightClicks": 5,
-    "priceLocksCount": 41,
-    "vipSubscriptionsCount": 81,
+    "priceLocksCount": 42,
+    "vipSubscriptionsCount": 83,
     "busAffiliateRevenue": 560,
     "flightAffiliateRevenue": 2250,
-    "priceLockRevenue": 1599,
-    "vipRevenue": 16019,
+    "priceLockRevenue": 1638,
+    "vipRevenue": 16417,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 22439,
+    "revenueEstimate": 22941,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 32,
-    "insuranceRevenue": 2076
+    "insurancePoliciesCount": 33,
+    "insuranceRevenue": 2141
   },
   "coupons": [
     {
@@ -8355,6 +8442,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-08-06T13:58:41.350Z"
+    },
+    {
+      "id": "INS-0AE55B4F",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-06T16:03:02.909Z"
     }
   ],
   "loyaltyUsers": [
@@ -8933,6 +9030,24 @@
       "referralCode": "BHARATBUS-8538-3JUJ",
       "referralCount": 0,
       "joinedAt": "2026-08-06T13:58:41.357Z"
+    },
+    {
+      "id": "loyalty-109e2e52",
+      "phone": "91178041847",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-1847-MPC7",
+      "referralCount": 0,
+      "joinedAt": "2026-08-06T16:03:02.921Z"
+    },
+    {
+      "id": "loyalty-97951543",
+      "phone": "88286669176",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-9176-H0QN",
+      "referralCount": 0,
+      "joinedAt": "2026-08-06T16:03:02.926Z"
     }
   ],
   "referrals": [],
@@ -9352,6 +9467,19 @@
       "status": "NEW_LEAD",
       "estimatedMRR": 15000,
       "createdAt": "2026-08-06T13:58:41.371Z"
+    },
+    {
+      "id": "CORP-2404B406",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1786032182945@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-08-06T16:03:02.945Z"
     }
   ],
   "operatorLeads": [
@@ -9770,6 +9898,19 @@
       "status": "NEW_LEAD",
       "estimatedPlan": "Enterprise (₹15,000/mo)",
       "createdAt": "2026-08-06T13:58:41.376Z"
+    },
+    {
+      "id": "OPR-3331F31D",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1786032182954@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (₹15,000/mo)",
+      "createdAt": "2026-08-06T16:03:02.955Z"
     }
   ],
   "translations": {
