@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -4281,16 +4281,17 @@
       }
 
 
+      
       /* ══════════════════════════════════════════════════════════════
-         HOME PAGE REDESIGN v2 — Aurora + Glassmorphism
+         HOME PAGE REDESIGN v3 — ULTRA-PREMIUM GLASS & AURORA
          ══════════════════════════════════════════════════════════════ */
 
-      /* Hero v2 */
+      /* Hero v3 */
       .hero-v2 {
         position: relative;
         overflow: hidden;
-        padding: 80px 24px 60px;
-        min-height: 88vh;
+        padding: 90px 24px 70px;
+        min-height: 90vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -4301,9 +4302,9 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(ellipse 80% 50% at 20% 0%, rgba(20, 184, 166, 0.12) 0%, transparent 60%),
-          radial-gradient(ellipse 60% 50% at 80% 0%, rgba(249, 115, 22, 0.10) 0%, transparent 55%),
-          radial-gradient(ellipse 50% 40% at 50% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse 90% 60% at 20% 0%, rgba(20, 184, 166, 0.15) 0%, transparent 60%),
+          radial-gradient(ellipse 70% 60% at 80% 0%, rgba(249, 115, 22, 0.12) 0%, transparent 55%),
+          radial-gradient(ellipse 60% 50% at 50% 100%, rgba(129, 140, 248, 0.10) 0%, transparent 50%),
           var(--bg);
         z-index: 0;
       }
@@ -4313,926 +4314,344 @@
         position: absolute;
         inset: 0;
         background-image:
-          linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-        background-size: 80px 80px;
-        mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 30%, transparent 100%);
-        -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 30%, transparent 100%);
+          linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 70px 70px;
+        mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%);
         pointer-events: none;
         z-index: 0;
       }
 
-      .hero-v2-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(100px);
-        pointer-events: none;
-        will-change: transform;
-        z-index: 0;
-      }
       .hero-v2-orb-1 {
-        width: 500px; height: 500px;
-        background: rgba(20,184,166,0.06);
-        top: -200px; left: -100px;
-        animation: orb1 25s ease-in-out infinite;
+        width: 580px; height: 580px;
+        background: rgba(20,184,166,0.07);
+        top: -220px; left: -120px;
+        animation: orb1 22s ease-in-out infinite;
       }
       .hero-v2-orb-2 {
-        width: 400px; height: 400px;
-        background: rgba(249,115,22,0.05);
-        top: -50px; right: -80px;
-        animation: orb2 30s ease-in-out infinite;
+        width: 480px; height: 480px;
+        background: rgba(249,115,22,0.06);
+        top: -60px; right: -100px;
+        animation: orb2 28s ease-in-out infinite;
       }
       .hero-v2-orb-3 {
-        width: 350px; height: 350px;
-        background: rgba(129,140,248,0.04);
-        bottom: -100px; left: 30%;
-        animation: orb1 20s ease-in-out infinite reverse;
+        width: 400px; height: 400px;
+        background: rgba(129,140,248,0.05);
+        bottom: -120px; left: 35%;
+        animation: orb1 18s ease-in-out infinite reverse;
       }
 
-      .hero-v2-inner {
-        max-width: 860px;
-        margin: 0 auto;
-        text-align: center;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Hero Badge */
-      .hero-live-badge {
-        display: inline-flex;
+      /* Floating Live Toast Widget */
+      .hero-live-toast {
+        position: absolute;
+        top: 36px; right: 40px;
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(20, 184, 166, 0.25);
+        border-radius: 100px;
+        padding: 8px 18px;
+        display: flex;
         align-items: center;
         gap: 10px;
-        background: rgba(20, 184, 166, 0.06);
-        border: 1px solid rgba(20, 184, 166, 0.18);
-        border-radius: 100px;
-        padding: 8px 22px;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 700;
-        color: var(--ts);
-        margin-bottom: 28px;
-        animation: fadeUp 0.5s ease both;
-        backdrop-filter: blur(8px);
-      }
-
-      .hero-live-badge .hlb-dot {
-        width: 8px; height: 8px;
-        background: #14b8a6;
-        border-radius: 50%;
-        animation: pulse-dot 2s ease-in-out infinite;
-        box-shadow: 0 0 10px rgba(20,184,166,0.6);
-      }
-
-      .hero-live-badge .hlb-route {
-        color: #14b8a6;
-        font-weight: 800;
-        min-width: 130px;
-        display: inline-block;
-        text-align: left;
-      }
-
-      /* Hero Title */
-      .hero-v2-title {
-        font-family: 'Outfit', sans-serif;
-        font-size: clamp(40px, 7vw, 78px);
-        font-weight: 900;
-        line-height: 1.05;
-        letter-spacing: -2.5px;
-        margin-bottom: 20px;
-        animation: fadeUp 0.5s 0.08s ease both;
-      }
-
-      .hero-v2-title .hero-hl {
-        background: linear-gradient(135deg, #f97316 0%, #fb923c 25%, #14b8a6 65%, #818cf8 100%);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: gradShift 6s ease infinite;
-      }
-
-      @keyframes gradShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-      }
-
-      .hero-v2-sub {
-        font-size: 18px;
-        color: var(--ts);
-        max-width: 560px;
-        margin: 0 auto 40px;
-        line-height: 1.75;
-        animation: fadeUp 0.5s 0.16s ease both;
-      }
-
-      /* Search Box v2 */
-      .search-box-v2 {
-        background: rgba(15, 23, 42, 0.65);
-        border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 24px;
-        padding: 24px;
-        backdrop-filter: blur(28px);
-        -webkit-backdrop-filter: blur(28px);
-        box-shadow:
-          0 48px 96px rgba(0,0,0,0.45),
-          inset 0 1px 0 rgba(255,255,255,0.06);
-        animation: fadeUp 0.5s 0.24s ease both;
-      }
-
-      body.light .search-box-v2 {
-        background: rgba(255,255,255,0.88);
-        border-color: rgba(0,0,0,0.08);
-        box-shadow: 0 48px 96px rgba(0,0,0,0.08);
-      }
-
-      .sbv2-row {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr 0.85fr auto;
-        gap: 12px;
-        align-items: end;
-      }
-
-      .sbv2-field {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .sbv2-label {
-        font-size: 10px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        color: #14b8a6;
-      }
-
-      .sbv2-input {
-        width: 100%;
-        background: rgba(255,255,255,0.06);
-        border: 1.5px solid rgba(255,255,255,0.08);
-        border-radius: 14px;
-        padding: 14px 16px;
         color: var(--t);
-        font-size: 15px;
-        font-weight: 700;
-        outline: none;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        font-family: inherit;
+        box-shadow: 0 16px 36px rgba(0,0,0,0.4), 0 0 20px rgba(20,184,166,0.15);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        z-index: 10;
+        animation: fadeUp 0.6s ease both;
       }
 
-      body.light .sbv2-input {
-        background: rgba(0,0,0,0.04);
-        border-color: rgba(0,0,0,0.1);
-      }
-
-      .sbv2-input:focus {
-        border-color: #14b8a6;
-        box-shadow: 0 0 0 3px rgba(20,184,166,0.15);
-      }
-
-      .sbv2-input::placeholder {
-        color: var(--tm);
-        font-weight: 500;
-      }
-
-      .sbv2-swap {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 12px;
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #14b8a6;
-        font-size: 18px;
-        cursor: pointer;
-        transition: all 0.3s;
-        align-self: end;
-        font-family: inherit;
-      }
-
-      .sbv2-swap:hover {
-        background: rgba(20,184,166,0.12);
+      body.light .hero-live-toast {
+        background: rgba(255,255,255,0.85);
         border-color: rgba(20,184,166,0.3);
       }
 
-      .sbv2-search-btn {
-        background: linear-gradient(135deg, #f97316, #ea580c);
-        color: #fff;
-        border: none;
-        border-radius: 14px;
-        padding: 14px 28px;
-        font-size: 15px;
-        font-weight: 800;
-        cursor: pointer;
+      .hlt-icon { font-size: 14px; animation: wa-pulse 2s infinite; }
+      .hlt-highlight { color: #14b8a6; font-weight: 800; }
+      .hlt-time { font-size: 10px; color: var(--ts); font-weight: 600; }
+
+      @media (max-width: 992px) {
+        .hero-live-toast { display: none; }
+      }
+
+      /* Travel Mode Selector Tabs */
+      .sbv2-modes {
         display: flex;
         align-items: center;
-        gap: 8px;
-        justify-content: center;
-        white-space: nowrap;
-        box-shadow: 0 8px 28px rgba(249,115,22,0.35);
-        transition: all 0.25s;
-        align-self: end;
+        gap: 6px;
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 100px;
+        padding: 5px;
+        margin-bottom: 20px;
+        width: fit-content;
+      }
+
+      body.light .sbv2-modes {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.06);
+      }
+
+      .sbv2-mode-btn {
+        background: transparent;
+        border: none;
+        border-radius: 100px;
+        padding: 8px 18px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ts);
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
         font-family: inherit;
       }
 
-      .sbv2-search-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 44px rgba(249,115,22,0.5);
+      .sbv2-mode-btn:hover {
+        color: var(--t);
+        background: rgba(255, 255, 255, 0.06);
       }
 
-      .sbv2-search-btn:active {
-        transform: translateY(0);
+      .sbv2-mode-btn.active {
+        background: linear-gradient(135deg, #14b8a6, #0d9488);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(20, 184, 166, 0.35);
       }
 
-      .sbv2-trending {
+      /* Date Chips Row inside Search */
+      .sbv2-date-chips {
         display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 16px;
-        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
       }
 
-      .sbv2-trending-label {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--ts);
-      }
-
-      .sbv2-chip {
+      .sbv2-date-chip {
         background: rgba(255,255,255,0.05);
         border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 100px;
-        padding: 5px 14px;
-        font-size: 12px;
+        border-radius: 8px;
+        padding: 3px 9px;
+        font-size: 11px;
         font-weight: 700;
         color: var(--ts);
         cursor: pointer;
         transition: all 0.2s;
         font-family: inherit;
-        white-space: nowrap;
       }
 
-      .sbv2-chip:hover {
-        background: rgba(20,184,166,0.1);
+      .sbv2-date-chip:hover {
+        background: rgba(20,184,166,0.12);
         border-color: rgba(20,184,166,0.3);
         color: #14b8a6;
       }
 
-      /* Hero Stats v2 */
-      .hero-stats-v2 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 32px;
-        flex-wrap: wrap;
-        margin-top: 44px;
-        animation: fadeUp 0.5s 0.4s ease both;
+      /* Partner Marquee Strip */
+      .partner-marquee-section {
+        padding: 24px 0 40px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
       }
 
-      .hs-v2-item { text-align: center; }
-
-      .hs-v2-val {
-        font-family: 'Outfit', sans-serif;
-        font-size: 28px;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .hs-v2-lbl {
-        font-size: 11px;
-        color: var(--ts);
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-        margin-top: 5px;
-      }
-
-      .hs-v2-div {
-        width: 1px;
-        height: 40px;
-        background: rgba(255,255,255,0.1);
-      }
-
-      /* Section v2 */
-      .section-v2 { padding: 72px 0; }
-
-      .section-hdr-v2 {
+      .pm-label {
         text-align: center;
-        margin-bottom: 48px;
-      }
-
-      .section-chip-v2 {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(20,184,166,0.06);
-        border: 1px solid rgba(20,184,166,0.16);
-        border-radius: 100px;
-        padding: 5px 18px;
-        font-size: 12px;
-        font-weight: 800;
-        color: #14b8a6;
-        margin-bottom: 14px;
-      }
-
-      .section-title-v2 {
-        font-family: 'Outfit', sans-serif;
-        font-size: 36px;
-        font-weight: 900;
-        letter-spacing: -1px;
-        margin-bottom: 8px;
-      }
-
-      .section-sub-v2 {
-        font-size: 15px;
-        color: var(--ts);
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      /* How It Works */
-      .hiw-grid {
-        display: flex;
-        align-items: stretch;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .hiw-card {
-        background: rgba(15,23,42,0.45);
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 22px;
-        padding: 36px 28px;
-        text-align: center;
-        flex: 1;
-        min-width: 220px;
-        max-width: 300px;
-        position: relative;
-        transition: all 0.3s;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
-
-      body.light .hiw-card {
-        background: rgba(255,255,255,0.65);
-        border-color: rgba(0,0,0,0.06);
-      }
-
-      .hiw-card:hover {
-        transform: translateY(-8px);
-        border-color: rgba(20,184,166,0.25);
-        box-shadow: 0 24px 56px rgba(0,0,0,0.3), 0 0 0 1px rgba(20,184,166,0.1);
-      }
-
-      body.light .hiw-card:hover {
-        box-shadow: 0 24px 56px rgba(0,0,0,0.06);
-      }
-
-      .hiw-step-num {
-        font-family: 'Outfit', sans-serif;
-        font-size: 52px;
-        font-weight: 900;
-        color: rgba(20,184,166,0.1);
-        line-height: 1;
-        margin-bottom: 4px;
-      }
-
-      .hiw-icon {
-        font-size: 38px;
-        margin-bottom: 16px;
-      }
-
-      .hiw-card-title {
-        font-family: 'Outfit', sans-serif;
-        font-size: 18px;
-        font-weight: 800;
-        margin-bottom: 8px;
-      }
-
-      .hiw-card-desc {
-        font-size: 13px;
-        color: var(--ts);
-        line-height: 1.65;
-      }
-
-      .hiw-arrow-icon {
-        font-size: 28px;
-        color: rgba(20,184,166,0.3);
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-      }
-
-      /* Routes v2 */
-      .routes-grid-v2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 16px;
-      }
-
-      .route-card-v2 {
-        background: rgba(15,23,42,0.45);
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 18px;
-        padding: 22px;
-        cursor: pointer;
-        transition: all 0.28s;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
-
-      body.light .route-card-v2 {
-        background: rgba(255,255,255,0.65);
-        border-color: rgba(0,0,0,0.06);
-      }
-
-      .route-card-v2::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #f97316, #14b8a6);
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-
-      .route-card-v2:hover {
-        border-color: rgba(20,184,166,0.25);
-        transform: translateY(-5px);
-        box-shadow: 0 20px 52px rgba(0,0,0,0.3);
-      }
-
-      body.light .route-card-v2:hover {
-        box-shadow: 0 20px 52px rgba(0,0,0,0.06);
-      }
-
-      .route-card-v2:hover::before { opacity: 1; }
-
-      .rcv2-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 10px;
-      }
-
-      .rcv2-name { font-weight: 900; font-size: 15px; }
-
-      .rcv2-tag {
-        font-size: 9px;
-        font-weight: 800;
-        padding: 3px 10px;
-        border-radius: 100px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .rcv2-tag-hot {
-        background: rgba(249,115,22,0.1);
-        color: var(--p);
-        border: 1px solid rgba(249,115,22,0.22);
-      }
-
-      .rcv2-tag-pop {
-        background: rgba(20,184,166,0.08);
-        color: #14b8a6;
-        border: 1px solid rgba(20,184,166,0.22);
-      }
-
-      .rcv2-tag-new {
-        background: rgba(129,140,248,0.08);
-        color: #818cf8;
-        border: 1px solid rgba(129,140,248,0.22);
-      }
-
-      .rcv2-meta {
-        font-size: 12px;
-        color: var(--ts);
-        margin-bottom: 14px;
-      }
-
-      .rcv2-price {
-        font-family: 'Outfit', sans-serif;
-        font-size: 22px;
-        font-weight: 900;
-        color: var(--p);
-      }
-
-      .rcv2-price-sub {
-        font-size: 12px;
-        color: var(--ts);
-        font-weight: 500;
-        margin-top: 2px;
-      }
-
-      /* Bento Feature Grid */
-      .bento-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-
-      .bento-card {
-        background: rgba(15,23,42,0.45);
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 22px;
-        padding: 30px;
-        transition: all 0.3s;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-      }
-
-      body.light .bento-card {
-        background: rgba(255,255,255,0.65);
-        border-color: rgba(0,0,0,0.06);
-      }
-
-      .bento-card:hover {
-        border-color: rgba(20,184,166,0.25);
-        transform: translateY(-4px);
-        box-shadow: 0 16px 44px rgba(0,0,0,0.25);
-      }
-
-      body.light .bento-card:hover {
-        box-shadow: 0 16px 44px rgba(0,0,0,0.06);
-      }
-
-      .bento-card.bento-wide { grid-column: span 2; }
-
-      .bento-icon {
-        width: 50px; height: 50px;
-        border-radius: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        margin-bottom: 18px;
-      }
-
-      .bi-teal { background: rgba(20,184,166,0.1); }
-      .bi-orange { background: rgba(249,115,22,0.1); }
-      .bi-purple { background: rgba(129,140,248,0.1); }
-      .bi-gold { background: rgba(245,158,11,0.1); }
-      .bi-green { background: rgba(16,185,129,0.1); }
-
-      .bento-title {
-        font-family: 'Outfit', sans-serif;
-        font-size: 17px;
-        font-weight: 800;
-        margin-bottom: 8px;
-      }
-
-      .bento-desc {
-        font-size: 13px;
-        color: var(--ts);
-        line-height: 1.65;
-      }
-
-      /* Stats Banner */
-      .stats-banner-v2 {
-        background: linear-gradient(135deg, rgba(15,23,42,0.7), rgba(20,184,166,0.04));
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 24px;
-        padding: 52px 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        gap: 24px;
-      }
-
-      body.light .stats-banner-v2 {
-        background: rgba(255,255,255,0.6);
-        border-color: rgba(0,0,0,0.06);
-      }
-
-      .sb-v2-item { text-align: center; }
-
-      .sb-v2-val {
-        font-family: 'Outfit', sans-serif;
-        font-size: 38px;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .sb-v2-lbl {
-        font-size: 12px;
-        color: var(--ts);
-        font-weight: 700;
-        margin-top: 8px;
-      }
-
-      .sb-v2-div {
-        width: 1px;
-        height: 48px;
-        background: rgba(255,255,255,0.07);
-      }
-
-      /* Testimonials v2 */
-      .testimonials-v2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 16px;
-      }
-
-      .tcard-v2 {
-        background: rgba(15,23,42,0.45);
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 20px;
-        padding: 28px;
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        transition: all 0.3s;
-      }
-
-      body.light .tcard-v2 {
-        background: rgba(255,255,255,0.65);
-        border-color: rgba(0,0,0,0.06);
-      }
-
-      .tcard-v2:hover {
-        border-color: rgba(20,184,166,0.2);
-        transform: translateY(-4px);
-        box-shadow: 0 16px 40px rgba(0,0,0,0.2);
-      }
-
-      .tcard-v2-stars {
-        color: var(--gold);
-        font-size: 14px;
-        margin-bottom: 12px;
-        letter-spacing: 2px;
-      }
-
-      .tcard-v2-quote {
-        font-size: 16px;
-        font-weight: 800;
-        margin-bottom: 8px;
-        line-height: 1.5;
-      }
-
-      .tcard-v2-body {
-        font-size: 13px;
-        color: var(--ts);
-        line-height: 1.7;
-        margin-bottom: 18px;
-      }
-
-      .tcard-v2-author {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .tcard-v2-avatar {
-        width: 38px; height: 38px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        font-weight: 800;
-        color: #fff;
-        flex-shrink: 0;
-      }
-
-      .tcard-v2-name { font-size: 13px; font-weight: 800; }
-      .tcard-v2-loc { font-size: 11px; color: var(--ts); margin-top: 1px; }
-
-      /* CTA Banner */
-      .cta-v2 {
-        background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(20,184,166,0.08));
-        border: 1px solid rgba(249,115,22,0.12);
-        border-radius: 24px;
-        padding: 60px 40px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cta-v2::before {
-        content: '';
-        position: absolute;
-        top: -60%; right: -15%;
-        width: 350px; height: 350px;
-        background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%);
-        pointer-events: none;
-      }
-
-      .cta-v2::after {
-        content: '';
-        position: absolute;
-        bottom: -50%; left: -10%;
-        width: 280px; height: 280px;
-        background: radial-gradient(circle, rgba(20,184,166,0.06) 0%, transparent 70%);
-        pointer-events: none;
-      }
-
-      .cta-v2-title {
-        font-family: 'Outfit', sans-serif;
-        font-size: 34px;
-        font-weight: 900;
-        margin-bottom: 12px;
-        position: relative;
-        letter-spacing: -0.5px;
-      }
-
-      .cta-v2-sub {
-        font-size: 16px;
-        color: var(--ts);
-        margin-bottom: 30px;
-        position: relative;
-      }
-
-      .cta-v2-btn {
-        background: linear-gradient(135deg, #f97316, #ea580c);
-        color: #fff;
-        border: none;
-        border-radius: 16px;
-        padding: 17px 40px;
-        font-size: 16px;
-        font-weight: 800;
-        cursor: pointer;
-        box-shadow: 0 8px 32px rgba(249,115,22,0.35);
-        transition: all 0.25s;
-        font-family: inherit;
-        position: relative;
-      }
-
-      .cta-v2-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 16px 48px rgba(249,115,22,0.5);
-      }
-
-      /* Premium Footer */
-      .footer-v2 {
-        border-top: 1px solid rgba(255,255,255,0.06);
-        padding: 64px 24px 32px;
-        background: rgba(3,7,18,0.4);
-      }
-
-      body.light .footer-v2 {
-        background: rgba(248,250,252,0.4);
-        border-color: rgba(0,0,0,0.06);
-      }
-
-      .footer-v2-inner {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .footer-v2-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 48px;
-        margin-bottom: 48px;
-      }
-
-      .footer-v2-brand-name {
-        font-family: 'Outfit', sans-serif;
-        font-size: 22px;
-        font-weight: 900;
-        margin-bottom: 12px;
-      }
-
-      .footer-v2-brand-name em { color: var(--p); font-style: normal; }
-
-      .footer-v2-brand-desc {
-        font-size: 13px;
-        color: var(--ts);
-        line-height: 1.7;
-        margin-bottom: 18px;
-        max-width: 300px;
-      }
-
-      .footer-v2-made {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(20,184,166,0.06);
-        border: 1px solid rgba(20,184,166,0.14);
-        border-radius: 100px;
-        padding: 5px 14px;
-        font-size: 12px;
-        font-weight: 700;
-        color: #14b8a6;
-      }
-
-      .footer-v2-col-title {
         font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 1.5px;
-        color: var(--t);
-        margin-bottom: 20px;
-      }
-
-      .footer-v2-links {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .footer-v2-links a {
-        font-size: 13px;
         color: var(--ts);
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.2s, transform 0.2s;
-        display: inline-block;
+        margin-bottom: 16px;
       }
 
-      .footer-v2-links a:hover {
-        color: var(--p);
-        transform: translateX(3px);
+      .pm-track-wrap {
+        overflow: hidden;
+        position: relative;
+        mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+        -webkit-mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
       }
 
-      .footer-v2-bottom {
+      .pm-track {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        animation: marquee-scroll 28s linear infinite;
+        white-space: nowrap;
+        width: max-content;
+      }
+
+      .pm-track:hover { animation-play-state: paused; }
+
+      @keyframes marquee-scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+      }
+
+      .pm-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--ts);
+        opacity: 0.7;
+        transition: opacity 0.2s, transform 0.2s;
+        padding: 6px 16px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+
+      .pm-item:hover {
+        opacity: 1;
+        transform: scale(1.05);
+        color: var(--t);
+        border-color: rgba(20,184,166,0.3);
+      }
+
+      /* Price Intelligence Demo Card */
+      .demo-comparison-card {
+        background: rgba(15,23,42,0.5);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 32px;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        margin-top: 16px;
+      }
+
+      body.light .demo-comparison-card {
+        background: rgba(255,255,255,0.75);
+        border-color: rgba(0,0,0,0.08);
+      }
+
+      .dcc-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-top: 28px;
-        border-top: 1px solid rgba(255,255,255,0.06);
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .dcc-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 20px;
+        font-weight: 900;
+      }
+
+      .dcc-badge {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        color: #10b981;
+        border-radius: 100px;
+        padding: 4px 14px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .dcc-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      @media (max-width: 768px) {
+        .dcc-grid { grid-template-columns: 1fr 1fr; }
+      }
+
+      .dcc-plat {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 16px;
+        padding: 16px;
+        text-align: center;
+        position: relative;
+        transition: all 0.25s;
+      }
+
+      .dcc-plat.best-price {
+        background: rgba(20,184,166,0.08);
+        border-color: rgba(20,184,166,0.3);
+        box-shadow: 0 8px 24px rgba(20,184,166,0.15);
+      }
+
+      .dcc-plat-name { font-size: 12px; font-weight: 800; color: var(--ts); margin-bottom: 6px; }
+      .dcc-plat-price { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 900; }
+      .dcc-plat.best-price .dcc-plat-price { color: #14b8a6; }
+      .dcc-plat-tag { font-size: 10px; font-weight: 800; margin-top: 4px; color: var(--ts); }
+      .dcc-plat.best-price .dcc-plat-tag { color: #10b981; }
+
+      /* Newsletter Box in Footer */
+      .footer-v2-newsletter {
+        background: rgba(20,184,166,0.05);
+        border: 1px solid rgba(20,184,166,0.15);
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         flex-wrap: wrap;
         gap: 16px;
       }
 
-      body.light .footer-v2-bottom {
-        border-color: rgba(0,0,0,0.06);
-      }
+      .fn-title { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 2px; }
+      .fn-sub { font-size: 12px; color: var(--ts); }
 
-      .footer-v2-copy {
-        font-size: 12px;
-        color: var(--tm);
-      }
-
-      .footer-v2-legal {
+      .fn-form {
         display: flex;
-        gap: 24px;
+        gap: 8px;
+        max-width: 400px;
+        width: 100%;
       }
 
-      .footer-v2-legal a {
+      .fn-input {
+        flex: 1;
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        padding: 10px 14px;
+        color: var(--t);
+        font-size: 13px;
+        outline: none;
+        font-family: inherit;
+      }
+
+      .fn-btn {
+        background: linear-gradient(135deg, #14b8a6, #0d9488);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        white-space: nowrap;
+        font-family: inherit;
+        transition: transform 0.2s;
+      }
+
+      .fn-btn:hover { transform: translateY(-1px); }
+
+      /* Live System Status Dot */
+      .footer-v2-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         font-size: 12px;
+        font-weight: 700;
         color: var(--ts);
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.2s;
       }
 
-      .footer-v2-legal a:hover { color: var(--p); }
-
-      /* Responsive — New Sections */
-      @media (max-width: 1024px) {
-        .sbv2-row {
-          grid-template-columns: 1fr 1fr;
-          gap: 10px;
-        }
-        .sbv2-swap { grid-column: span 2; justify-self: center; width: 100%; }
-        .sbv2-field:nth-child(4) { grid-column: span 2; }
-        .sbv2-search-btn { grid-column: span 2; }
-        .bento-grid { grid-template-columns: 1fr 1fr; }
-        .bento-card.bento-wide { grid-column: span 2; }
-        .footer-v2-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .fvs-dot {
+        width: 8px; height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 8px rgba(16,185,129,0.6);
+        animation: pulse-dot 2s infinite;
       }
 
-      @media (max-width: 768px) {
-        .hero-v2 { padding: 44px 16px 36px; min-height: auto; }
-        .hero-v2-title { font-size: clamp(30px, 8vw, 48px); letter-spacing: -1.5px; }
-        .hero-v2-sub { font-size: 15px; margin-bottom: 28px; }
-        .sbv2-row { grid-template-columns: 1fr; }
-        .sbv2-swap { grid-column: span 1; }
-        .sbv2-field:nth-child(4) { grid-column: span 1; }
-        .sbv2-search-btn { grid-column: span 1; padding: 16px; font-size: 15px; }
-        .hero-stats-v2 {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-        .hs-v2-div { display: none; }
-        .hs-v2-val { font-size: 22px; }
-        .hiw-grid { flex-direction: column; }
-        .hiw-card { max-width: 100%; }
-        .hiw-arrow-icon { display: none; }
-        .bento-grid { grid-template-columns: 1fr; }
-        .bento-card.bento-wide { grid-column: span 1; }
-        .routes-grid-v2 { grid-template-columns: 1fr; }
-        .section-title-v2 { font-size: 28px; }
-        .footer-v2-grid { grid-template-columns: 1fr; gap: 28px; }
-        .stats-banner-v2 { flex-direction: column; padding: 36px 20px; }
-        .sb-v2-div { width: 50%; height: 1px; }
-        .sb-v2-val { font-size: 30px; }
-        .cta-v2 { padding: 40px 20px; }
-        .cta-v2-title { font-size: 24px; }
-        .search-box-v2 { padding: 16px; border-radius: 18px; }
-        .testimonials-v2 { grid-template-columns: 1fr; }
-      }
-
-    </style>
+</style>
   </head>
 
   <body>
@@ -5374,7 +4793,7 @@
       </div>
     </div>
 
-    <!-- ======= VIEW: HOME ======= -->
+        <!-- ======= VIEW: HOME ======= -->
     <div id="view-home" class="view active">
       <!-- LIVE DEAL TICKER -->
       <div class="deal-ticker" id="deal-ticker">
@@ -5383,8 +4802,15 @@
         </div>
       </div>
 
-      <!-- ══ HERO v2 ══ -->
+      <!-- ══ HERO v3 ══ -->
       <section class="hero-v2">
+        <!-- Floating Live Savings Toast -->
+        <div class="hero-live-toast" id="hero-live-toast">
+          <span class="hlt-icon">⚡</span>
+          <span><span class="hlt-highlight" id="hlt-name">Priya M.</span> saved <span class="hlt-highlight" id="hlt-savings">₹340</span> on <span id="hlt-route">Mumbai → Goa</span></span>
+          <span class="hlt-time" id="hlt-time">12s ago</span>
+        </div>
+
         <div class="hero-v2-orb hero-v2-orb-1"></div>
         <div class="hero-v2-orb hero-v2-orb-2"></div>
         <div class="hero-v2-orb hero-v2-orb-3"></div>
@@ -5405,8 +4831,17 @@
             Save up to 40% on every trip across India.
           </p>
 
-          <!-- SEARCH BOX v2 -->
+          <!-- SEARCH BOX v3 -->
           <div class="search-box-v2">
+            <!-- Mode Switcher Tabs -->
+            <div class="sbv2-modes">
+              <button class="sbv2-mode-btn active" onclick="setHomeSearchMode(this, 'bus')">🚌 Bus Fares</button>
+              <button class="sbv2-mode-btn" onclick="setHomeSearchMode(this, 'flight')">✈️ Flights</button>
+              <button class="sbv2-mode-btn" onclick="setHomeSearchMode(this, 'train')">🚂 Trains</button>
+              <button class="sbv2-mode-btn" onclick="setHomeSearchMode(this, 'cab')">🚗 SUV Cabs</button>
+              <button class="sbv2-mode-btn" onclick="setHomeSearchMode(this, 'hotel')">🏨 Hotels</button>
+            </div>
+
             <div class="sbv2-row">
               <div class="sbv2-field">
                 <label class="sbv2-label">🚌 From</label>
@@ -5428,9 +4863,16 @@
               <div class="sbv2-field">
                 <label class="sbv2-label">📅 Date</label>
                 <input class="sbv2-input" type="date" id="home-date" />
+                <div class="sbv2-date-chips">
+                  <button class="sbv2-date-chip" onclick="setDate(0)">Today</button>
+                  <button class="sbv2-date-chip" onclick="setDate(1)">Tomorrow</button>
+                  <button class="sbv2-date-chip" onclick="setDateSat()">Sat 🔥</button>
+                </div>
               </div>
-              <button class="sbv2-search-btn" onclick="doSearch()">🔍 Search Buses</button>
+              <button class="sbv2-search-btn" onclick="doSearch()">🔍 Compare All Prices →</button>
             </div>
+
+            <!-- Quick Trending Corridor Chips -->
             <div class="sbv2-trending">
               <span class="sbv2-trending-label">🔥 Trending:</span>
               <button class="sbv2-chip" onclick="quickSearch('Mumbai','Goa')">Mumbai → Goa (₹499)</button>
@@ -5466,6 +4908,36 @@
         </div>
       </section>
 
+      <!-- ══ PARTNER OPERATORS MARQUEE STRIP ══ -->
+      <section class="partner-marquee-section">
+        <div class="pm-label">Comparing Fares Live Across Official Partners</div>
+        <div class="pm-track-wrap">
+          <div class="pm-track">
+            <span class="pm-item">🚌 RedBus</span>
+            <span class="pm-item">🚌 AbhiBus</span>
+            <span class="pm-item">✈️ MakeMyTrip</span>
+            <span class="pm-item">🧳 Yatra</span>
+            <span class="pm-item">⚡ Zingbus</span>
+            <span class="pm-item">👑 IntrCity SmartBus</span>
+            <span class="pm-item">🚌 VRL Travels</span>
+            <span class="pm-item">🏛️ KSRTC</span>
+            <span class="pm-item">🚩 MSRTC</span>
+            <span class="pm-item">🚌 Orange Tours</span>
+            <!-- duplicated for seamless marquee loop -->
+            <span class="pm-item">🚌 RedBus</span>
+            <span class="pm-item">🚌 AbhiBus</span>
+            <span class="pm-item">✈️ MakeMyTrip</span>
+            <span class="pm-item">🧳 Yatra</span>
+            <span class="pm-item">⚡ Zingbus</span>
+            <span class="pm-item">👑 IntrCity SmartBus</span>
+            <span class="pm-item">🚌 VRL Travels</span>
+            <span class="pm-item">🏛️ KSRTC</span>
+            <span class="pm-item">🚩 MSRTC</span>
+            <span class="pm-item">🚌 Orange Tours</span>
+          </div>
+        </div>
+      </section>
+
       <!-- INSTANT IN-PAGE LIVE RESULTS PANEL (preserved for JS) -->
       <div class="container">
         <div class="home-results-panel" id="home-results-panel" style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;display:none">
@@ -5486,6 +4958,39 @@
             <span id="hrp-ai-text">Fetching real-time prices &amp; demand surge predictions...</span>
           </div>
           <div id="hrp-list" style="display:flex;flex-direction:column;gap:16px"></div>
+        </div>
+
+        <!-- ══ DEMO PRICE INTELLIGENCE CARD ══ -->
+        <div class="demo-comparison-card">
+          <div class="dcc-header">
+            <div>
+              <div class="dcc-title">⚡ Live Price Comparison Engine</div>
+              <div style="font-size:13px;color:var(--ts)">Example: Mumbai → Goa Volvo AC Sleeper</div>
+            </div>
+            <div class="dcc-badge">Instant Savings: ₹121 (22% OFF)</div>
+          </div>
+          <div class="dcc-grid">
+            <div class="dcc-plat">
+              <div class="dcc-plat-name">RedBus</div>
+              <div class="dcc-plat-price">₹670</div>
+              <div class="dcc-plat-tag">Standard Fare</div>
+            </div>
+            <div class="dcc-plat best-price">
+              <div class="dcc-plat-name">AbhiBus</div>
+              <div class="dcc-plat-price">₹549</div>
+              <div class="dcc-plat-tag">⚡ LOWEST PRICE</div>
+            </div>
+            <div class="dcc-plat">
+              <div class="dcc-plat-name">MakeMyTrip</div>
+              <div class="dcc-plat-price">₹640</div>
+              <div class="dcc-plat-tag">Standard Fare</div>
+            </div>
+            <div class="dcc-plat">
+              <div class="dcc-plat-name">Zingbus</div>
+              <div class="dcc-plat-price">₹599</div>
+              <div class="dcc-plat-tag">Deal Available</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -5725,10 +5230,22 @@
       <!-- ══ PREMIUM FOOTER ══ -->
       <footer class="footer-v2">
         <div class="footer-v2-inner">
+          <!-- Newsletter Box -->
+          <div class="footer-v2-newsletter">
+            <div>
+              <div class="fn-title">📩 Get Secret Bus Deals &amp; Price Alerts</div>
+              <div class="fn-sub">Subscribe to get weekly travel discounts up to ₹200 OFF</div>
+            </div>
+            <div class="fn-form">
+              <input class="fn-input" type="email" id="fn-email" placeholder="Enter your email" />
+              <button class="fn-btn" onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+          </div>
+
           <div class="footer-v2-grid">
             <div>
               <div class="footer-v2-brand-name">Bus<em>Compare</em> India</div>
-              <p class="footer-v2-brand-desc">India's smartest bus fare comparison engine. Compare prices across 40+ operators and save up to 40% on every trip.</p>
+              <p class="footer-v2-brand-desc">India's happiest bus fare comparison engine. Compare prices across 40+ operators and save up to 40% on every trip.</p>
               <div class="footer-v2-made">🇮🇳 Made with ❤️ in India</div>
             </div>
             <div>
@@ -5762,6 +5279,10 @@
           </div>
           <div class="footer-v2-bottom">
             <div class="footer-v2-copy">© 2026 BusCompare India. All rights reserved.</div>
+            <div class="footer-v2-status">
+              <span class="fvs-dot"></span>
+              <span>All Systems Operational</span>
+            </div>
             <div class="footer-v2-legal">
               <a href="/terms">Terms of Service</a>
               <a href="/privacy">Privacy Policy</a>
@@ -5771,8 +5292,69 @@
       </footer>
     </div>
 
+    <!-- SCRIPT HELPERS FOR HOME REDESIGN v3 -->
+    <script>
+      function setHomeSearchMode(btn, mode) {
+        document.querySelectorAll('.sbv2-mode-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        if (mode === 'bus') {
+          // Bus mode active
+        } else if (mode === 'flight') {
+          nav('/search?mode=flight');
+        } else if (mode === 'train') {
+          nav('/search?mode=train');
+        } else if (mode === 'cab') {
+          nav('/search?mode=cab');
+        } else if (mode === 'hotel') {
+          nav('/search?mode=hotel');
+        }
+      }
 
-    <!-- ======= VIEW: SEARCH ======= -->
+      function subscribeNewsletter() {
+        const email = document.getElementById('fn-email')?.value;
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid email address');
+          return;
+        }
+        alert('🎉 Thank you for subscribing! You will receive exclusive price drop alerts.');
+        if (document.getElementById('fn-email')) document.getElementById('fn-email').value = '';
+      }
+
+      // Live Savings Toast Ticker Loop
+      (function initLiveSavingsToast() {
+        const TOAST_DATA = [
+          { name: "Priya M.", savings: "₹340", route: "Mumbai → Goa", time: "12s ago" },
+          { name: "Rahul S.", savings: "₹210", route: "Bangalore → Chennai", time: "25s ago" },
+          { name: "Ananya K.", savings: "₹450", route: "Delhi → Jaipur", time: "40s ago" },
+          { name: "Vikram R.", savings: "₹180", route: "Hyderabad → Vizag", time: "1m ago" },
+          { name: "Suresh P.", savings: "₹290", route: "Pune → Mumbai", time: "2m ago" }
+        ];
+        let idx = 0;
+        setInterval(() => {
+          idx = (idx + 1) % TOAST_DATA.length;
+          const d = TOAST_DATA[idx];
+          const nameEl = document.getElementById('hlt-name');
+          const savEl = document.getElementById('hlt-savings');
+          const routeEl = document.getElementById('hlt-route');
+          const timeEl = document.getElementById('hlt-time');
+          const toast = document.getElementById('hero-live-toast');
+          if (nameEl && savEl && routeEl && timeEl && toast) {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(-6px)';
+            setTimeout(() => {
+              nameEl.textContent = d.name;
+              savEl.textContent = d.savings;
+              routeEl.textContent = d.route;
+              timeEl.textContent = d.time;
+              toast.style.opacity = '1';
+              toast.style.transform = 'translateY(0)';
+            }, 300);
+          }
+        }, 5000);
+      })();
+    </script>
+
+<!-- ======= VIEW: SEARCH ======= -->
     <div id="view-search" class="view">
       <div class="sp-wrap">
         <div class="sp-topbar">
