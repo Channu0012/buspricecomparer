@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -4279,6 +4279,959 @@
           max-width: 94vw;
         }
       }
+
+
+      /* ══════════════════════════════════════════════════════════════
+         HOME PAGE REDESIGN v2 — Aurora + Glassmorphism
+         ══════════════════════════════════════════════════════════════ */
+
+      /* Hero v2 */
+      .hero-v2 {
+        position: relative;
+        overflow: hidden;
+        padding: 80px 24px 60px;
+        min-height: 88vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-v2::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 80% 50% at 20% 0%, rgba(20, 184, 166, 0.12) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 50% at 80% 0%, rgba(249, 115, 22, 0.10) 0%, transparent 55%),
+          radial-gradient(ellipse 50% 40% at 50% 100%, rgba(129, 140, 248, 0.08) 0%, transparent 50%),
+          var(--bg);
+        z-index: 0;
+      }
+
+      .hero-v2::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+        background-size: 80px 80px;
+        mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 30%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 0%, black 30%, transparent 100%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .hero-v2-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+        will-change: transform;
+        z-index: 0;
+      }
+      .hero-v2-orb-1 {
+        width: 500px; height: 500px;
+        background: rgba(20,184,166,0.06);
+        top: -200px; left: -100px;
+        animation: orb1 25s ease-in-out infinite;
+      }
+      .hero-v2-orb-2 {
+        width: 400px; height: 400px;
+        background: rgba(249,115,22,0.05);
+        top: -50px; right: -80px;
+        animation: orb2 30s ease-in-out infinite;
+      }
+      .hero-v2-orb-3 {
+        width: 350px; height: 350px;
+        background: rgba(129,140,248,0.04);
+        bottom: -100px; left: 30%;
+        animation: orb1 20s ease-in-out infinite reverse;
+      }
+
+      .hero-v2-inner {
+        max-width: 860px;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Hero Badge */
+      .hero-live-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(20, 184, 166, 0.06);
+        border: 1px solid rgba(20, 184, 166, 0.18);
+        border-radius: 100px;
+        padding: 8px 22px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ts);
+        margin-bottom: 28px;
+        animation: fadeUp 0.5s ease both;
+        backdrop-filter: blur(8px);
+      }
+
+      .hero-live-badge .hlb-dot {
+        width: 8px; height: 8px;
+        background: #14b8a6;
+        border-radius: 50%;
+        animation: pulse-dot 2s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(20,184,166,0.6);
+      }
+
+      .hero-live-badge .hlb-route {
+        color: #14b8a6;
+        font-weight: 800;
+        min-width: 130px;
+        display: inline-block;
+        text-align: left;
+      }
+
+      /* Hero Title */
+      .hero-v2-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(40px, 7vw, 78px);
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: -2.5px;
+        margin-bottom: 20px;
+        animation: fadeUp 0.5s 0.08s ease both;
+      }
+
+      .hero-v2-title .hero-hl {
+        background: linear-gradient(135deg, #f97316 0%, #fb923c 25%, #14b8a6 65%, #818cf8 100%);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradShift 6s ease infinite;
+      }
+
+      @keyframes gradShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .hero-v2-sub {
+        font-size: 18px;
+        color: var(--ts);
+        max-width: 560px;
+        margin: 0 auto 40px;
+        line-height: 1.75;
+        animation: fadeUp 0.5s 0.16s ease both;
+      }
+
+      /* Search Box v2 */
+      .search-box-v2 {
+        background: rgba(15, 23, 42, 0.65);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 24px;
+        padding: 24px;
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        box-shadow:
+          0 48px 96px rgba(0,0,0,0.45),
+          inset 0 1px 0 rgba(255,255,255,0.06);
+        animation: fadeUp 0.5s 0.24s ease both;
+      }
+
+      body.light .search-box-v2 {
+        background: rgba(255,255,255,0.88);
+        border-color: rgba(0,0,0,0.08);
+        box-shadow: 0 48px 96px rgba(0,0,0,0.08);
+      }
+
+      .sbv2-row {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr 0.85fr auto;
+        gap: 12px;
+        align-items: end;
+      }
+
+      .sbv2-field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .sbv2-label {
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        color: #14b8a6;
+      }
+
+      .sbv2-input {
+        width: 100%;
+        background: rgba(255,255,255,0.06);
+        border: 1.5px solid rgba(255,255,255,0.08);
+        border-radius: 14px;
+        padding: 14px 16px;
+        color: var(--t);
+        font-size: 15px;
+        font-weight: 700;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        font-family: inherit;
+      }
+
+      body.light .sbv2-input {
+        background: rgba(0,0,0,0.04);
+        border-color: rgba(0,0,0,0.1);
+      }
+
+      .sbv2-input:focus {
+        border-color: #14b8a6;
+        box-shadow: 0 0 0 3px rgba(20,184,166,0.15);
+      }
+
+      .sbv2-input::placeholder {
+        color: var(--tm);
+        font-weight: 500;
+      }
+
+      .sbv2-swap {
+        background: rgba(255,255,255,0.06);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #14b8a6;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s;
+        align-self: end;
+        font-family: inherit;
+      }
+
+      .sbv2-swap:hover {
+        background: rgba(20,184,166,0.12);
+        border-color: rgba(20,184,166,0.3);
+      }
+
+      .sbv2-search-btn {
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: #fff;
+        border: none;
+        border-radius: 14px;
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 800;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+        white-space: nowrap;
+        box-shadow: 0 8px 28px rgba(249,115,22,0.35);
+        transition: all 0.25s;
+        align-self: end;
+        font-family: inherit;
+      }
+
+      .sbv2-search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 44px rgba(249,115,22,0.5);
+      }
+
+      .sbv2-search-btn:active {
+        transform: translateY(0);
+      }
+
+      .sbv2-trending {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+
+      .sbv2-trending-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ts);
+      }
+
+      .sbv2-chip {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 100px;
+        padding: 5px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ts);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+        white-space: nowrap;
+      }
+
+      .sbv2-chip:hover {
+        background: rgba(20,184,166,0.1);
+        border-color: rgba(20,184,166,0.3);
+        color: #14b8a6;
+      }
+
+      /* Hero Stats v2 */
+      .hero-stats-v2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin-top: 44px;
+        animation: fadeUp 0.5s 0.4s ease both;
+      }
+
+      .hs-v2-item { text-align: center; }
+
+      .hs-v2-val {
+        font-family: 'Outfit', sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .hs-v2-lbl {
+        font-size: 11px;
+        color: var(--ts);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-top: 5px;
+      }
+
+      .hs-v2-div {
+        width: 1px;
+        height: 40px;
+        background: rgba(255,255,255,0.1);
+      }
+
+      /* Section v2 */
+      .section-v2 { padding: 72px 0; }
+
+      .section-hdr-v2 {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .section-chip-v2 {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(20,184,166,0.06);
+        border: 1px solid rgba(20,184,166,0.16);
+        border-radius: 100px;
+        padding: 5px 18px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #14b8a6;
+        margin-bottom: 14px;
+      }
+
+      .section-title-v2 {
+        font-family: 'Outfit', sans-serif;
+        font-size: 36px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        margin-bottom: 8px;
+      }
+
+      .section-sub-v2 {
+        font-size: 15px;
+        color: var(--ts);
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* How It Works */
+      .hiw-grid {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .hiw-card {
+        background: rgba(15,23,42,0.45);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 22px;
+        padding: 36px 28px;
+        text-align: center;
+        flex: 1;
+        min-width: 220px;
+        max-width: 300px;
+        position: relative;
+        transition: all 0.3s;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      body.light .hiw-card {
+        background: rgba(255,255,255,0.65);
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .hiw-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(20,184,166,0.25);
+        box-shadow: 0 24px 56px rgba(0,0,0,0.3), 0 0 0 1px rgba(20,184,166,0.1);
+      }
+
+      body.light .hiw-card:hover {
+        box-shadow: 0 24px 56px rgba(0,0,0,0.06);
+      }
+
+      .hiw-step-num {
+        font-family: 'Outfit', sans-serif;
+        font-size: 52px;
+        font-weight: 900;
+        color: rgba(20,184,166,0.1);
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+
+      .hiw-icon {
+        font-size: 38px;
+        margin-bottom: 16px;
+      }
+
+      .hiw-card-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+
+      .hiw-card-desc {
+        font-size: 13px;
+        color: var(--ts);
+        line-height: 1.65;
+      }
+
+      .hiw-arrow-icon {
+        font-size: 28px;
+        color: rgba(20,184,166,0.3);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Routes v2 */
+      .routes-grid-v2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 16px;
+      }
+
+      .route-card-v2 {
+        background: rgba(15,23,42,0.45);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 18px;
+        padding: 22px;
+        cursor: pointer;
+        transition: all 0.28s;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      body.light .route-card-v2 {
+        background: rgba(255,255,255,0.65);
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .route-card-v2::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #f97316, #14b8a6);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .route-card-v2:hover {
+        border-color: rgba(20,184,166,0.25);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 52px rgba(0,0,0,0.3);
+      }
+
+      body.light .route-card-v2:hover {
+        box-shadow: 0 20px 52px rgba(0,0,0,0.06);
+      }
+
+      .route-card-v2:hover::before { opacity: 1; }
+
+      .rcv2-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .rcv2-name { font-weight: 900; font-size: 15px; }
+
+      .rcv2-tag {
+        font-size: 9px;
+        font-weight: 800;
+        padding: 3px 10px;
+        border-radius: 100px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .rcv2-tag-hot {
+        background: rgba(249,115,22,0.1);
+        color: var(--p);
+        border: 1px solid rgba(249,115,22,0.22);
+      }
+
+      .rcv2-tag-pop {
+        background: rgba(20,184,166,0.08);
+        color: #14b8a6;
+        border: 1px solid rgba(20,184,166,0.22);
+      }
+
+      .rcv2-tag-new {
+        background: rgba(129,140,248,0.08);
+        color: #818cf8;
+        border: 1px solid rgba(129,140,248,0.22);
+      }
+
+      .rcv2-meta {
+        font-size: 12px;
+        color: var(--ts);
+        margin-bottom: 14px;
+      }
+
+      .rcv2-price {
+        font-family: 'Outfit', sans-serif;
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--p);
+      }
+
+      .rcv2-price-sub {
+        font-size: 12px;
+        color: var(--ts);
+        font-weight: 500;
+        margin-top: 2px;
+      }
+
+      /* Bento Feature Grid */
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .bento-card {
+        background: rgba(15,23,42,0.45);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 22px;
+        padding: 30px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      body.light .bento-card {
+        background: rgba(255,255,255,0.65);
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .bento-card:hover {
+        border-color: rgba(20,184,166,0.25);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 44px rgba(0,0,0,0.25);
+      }
+
+      body.light .bento-card:hover {
+        box-shadow: 0 16px 44px rgba(0,0,0,0.06);
+      }
+
+      .bento-card.bento-wide { grid-column: span 2; }
+
+      .bento-icon {
+        width: 50px; height: 50px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 18px;
+      }
+
+      .bi-teal { background: rgba(20,184,166,0.1); }
+      .bi-orange { background: rgba(249,115,22,0.1); }
+      .bi-purple { background: rgba(129,140,248,0.1); }
+      .bi-gold { background: rgba(245,158,11,0.1); }
+      .bi-green { background: rgba(16,185,129,0.1); }
+
+      .bento-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+
+      .bento-desc {
+        font-size: 13px;
+        color: var(--ts);
+        line-height: 1.65;
+      }
+
+      /* Stats Banner */
+      .stats-banner-v2 {
+        background: linear-gradient(135deg, rgba(15,23,42,0.7), rgba(20,184,166,0.04));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 24px;
+        padding: 52px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      body.light .stats-banner-v2 {
+        background: rgba(255,255,255,0.6);
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .sb-v2-item { text-align: center; }
+
+      .sb-v2-val {
+        font-family: 'Outfit', sans-serif;
+        font-size: 38px;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .sb-v2-lbl {
+        font-size: 12px;
+        color: var(--ts);
+        font-weight: 700;
+        margin-top: 8px;
+      }
+
+      .sb-v2-div {
+        width: 1px;
+        height: 48px;
+        background: rgba(255,255,255,0.07);
+      }
+
+      /* Testimonials v2 */
+      .testimonials-v2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 16px;
+      }
+
+      .tcard-v2 {
+        background: rgba(15,23,42,0.45);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 28px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: all 0.3s;
+      }
+
+      body.light .tcard-v2 {
+        background: rgba(255,255,255,0.65);
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .tcard-v2:hover {
+        border-color: rgba(20,184,166,0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+      }
+
+      .tcard-v2-stars {
+        color: var(--gold);
+        font-size: 14px;
+        margin-bottom: 12px;
+        letter-spacing: 2px;
+      }
+
+      .tcard-v2-quote {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+
+      .tcard-v2-body {
+        font-size: 13px;
+        color: var(--ts);
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      .tcard-v2-author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .tcard-v2-avatar {
+        width: 38px; height: 38px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 800;
+        color: #fff;
+        flex-shrink: 0;
+      }
+
+      .tcard-v2-name { font-size: 13px; font-weight: 800; }
+      .tcard-v2-loc { font-size: 11px; color: var(--ts); margin-top: 1px; }
+
+      /* CTA Banner */
+      .cta-v2 {
+        background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(20,184,166,0.08));
+        border: 1px solid rgba(249,115,22,0.12);
+        border-radius: 24px;
+        padding: 60px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-v2::before {
+        content: '';
+        position: absolute;
+        top: -60%; right: -15%;
+        width: 350px; height: 350px;
+        background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .cta-v2::after {
+        content: '';
+        position: absolute;
+        bottom: -50%; left: -10%;
+        width: 280px; height: 280px;
+        background: radial-gradient(circle, rgba(20,184,166,0.06) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .cta-v2-title {
+        font-family: 'Outfit', sans-serif;
+        font-size: 34px;
+        font-weight: 900;
+        margin-bottom: 12px;
+        position: relative;
+        letter-spacing: -0.5px;
+      }
+
+      .cta-v2-sub {
+        font-size: 16px;
+        color: var(--ts);
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .cta-v2-btn {
+        background: linear-gradient(135deg, #f97316, #ea580c);
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        padding: 17px 40px;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 8px 32px rgba(249,115,22,0.35);
+        transition: all 0.25s;
+        font-family: inherit;
+        position: relative;
+      }
+
+      .cta-v2-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 48px rgba(249,115,22,0.5);
+      }
+
+      /* Premium Footer */
+      .footer-v2 {
+        border-top: 1px solid rgba(255,255,255,0.06);
+        padding: 64px 24px 32px;
+        background: rgba(3,7,18,0.4);
+      }
+
+      body.light .footer-v2 {
+        background: rgba(248,250,252,0.4);
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .footer-v2-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-v2-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 48px;
+        margin-bottom: 48px;
+      }
+
+      .footer-v2-brand-name {
+        font-family: 'Outfit', sans-serif;
+        font-size: 22px;
+        font-weight: 900;
+        margin-bottom: 12px;
+      }
+
+      .footer-v2-brand-name em { color: var(--p); font-style: normal; }
+
+      .footer-v2-brand-desc {
+        font-size: 13px;
+        color: var(--ts);
+        line-height: 1.7;
+        margin-bottom: 18px;
+        max-width: 300px;
+      }
+
+      .footer-v2-made {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(20,184,166,0.06);
+        border: 1px solid rgba(20,184,166,0.14);
+        border-radius: 100px;
+        padding: 5px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #14b8a6;
+      }
+
+      .footer-v2-col-title {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: var(--t);
+        margin-bottom: 20px;
+      }
+
+      .footer-v2-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .footer-v2-links a {
+        font-size: 13px;
+        color: var(--ts);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s, transform 0.2s;
+        display: inline-block;
+      }
+
+      .footer-v2-links a:hover {
+        color: var(--p);
+        transform: translateX(3px);
+      }
+
+      .footer-v2-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 28px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      body.light .footer-v2-bottom {
+        border-color: rgba(0,0,0,0.06);
+      }
+
+      .footer-v2-copy {
+        font-size: 12px;
+        color: var(--tm);
+      }
+
+      .footer-v2-legal {
+        display: flex;
+        gap: 24px;
+      }
+
+      .footer-v2-legal a {
+        font-size: 12px;
+        color: var(--ts);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      .footer-v2-legal a:hover { color: var(--p); }
+
+      /* Responsive — New Sections */
+      @media (max-width: 1024px) {
+        .sbv2-row {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+        .sbv2-swap { grid-column: span 2; justify-self: center; width: 100%; }
+        .sbv2-field:nth-child(4) { grid-column: span 2; }
+        .sbv2-search-btn { grid-column: span 2; }
+        .bento-grid { grid-template-columns: 1fr 1fr; }
+        .bento-card.bento-wide { grid-column: span 2; }
+        .footer-v2-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      }
+
+      @media (max-width: 768px) {
+        .hero-v2 { padding: 44px 16px 36px; min-height: auto; }
+        .hero-v2-title { font-size: clamp(30px, 8vw, 48px); letter-spacing: -1.5px; }
+        .hero-v2-sub { font-size: 15px; margin-bottom: 28px; }
+        .sbv2-row { grid-template-columns: 1fr; }
+        .sbv2-swap { grid-column: span 1; }
+        .sbv2-field:nth-child(4) { grid-column: span 1; }
+        .sbv2-search-btn { grid-column: span 1; padding: 16px; font-size: 15px; }
+        .hero-stats-v2 {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px;
+        }
+        .hs-v2-div { display: none; }
+        .hs-v2-val { font-size: 22px; }
+        .hiw-grid { flex-direction: column; }
+        .hiw-card { max-width: 100%; }
+        .hiw-arrow-icon { display: none; }
+        .bento-grid { grid-template-columns: 1fr; }
+        .bento-card.bento-wide { grid-column: span 1; }
+        .routes-grid-v2 { grid-template-columns: 1fr; }
+        .section-title-v2 { font-size: 28px; }
+        .footer-v2-grid { grid-template-columns: 1fr; gap: 28px; }
+        .stats-banner-v2 { flex-direction: column; padding: 36px 20px; }
+        .sb-v2-div { width: 50%; height: 1px; }
+        .sb-v2-val { font-size: 30px; }
+        .cta-v2 { padding: 40px 20px; }
+        .cta-v2-title { font-size: 24px; }
+        .search-box-v2 { padding: 16px; border-radius: 18px; }
+        .testimonials-v2 { grid-template-columns: 1fr; }
+      }
+
     </style>
   </head>
 
@@ -4426,508 +5379,398 @@
       <!-- LIVE DEAL TICKER -->
       <div class="deal-ticker" id="deal-ticker">
         <div class="ticker-track" id="ticker-track">
-          <!-- filled twice by JS for seamless loop -->
+          <!-- filled by JS for seamless loop -->
         </div>
       </div>
 
-      <div class="hero">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="hero-content" style="position:relative;z-index:1">
+      <!-- ══ HERO v2 ══ -->
+      <section class="hero-v2">
+        <div class="hero-v2-orb hero-v2-orb-1"></div>
+        <div class="hero-v2-orb hero-v2-orb-2"></div>
+        <div class="hero-v2-orb hero-v2-orb-3"></div>
+        <div class="hero-v2-inner">
 
-          <!-- TYPEWRITER STRIP -->
-          <div class="hero-typewriter-wrap">
-            <span class="tw-prefix">🔥 Now searching:</span>
-            <span class="tw-text" id="tw-text">Mumbai → Goa</span>
-            <span class="tw-cursor"></span>
+          <!-- Typewriter Badge -->
+          <div class="hero-live-badge">
+            <span class="hlb-dot"></span>
+            <span>🔥 Now searching:</span>
+            <span class="hlb-route" id="tw-text">Mumbai → Goa</span>
           </div>
 
-          <h1 class="hero-title">
-            Compare Every Way<br />to
-            <span class="grad-text">Travel India. 🇮🇳</span>
+          <h1 class="hero-v2-title">
+            Find the <span class="hero-hl">Cheapest Bus</span><br/>Ticket. Instantly.
           </h1>
-          <p class="hero-sub">
-            Bus · Flight · Train · Cab — Real-time fares across RedBus, AbhiBus,
-            MakeMyTrip & 40+ operators. Save up to 40% instantly.
+          <p class="hero-v2-sub">
+            Compare real-time fares across RedBus, AbhiBus, MakeMyTrip &amp; 40+ operators.
+            Save up to 40% on every trip across India.
           </p>
-          <div class="hero-stats">
-            <div class="hs-item">
-              <div class="hs-val" id="stat-searches" style="color: var(--p)">0</div>
-              <div class="hs-lbl">Searches Today</div>
-            </div>
-            <div class="hs-div"></div>
-            <div class="hs-item">
-              <div class="hs-val" id="stat-savings" style="color: var(--green)">0%</div>
-              <div class="hs-lbl">Avg Savings</div>
-            </div>
-            <div class="hs-div"></div>
-            <div class="hs-item">
-              <div class="hs-val" id="stat-routes" style="color: #60a5fa">0</div>
-              <div class="hs-lbl">Routes Covered</div>
-            </div>
-            <div class="hs-div"></div>
-            <div class="hs-item">
-              <div class="hs-val" id="stat-langs" style="color: #a78bfa">0</div>
-              <div class="hs-lbl">Languages</div>
-            </div>
-          </div>
 
-          <!-- TRUST BADGES -->
-          <div class="hero-trust-row">
-            <span class="trust-badge"><span class="trust-badge-icon">⭐</span> 4.8 / 5 Rating</span>
-            <span class="trust-badge"><span class="trust-badge-icon">🔒</span> SSL Secured</span>
-            <span class="trust-badge"><span class="trust-badge-icon">🇮🇳</span> Made in India</span>
-            <span class="trust-badge"><span class="trust-badge-icon">⚡</span> Real-time Prices</span>
-            <span class="trust-badge"><span class="trust-badge-icon">💸</span> No Hidden Fees</span>
-          </div>
-          <!-- SEARCH WIDGET -->
-          <div class="search-widget">
-            <!-- MODE TABS -->
-            <div class="mode-tabs">
-              <button class="mode-tab active" onclick="setSearchMode('bus')">🚌 Bus Fares</button>
-              <button class="mode-tab" onclick="setSearchMode('flight')">✈️ Flights</button>
-              <button class="mode-tab" onclick="setSearchMode('train')">🚂 Trains</button>
-              <button class="mode-tab" onclick="setSearchMode('cab')">🚗 SUV Cabs</button>
-              <button class="mode-tab" onclick="setSearchMode('hotel')">🏨 Hotels</button>
-            </div>
-
-            <div class="sw-grid">
-              <div class="sw-field">
-                <label class="sw-label">🚌 From</label>
+          <!-- SEARCH BOX v2 -->
+          <div class="search-box-v2">
+            <div class="sbv2-row">
+              <div class="sbv2-field">
+                <label class="sbv2-label">🚌 From</label>
                 <div class="ac-wrap">
-                  <input
-                    class="sw-input"
-                    id="home-from"
-                    placeholder="e.g. Mumbai"
-                    autocomplete="off"
-                    oninput="autoComplete(this, 'ac-from')"
-                    onfocus="autoComplete(this, 'ac-from')"
-                  />
+                  <input class="sbv2-input" id="home-from" placeholder="e.g. Mumbai" autocomplete="off"
+                    oninput="autoComplete(this, 'ac-from')" onfocus="autoComplete(this, 'ac-from')" />
                   <div class="ac-dd" id="ac-from"></div>
                 </div>
               </div>
-              <div class="sw-field">
-                <label class="sw-label">📍 To</label>
+              <button class="sbv2-swap" id="btn-swap-cities" onclick="swapCities()" title="Swap Cities">⇆</button>
+              <div class="sbv2-field">
+                <label class="sbv2-label">📍 To</label>
                 <div class="ac-wrap">
-                  <input
-                    class="sw-input"
-                    id="home-to"
-                    placeholder="e.g. Goa"
-                    autocomplete="off"
-                    oninput="autoComplete(this, 'ac-to')"
-                    onfocus="autoComplete(this, 'ac-to')"
-                  />
+                  <input class="sbv2-input" id="home-to" placeholder="e.g. Goa" autocomplete="off"
+                    oninput="autoComplete(this, 'ac-to')" onfocus="autoComplete(this, 'ac-to')" />
                   <div class="ac-dd" id="ac-to"></div>
                 </div>
               </div>
-              <div
-                class="sw-field"
-                style="display: flex; align-items: flex-end"
-              >
-                <button
-                  class="btn-swap-cities"
-                  id="btn-swap-cities"
-                  onclick="swapCities()"
-                  title="Swap Cities"
-                  style="
-                    width: 100%;
-                    background: rgba(255, 255, 255, 0.06);
-                    border: 1px solid var(--border);
-                    border-radius: 12px;
-                    padding: 12px;
-                    color: var(--p);
-                    font-size: 18px;
-                    cursor: pointer;
-                  "
-                >
-                  ⇆
-                </button>
+              <div class="sbv2-field">
+                <label class="sbv2-label">📅 Date</label>
+                <input class="sbv2-input" type="date" id="home-date" />
               </div>
-              <div class="sw-field">
-                <label class="sw-label">📅 Date</label>
-                <input class="sw-input" type="date" id="home-date" />
-                <div class="sw-date-row">
-                  <button class="sw-chip" onclick="setDate(0)">Today</button>
-                  <button class="sw-chip" onclick="setDate(1)">Tomorrow</button>
-                  <button class="sw-chip hot" onclick="setDateSat()">
-                    Sat 🔥
-                  </button>
+              <button class="sbv2-search-btn" onclick="doSearch()">🔍 Search Buses</button>
+            </div>
+            <div class="sbv2-trending">
+              <span class="sbv2-trending-label">🔥 Trending:</span>
+              <button class="sbv2-chip" onclick="quickSearch('Mumbai','Goa')">Mumbai → Goa (₹499)</button>
+              <button class="sbv2-chip" onclick="quickSearch('Bangalore','Chennai')">Bangalore → Chennai (₹399)</button>
+              <button class="sbv2-chip" onclick="quickSearch('Delhi','Jaipur')">Delhi → Jaipur (₹299)</button>
+              <button class="sbv2-chip" onclick="quickSearch('Hyderabad','Bangalore')">Hyderabad → BLR (₹599)</button>
+              <button class="sbv2-chip" onclick="quickSearch('Pune','Mumbai')">Pune → Mumbai (₹199)</button>
+            </div>
+          </div>
+
+          <!-- HERO STATS -->
+          <div class="hero-stats-v2">
+            <div class="hs-v2-item">
+              <div class="hs-v2-val" id="stat-searches" style="color:#14b8a6">0</div>
+              <div class="hs-v2-lbl">Searches Today</div>
+            </div>
+            <div class="hs-v2-div"></div>
+            <div class="hs-v2-item">
+              <div class="hs-v2-val" id="stat-savings" style="color:var(--p)">0%</div>
+              <div class="hs-v2-lbl">Avg Savings</div>
+            </div>
+            <div class="hs-v2-div"></div>
+            <div class="hs-v2-item">
+              <div class="hs-v2-val" id="stat-routes" style="color:#818cf8">0</div>
+              <div class="hs-v2-lbl">Routes Covered</div>
+            </div>
+            <div class="hs-v2-div"></div>
+            <div class="hs-v2-item">
+              <div class="hs-v2-val" id="stat-langs" style="color:var(--gold)">0</div>
+              <div class="hs-v2-lbl">Languages</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTANT IN-PAGE LIVE RESULTS PANEL (preserved for JS) -->
+      <div class="container">
+        <div class="home-results-panel" id="home-results-panel" style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900" id="hrp-title">Live Comparison Results</h3>
+              <div style="font-size:13px;color:var(--ts)" id="hrp-sub">Comparing fares across all operators</div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="sbv2-chip" onclick="filterHomeBuses('cheapest')">💰 Cheapest</button>
+              <button class="sbv2-chip" onclick="filterHomeBuses('fastest')">⚡ Fastest</button>
+              <button class="sbv2-chip" onclick="filterHomeBuses('rating')">⭐ Top Rated</button>
+              <a id="hrp-full-link" href="/search" class="sbv2-chip" style="text-decoration:none;background:rgba(249,115,22,0.1);border-color:rgba(249,115,22,0.25);color:var(--p)">Full Search ↗</a>
+            </div>
+          </div>
+          <div style="background:rgba(20,184,166,0.06);border:1px solid rgba(20,184,166,0.18);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:#14b8a6">
+            <span>🤖 AI Price Intelligence:</span>
+            <span id="hrp-ai-text">Fetching real-time prices &amp; demand surge predictions...</span>
+          </div>
+          <div id="hrp-list" style="display:flex;flex-direction:column;gap:16px"></div>
+        </div>
+      </div>
+
+      <!-- ══ HOW IT WORKS ══ -->
+      <section class="section-v2">
+        <div class="container">
+          <div class="section-hdr-v2">
+            <div class="section-chip-v2">✨ Simple &amp; Fast</div>
+            <h2 class="section-title-v2">How It Works</h2>
+            <p class="section-sub-v2">Save money on every bus trip in just 3 simple steps</p>
+          </div>
+          <div class="hiw-grid">
+            <div class="hiw-card">
+              <div class="hiw-step-num">01</div>
+              <div class="hiw-icon">🔍</div>
+              <h3 class="hiw-card-title">Search Your Route</h3>
+              <p class="hiw-card-desc">Enter your departure and destination cities with your preferred travel date</p>
+            </div>
+            <div class="hiw-arrow-icon">→</div>
+            <div class="hiw-card">
+              <div class="hiw-step-num">02</div>
+              <div class="hiw-icon">📊</div>
+              <h3 class="hiw-card-title">Compare All Prices</h3>
+              <p class="hiw-card-desc">See fares from RedBus, AbhiBus, MakeMyTrip &amp; 40+ operators side-by-side</p>
+            </div>
+            <div class="hiw-arrow-icon">→</div>
+            <div class="hiw-card">
+              <div class="hiw-step-num">03</div>
+              <div class="hiw-icon">🎫</div>
+              <h3 class="hiw-card-title">Book the Cheapest</h3>
+              <p class="hiw-card-desc">Click to book directly on the operator's website — zero hidden fees, ever</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ POPULAR ROUTES ══ -->
+      <section class="section-v2">
+        <div class="container">
+          <div class="section-hdr-v2" style="text-align:left;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+            <div>
+              <div class="section-chip-v2">🔥 Most Searched</div>
+              <h2 class="section-title-v2">Popular Routes</h2>
+              <p class="section-sub-v2" style="margin:0">India's most searched bus corridors — live prices updated every minute</p>
+            </div>
+            <button class="btn-see-all" onclick="nav('/search')">View All Routes</button>
+          </div>
+          <div class="routes-grid-v2" id="popular-routes-grid">
+            <div class="route-card-v2" onclick="nav('/search?from=Mumbai&to=Goa')">
+              <div class="rcv2-top">
+                <span class="rcv2-name">Mumbai → Goa 🏖️</span>
+                <span class="rcv2-tag rcv2-tag-hot">🔥 HOT</span>
+              </div>
+              <div class="rcv2-meta">8+ Operators · 9h 30m · 590 km</div>
+              <div class="rcv2-price">From ₹599</div>
+              <div class="rcv2-price-sub">RedBus · AbhiBus · MakeMyTrip</div>
+            </div>
+            <div class="route-card-v2" onclick="nav('/search?from=Mumbai&to=Pune')">
+              <div class="rcv2-top">
+                <span class="rcv2-name">Mumbai → Pune</span>
+                <span class="rcv2-tag rcv2-tag-pop">POPULAR</span>
+              </div>
+              <div class="rcv2-meta">12+ Operators · 3h 30m · 148 km</div>
+              <div class="rcv2-price">From ₹199</div>
+              <div class="rcv2-price-sub">Cheapest daily express</div>
+            </div>
+            <div class="route-card-v2" onclick="nav('/search?from=Bangalore&to=Goa')">
+              <div class="rcv2-top">
+                <span class="rcv2-name">Bangalore → Goa 🌴</span>
+                <span class="rcv2-tag rcv2-tag-pop">POPULAR</span>
+              </div>
+              <div class="rcv2-meta">6+ Operators · 9h 00m</div>
+              <div class="rcv2-price">From ₹799</div>
+              <div class="rcv2-price-sub">Overnight Volvo Sleeper</div>
+            </div>
+            <div class="route-card-v2" onclick="nav('/search?from=Delhi&to=Jaipur')">
+              <div class="rcv2-top">
+                <span class="rcv2-name">Delhi → Jaipur 🏰</span>
+                <span class="rcv2-tag rcv2-tag-new">TRENDING</span>
+              </div>
+              <div class="rcv2-meta">5+ Operators · 5h 45m</div>
+              <div class="rcv2-price">From ₹429</div>
+              <div class="rcv2-price-sub">KSRTC &amp; Private</div>
+            </div>
+            <div class="route-card-v2" onclick="nav('/search?from=Hyderabad&to=Bangalore')">
+              <div class="rcv2-top">
+                <span class="rcv2-name">Hyderabad → Bangalore</span>
+                <span class="rcv2-tag rcv2-tag-hot">🔥 HOT</span>
+              </div>
+              <div class="rcv2-meta">8+ Operators · 9h 30m</div>
+              <div class="rcv2-price">From ₹799</div>
+              <div class="rcv2-price-sub">Tech city to tech city</div>
+            </div>
+            <div class="route-card-v2" onclick="nav('/search?from=Chennai&to=Bangalore')">
+              <div class="rcv2-top">
+                <span class="rcv2-name">Chennai → Bangalore</span>
+                <span class="rcv2-tag rcv2-tag-pop">POPULAR</span>
+              </div>
+              <div class="rcv2-meta">6+ Operators · 6h 30m</div>
+              <div class="rcv2-price">From ₹450</div>
+              <div class="rcv2-price-sub">Busiest South India route</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ PLATFORM FEATURES — BENTO GRID ══ -->
+      <section class="section-v2">
+        <div class="container">
+          <div class="section-hdr-v2">
+            <div class="section-chip-v2">⚡ Why BusCompare?</div>
+            <h2 class="section-title-v2">Built for Indian Travelers</h2>
+            <p class="section-sub-v2">Every feature designed to save you time and money on bus travel</p>
+          </div>
+          <div class="bento-grid">
+            <div class="bento-card bento-wide">
+              <div class="bento-icon bi-teal">📊</div>
+              <div class="bento-title">Real-Time Price Comparison</div>
+              <div class="bento-desc">Compare fares from RedBus, AbhiBus, MakeMyTrip &amp; 40+ operators instantly. Prices update every minute with live seat availability data across all platforms.</div>
+            </div>
+            <div class="bento-card">
+              <div class="bento-icon bi-orange">🔔</div>
+              <div class="bento-title">Smart Price Alerts</div>
+              <div class="bento-desc">Set alerts and get notified via WhatsApp &amp; Email the moment prices drop on your route.</div>
+            </div>
+            <div class="bento-card">
+              <div class="bento-icon bi-purple">🌐</div>
+              <div class="bento-title">6 Indian Languages</div>
+              <div class="bento-desc">Use BusCompare in Hindi, Telugu, Tamil, Kannada, Bengali &amp; English — designed for Bharat.</div>
+            </div>
+            <div class="bento-card">
+              <div class="bento-icon bi-gold">🔒</div>
+              <div class="bento-title">Fare Lock @ ₹39</div>
+              <div class="bento-desc">Lock any bus fare for 6 hours. Book when you're ready without price surprises.</div>
+            </div>
+            <div class="bento-card bento-wide">
+              <div class="bento-icon bi-green">💼</div>
+              <div class="bento-title">Corporate &amp; B2B Travel</div>
+              <div class="bento-desc">GST invoices, bulk team booking, expense dashboards &amp; dedicated travel manager for businesses. Cut your corporate travel costs by up to 25%.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ STATS BANNER ══ -->
+      <section class="section-v2">
+        <div class="container">
+          <div class="stats-banner-v2">
+            <div class="sb-v2-item">
+              <div class="sb-v2-val" style="color:var(--p)">30+</div>
+              <div class="sb-v2-lbl">Bus Operators</div>
+            </div>
+            <div class="sb-v2-div"></div>
+            <div class="sb-v2-item">
+              <div class="sb-v2-val" style="color:#14b8a6">1,200+</div>
+              <div class="sb-v2-lbl">Routes Daily</div>
+            </div>
+            <div class="sb-v2-div"></div>
+            <div class="sb-v2-item">
+              <div class="sb-v2-val" style="color:#818cf8">50K+</div>
+              <div class="sb-v2-lbl">Happy Users</div>
+            </div>
+            <div class="sb-v2-div"></div>
+            <div class="sb-v2-item">
+              <div class="sb-v2-val" style="color:var(--gold)">₹2.4Cr+</div>
+              <div class="sb-v2-lbl">Savings for Users</div>
+            </div>
+            <div class="sb-v2-div"></div>
+            <div class="sb-v2-item">
+              <div class="sb-v2-val" style="color:var(--green)">4.8★</div>
+              <div class="sb-v2-lbl">Platform Rating</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ TESTIMONIALS ══ -->
+      <section class="section-v2">
+        <div class="container">
+          <div class="section-hdr-v2">
+            <div class="section-chip-v2">⭐ Trusted by Travelers</div>
+            <h2 class="section-title-v2">What Users Say</h2>
+            <p class="section-sub-v2">Real reviews from 50,000+ happy BusCompare users across India</p>
+          </div>
+          <div class="testimonials-v2">
+            <div class="tcard-v2">
+              <div class="tcard-v2-stars">★★★★★</div>
+              <div class="tcard-v2-quote">"Saved ₹340 on Mumbai → Goa!"</div>
+              <div class="tcard-v2-body">Compared 6 operators in 30 seconds. The price lock feature saved me when fares jumped on Friday night. Absolutely brilliant!</div>
+              <div class="tcard-v2-author">
+                <div class="tcard-v2-avatar" style="background:linear-gradient(135deg,#f97316,#fb923c)">PM</div>
+                <div>
+                  <div class="tcard-v2-name">Priya M.</div>
+                  <div class="tcard-v2-loc">Mumbai, Maharashtra</div>
                 </div>
               </div>
-              <div class="sw-field">
-                <label class="sw-label" style="opacity: 0">S</label>
-                <button class="btn-search-big" onclick="doSearch()">
-                  🔍 Compare All Travel →
-                </button>
+            </div>
+            <div class="tcard-v2">
+              <div class="tcard-v2-stars">★★★★★</div>
+              <div class="tcard-v2-quote">"Best travel tool for Tier 2 cities"</div>
+              <div class="tcard-v2-body">Finally a site that works in Telugu! My parents from Vizag can now compare buses themselves. The vernacular support is game-changing.</div>
+              <div class="tcard-v2-author">
+                <div class="tcard-v2-avatar" style="background:linear-gradient(135deg,#14b8a6,#2dd4bf)">RK</div>
+                <div>
+                  <div class="tcard-v2-name">Ravi K.</div>
+                  <div class="tcard-v2-loc">Visakhapatnam, Andhra Pradesh</div>
+                </div>
               </div>
             </div>
-
-            <!-- POPULAR CORRIDORS QUICK CHIPS -->
-            <div style="display:flex;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap">
-              <span style="font-size:12px;font-weight:700;color:var(--ts)">🔥 Trending:</span>
-              <button class="sw-chip" onclick="quickSearch('Mumbai','Goa')">Mumbai → Goa (₹499)</button>
-              <button class="sw-chip" onclick="quickSearch('Bangalore','Chennai')">Bangalore → Chennai (₹399)</button>
-              <button class="sw-chip" onclick="quickSearch('Delhi','Jaipur')">Delhi → Jaipur (₹299)</button>
-              <button class="sw-chip" onclick="quickSearch('Hyderabad','Bangalore')">Hyderabad → Bangalore (₹599)</button>
-              <button class="sw-chip" onclick="quickSearch('Pune','Mumbai')">Pune → Mumbai (₹199)</button>
-            </div>
-          </div>
-
-          <!-- INSTANT IN-PAGE LIVE RESULTS PANEL -->
-          <div class="home-results-panel" id="home-results-panel" style="margin-top:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;display:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">
-              <div>
-                <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900" id="hrp-title">Live Comparison Results</h3>
-                <div style="font-size:13px;color:var(--ts)" id="hrp-sub">Comparing fares across RedBus, AbhiBus, MakeMyTrip & 40+ operators</div>
+            <div class="tcard-v2">
+              <div class="tcard-v2-stars">★★★★★</div>
+              <div class="tcard-v2-quote">"Our company uses it weekly"</div>
+              <div class="tcard-v2-body">Corporate travel made simple. GST invoices and team booking dashboard is exactly what we needed. Cut our travel costs by 22%.</div>
+              <div class="tcard-v2-author">
+                <div class="tcard-v2-avatar" style="background:linear-gradient(135deg,#818cf8,#a78bfa)">AS</div>
+                <div>
+                  <div class="tcard-v2-name">Amit S.</div>
+                  <div class="tcard-v2-loc">Bangalore, Karnataka</div>
+                </div>
               </div>
-              <div style="display:flex;gap:8px">
-                <button class="sw-chip" onclick="filterHomeBuses('cheapest')">💰 Cheapest First</button>
-                <button class="sw-chip" onclick="filterHomeBuses('fastest')">⚡ Fastest</button>
-                <button class="sw-chip" onclick="filterHomeBuses('rating')">⭐ Top Rated</button>
-                <a id="hrp-full-link" href="/search" class="sw-chip hot" style="text-decoration:none">Open Dedicated Search Page ↗</a>
-              </div>
-            </div>
-
-            <!-- AI INSIGHT BANNER -->
-            <div style="background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;color:var(--p)">
-              <span>🤖 AI Price Intelligence:</span>
-              <span id="hrp-ai-text">Fetching real-time prices & demand surge predictions...</span>
-            </div>
-
-            <!-- RESULTS CARDS LIST -->
-            <div id="hrp-list" style="display:flex;flex-direction:column;gap:16px">
-              <!-- Filled dynamically by JS -->
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- B2B VALUE PROPS -->
-      <div class="section">
+      <!-- ══ CTA BANNER ══ -->
+      <section class="section-v2">
         <div class="container">
-          <div class="b2b-grid">
-            <div class="b2b-card" onclick="nav('/corporate')">
-              <div class="b2b-icon">💼</div>
-              <div class="b2b-title">Corporate Travel</div>
-              <div class="b2b-desc">
-                GST invoices, bulk booking & expense management for your whole
-                team. Save 25% vs. booking individually.
-              </div>
-              <div class="b2b-cta" style="color: #60a5fa">
-                Get a free demo →
-              </div>
-            </div>
-            <div class="b2b-card" onclick="nav('/operators')">
-              <div class="b2b-icon">🚌</div>
-              <div class="b2b-title">Bus Operators</div>
-              <div class="b2b-desc">
-                Grow your fleet with our SaaS dashboard — real-time analytics,
-                dynamic pricing & 10x customer reach.
-              </div>
-              <div class="b2b-cta" style="color: var(--green)">
-                List your buses →
-              </div>
-            </div>
-            <div class="b2b-card" onclick="openModal('modal-coins')">
-              <div class="b2b-icon">🪙</div>
-              <div class="b2b-title">BusCoins Rewards</div>
-              <div class="b2b-desc">
-                Earn coins on every search & booking. Refer friends and earn ₹50
-                credits towards your next trip.
-              </div>
-              <div class="b2b-cta" style="color: var(--gold)">
-                Start earning →
-              </div>
-            </div>
-            <div
-              class="b2b-card"
-              onclick="openModal('modal-vip')"
-              style="
-                border-color: rgba(245, 158, 11, 0.25);
-                background: linear-gradient(
-                  135deg,
-                  rgba(245, 158, 11, 0.05),
-                  var(--card)
-                );
-              "
-            >
-              <div class="b2b-icon">👑</div>
-              <div class="b2b-title" style="color: var(--gold)">
-                VIP BusPass
-              </div>
-              <div class="b2b-desc">
-                Zero convenience fees, WhatsApp instant alerts & 6hr fare lock
-                included every single month.
-              </div>
-              <div class="b2b-cta" style="color: var(--gold)">₹99/month →</div>
-            </div>
+          <div class="cta-v2">
+            <h2 class="cta-v2-title">Ready to Save on Your Next Trip? 🚌</h2>
+            <p class="cta-v2-sub">Join 50,000+ smart travelers who compare before they book</p>
+            <button class="cta-v2-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">🔍 Start Comparing Now →</button>
           </div>
+        </div>
+      </section>
 
-          <!-- POPULAR ROUTES -->
-          <div class="section-hd">
+      <!-- ══ PREMIUM FOOTER ══ -->
+      <footer class="footer-v2">
+        <div class="footer-v2-inner">
+          <div class="footer-v2-grid">
             <div>
-              <div class="section-title">🔥 Popular Routes</div>
-              <div class="section-sub">
-                India's most searched bus corridors — live prices
-              </div>
+              <div class="footer-v2-brand-name">Bus<em>Compare</em> India</div>
+              <p class="footer-v2-brand-desc">India's smartest bus fare comparison engine. Compare prices across 40+ operators and save up to 40% on every trip.</p>
+              <div class="footer-v2-made">🇮🇳 Made with ❤️ in India</div>
             </div>
-            <button class="btn-see-all" onclick="nav('/search')">
-              View All
-            </button>
-          </div>
-          <div class="routes-grid" id="popular-routes-grid">
-            <!-- Static fallback shown until API loads -->
-            <div class="route-card" onclick="nav('/search?from=Mumbai&to=Goa')">
-              <div class="rc-top">
-                <span class="rc-name">Mumbai → Goa 🏖️</span
-                ><span class="rc-tag tag-hot">🔥 HOT</span>
-              </div>
-              <div class="rc-meta">8+ Operators · 9h 30m · 590 km</div>
-              <div class="rc-price">From ₹599</div>
-              <div class="rc-price-sub">RedBus · AbhiBus · MakeMyTrip</div>
-            </div>
-            <div
-              class="route-card"
-              onclick="nav('/search?from=Mumbai&to=Pune')"
-            >
-              <div class="rc-top">
-                <span class="rc-name">Mumbai → Pune</span
-                ><span class="rc-tag tag-pop">POPULAR</span>
-              </div>
-              <div class="rc-meta">12+ Operators · 3h 30m · 148 km</div>
-              <div class="rc-price">From ₹199</div>
-              <div class="rc-price-sub">Cheapest daily express</div>
-            </div>
-            <div
-              class="route-card"
-              onclick="nav('/search?from=Bangalore&to=Goa')"
-            >
-              <div class="rc-top">
-                <span class="rc-name">Bangalore → Goa 🌴</span
-                ><span class="rc-tag tag-pop">POPULAR</span>
-              </div>
-              <div class="rc-meta">6+ Operators · 9h 00m</div>
-              <div class="rc-price">From ₹799</div>
-              <div class="rc-price-sub">Overnight Volvo Sleeper</div>
-            </div>
-            <div
-              class="route-card"
-              onclick="nav('/search?from=Delhi&to=Jaipur')"
-            >
-              <div class="rc-top">
-                <span class="rc-name">Delhi → Jaipur 🏰</span
-                ><span class="rc-tag tag-new">TRENDING</span>
-              </div>
-              <div class="rc-meta">5+ Operators · 5h 45m</div>
-              <div class="rc-price">From ₹429</div>
-              <div class="rc-price-sub">KSRTC & Private</div>
-            </div>
-            <div
-              class="route-card"
-              onclick="nav('/search?from=Hyderabad&to=Bangalore')"
-            >
-              <div class="rc-top">
-                <span class="rc-name">Hyderabad → Bangalore</span>
-              </div>
-              <div class="rc-meta">8+ Operators · 9h 30m</div>
-              <div class="rc-price">From ₹799</div>
-              <div class="rc-price-sub">Tech city to tech city</div>
-            </div>
-            <div
-              class="route-card"
-              onclick="nav('/search?from=Chennai&to=Bangalore')"
-            >
-              <div class="rc-top">
-                <span class="rc-name">Chennai → Bangalore</span
-                ><span class="rc-tag tag-hot">🔥 HOT</span>
-              </div>
-              <div class="rc-meta">6+ Operators · 6h 30m</div>
-              <div class="rc-price">From ₹450</div>
-              <div class="rc-price-sub">Busiest South India route</div>
-            </div>
-          </div>
-
-          <!-- TESTIMONIALS -->
-          <div class="section-hd" style="margin-top: 52px">
             <div>
-              <div class="section-title">⭐ What Travelers Say</div>
-              <div class="section-sub">
-                Real reviews from 50,000+ happy BusCompare users
-              </div>
+              <div class="footer-v2-col-title">Quick Links</div>
+              <ul class="footer-v2-links">
+                <li><a href="/">🏠 Home</a></li>
+                <li><a href="/search">🔍 Search Buses</a></li>
+                <li><a href="/alerts">🔔 Price Alerts</a></li>
+                <li><a href="/corporate">💼 Corporate</a></li>
+                <li><a href="/operators">🚌 Operators</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-v2-col-title">Features</div>
+              <ul class="footer-v2-links">
+                <li><a href="#" onclick="openModal('modal-coins');return false">🪙 BusCoins Rewards</a></li>
+                <li><a href="#" onclick="openModal('modal-vip');return false">👑 VIP BusPass</a></li>
+                <li><a href="#" onclick="openModal('modal-spin-win');return false">🎡 Spin &amp; Win</a></li>
+                <li><a href="/alerts">🔔 Price Drop Alerts</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-v2-col-title">Support &amp; Legal</div>
+              <ul class="footer-v2-links">
+                <li><a href="https://wa.me/919999000000" target="_blank">💬 WhatsApp Help</a></li>
+                <li><a href="mailto:support@buscompare.in">📧 Email Support</a></li>
+                <li><a href="/privacy">🔒 Privacy Policy</a></li>
+                <li><a href="/terms">⚖️ Terms of Service</a></li>
+              </ul>
             </div>
           </div>
-          <div class="testimonials-grid">
-            <div class="t-card">
-              <div class="tc-stars">★★★★★</div>
-              <div class="tc-text">"Saved ₹340 on Mumbai → Goa!"</div>
-              <div class="tc-body">
-                Compared 6 operators in 30 seconds. The price lock feature saved
-                me when fares jumped on Friday night. Absolutely brilliant!
-              </div>
-              <div class="tc-author">— Priya M., Mumbai</div>
-            </div>
-            <div class="t-card">
-              <div class="tc-stars">★★★★★</div>
-              <div class="tc-text">"Best travel tool for Tier 2 cities"</div>
-              <div class="tc-body">
-                Finally a site that works in Telugu! My parents from Vizag can
-                now compare buses themselves. The vernacular support is
-                game-changing.
-              </div>
-              <div class="tc-author">— Ravi K., Visakhapatnam</div>
-            </div>
-            <div class="t-card">
-              <div class="tc-stars">★★★★★</div>
-              <div class="tc-text">"Our company uses it weekly"</div>
-              <div class="tc-body">
-                Corporate travel made simple. GST invoices and team booking
-                dashboard is exactly what we needed. Cut our travel costs by
-                22%.
-              </div>
-              <div class="tc-author">— Amit S., Bangalore (TechStartup)</div>
-            </div>
-          </div>
-
-          <!-- TRUST BAR -->
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              gap: 24px;
-              flex-wrap: wrap;
-              margin-top: 48px;
-              padding-top: 36px;
-              border-top: 1px solid var(--border);
-            "
-          >
-            <div style="text-align: center">
-              <div
-                style="
-                  font-family: &quot;Outfit&quot;, sans-serif;
-                  font-size: 26px;
-                  font-weight: 900;
-                  color: var(--p);
-                "
-              >
-                30+
-              </div>
-              <div
-                style="
-                  font-size: 11px;
-                  color: var(--ts);
-                  font-weight: 700;
-                  margin-top: 2px;
-                "
-              >
-                BUS OPERATORS
-              </div>
-            </div>
-            <div
-              style="width: 1px; height: 40px; background: var(--border)"
-            ></div>
-            <div style="text-align: center">
-              <div
-                style="
-                  font-family: &quot;Outfit&quot;, sans-serif;
-                  font-size: 26px;
-                  font-weight: 900;
-                  color: var(--green);
-                "
-              >
-                1,200+
-              </div>
-              <div
-                style="
-                  font-size: 11px;
-                  color: var(--ts);
-                  font-weight: 700;
-                  margin-top: 2px;
-                "
-              >
-                ROUTES DAILY
-              </div>
-            </div>
-            <div
-              style="width: 1px; height: 40px; background: var(--border)"
-            ></div>
-            <div style="text-align: center">
-              <div
-                style="
-                  font-family: &quot;Outfit&quot;, sans-serif;
-                  font-size: 26px;
-                  font-weight: 900;
-                  color: #60a5fa;
-                "
-              >
-                50K+
-              </div>
-              <div
-                style="
-                  font-size: 11px;
-                  color: var(--ts);
-                  font-weight: 700;
-                  margin-top: 2px;
-                "
-              >
-                HAPPY USERS
-              </div>
-            </div>
-            <div
-              style="width: 1px; height: 40px; background: var(--border)"
-            ></div>
-            <div style="text-align: center">
-              <div
-                style="
-                  font-family: &quot;Outfit&quot;, sans-serif;
-                  font-size: 26px;
-                  font-weight: 900;
-                  color: #a78bfa;
-                "
-              >
-                ₹2.4 Cr+
-              </div>
-              <div
-                style="
-                  font-size: 11px;
-                  color: var(--ts);
-                  font-weight: 700;
-                  margin-top: 2px;
-                "
-              >
-                SAVINGS FOR USERS
-              </div>
-            </div>
-            <div
-              style="width: 1px; height: 40px; background: var(--border)"
-            ></div>
-            <div style="text-align: center">
-              <div
-                style="
-                  font-family: &quot;Outfit&quot;, sans-serif;
-                  font-size: 26px;
-                  font-weight: 900;
-                  color: var(--gold);
-                "
-              >
-                4.8★
-              </div>
-              <div
-                style="
-                  font-size: 11px;
-                  color: var(--ts);
-                  font-weight: 700;
-                  margin-top: 2px;
-                "
-              >
-                PLATFORM RATING
-              </div>
+          <div class="footer-v2-bottom">
+            <div class="footer-v2-copy">© 2026 BusCompare India. All rights reserved.</div>
+            <div class="footer-v2-legal">
+              <a href="/terms">Terms of Service</a>
+              <a href="/privacy">Privacy Policy</a>
             </div>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
+
 
     <!-- ======= VIEW: SEARCH ======= -->
     <div id="view-search" class="view">

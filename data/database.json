@@ -8715,22 +8715,31 @@
       "pricePaid": 299,
       "createdAt": "2026-08-06T16:51:45.451Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-B9ACB4CD",
+      "email": "channupatil299@gmail.com",
+      "phone": "06363890658",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-07T16:20:44.431Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 7,
-    "totalSearches": 870,
+    "totalSearches": 871,
     "totalReviews": 89,
     "totalAlerts": 94,
     "flightClicks": 5,
     "priceLocksCount": 52,
-    "vipSubscriptionsCount": 103,
+    "vipSubscriptionsCount": 104,
     "busAffiliateRevenue": 560,
     "flightAffiliateRevenue": 2250,
     "priceLockRevenue": 2028,
-    "vipRevenue": 20397,
+    "vipRevenue": 20696,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 27961,
+    "revenueEstimate": 28260,
     "lastReset": "2026-07-27",
     "insurancePoliciesCount": 43,
     "insuranceRevenue": 2791
