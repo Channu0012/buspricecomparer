@@ -9,16 +9,27 @@ const config = require("./config/env");
 const { globalLimiter } = require("./src/middleware/rateLimiter");
 const apiRouter = require("./src/routes/api");
 
+// Process-level crash prevention
+process.on("uncaughtException", (err) => {
+  console.error("⚠️ Uncaught Exception:", err);
+});
+
+process.on("unhandledRejection", (reason) => {
+  console.error("⚠️ Unhandled Rejection:", reason);
+});
+
 const app = express();
 
 // Helper: Get Local Network IP
 function getLanIP() {
-  const ifaces = os.networkInterfaces();
-  for (const name of Object.keys(ifaces)) {
-    for (const iface of ifaces[name]) {
-      if (iface.family === "IPv4" && !iface.internal) return iface.address;
+  try {
+    const ifaces = os.networkInterfaces();
+    for (const name of Object.keys(ifaces)) {
+      for (const iface of ifaces[name]) {
+        if (iface.family === "IPv4" && !iface.internal) return iface.address;
+      }
     }
-  }
+  } catch (e) {}
   return "localhost";
 }
 
@@ -94,6 +105,18 @@ app.use("/api", apiRouter);
 // Mount Business & Affiliate Routes (/go/* and /sitemap.xml)
 const businessRoutes = require("./src/routes/businessRoutes");
 app.use("/", businessRoutes);
+
+// Fallback 404 Route - Send index.html safely
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "templates", "index.html"));
+});
+
+// Global Error Handler Middleware
+app.use((err, req, res, next) => {
+  console.error("⚠️ Express Global Error:", err);
+  if (res.headersSent) return next(err);
+  res.status(err.status || 500).json({ error: err.message || "Internal Server Error" });
+});
 
 // Start Listener
 app.listen(config.PORT, config.HOST, () => {

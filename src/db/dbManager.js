@@ -7,6 +7,31 @@ let dbMemoryCache = null;
 let isWriting = false;
 let pendingWrite = false;
 
+function getDefaultDB() {
+  return {
+    buses: [],
+    routes: [],
+    cities: [],
+    popularRoutes: [],
+    coupons: [],
+    priceLocks: [],
+    alerts: [],
+    vipSubscriptions: [],
+    insurancePolicies: [],
+    loyaltyUsers: [],
+    reviews: [],
+    corporateLeads: [],
+    operatorLeads: [],
+    admin: { totalSearches: 0, totalClicks: 0 },
+    analytics: {
+      searches: 0,
+      platformClicks: {},
+      topRoutes: {},
+      recentClicks: [],
+    },
+  };
+}
+
 function readDB() {
   if (dbMemoryCache) return dbMemoryCache;
   try {
@@ -14,35 +39,24 @@ function readDB() {
       console.warn(
         `[DB] Database file not found at ${config.DATABASE_PATH}, returning empty database structure.`,
       );
-      return {
-        buses: [],
-        routes: [],
-        priceLocks: [],
-        alerts: [],
-        vipSubscriptions: [],
-        insurancePolicies: [],
-        loyaltyUsers: [],
-        reviews: [],
-        corporateLeads: [],
-        operatorLeads: [],
-        analytics: {
-          searches: 0,
-          platformClicks: {},
-          topRoutes: {},
-          recentClicks: [],
-        },
-      };
+      dbMemoryCache = getDefaultDB();
+      return dbMemoryCache;
     }
     dbMemoryCache = JSON.parse(fs.readFileSync(config.DATABASE_PATH, "utf8"));
+    if (!dbMemoryCache.cities) dbMemoryCache.cities = [];
+    if (!dbMemoryCache.buses) dbMemoryCache.buses = [];
+    if (!dbMemoryCache.routes) dbMemoryCache.routes = [];
+    if (!dbMemoryCache.popularRoutes) dbMemoryCache.popularRoutes = [];
+    if (!dbMemoryCache.admin) dbMemoryCache.admin = { totalSearches: 0, totalClicks: 0 };
     return dbMemoryCache;
   } catch (e) {
     console.error("[DB] Read error:", e.message);
-    return null;
+    return dbMemoryCache || getDefaultDB();
   }
 }
 
 function writeDB(data) {
-  dbMemoryCache = data; // Update in-memory cache instantly
+  dbMemoryCache = data || dbMemoryCache || getDefaultDB(); // Update in-memory cache instantly
   if (isWriting) {
     pendingWrite = true;
     return true;
