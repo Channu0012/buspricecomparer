@@ -1,312 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy — BusCompare India</title>
-    <meta
-      name="description"
-      content="BusCompare India Privacy Policy. Learn how we protect your personal data in compliance with DPDP Act 2023."
-    />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="shortcut icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta property="og:title" content="Privacy Policy — BusCompare India" />
-    <meta property="og:image" content="/logo.png" />
-    <meta name="twitter:image" content="/logo.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg: #070b14;
-        --s1: #0d1221;
-        --card: #161e2e;
-        --border: rgba(255, 255, 255, 0.07);
-        --bl: rgba(255, 255, 255, 0.12);
-        --p: #f97316;
-        --green: #10b981;
-        --t: #f1f5f9;
-        --ts: #94a3b8;
-        --tm: #475569;
-        --r: 12px;
-        --rl: 20px;
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family:
-          "Inter",
-          -apple-system,
-          system-ui,
-          sans-serif;
-        background: var(--bg);
-        color: var(--t);
-        line-height: 1.7;
-        -webkit-font-smoothing: antialiased;
-      }
-      .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 14px 24px;
-        background: rgba(7, 11, 20, 0.95);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-in {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .nav-logo {
-        font-family: "Outfit", sans-serif;
-        font-size: 20px;
-        font-weight: 900;
-        color: var(--t);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .nav-logo-icon {
-        width: 34px;
-        height: 34px;
-        background: var(--p);
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-      }
-      .nav-logo em {
-        color: var(--p);
-        font-style: normal;
-      }
-      .nav-back {
-        color: var(--ts);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 700;
-        padding: 6px 16px;
-        border: 1px solid var(--bl);
-        border-radius: 100px;
-        transition: 0.2s;
-      }
-      .nav-back:hover {
-        color: var(--t);
-        background: rgba(255, 255, 255, 0.06);
-      }
-      .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 60px 24px 100px;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: var(--green);
-        background: rgba(16, 185, 129, 0.1);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        padding: 4px 14px;
-        border-radius: 100px;
-        margin-bottom: 16px;
-      }
-      h1 {
-        font-family: "Outfit", sans-serif;
-        font-size: clamp(32px, 4vw, 48px);
-        font-weight: 900;
-        margin-bottom: 12px;
-        letter-spacing: -1px;
-      }
-      .updated {
-        font-size: 13px;
-        color: var(--tm);
-        margin-bottom: 40px;
-      }
-      .card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--rl);
-        padding: 36px;
-        margin-bottom: 24px;
-      }
-      h2 {
-        font-family: "Outfit", sans-serif;
-        font-size: 22px;
-        font-weight: 800;
-        color: var(--t);
-        margin-bottom: 12px;
-        margin-top: 8px;
-      }
-      p,
-      li {
-        font-size: 15px;
-        color: var(--ts);
-        margin-bottom: 14px;
-      }
-      ul {
-        padding-left: 20px;
-        margin-bottom: 16px;
-      }
-      li {
-        margin-bottom: 8px;
-      }
-      .highlight {
-        color: var(--p);
-        font-weight: 700;
-      }
-      footer {
-        text-align: center;
-        padding: 32px 24px;
-        border-top: 1px solid var(--border);
-        font-size: 13px;
-        color: var(--tm);
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="nav-in">
-        <a href="/" class="nav-logo"
-          ><img src="/logo.png" alt="BusCompare" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(249,115,22,0.5))" />
-          Bus<em>Compare</em></a
-        >
-        <a href="/" class="nav-back">← Back to Home</a>
-      </div>
-    </nav>
-
-    <div class="container">
-      <div class="badge">🔒 Security & Compliance</div>
-      <h1>Privacy Policy</h1>
-      <div class="updated">
-        Effective Date: July 27, 2026 | Compliant with Digital Personal Data
-        Protection Act (DPDP), 2023
-      </div>
-
-      <div class="card">
-        <h2>1. Overview</h2>
-        <p>
-          At <strong>BusCompare India</strong>, your privacy and data security
-          are our highest priorities. This Privacy Policy explains how we
-          collect, process, store, and protect your personal information when
-          you use our website and services.
-        </p>
-      </div>
-
-      <div class="card">
-        <h2>2. Information We Collect</h2>
-        <p>
-          We collect minimal personal information strictly necessary to provide
-          price alert notifications and review submissions:
-        </p>
-        <ul>
-          <li>
-            <span class="highlight">Email Address</span>: Collected when you
-            subscribe to price alerts.
-          </li>
-          <li>
-            <span class="highlight">WhatsApp Number (Optional)</span>: Collected
-            only if you explicitly request WhatsApp notifications for price
-            drops.
-          </li>
-          <li>
-            <span class="highlight">Reviews & Ratings</span>: Display name,
-            city, rating, and feedback submitted voluntarily.
-          </li>
-          <li>
-            <span class="highlight">Telemetry & Analytics</span>: Anonymous
-            click data (route, platform selected) to improve comparison
-            accuracy.
-          </li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>3. How We Use Your Data</h2>
-        <p>
-          Your data is strictly used for the following operational purposes:
-        </p>
-        <ul>
-          <li>Sending price drop notifications via Email or WhatsApp.</li>
-          <li>Publishing verified user reviews for bus operators.</li>
-          <li>
-            Preventing fraud, bot traffic, and automated scraping attacks.
-          </li>
-        </ul>
-        <p>
-          <strong
-            >We NEVER sell, rent, or trade your personal information to third
-            parties or advertisers.</strong
-          >
-        </p>
-      </div>
-
-      <div class="card">
-        <h2>4. Data Encryption & Security</h2>
-        <p>
-          We implement enterprise-grade security protocols to prevent
-          unauthorized access, hacking, or data breaches:
-        </p>
-        <ul>
-          <li>
-            <span class="highlight">HTTPS/TLS Encryption</span>: All data in
-            transit is encrypted using 256-bit SSL encryption.
-          </li>
-          <li>
-            <span class="highlight">Security Headers & Protection</span>:
-            Protected by automated rate limiting, XSS filtering, CSP policies,
-            and anti-CSRF protection.
-          </li>
-          <li>
-            <span class="highlight">Restricted Access</span>: Administrative
-            analytics are protected by multi-factor passkeys and session tokens.
-          </li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h2>5. Third-Party Links & Affiliate Disclosure</h2>
-        <p>
-          BusCompare India is a comparison engine. When you click "Book Now",
-          you are redirected to official partner booking portals (such as
-          RedBus, AbhiBus, MakeMyTrip). We do not collect or store your payment
-          card details, bank account numbers, or UPI credentials. All
-          transactions occur directly on partner websites.
-        </p>
-      </div>
-
-      <div class="card">
-        <h2>6. Your Rights & Unsubscribe</h2>
-        <p>
-          Under the DPDP Act 2023, you have the right to request deletion of
-          your stored email or WhatsApp number at any time. You can instantly
-          unsubscribe from alerts by emailing
-          <span class="highlight">privacy@buscompare.in</span> or clicking the
-          unsubscribe link in any notification.
-        </p>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — BusCompare India</title>
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #060a13; --card: #111827; --border: rgba(255, 255, 255, 0.08); --p: #f97316; --t: #f1f5f9; --ts: #94a3b8; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); line-height: 1.7; min-height: 100vh; }
+    a { color: var(--p); text-decoration: none; }
+    .navbar { position: sticky; top: 0; z-index: 1000; padding: 12px 24px; background: rgba(6,10,19,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .container { max-width: 800px; margin: 40px auto; padding: 0 24px 80px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; margin-bottom: 16px; }
+    h2 { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 800; color: var(--p); margin: 24px 0 10px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-space-between">
+      <a href="/" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--t)">🚌 Bus<em style="color:var(--p);font-style:normal">Compare</em></a>
+      <a href="/" style="color:var(--ts);font-size:13px;font-weight:700">← Back to Home</a>
     </div>
-
-    <footer>
-      © 2026 BusCompare India. All rights reserved. &nbsp;•&nbsp;
-      <a href="/privacy" style="color: var(--ts)">Privacy Policy</a>
-      &nbsp;•&nbsp;
-      <a href="/terms" style="color: var(--ts)">Terms of Service</a>
-    </footer>
-  </body>
+  </nav>
+  <main class="container">
+    <div class="card">
+      <h1>Privacy Policy</h1>
+      <p style="color:var(--ts);font-size:13px">Last Updated: August 2026</p>
+      <h2>1. Information We Collect</h2>
+      <p>BusCompare India respects your privacy. We collect minimal personal information such as email addresses and phone numbers only when you set price alerts, subscribe to VIP passes, or submit corporate inquiries.</p>
+      <h2>2. How We Use Information</h2>
+      <p>We use your data strictly to deliver fare comparison services, price drop notifications, customer support, and loyalty rewards.</p>
+      <h2>3. Data Protection</h2>
+      <p>All transmitted data is encrypted using standard SSL/TLS protocols. We never sell your personal information to third parties.</p>
+    </div>
+  </main>
+</body>
 </html>

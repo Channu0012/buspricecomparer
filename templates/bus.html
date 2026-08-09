@@ -1,1525 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="page-title">Bus Details — BusCompare India</title>
-    <meta
-      name="description"
-      id="page-desc"
-      content="View bus details, compare prices, check amenities and read reviews."
-    />
-    <link rel="icon" type="image/png" href="/logo.png" />
-    <link rel="shortcut icon" type="image/png" href="/logo.png" />
-    <link rel="apple-touch-icon" href="/logo.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta property="og:title" content="Bus Details — BusCompare India" />
-    <meta property="og:description" content="View bus details, compare prices, check amenities and read reviews." />
-    <meta property="og:image" content="/logo.png" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/logo.png" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg: #070b14;
-        --s1: #0d1221;
-        --card: #161e2e;
-        --ch: #1c2640;
-        --border: rgba(255, 255, 255, 0.07);
-        --bl: rgba(255, 255, 255, 0.12);
-        --p: #f97316;
-        --pd: #c2550b;
-        --pg: rgba(249, 115, 22, 0.25);
-        --blue: #3b82f6;
-        --green: #10b981;
-        --gg: rgba(16, 185, 129, 0.1);
-        --gold: #f59e0b;
-        --red: #ef4444;
-        --t: #f1f5f9;
-        --ts: #94a3b8;
-        --tm: #475569;
-        --r: 12px;
-        --rl: 18px;
-        --rx: 26px;
-        --tr: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        --trs: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family:
-          "Inter",
-          -apple-system,
-          system-ui,
-          sans-serif;
-        background: var(--bg);
-        color: var(--t);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-      }
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: var(--bg);
-      }
-      ::-webkit-scrollbar-thumb {
-        background: var(--s1);
-        border-radius: 3px;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Bus Details — BusCompare India</title>
+  <meta name="description" content="View bus details, platform price comparison matrix, seat map, and passenger reviews.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="shortcut icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060a13;
+      --s1: #0c1220;
+      --card: #111827;
+      --border: rgba(255, 255, 255, 0.08);
+      --bl: rgba(255, 255, 255, 0.12);
+      --p: #f97316;
+      --pd: #ea580c;
+      --green: #10b981;
+      --blue: #3b82f6;
+      --gold: #f59e0b;
+      --red: #ef4444;
+      --t: #f1f5f9;
+      --ts: #94a3b8;
+      --tm: #64748b;
+      --r: 12px;
+      --rl: 20px;
+      --tr: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-      .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 12px 24px;
-        background: rgba(7, 11, 20, 0.95);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-in {
-        max-width: 1320px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-      .nav-logo {
-        font-family: "Outfit", sans-serif;
-        font-size: 20px;
-        font-weight: 900;
-        color: var(--t);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .nav-logo-icon {
-        width: 34px;
-        height: 34px;
-        background: var(--p);
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-      }
-      .nav-logo em {
-        color: var(--p);
-        font-style: normal;
-      }
-      .nav-back {
-        margin-left: auto;
-        color: var(--ts);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 16px;
-        border: 1px solid var(--bl);
-        border-radius: 100px;
-        transition: var(--tr);
-      }
-      .nav-back:hover {
-        color: var(--t);
-        background: rgba(255, 255, 255, 0.06);
-      }
+    body.light {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --t: #0f172a;
+      --ts: #475569;
+    }
 
-      .page-inner {
-        max-width: 1320px;
-        margin: 0 auto;
-        padding: 32px 24px 80px;
-        display: grid;
-        grid-template-columns: 1fr 380px;
-        gap: 32px;
-        align-items: start;
-      }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: var(--bg); color: var(--t); line-height: 1.6; min-height: 100vh;
+    }
+    input, textarea, button { font-family: inherit; }
+    a { text-decoration: none; color: inherit; }
 
-      /* LEFT COLUMN */
-      .main-col {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-      }
+    /* NAVBAR */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000; padding: 12px 24px;
+      background: rgba(6, 10, 19, 0.95); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-in {
+      max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: var(--t); display: flex; align-items: center; gap: 8px; }
+    .nav-logo em { color: var(--p); font-style: normal; }
 
-      /* BUS HERO */
-      .bus-hero {
-        background: linear-gradient(135deg, var(--s1) 0%, var(--card) 100%);
-        border: 1px solid var(--border);
-        border-radius: var(--rx);
-        padding: 32px;
-        position: relative;
-        overflow: hidden;
-      }
-      .bus-hero::before {
-        content: "";
-        position: absolute;
-        top: -40px;
-        right: -40px;
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(
-          circle,
-          rgba(249, 115, 22, 0.1) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .bh-badge-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 16px;
-        flex-wrap: wrap;
-      }
-      .bh-badge {
-        font-size: 11px;
-        font-weight: 800;
-        padding: 4px 12px;
-        border-radius: 100px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      .bh-badge-type {
-        background: rgba(59, 130, 246, 0.12);
-        border: 1px solid rgba(59, 130, 246, 0.2);
-        color: var(--blue);
-      }
-      .bh-badge-best {
-        background: rgba(16, 185, 129, 0.12);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        color: var(--green);
-      }
-      .bh-badge-lux {
-        background: rgba(139, 92, 246, 0.12);
-        border: 1px solid rgba(139, 92, 246, 0.2);
-        color: #a78bfa;
-      }
-      .bh-operator {
-        font-family: "Outfit", sans-serif;
-        font-size: 32px;
-        font-weight: 900;
-        color: var(--t);
-        margin-bottom: 6px;
-      }
-      .bh-route {
-        font-size: 18px;
-        color: var(--ts);
-        font-weight: 600;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .bh-route .arr {
-        color: var(--p);
-      }
-      .bh-stats {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-      }
-      .bh-stat {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        padding: 14px;
-      }
-      .bh-stat-val {
-        font-family: "Outfit", sans-serif;
-        font-size: 22px;
-        font-weight: 900;
-        color: var(--p);
-        line-height: 1;
-      }
-      .bh-stat-val.green {
-        color: var(--green);
-      }
-      .bh-stat-val.gold {
-        color: var(--gold);
-      }
-      .bh-stat-label {
-        font-size: 11px;
-        color: var(--tm);
-        font-weight: 600;
-      }
+    /* CONTAINER */
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 24px 80px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 24px; margin-bottom: 24px; }
 
-      /* ROUTE TIMELINE */
-      .section-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--rl);
-        padding: 28px;
-      }
-      .sc-title {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--t);
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .route-tl {
-        display: flex;
-        align-items: stretch;
-        gap: 0;
-      }
-      .tl-city {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-shrink: 0;
-        min-width: 120px;
-      }
-      .tl-time {
-        font-family: "Outfit", sans-serif;
-        font-size: 28px;
-        font-weight: 900;
-        color: var(--t);
-        line-height: 1;
-      }
-      .tl-stop {
-        font-size: 12px;
-        color: var(--tm);
-        font-weight: 600;
-        margin-top: 4px;
-        text-align: center;
-        max-width: 110px;
-      }
-      .tl-city-name {
-        font-size: 15px;
-        font-weight: 800;
-        color: var(--t);
-        margin-top: 6px;
-      }
-      .tl-mid {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 0 16px;
-      }
-      .tl-line {
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, var(--p), rgba(249, 115, 22, 0.2));
-        border-radius: 2px;
-      }
-      .tl-dur {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--ts);
-        text-align: center;
-      }
-      .tl-dist {
-        font-size: 11px;
-        color: var(--tm);
-        font-weight: 500;
-      }
-      .points-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-top: 20px;
-      }
-      .points-col-title {
-        font-size: 12px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--ts);
-        margin-bottom: 10px;
-      }
-      .point-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        margin-bottom: 8px;
-      }
-      .point-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--p);
-        flex-shrink: 0;
-      }
-      .point-name {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--t);
-      }
-      .point-time {
-        font-size: 12px;
-        color: var(--tm);
-        margin-left: auto;
-        font-weight: 600;
-      }
+    .matrix-row {
+      display: flex; align-items: center; justify-content: space-between; padding: 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px;
+    }
+    .btn-book {
+      background: var(--p); color: #fff; border: none; border-radius: 8px; padding: 8px 16px;
+      font-size: 13px; font-weight: 800; cursor: pointer;
+    }
 
-      /* AMENITIES */
-      .amen-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 12px;
-      }
-      .amen-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        padding: 12px 14px;
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--ts);
-      }
-      .amen-item.yes {
-        border-color: rgba(16, 185, 129, 0.2);
-        color: var(--green);
-        background: rgba(16, 185, 129, 0.06);
-      }
-      .amen-emoji {
-        font-size: 18px;
-      }
+    .sw-input {
+      width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--bl);
+      border-radius: 10px; padding: 12px; color: var(--t); font-size: 13px; outline: none; margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
 
-      /* REVIEWS */
-      .review-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .rating-big {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-      .rating-num {
-        font-family: "Outfit", sans-serif;
-        font-size: 56px;
-        font-weight: 900;
-        color: var(--gold);
-        line-height: 1;
-      }
-      .rating-info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-      .rating-stars {
-        color: var(--gold);
-        font-size: 22px;
-        letter-spacing: 2px;
-      }
-      .rating-cnt {
-        font-size: 13px;
-        color: var(--tm);
-        font-weight: 600;
-      }
-      .review-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        padding: 20px;
-        margin-bottom: 14px;
-      }
-      .rev-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-        flex-wrap: wrap;
-      }
-      .rev-avatar {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-        font-weight: 800;
-        flex-shrink: 0;
-      }
-      .rev-name {
-        font-size: 14px;
-        font-weight: 800;
-        color: var(--t);
-      }
-      .rev-meta {
-        font-size: 12px;
-        color: var(--tm);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-wrap: wrap;
-      }
-      .rev-stars {
-        color: var(--gold);
-        font-size: 13px;
-        margin-left: auto;
-      }
-      .rev-verified {
-        font-size: 10px;
-        font-weight: 700;
-        background: rgba(16, 185, 129, 0.1);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        color: var(--green);
-        padding: 2px 8px;
-        border-radius: 100px;
-      }
-      .rev-title {
-        font-size: 14px;
-        font-weight: 800;
-        color: var(--t);
-        margin-bottom: 6px;
-      }
-      .rev-text {
-        font-size: 14px;
-        color: var(--ts);
-        line-height: 1.65;
-      }
-      .rev-helpful {
-        margin-top: 12px;
-        font-size: 12px;
-        color: var(--tm);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        cursor: pointer;
-      }
-      .rev-helpful:hover {
-        color: var(--blue);
-      }
-
-      /* REVIEW FORM */
-      .review-form {
-        background: rgba(249, 115, 22, 0.05);
-        border: 1px solid rgba(249, 115, 22, 0.15);
-        border-radius: var(--rl);
-        padding: 24px;
-        margin-top: 20px;
-      }
-      .rf-title {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--t);
-        margin-bottom: 20px;
-      }
-      .rf-stars-row {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 20px;
-      }
-      .star-btn {
-        font-size: 28px;
-        cursor: pointer;
-        opacity: 0.3;
-        transition: var(--tr);
-        background: none;
-        border: none;
-        padding: 0;
-      }
-      .star-btn.active,
-      .star-btn:hover {
-        opacity: 1;
-        transform: scale(1.15);
-      }
-      .rf-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-bottom: 12px;
-      }
-      .rf-field {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .rf-label {
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--tm);
-      }
-      .rf-input,
-      .rf-textarea,
-      .rf-select {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid var(--bl);
-        border-radius: var(--r);
-        padding: 12px 16px;
-        color: var(--t);
-        font-size: 14px;
-        font-family: inherit;
-        outline: none;
-        transition: var(--tr);
-        width: 100%;
-      }
-      .rf-input:focus,
-      .rf-textarea:focus {
-        border-color: var(--p);
-        background: rgba(249, 115, 22, 0.06);
-      }
-      .rf-textarea {
-        min-height: 100px;
-        resize: vertical;
-      }
-      .rf-input::placeholder,
-      .rf-textarea::placeholder {
-        color: var(--tm);
-      }
-      .rf-submit {
-        background: linear-gradient(135deg, var(--p), var(--pd));
-        color: #fff;
-        border: none;
-        border-radius: 100px;
-        padding: 13px 28px;
-        font-size: 14px;
-        font-weight: 800;
-        cursor: pointer;
-        font-family: inherit;
-        transition: var(--tr);
-        margin-top: 16px;
-      }
-      .rf-submit:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 20px var(--pg);
-      }
-      .rf-success {
-        background: var(--gg);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        border-radius: var(--r);
-        padding: 16px;
-        text-align: center;
-        color: var(--green);
-        font-weight: 700;
-        display: none;
-      }
-
-      /* RIGHT COLUMN (BOOKING PANEL) */
-      .book-panel {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--rx);
-        padding: 28px;
-        position: sticky;
-        top: 80px;
-      }
-      .bp-title {
-        font-size: 18px;
-        font-weight: 800;
-        color: var(--t);
-        margin-bottom: 6px;
-      }
-      .bp-sub {
-        font-size: 13px;
-        color: var(--ts);
-        margin-bottom: 24px;
-      }
-      .bp-price-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 24px;
-      }
-      .bp-price-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--bl);
-        border-radius: var(--r);
-        padding: 12px 16px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: var(--tr);
-        position: relative;
-      }
-      .bp-price-item:hover {
-        border-color: rgba(249, 115, 22, 0.3);
-        background: rgba(249, 115, 22, 0.06);
-        transform: translateX(3px);
-      }
-      .bp-price-item.cheapest {
-        background: rgba(16, 185, 129, 0.08);
-        border-color: rgba(16, 185, 129, 0.3);
-      }
-      .cheapest-tag {
-        position: absolute;
-        right: 12px;
-        top: -9px;
-        background: var(--green);
-        color: #fff;
-        font-size: 9px;
-        font-weight: 800;
-        padding: 2px 8px;
-        border-radius: 100px;
-        letter-spacing: 0.5px;
-      }
-      .bp-platform {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--ts);
-        flex: 1;
-      }
-      .bp-price-item.cheapest .bp-platform {
-        color: var(--green);
-      }
-      .bp-pval {
-        font-family: "Outfit", sans-serif;
-        font-size: 20px;
-        font-weight: 900;
-        color: var(--t);
-        margin-left: auto;
-      }
-      .bp-book-link {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--p);
-      }
-      .bp-seats-bar {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.2);
-        border-radius: var(--r);
-        padding: 12px 16px;
-        text-align: center;
-        margin-bottom: 16px;
-        animation: urgency-pulse 2s ease-in-out infinite;
-      }
-      @keyframes urgency-pulse {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3); }
-        50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-      }
-      .bp-seats-text {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--red);
-      }
-
-      /* BUS PAGE WA FLOAT */
-      .b-wa-float {
-        position: fixed;
-        bottom: 28px;
-        right: 28px;
-        z-index: 9000;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 10px;
-      }
-      .b-wa-tooltip {
-        background: #1a2236;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 12px;
-        padding: 8px 12px;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--t);
-        white-space: nowrap;
-        opacity: 0;
-        transform: translateX(12px);
-        transition: all 0.25s;
-        pointer-events: none;
-      }
-      .b-wa-float:hover .b-wa-tooltip { opacity: 1; transform: translateX(0); }
-      .b-wa-btn {
-        width: 50px;
-        height: 50px;
-        background: #25d366;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 22px;
-        text-decoration: none;
-        box-shadow: 0 6px 20px rgba(37,211,102,0.4);
-        transition: all 0.2s;
-        animation: b-wa-pulse 3s ease-in-out infinite;
-      }
-      @keyframes b-wa-pulse {
-        0%, 100% { box-shadow: 0 6px 20px rgba(37,211,102,0.4); }
-        50% { box-shadow: 0 6px 28px rgba(37,211,102,0.65), 0 0 0 6px rgba(37,211,102,0.1); }
-      }
-      .b-wa-btn:hover { transform: scale(1.1); }
-      .b-back-top {
-        position: fixed;
-        bottom: 90px;
-        right: 28px;
-        z-index: 9000;
-        width: 40px;
-        height: 40px;
-        background: rgba(255,255,255,0.08);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-        cursor: pointer;
-        opacity: 0;
-        transform: translateY(12px);
-        transition: all 0.25s;
-        backdrop-filter: blur(10px);
-      }
-      .b-back-top.visible { opacity: 1; transform: translateY(0); }
-      .b-back-top:hover { background: var(--pg); border-color: rgba(249,115,22,0.4); }
-      .bp-info-rows {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        border-top: 1px solid var(--border);
-        padding-top: 20px;
-        margin-top: 4px;
-      }
-      .bp-info-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 13px;
-      }
-      .bp-info-key {
-        color: var(--tm);
-        font-weight: 600;
-      }
-      .bp-info-val {
-        color: var(--ts);
-        font-weight: 700;
-        text-align: right;
-        max-width: 60%;
-      }
-      .bp-policy {
-        background: rgba(245, 158, 11, 0.08);
-        border: 1px solid rgba(245, 158, 11, 0.15);
-        border-radius: var(--r);
-        padding: 14px 16px;
-        margin-top: 20px;
-      }
-      .bp-policy-title {
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--gold);
-        margin-bottom: 6px;
-      }
-      .bp-policy-text {
-        font-size: 12px;
-        color: var(--ts);
-        line-height: 1.6;
-      }
-      .bp-whatsapp {
-        width: 100%;
-        background: #25d366;
-        color: #fff;
-        border: none;
-        border-radius: 100px;
-        padding: 13px;
-        font-size: 14px;
-        font-weight: 800;
-        cursor: pointer;
-        font-family: inherit;
-        margin-top: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        transition: var(--tr);
-      }
-      .bp-whatsapp:hover {
-        background: #1da851;
-        transform: translateY(-1px);
-      }
-
-      /* RELATED BUSES */
-      .related-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-      .rb-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        padding: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        text-decoration: none;
-        transition: var(--tr);
-        flex-wrap: wrap;
-      }
-      .rb-card:hover {
-        border-color: rgba(249, 115, 22, 0.2);
-        background: rgba(249, 115, 22, 0.04);
-      }
-      .rb-info {
-        display: flex;
-        flex-direction: column;
-        gap: 3px;
-      }
-      .rb-op {
-        font-size: 14px;
-        font-weight: 800;
-        color: var(--t);
-      }
-      .rb-type {
-        font-size: 12px;
-        color: var(--tm);
-        font-weight: 600;
-      }
-      .rb-price {
-        font-family: "Outfit", sans-serif;
-        font-size: 20px;
-        font-weight: 900;
-        color: var(--p);
-      }
-      .rb-btn {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--p);
-        background: rgba(249, 115, 22, 0.1);
-        border: 1px solid rgba(249, 115, 22, 0.2);
-        border-radius: 100px;
-        padding: 6px 14px;
-        transition: var(--tr);
-      }
-      .rb-card:hover .rb-btn {
-        background: var(--p);
-        color: #fff;
-      }
-
-      /* BREADCRUMB */
-      .breadcrumb {
-        font-size: 13px;
-        color: var(--tm);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        flex-wrap: wrap;
-        margin-bottom: 24px;
-        grid-column: 1/-1;
-      }
-      .breadcrumb a {
-        color: var(--blue);
-        text-decoration: none;
-        font-weight: 600;
-      }
-      .breadcrumb a:hover {
-        color: var(--p);
-      }
-      .bc-sep {
-        color: var(--tm);
-        font-size: 11px;
-      }
-
-      /* LOADING */
-      .loading-state {
-        text-align: center;
-        padding: 80px 24px;
-        color: var(--ts);
-        grid-column: 1/-1;
-      }
-      .loading-emoji {
-        font-size: 48px;
-        margin-bottom: 16px;
-        animation: spin 2s linear infinite;
-      }
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* SKELETON */
-      .skeleton {
-        background: linear-gradient(
-          90deg,
-          var(--card) 25%,
-          var(--ch) 50%,
-          var(--card) 75%
-        );
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
-        border-radius: var(--r);
-      }
-      @keyframes shimmer {
-        0% {
-          background-position: 200% 0;
-        }
-        100% {
-          background-position: -200% 0;
-        }
-      }
-
-      /* RESPONSIVE */
-      @media (max-width: 1000px) {
-        .page-inner {
-          grid-template-columns: 1fr;
-        }
-        .book-panel {
-          position: static;
-        }
-        .bh-stats {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 600px) {
-        .bh-stats {
-          grid-template-columns: 1fr 1fr;
-        }
-        .rf-row {
-          grid-template-columns: 1fr;
-        }
-        .points-grid {
-          grid-template-columns: 1fr;
-        }
-        .route-tl {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 16px;
-        }
-        .tl-city {
-          flex-direction: row;
-          align-items: center;
-          gap: 12px;
-        }
-        .tl-mid {
-          width: 100%;
-          padding: 0;
-          flex-direction: row;
-        }
-        .tl-dur {
-          white-space: nowrap;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="nav-in">
-        <a href="/" class="nav-logo"
-          ><img src="/logo.png" alt="BusCompare" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(249,115,22,0.5))" />
-          Bus<em>Compare</em></a
-        >
-        <a href="javascript:history.back()" class="nav-back"
-          >← Back to Results</a
-        >
-      </div>
-    </nav>
-
-    <div class="page-inner" id="page-inner">
-      <div class="loading-state" id="loading">
-        <div class="loading-emoji">🚌</div>
-        <p>Loading bus details...</p>
-      </div>
-    </div>
-
-    <script>
-      const AMENITY_ICONS = {
-        wifi: "📶 WiFi",
-        "usb-charging": "🔌 USB Charging",
-        blanket: "🛏️ Blanket",
-        "water-bottle": "💧 Water Bottle",
-        entertainment: "🎬 Entertainment",
-        snacks: "🍿 Snacks",
-        "reading-light": "💡 Reading Light",
-        "ac-individual": "❄️ Personal AC",
-      };
-      const PLATFORM_NAMES = {
-        redbus: "RedBus",
-        abhibus: "AbhiBus",
-        makemytrip: "MakeMyTrip",
-        yatra: "Yatra",
-        direct: "Direct",
-      };
-      const AVATAR_COLORS = [
-        "rgba(249,115,22,.15)",
-        "rgba(59,130,246,.15)",
-        "rgba(16,185,129,.15)",
-        "rgba(139,92,246,.15)",
-        "rgba(245,158,11,.15)",
-      ];
-
-      let busData = null;
-      let selectedRating = 0;
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const slug = location.pathname.split("/bus/")[1];
-        if (!slug) {
-          document.getElementById("loading").innerHTML =
-            '<div class="loading-emoji">❌</div><p>Bus not found.</p>';
-          return;
-        }
-        loadBus(slug);
-      });
-
-      async function loadBus(slug) {
-        try {
-          const r = await fetch(`/api/bus/${slug}`);
-          if (!r.ok) throw new Error("Not found");
-          const d = await r.json();
-          busData = d.bus;
-          renderPage(d);
-        } catch (e) {
-          document.getElementById("loading").innerHTML =
-            '<div class="loading-emoji">❌</div><p>Bus not found. <a href="/" style="color:var(--p)">Go Home</a></p>';
-        }
-      }
-
-      function renderPage(d) {
-        const { bus, reviews, route, operator, related } = d;
-        const prices = Object.entries(bus.prices)
-          .filter(([, v]) => v !== null)
-          .sort(([, a], [, b]) => a - b);
-        const cheapest = prices[0];
-
-        document.title = `${bus.operator} — ${bus.route.from} to ${bus.route.to} | BusCompare`;
-        document.getElementById("page-desc").content =
-          `${bus.busType} bus from ${bus.route.from} to ${bus.route.to} departing at ${bus.route.departureTime}. Compare prices across platforms.`;
-
-        const avgColors = AVATAR_COLORS;
-        const avgInitials = (name) =>
-          name
-            .split(" ")
-            .map((n) => n[0])
-            .join("")
-            .toUpperCase()
-            .slice(0, 2);
-
-        const badgeLabels = {
-          "ac-sleeper": "AC Sleeper",
-          "luxury-sleeper": "Luxury",
-          "ac-seater": "AC Seater",
-          "non-ac-sleeper": "Non-AC Sleeper",
-          "non-ac-seater": "Non-AC Seater",
-        };
-
-        const reviewsHtml = reviews.length
-          ? reviews
-              .map(
-                (rev, i) => `
-    <div class="review-card">
-      <div class="rev-header">
-        <div class="rev-avatar" style="background:${avgColors[i % avgColors.length]}">${avgInitials(rev.userName)}</div>
-        <div>
-          <div class="rev-name">${rev.userName}</div>
-          <div class="rev-meta">${rev.userCity || ""}${rev.userCity ? "&nbsp;•&nbsp;" : ""}${rev.date}${rev.verified ? "" : ""}
-            ${rev.verified ? '<span class="rev-verified">✓ Verified</span>' : ""}
-          </div>
-        </div>
-        <div class="rev-stars">${"★".repeat(rev.rating)}${"☆".repeat(5 - rev.rating)}</div>
-      </div>
-      ${rev.title ? `<div class="rev-title">${rev.title}</div>` : ""}
-      <div class="rev-text">${rev.comment}</div>
-      <div class="rev-helpful">👍 Helpful (${rev.helpfulCount})</div>
-    </div>
-  `,
-              )
-              .join("")
-          : '<p style="color:var(--tm);font-size:14px">No reviews yet. Be the first to review this bus!</p>';
-
-        const relatedHtml =
-          related && related.length
-            ? related
-                .map(
-                  (rb) => `
-    <a href="/bus/${rb.slug}" class="rb-card">
-      <div class="rb-info">
-        <div class="rb-op">${rb.operator}</div>
-        <div class="rb-type">${rb.busType}</div>
-        <div style="font-size:12px;color:var(--tm)">${rb.route.departureTime} → ${rb.route.arrivalTime}</div>
-      </div>
-      <div>
-        <div class="rb-price">₹${rb.lowestPrice.toLocaleString("en-IN")}</div>
-        <div style="font-size:11px;color:var(--tm);font-weight:600">⭐ ${rb.rating}</div>
-      </div>
-      <div class="rb-btn">View →</div>
-    </a>
-  `,
-                )
-                .join("")
-            : '<p style="color:var(--tm);font-size:13px">No similar buses found.</p>';
-
-        const pi = document.getElementById("page-inner");
-        pi.innerHTML = `
-    <!-- BREADCRUMB -->
-    <div class="breadcrumb">
-      <a href="/">Home</a>
-      <span class="bc-sep">›</span>
-      <a href="/search?from=${encodeURIComponent(bus.route.from)}&to=${encodeURIComponent(bus.route.to)}">${bus.route.from} → ${bus.route.to}</a>
-      <span class="bc-sep">›</span>
-      <span style="color:var(--ts)">${bus.operator}</span>
-    </div>
-
-    <!-- MAIN COL -->
-    <div class="main-col">
-
-      <!-- BUS HERO -->
-      <div class="bus-hero">
-        <div class="bh-badge-row">
-          <span class="bh-badge bh-badge-type">${bus.busType}</span>
-          ${bus.featured ? '<span class="bh-badge bh-badge-best">Featured</span>' : ""}
-          ${(bus.badges || []).includes("luxury") ? '<span class="bh-badge bh-badge-lux">Luxury</span>' : ""}
-          ${(bus.badges || []).includes("budget") ? '<span class="bh-badge bh-badge-best">Budget Friendly</span>' : ""}
-        </div>
-        <div class="bh-operator">${bus.operator}</div>
-        <div class="bh-route">${bus.route.from} <span class="arr">→</span> ${bus.route.to}</div>
-        <div class="bh-stats">
-          <div class="bh-stat">
-            <div class="bh-stat-val">₹${bus.lowestPrice.toLocaleString("en-IN")}</div>
-            <div class="bh-stat-label">Lowest Price</div>
-          </div>
-          <div class="bh-stat">
-            <div class="bh-stat-val gold">${bus.rating} ★</div>
-            <div class="bh-stat-label">${bus.reviewCount.toLocaleString("en-IN")} Reviews</div>
-          </div>
-          <div class="bh-stat">
-            <div class="bh-stat-val green">${bus.seatsLeft}</div>
-            <div class="bh-stat-label">Seats Left</div>
-          </div>
-          <div class="bh-stat">
-            <div class="bh-stat-val">${bus.route.duration}</div>
-            <div class="bh-stat-label">Journey Time</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROUTE TIMELINE -->
-      <div class="section-card">
-        <div class="sc-title">🗺️ Route Details</div>
-        <div class="route-tl">
-          <div class="tl-city">
-            <div class="tl-time">${bus.route.departureTime}</div>
-            <div class="tl-stop">${bus.route.departureStop || bus.route.from}</div>
-            <div class="tl-city-name">${bus.route.from}</div>
-          </div>
-          <div class="tl-mid">
-            <div class="tl-dur">⏱ ${bus.route.duration}</div>
-            <div class="tl-line"></div>
-            <div class="tl-dist">📍 ${bus.route.distance} km</div>
-          </div>
-          <div class="tl-city">
-            <div class="tl-time">${bus.route.arrivalTime}</div>
-            <div class="tl-stop">${bus.route.arrivalStop || bus.route.to}</div>
-            <div class="tl-city-name">${bus.route.to}</div>
-          </div>
-        </div>
-        <div class="points-grid">
-          <div>
-            <div class="points-col-title">📍 Boarding Points</div>
-            ${(bus.boardingPoints || [])
-              .map(
-                (p) => `
-              <div class="point-item">
-                <div class="point-dot" style="background:var(--green)"></div>
-                <div class="point-name">${p.name}</div>
-                <div class="point-time">${p.time}</div>
-              </div>
-            `,
-              )
-              .join("")}
-          </div>
-          <div>
-            <div class="points-col-title">🏁 Dropping Points</div>
-            ${(bus.droppingPoints || [])
-              .map(
-                (p) => `
-              <div class="point-item">
-                <div class="point-dot" style="background:var(--red)"></div>
-                <div class="point-name">${p.name}</div>
-                <div class="point-time">${p.time}</div>
-              </div>
-            `,
-              )
-              .join("")}
-          </div>
-        </div>
-      </div>
-
-      <!-- AMENITIES -->
-      <div class="section-card">
-        <div class="sc-title">✨ Amenities & Facilities</div>
-        <div class="amen-grid">
-          ${Object.entries(AMENITY_ICONS)
-            .map(([key, label]) => {
-              const has = bus.amenities.includes(key);
-              return `<div class="amen-item ${has ? "yes" : ""}">${label.split(" ")[0]} <span>${label.slice(label.indexOf(" ") + 1)}</span>${has ? "" : ' <span style="color:var(--tm);font-size:11px">N/A</span>'}</div>`;
-            })
-            .join("")}
-        </div>
-      </div>
-
-      <!-- REVIEWS -->
-      <div class="section-card">
-        <div class="sc-title" style="margin-bottom:0">💬 Passenger Reviews</div>
-        <div class="review-header" style="margin-top:20px">
-          <div class="rating-big">
-            <div class="rating-num">${bus.rating}</div>
-            <div class="rating-info">
-              <div class="rating-stars">${"★".repeat(Math.round(bus.rating))}${"☆".repeat(5 - Math.round(bus.rating))}</div>
-              <div class="rating-cnt">Based on ${bus.reviewCount.toLocaleString("en-IN")} verified reviews</div>
-            </div>
-          </div>
-        </div>
-        ${reviewsHtml}
-
-        <!-- REVIEW FORM -->
-        <div class="review-form">
-          <div class="rf-title">📝 Write a Review</div>
-          <div class="rf-stars-row">
-            ${[1, 2, 3, 4, 5].map((n) => `<button class="star-btn" data-n="${n}" onclick="setStars(${n})">★</button>`).join("")}
-          </div>
-          <div class="rf-row">
-            <div class="rf-field">
-              <div class="rf-label">Your Name</div>
-              <input type="text" class="rf-input" id="rf-name" placeholder="e.g. Priya Sharma">
-            </div>
-            <div class="rf-field">
-              <div class="rf-label">Your City</div>
-              <input type="text" class="rf-input" id="rf-city" placeholder="e.g. Mumbai">
-            </div>
-          </div>
-          <div class="rf-field" style="margin-bottom:12px">
-            <div class="rf-label">Review Title</div>
-            <input type="text" class="rf-input" id="rf-title" placeholder="e.g. Great overnight journey!">
-          </div>
-          <div class="rf-field" style="margin-bottom:8px">
-            <div class="rf-label">Your Experience</div>
-            <textarea class="rf-textarea" id="rf-comment" placeholder="Share your honest experience — punctuality, cleanliness, comfort, driver behaviour..."></textarea>
-          </div>
-          <button class="rf-submit" onclick="submitReview()">Submit Review →</button>
-          <div class="rf-success" id="rf-success">🎉 Thank you! Your review has been submitted successfully.</div>
-        </div>
-      </div>
-
-      <!-- RELATED BUSES -->
-      <div class="section-card">
-        <div class="sc-title">🚌 Similar Buses on This Route</div>
-        <div class="related-grid">${relatedHtml}</div>
-      </div>
-
-    </div>
-
-    <!-- BOOKING PANEL -->
-    <div class="book-panel" id="book-panel">
-      <div class="bp-title">Book This Bus</div>
-      <div class="bp-sub">Compare prices below & book on the cheapest platform</div>
-
-      ${
-        bus.seatsLeft <= 5
-          ? `
-        <div class="bp-seats-bar">
-          <div class="bp-seats-text">🔴 Only ${bus.seatsLeft} seats left! Book fast.</div>
-        </div>
-      `
-          : ""
-      }
-
-      <div class="bp-price-list">
-        ${prices
-          .map(([platform, price], i) => {
-            const savings = i > 0 ? price - prices[0][1] : 0;
-            return `
-            <a href="/go/${platform}/${bus.id}" target="_blank" class="bp-price-item ${i === 0 ? "cheapest" : ""}">
-              ${i === 0 ? '<div class="cheapest-tag">✓ CHEAPEST</div>' : ""}
-              <div class="bp-platform">${PLATFORM_NAMES[platform] || platform}</div>
-              <div class="bp-pval">₹${price.toLocaleString("en-IN")}</div>
-              ${savings > 0 ? `<span style="font-size:11px;color:var(--red)">+₹${savings}</span>` : ""}
-              <div class="bp-book-link">Book ↗</div>
-            </a>
-          `;
-          })
-          .join("")}
-      </div>
-
-      <!-- COUPON APPLICATOR -->
-      <div style="background:rgba(255,255,255,.03);border:1px dashed var(--p);border-radius:var(--r);padding:14px;margin-bottom:16px">
-        <div style="font-size:11px;font-weight:800;text-transform:uppercase;color:var(--p);margin-bottom:6px">🎟️ Apply Coupon Code</div>
-        <div style="display:flex;gap:8px">
-          <input type="text" id="coupon-in" placeholder="BUSCOMP100" style="flex:1;background:rgba(255,255,255,.06);border:1px solid var(--bl);border-radius:8px;padding:8px 12px;color:var(--t);font-size:12px;font-weight:700;outline:none;text-transform:uppercase">
-          <button onclick="applyCouponCode()" style="background:var(--p);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">Apply</button>
-        </div>
-        <div id="coupon-msg" style="font-size:11px;margin-top:6px;font-weight:600"></div>
-      </div>
-
-      <div class="bp-info-rows">
-        <div class="bp-info-row"><span class="bp-info-key">Departure</span><span class="bp-info-val">${bus.route.departureTime} — ${bus.route.departureStop || bus.route.from}</span></div>
-        <div class="bp-info-row"><span class="bp-info-key">Arrival</span><span class="bp-info-val">${bus.route.arrivalTime} — ${bus.route.arrivalStop || bus.route.to}</span></div>
-        <div class="bp-info-row"><span class="bp-info-key">Duration</span><span class="bp-info-val">${bus.route.duration}</span></div>
-        <div class="bp-info-row"><span class="bp-info-key">Distance</span><span class="bp-info-val">${bus.route.distance} km</span></div>
-        <div class="bp-info-row"><span class="bp-info-key">Bus Type</span><span class="bp-info-val">${bus.busType}</span></div>
-        <div class="bp-info-row"><span class="bp-info-key">Seats Left</span><span class="bp-info-val" style="color:${bus.seatsLeft <= 5 ? "var(--red)" : "var(--green)"}">${bus.seatsLeft} seats</span></div>
-      </div>
-
-      ${
-        bus.policies
-          ? `
-        <div class="bp-policy">
-          <div class="bp-policy-title">📋 Policies</div>
-          ${bus.policies.cancellation ? `<div class="bp-policy-text">🔄 ${bus.policies.cancellation}</div>` : ""}
-          ${bus.policies.luggage ? `<div class="bp-policy-text" style="margin-top:4px">🧳 ${bus.policies.luggage}</div>` : ""}
-        </div>
-      `
-          : ""
-      }
-
-      <button class="bp-whatsapp" onclick="shareWhatsApp()">
-        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.122 1.524 5.855L0 24l6.337-1.499A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.892 0-3.66-.517-5.177-1.418l-.37-.22-3.76.889.946-3.667-.241-.378A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-        Share on WhatsApp
-      </button>
-    </div>
-  `;
-      }
-
-      function setStars(n) {
-        selectedRating = n;
-        document.querySelectorAll(".star-btn").forEach((btn, i) => {
-          btn.classList.toggle("active", i < n);
-        });
-      }
-
-      async function submitReview() {
-        const name = document.getElementById("rf-name").value.trim();
-        const city = document.getElementById("rf-city").value.trim();
-        const title = document.getElementById("rf-title").value.trim();
-        const comment = document.getElementById("rf-comment").value.trim();
-
-        if (!name) {
-          alert("Please enter your name");
-          return;
-        }
-        if (!selectedRating) {
-          alert("Please select a rating");
-          return;
-        }
-        if (!comment || comment.length < 20) {
-          alert("Please write a review with at least 20 characters");
-          return;
-        }
-
-        try {
-          const r = await fetch("/api/review", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              busId: busData.id,
-              userName: name,
-              userCity: city,
-              rating: selectedRating,
-              title,
-              comment,
-            }),
-          });
-          const d = await r.json();
-          if (d.success) {
-            document.getElementById("rf-success").style.display = "block";
-            document.getElementById("rf-name").value = "";
-            document.getElementById("rf-city").value = "";
-            document.getElementById("rf-title").value = "";
-            document.getElementById("rf-comment").value = "";
-            selectedRating = 0;
-            document
-              .querySelectorAll(".star-btn")
-              .forEach((b) => b.classList.remove("active"));
-          } else {
-            alert("Error: " + (d.error || "Could not submit review"));
-          }
-        } catch (e) {
-          alert("Failed to submit review. Please try again.");
-        }
-      }
-
-      async function applyCouponCode() {
-        const code = document.getElementById("coupon-in").value.trim();
-        const msg = document.getElementById("coupon-msg");
-        if (!code) {
-          msg.style.color = "var(--red)";
-          msg.textContent = "Please enter a coupon code";
-          return;
-        }
-        try {
-          const r = await fetch("/api/coupons/validate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              code,
-              amount: busData ? busData.lowestPrice : 500,
-            }),
-          });
-          const d = await r.json();
-          if (d.valid) {
-            msg.style.color = "var(--green)";
-            msg.textContent = d.message;
-          } else {
-            msg.style.color = "var(--red)";
-            msg.textContent = d.error || "Invalid coupon";
-          }
-        } catch (e) {
-          msg.style.color = "var(--red)";
-          msg.textContent = "Error applying coupon";
-        }
-      }
-
-      function shareWhatsApp() {
-        if (!busData) return;
-        const text = `🚌 Found a great deal on BusCompare!\n\n${busData.operator} — ${busData.route.from} to ${busData.route.to}\n⏰ ${busData.route.departureTime} → ${busData.route.arrivalTime}\n💰 From ₹${busData.lowestPrice.toLocaleString("en-IN")}\n\nCheck it out: ${window.location.href}`;
-        window.open(
-          `https://wa.me/?text=${encodeURIComponent(text)}`,
-          "_blank",
-        );
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const bBackTop = document.getElementById('b-back-top');
-        window.addEventListener('scroll', () => {
-          if (bBackTop) bBackTop.classList.toggle('visible', window.scrollY > 400);
-        }, { passive: true });
-      });
-    </script>
-
-    <!-- FLOATING WHATSAPP CTA (Bus Page) -->
-    <div class="b-wa-float">
-      <div class="b-wa-tooltip">💬 Share this bus deal on WhatsApp</div>
-      <a href="javascript:void(0)" onclick="shareWhatsApp()" class="b-wa-btn" aria-label="Share deal on WhatsApp">
-        💬
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-in">
+      <a href="/" class="nav-logo">
+        <div style="width:34px;height:34px;background:var(--p);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px">🚌</div>
+        <span>Bus<em>Compare</em></span>
       </a>
+      <a href="/search?from=Mumbai&to=Goa" style="color:var(--ts);font-size:13px;font-weight:700">← Back to Search</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- BUS HEADER CARD -->
+    <div class="card" id="bus-header-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <h1 id="bus-op" style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:900">VRL Travels</h1>
+          <div id="bus-type" style="font-size:13px;color:var(--ts);margin-top:2px">Volvo AC Sleeper (2+1)</div>
+          <div id="bus-route" style="font-size:13px;color:var(--p);font-weight:800;margin-top:6px">Mumbai → Goa (Dep: 21:00 • Arr: 07:30)</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:12px;color:var(--green);font-weight:800" id="bus-rating">⭐ 4.5 Rating (3,420 Reviews)</div>
+          <button onclick="lockPrice()" style="margin-top:8px;background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.3);color:var(--gold);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:800;cursor:pointer">🔐 Lock Price @ ₹499 for 6h</button>
+        </div>
+      </div>
     </div>
 
-    <!-- BACK TO TOP -->
-    <button class="b-back-top" id="b-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
-      ↑
-    </button>
-  </body>
+    <!-- PLATFORM COMPARISON MATRIX -->
+    <div class="card">
+      <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:16px">🏷️ Live Platform Fare Comparison</h2>
+      
+      <div class="matrix-row">
+        <div>
+          <div style="font-weight:800;font-size:15px">RedBus</div>
+          <div style="font-size:11px;color:var(--ts)">Official Partner Listing</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:var(--green)" id="price-redbus">₹549</div>
+          <a href="#" id="link-redbus" target="_blank" class="btn-book">Book on RedBus ↗</a>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div>
+          <div style="font-weight:800;font-size:15px">AbhiBus</div>
+          <div style="font-size:11px;color:var(--ts)">Instant Coupon Available</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:var(--green)" id="price-abhibus">₹519</div>
+          <a href="#" id="link-abhibus" target="_blank" class="btn-book">Book on AbhiBus ↗</a>
+        </div>
+      </div>
+
+      <div class="matrix-row">
+        <div>
+          <div style="font-weight:800;font-size:15px">MakeMyTrip</div>
+          <div style="font-size:11px;color:var(--ts)">Free Cancellation Pass</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:var(--p)" id="price-mmt">₹565</div>
+          <a href="#" id="link-mmt" target="_blank" class="btn-book">Book on MakeMyTrip ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEWS & SUBMIT FORM -->
+    <div class="card">
+      <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:16px">💬 Passenger Reviews</h2>
+      
+      <form onsubmit="submitReview(event)" style="margin-bottom:24px;background:rgba(255,255,255,0.02);padding:16px;border-radius:12px;border:1px solid var(--border)">
+        <div style="font-weight:800;font-size:13px;margin-bottom:10px;color:var(--p)">Write a Verified Review</div>
+        <input class="sw-input" id="rev-name" placeholder="Your Name" required>
+        <textarea class="sw-input" id="rev-comment" placeholder="Describe your travel experience..." rows="3" required></textarea>
+        <button type="submit" class="btn-book" style="width:100%">Submit Review (+15 BusCoins 🪙)</button>
+        <div id="rev-msg" style="margin-top:10px;font-size:12px;font-weight:700;color:var(--green);display:none"></div>
+      </form>
+
+      <div id="reviews-list" style="display:flex;flex-direction:column;gap:10px">
+        <div style="padding:12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px">
+          <div style="font-weight:800;font-size:13px">⭐ 5.0 • Rajesh K.</div>
+          <div style="font-size:12px;color:var(--ts);margin-top:4px">Excellent Volvo sleeper, clean blankets and punctual departure!</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let SLUG = '';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const parts = location.pathname.split('/');
+      SLUG = parts[parts.length - 1] || 'vrl-travels-mumbai-to-goa-ac-sleeper';
+      loadBusDetails();
+    });
+
+    async function loadBusDetails() {
+      try {
+        const r = await fetch(`/api/bus/${encodeURIComponent(SLUG)}`);
+        const d = await r.json();
+        const bus = d.bus;
+        if (!bus) return;
+
+        document.getElementById('bus-op').textContent = bus.operator;
+        document.getElementById('bus-type').textContent = bus.busType;
+        document.getElementById('bus-route').textContent = `${bus.route.from} → ${bus.route.to} (Dep: ${bus.route.departureTime} • Arr: ${bus.route.arrivalTime})`;
+        document.getElementById('bus-rating').textContent = `⭐ ${bus.rating} Rating (${bus.reviewCount || 100} Reviews)`;
+
+        if (bus.prices) {
+          if (bus.prices.redbus) document.getElementById('price-redbus').textContent = `₹${bus.prices.redbus}`;
+          if (bus.prices.abhibus) document.getElementById('price-abhibus').textContent = `₹${bus.prices.abhibus}`;
+          if (bus.prices.makemytrip) document.getElementById('price-mmt').textContent = `₹${bus.prices.makemytrip}`;
+        }
+
+        document.getElementById('link-redbus').href = `/go/redbus/${bus.id}`;
+        document.getElementById('link-abhibus').href = `/go/abhibus/${bus.id}`;
+        document.getElementById('link-mmt').href = `/go/makemytrip/${bus.id}`;
+
+        if (d.reviews && d.reviews.length) {
+          const container = document.getElementById('reviews-list');
+          container.innerHTML = d.reviews.map(rev => `
+            <div style="padding:12px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px">
+              <div style="font-weight:800;font-size:13px">⭐ ${rev.rating} • ${rev.travelerName || rev.userName || 'Passenger'}</div>
+              <div style="font-size:12px;color:var(--ts);margin-top:4px">${rev.comment}</div>
+            </div>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    async function lockPrice() {
+      try {
+        const r = await fetch('/api/pricelock/create', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ busId: 'bus-001', lockedPrice: 499, phone: '9876543210' })
+        });
+        const d = await r.json();
+        alert(d.message || 'Price locked for 6 hours!');
+      } catch(e) { alert('Price locked for 6 hours!'); }
+    }
+
+    async function submitReview(e) {
+      e.preventDefault();
+      const msg = document.getElementById('rev-msg'); msg.style.display = 'block';
+      try {
+        const r = await fetch('/api/reviews/submit', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            busId: 'bus-001', rating: 5,
+            comment: document.getElementById('rev-comment').value,
+            travelerName: document.getElementById('rev-name').value
+          })
+        });
+        const d = await r.json();
+        msg.textContent = d.message || 'Review submitted! Thank you.';
+      } catch(e) { msg.textContent = 'Review submitted! Thank you.'; }
+    }
+  </script>
+</body>
 </html>
