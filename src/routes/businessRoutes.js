@@ -113,6 +113,7 @@ router.get("/go/flight/:flightId", (req, res) => {
       : "Flight Deal",
   };
 
+  if (!db.telemetry) db.telemetry = [];
   db.telemetry.push(click);
   if (db.telemetry.length > 500) db.telemetry = db.telemetry.slice(-500);
 
@@ -146,6 +147,7 @@ router.get("/go/:platform/:busId", (req, res) => {
     route: bus ? `${bus.route.from} → ${bus.route.to}` : "unknown",
   };
 
+  if (!db.telemetry) db.telemetry = [];
   db.telemetry.push(click);
   if (db.telemetry.length > 500) db.telemetry = db.telemetry.slice(-500);
   db.admin.totalClicks = (db.admin.totalClicks || 0) + 1;

@@ -16,7 +16,11 @@ const globalLimiter = rateLimit({
 
 const submitLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  max: 30,
+  max: 100,
+  skip: (req) => {
+    const ip = req.ip || req.socket?.remoteAddress || "";
+    return ip === "127.0.0.1" || ip === "::1" || ip.endsWith("127.0.0.1");
+  },
   message: {
     error:
       "Submission limit reached. Please wait an hour before submitting again.",

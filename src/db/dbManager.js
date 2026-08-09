@@ -22,6 +22,7 @@ function getDefaultDB() {
     reviews: [],
     corporateLeads: [],
     operatorLeads: [],
+    telemetry: [],
     admin: { totalSearches: 0, totalClicks: 0 },
     analytics: {
       searches: 0,
@@ -47,6 +48,7 @@ function readDB() {
     if (!dbMemoryCache.buses) dbMemoryCache.buses = [];
     if (!dbMemoryCache.routes) dbMemoryCache.routes = [];
     if (!dbMemoryCache.popularRoutes) dbMemoryCache.popularRoutes = [];
+    if (!dbMemoryCache.telemetry) dbMemoryCache.telemetry = [];
     if (!dbMemoryCache.admin) dbMemoryCache.admin = { totalSearches: 0, totalClicks: 0 };
     return dbMemoryCache;
   } catch (e) {
