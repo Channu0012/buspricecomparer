@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BusCompare India — Compare Bus Prices & Save Up To 40%</title>
-  <meta name="description" content="Compare bus ticket prices across RedBus, AbhiBus, MakeMyTrip & KSRTC instantly. Find cheapest Volvo AC Sleeper & Seater buses with 2D seat map and price trend analytics.">
+  <title>BusCompare India — RedBus, AbhiBus & MMT Bus Price Comparer</title>
+  <meta name="description" content="Compare bus ticket prices across RedBus, AbhiBus, MakeMyTrip, Yatra & KSRTC instantly. Find cheapest Volvo AC Sleeper buses, interactive 2D seat map and price drop alerts.">
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="shortcut icon" type="image/png" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta property="og:title" content="BusCompare India — Compare Bus Prices & Save Up To 40%">
-  <meta property="og:description" content="Compare bus ticket prices across RedBus, AbhiBus, MakeMyTrip & KSRTC instantly.">
+  <meta property="og:title" content="BusCompare India — RedBus & Top Operators Price Comparison">
+  <meta property="og:description" content="Compare bus ticket prices across RedBus, AbhiBus, MakeMyTrip & KSRTC instantly. Save up to 40%.">
   <meta property="og:image" content="/logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -29,13 +29,15 @@
       --p: #f97316;
       --pd: #ea580c;
       --pg: rgba(249, 115, 22, 0.15);
+      --redbus: #d84e55;
+      --abhibus: #0077b6;
+      --mmt: #e63946;
       --green: #10b981;
       --gg: rgba(16, 185, 129, 0.12);
       --blue: #3b82f6;
       --purple: #8b5cf6;
       --gold: #f59e0b;
       --red: #ef4444;
-      --wa: #25d366;
       --t: #f1f5f9;
       --ts: #94a3b8;
       --tm: #64748b;
@@ -60,11 +62,8 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--t);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
+      background: var(--bg); color: var(--t); line-height: 1.6;
+      -webkit-font-smoothing: antialiased; min-height: 100vh;
       transition: background 0.3s, color 0.3s;
     }
 
@@ -74,14 +73,18 @@
     input, select, textarea, button { font-family: inherit; }
     a { text-decoration: none; color: inherit; }
 
-    /* ── HEADER NAVBAR ── */
+    /* REDBUS OFFER BAR */
+    .offer-top-bar {
+      background: linear-gradient(90deg, #d84e55, #f97316); color: #fff; padding: 8px 16px;
+      font-size: 12px; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .offer-code-tag { background: #fff; color: #d84e55; padding: 2px 8px; border-radius: 4px; font-weight: 900; letter-spacing: 0.5px; }
+
+    /* HEADER NAVBAR */
     .navbar {
-      position: sticky; top: 0; z-index: 1000;
-      height: 68px; padding: 0 24px;
-      background: rgba(6, 10, 19, 0.88);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center;
+      position: sticky; top: 0; z-index: 1000; height: 68px; padding: 0 24px;
+      background: rgba(6, 10, 19, 0.88); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border); display: flex; align-items: center;
     }
     body.light .navbar { background: rgba(255, 255, 255, 0.88); }
     .nav-in {
@@ -99,9 +102,7 @@
       border-radius: 10px; display: flex; align-items: center; justify-content: center;
       font-size: 20px; box-shadow: 0 4px 14px rgba(249, 115, 22, 0.35);
     }
-    .nav-logo-text {
-      font-family: 'Outfit', sans-serif; font-size: 21px; font-weight: 900; line-height: 1;
-    }
+    .nav-logo-text { font-family: 'Outfit', sans-serif; font-size: 21px; font-weight: 900; line-height: 1; }
     .nav-logo-text em { color: var(--p); font-style: normal; }
     .nav-logo-sub { display: block; font-size: 9px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--ts); margin-top: 1px; }
 
@@ -147,9 +148,7 @@
       border-bottom: 1px solid rgba(249,115,22,0.15); overflow: hidden;
       height: 36px; display: flex; align-items: center;
     }
-    .ticker-track {
-      display: flex; animation: ticker-scroll 35s linear infinite; white-space: nowrap; will-change: transform;
-    }
+    .ticker-track { display: flex; animation: ticker-scroll 35s linear infinite; white-space: nowrap; will-change: transform; }
     .ticker-track:hover { animation-play-state: paused; }
     @keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .ticker-item {
@@ -162,30 +161,42 @@
 
     /* ── HERO ── */
     .hero {
-      position: relative; overflow: hidden; padding: 70px 24px 60px;
-      background: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(249,115,22,0.09) 0%, transparent 60%), var(--bg);
+      position: relative; overflow: hidden; padding: 60px 24px 50px;
+      background: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(249,115,22,0.1) 0%, transparent 60%), var(--bg);
     }
-    .hero-content { max-width: 900px; margin: 0 auto; text-align: center; position: relative; }
+    .hero-content { max-width: 920px; margin: 0 auto; text-align: center; position: relative; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px; background: rgba(249, 115, 22, 0.1);
       border: 1px solid rgba(249, 115, 22, 0.28); border-radius: 100px; padding: 7px 20px;
-      font-size: 12px; font-weight: 800; color: var(--p); margin-bottom: 22px;
+      font-size: 12px; font-weight: 800; color: var(--p); margin-bottom: 20px;
     }
     .badge-dot { width: 7px; height: 7px; background: var(--p); border-radius: 50%; animation: blink 1.8s infinite; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
     .hero-title {
-      font-family: 'Outfit', sans-serif; font-size: clamp(38px, 6vw, 72px); font-weight: 900;
-      line-height: 1.06; letter-spacing: -2px; margin-bottom: 18px;
+      font-family: 'Outfit', sans-serif; font-size: clamp(38px, 6vw, 70px); font-weight: 900;
+      line-height: 1.06; letter-spacing: -2px; margin-bottom: 16px;
     }
     .grad-text {
       background: linear-gradient(135deg, #f97316 0%, #fbbf24 50%, #f97316 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .hero-sub { font-size: 17px; color: var(--ts); max-width: 580px; margin: 0 auto 30px; line-height: 1.7; }
+    .hero-sub { font-size: 17px; color: var(--ts); max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
+
+    /* PLATFORM BADGES ROW */
+    .partner-row {
+      display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px;
+    }
+    .partner-chip {
+      display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 700; color: var(--ts);
+    }
+    .partner-chip.redbus { border-color: rgba(216,78,85,0.3); color: #f87171; }
+    .partner-chip.abhibus { border-color: rgba(0,119,182,0.3); color: #38bdf8; }
+    .partner-chip.mmt { border-color: rgba(230,57,70,0.3); color: #fb7185; }
 
     .hero-stats {
-      display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 32px;
+      display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 30px;
     }
     .hs-val { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900; line-height: 1; }
     .hs-lbl { font-size: 11px; color: var(--ts); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin-top: 5px; }
@@ -293,6 +304,11 @@
 </head>
 <body>
 
+  <!-- REDBUS STYLE TOP OFFER BANNER -->
+  <div class="offer-top-bar">
+    <span>🏷️ Use Code <span class="offer-code-tag">BUSCOMP100</span> to get Flat ₹100 OFF across RedBus, AbhiBus & MakeMyTrip!</span>
+  </div>
+
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-in">
@@ -318,7 +334,6 @@
           <option value="INR">₹ INR</option>
           <option value="USD">$ USD</option>
           <option value="EUR">€ EUR</option>
-          <option value="GBP">£ GBP</option>
         </select>
         <select class="top-select" id="lang-sel" onchange="localStorage.setItem('bc_lang', this.value)">
           <option value="EN">🇺🇸 EN</option>
@@ -338,8 +353,6 @@
       <span class="ticker-item">🔥 <span class="t-route">Bangalore → Chennai</span> from <span class="t-price">₹399</span> <span class="t-save">Save ₹85</span></span>
       <span class="ticker-item">🔥 <span class="t-route">Delhi → Jaipur</span> from <span class="t-price">₹299</span> <span class="t-save">Save ₹65</span></span>
       <span class="ticker-item">🔥 <span class="t-route">Hyderabad → Vizag</span> from <span class="t-price">₹649</span> <span class="t-save">Save ₹180</span></span>
-      <span class="ticker-item">🔥 <span class="t-route">Mumbai → Goa</span> from <span class="t-price">₹499</span> <span class="t-save">Save ₹120</span></span>
-      <span class="ticker-item">🔥 <span class="t-route">Bangalore → Chennai</span> from <span class="t-price">₹399</span> <span class="t-save">Save ₹85</span></span>
     </div>
   </div>
 
@@ -348,12 +361,18 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        ⚡ Compare 15,000+ Bus Routes Across India
+        ⚡ Compare Fares Across RedBus, AbhiBus & MMT
       </div>
       <h1 class="hero-title">
         Find Cheapest Bus.<br><span class="grad-text">Travel Smarter. 🇮🇳</span>
       </h1>
       <p class="hero-sub">Compare real-time prices across RedBus, AbhiBus, MakeMyTrip & KSRTC. Interactive 2D Seat Map, Price Trends & Instant Fare Search.</p>
+
+      <div class="partner-row">
+        <span class="partner-chip redbus">🔴 RedBus Certified</span>
+        <span class="partner-chip abhibus">🔵 AbhiBus Direct</span>
+        <span class="partner-chip mmt">🔴 MakeMyTrip Express</span>
+      </div>
 
       <div class="hero-stats">
         <div><div class="hs-val" id="stat-searches" style="color:#14b8a6">24,870</div><div class="hs-lbl">LIVE SEARCHES TODAY</div></div>
@@ -361,8 +380,6 @@
         <div><div class="hs-val" id="stat-savings" style="color:var(--p)">40%</div><div class="hs-lbl">AVG FARE SAVED</div></div>
         <div class="hs-div"></div>
         <div><div class="hs-val" id="stat-routes" style="color:#818cf8">1,200+</div><div class="hs-lbl">INDIAN ROUTES</div></div>
-        <div class="hs-div"></div>
-        <div><div class="hs-val" id="stat-langs" style="color:var(--gold)">6</div><div class="hs-lbl">INDIAN LANGUAGES</div></div>
       </div>
 
       <!-- SEARCH WIDGET -->

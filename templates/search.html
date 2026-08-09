@@ -119,37 +119,52 @@
       background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center;
     }
 
+    /* REDBUS ENHANCED BUS CARD */
     .bus-card {
       background: var(--card); border: 1px solid var(--border); border-radius: var(--rl);
-      padding: 20px; transition: var(--tr); display: flex; flex-direction: column; gap: 14px;
+      padding: 22px; transition: var(--tr); display: flex; flex-direction: column; gap: 16px; position: relative;
     }
-    .bus-card:hover { border-color: rgba(249, 115, 22, 0.3); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
-    .bc-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .bc-op { font-size: 17px; font-weight: 900; }
-    .bc-type { font-size: 12px; color: var(--ts); font-weight: 600; }
-    .bc-price { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 900; color: var(--p); }
+    .bus-card:hover { border-color: rgba(249, 115, 22, 0.35); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .bc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .bc-op-name { font-size: 18px; font-weight: 900; color: var(--t); display: flex; align-items: center; gap: 8px; }
+    .bc-rating-chip { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 800; }
+    .bc-type { font-size: 12px; color: var(--ts); font-weight: 600; margin-top: 2px; }
+
+    .platform-matrix {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .platform-badge {
+      font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    }
+    .platform-badge.rb { border-color: rgba(216,78,85,0.3); color: #f87171; }
+    .platform-badge.ab { border-color: rgba(0,119,182,0.3); color: #38bdf8; }
+    .platform-badge.mmt { border-color: rgba(230,57,70,0.3); color: #fb7185; }
+
+    .bc-price-box { text-align: right; }
+    .bc-lowest { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; color: var(--p); line-height: 1; }
 
     .btn-book {
-      background: var(--p); color: #fff; border: none; border-radius: 8px; padding: 8px 18px;
+      background: var(--p); color: #fff; border: none; border-radius: 8px; padding: 9px 20px;
       font-size: 13px; font-weight: 800; cursor: pointer; transition: var(--tr);
     }
-    .btn-book:hover { background: var(--pd); }
+    .btn-book:hover { background: var(--pd); transform: scale(1.02); }
 
-    /* MODAL */
+    /* SEAT MAP MODAL */
     .modal-ov {
-      position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; padding: 20px;
+      position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; padding: 20px;
     }
     .modal-ov.open { display: flex; }
     .modal-card {
       background: var(--card); border: 1px solid var(--border); border-radius: 24px;
-      padding: 26px; width: 100%; max-width: 540px; position: relative; box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      padding: 26px; width: 100%; max-width: 560px; position: relative; box-shadow: 0 32px 80px rgba(0,0,0,0.6);
     }
     .modal-close {
       position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.06);
       border: 1px solid var(--bl); color: var(--ts); border-radius: 50%; width: 32px; height: 32px;
       display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
+    .driver-wheel { width: 28px; height: 28px; border: 2px solid var(--ts); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: auto; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -194,16 +209,17 @@
         <div class="sf-label">Bus Type</div>
         <select id="flt-type" class="sf-select" onchange="applyFilters()">
           <option value="all">All Bus Types</option>
-          <option value="ac-sleeper">AC Sleeper</option>
-          <option value="ac-seater">AC Seater</option>
-          <option value="non-ac">Non-AC</option>
+          <option value="ac-sleeper">AC Sleeper (2+1)</option>
+          <option value="ac-seater">AC Seater (2+2)</option>
+          <option value="non-ac">Non-AC Express</option>
+          <option value="luxury-sleeper">Volvo / Scania Luxury</option>
         </select>
       </div>
 
       <div class="sf-group">
         <div class="sf-label">Departure Time</div>
         <select id="flt-dep" class="sf-select" onchange="applyFilters()">
-          <option value="all">Any Departure</option>
+          <option value="all">Any Departure Time</option>
           <option value="morning">Morning (6 AM - 12 PM)</option>
           <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
           <option value="evening">Evening (5 PM - 9 PM)</option>
@@ -215,7 +231,7 @@
         <div class="sf-label">Sort Results</div>
         <select id="flt-sort" class="sf-select" onchange="applyFilters()">
           <option value="price-asc">Cheapest First</option>
-          <option value="rating">Top Rated First</option>
+          <option value="rating">Highest Rated (⭐ 4.5+)</option>
           <option value="duration">Fastest Duration</option>
           <option value="departure">Earliest Departure</option>
         </select>
@@ -228,7 +244,7 @@
       <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:18px 20px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <h1 id="route-title" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900">Mumbai → Goa</h1>
-          <div id="route-sub" style="font-size:12px;color:var(--ts)">Comparing real-time ticket fares</div>
+          <div id="route-sub" style="font-size:12px;color:var(--ts)">Comparing real-time fares across RedBus, AbhiBus & MakeMyTrip</div>
         </div>
         <div style="font-size:13px;font-weight:800;color:var(--green)" id="route-count">10 Buses Found</div>
       </div>
@@ -236,7 +252,7 @@
       <!-- PRICE TREND -->
       <div class="trend-card" id="trend-box">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-          <div style="font-weight:800;font-size:13px;color:var(--p)">📈 7-Day Fare Trends</div>
+          <div style="font-weight:800;font-size:13px;color:var(--p)">📈 7-Day Fare Forecast</div>
           <div style="font-size:11px;color:var(--green);font-weight:800;background:var(--gg);padding:2px 8px;border-radius:100px" id="cheapest-day">Lowest on Tuesdays</div>
         </div>
         <div style="font-size:12px;color:var(--ts)" id="trend-recommend">Fares are 20% lower on weekdays compared to weekend peaks.</div>
@@ -273,23 +289,35 @@
     </main>
   </div>
 
-  <!-- SEAT MAP MODAL -->
+  <!-- REDBUS STYLE INTERACTIVE 2D SEAT MAP MODAL -->
   <div class="modal-ov" id="modal-seats">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-seats')">✕</button>
-      <div style="font-size:28px;margin-bottom:4px">💺</div>
-      <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;margin-bottom:4px">Interactive Seat Map</h3>
-      <p style="font-size:12px;color:var(--ts);margin-bottom:16px">Green: Available · Red: Booked · Yellow: Ladies</p>
-      <div style="display:flex;flex-direction:column;gap:12px;background:rgba(0,0,0,0.2);padding:16px;border-radius:12px;margin-bottom:16px">
-        <div style="font-weight:800;font-size:11px;color:var(--p)">LOWER DECK</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900">💺 2D Interactive Seat Map</h3>
+        <div class="driver-wheel" title="Driver Cabin">☸️</div>
+      </div>
+      <p style="font-size:12px;color:var(--ts);margin-bottom:16px">Green: Available · Red: Booked · Yellow: Reserved for Ladies</p>
+      
+      <div style="display:flex;flex-direction:column;gap:14px;background:rgba(0,0,0,0.25);padding:18px;border-radius:14px;margin-bottom:16px">
+        <div style="font-weight:800;font-size:11px;color:var(--p)">LOWER DECK (BERTHS 1-12)</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-          <button style="padding:8px;border-radius:6px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L1 (₹499)</button>
-          <button style="padding:8px;border-radius:6px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">L2 (Booked)</button>
-          <button style="padding:8px;border-radius:6px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L3 (₹499)</button>
-          <button style="padding:8px;border-radius:6px;background:rgba(245,158,11,0.2);color:#fde047;border:1px solid #f59e0b;font-weight:800;cursor:pointer">L4 (Ladies)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L1 (₹499)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">L2 (Booked)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L3 (₹499)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(245,158,11,0.2);color:#fde047;border:1px solid #f59e0b;font-weight:800;cursor:pointer">L4 (Ladies)</button>
+        </div>
+
+        <div style="font-weight:800;font-size:11px;color:var(--blue);margin-top:6px">UPPER DECK (BERTHS 13-24)</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U1 (₹479)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U2 (₹479)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">U3 (Booked)</button>
+          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U4 (₹479)</button>
         </div>
       </div>
-      <button onclick="confirmSeats()" class="btn-book" style="width:100%">Proceed to Ticket Checkout →</button>
+
+      <button onclick="confirmSeats()" class="btn-book" style="width:100%;padding:14px;font-size:15px">Proceed to Ticket Checkout →</button>
     </div>
   </div>
 
@@ -347,14 +375,24 @@
         <div class="bus-card">
           <div class="bc-top">
             <div>
-              <div class="bc-op">${b.operator}</div>
+              <div class="bc-op-name">
+                <span>${b.operator}</span>
+                <span class="bc-rating-chip">⭐ ${b.rating}</span>
+              </div>
               <div class="bc-type">${b.busType} • Dep: ${b.route.departureTime} → Arr: ${b.route.arrivalTime} (${b.route.duration})</div>
-              <div style="font-size:12px;color:var(--green);font-weight:700;margin-top:4px">⭐ ${b.rating} (${b.reviewCount} reviews) • ${b.seatsLeft} seats left</div>
+              
+              <div class="platform-matrix">
+                <span class="platform-badge rb">RedBus: ₹${b.prices ? b.prices.redbus || b.lowestPrice : b.lowestPrice}</span>
+                <span class="platform-badge ab">AbhiBus: ₹${b.prices ? b.prices.abhibus || b.lowestPrice : b.lowestPrice}</span>
+                <span class="platform-badge mmt">MMT: ₹${b.prices ? b.prices.makemytrip || b.lowestPrice : b.lowestPrice}</span>
+              </div>
             </div>
-            <div style="text-align:right">
-              <div class="bc-price">₹${b.lowestPrice}</div>
-              <div style="display:flex;gap:6px;margin-top:6px">
-                <button onclick="openModal('modal-seats')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:6px;padding:6px 12px;font-size:11px;font-weight:800;cursor:pointer">💺 Seats</button>
+
+            <div class="bc-price-box">
+              <div class="bc-lowest">₹${b.lowestPrice}</div>
+              <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:2px">Free Cancellation</div>
+              <div style="display:flex;gap:6px;margin-top:8px">
+                <button onclick="openModal('modal-seats')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">💺 2D Seat Map</button>
                 <a href="/go/redbus/${b.id}" target="_blank" class="btn-book">Book Now ↗</a>
               </div>
             </div>
@@ -396,7 +434,7 @@
 
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-    function confirmSeats() { alert('🎉 Seats reserved! Redirecting to instant payment...'); closeModal('modal-seats'); }
+    function confirmSeats() { alert('🎉 Seats confirmed! Redirecting to checkout...'); closeModal('modal-seats'); }
   </script>
 </body>
 </html>
