@@ -293,31 +293,25 @@
   <div class="modal-ov" id="modal-seats">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-seats')">✕</button>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900">💺 2D Interactive Seat Map</h3>
-        <div class="driver-wheel" title="Driver Cabin">☸️</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900" id="sm-title">💺 Real-Time Seat Map</h3>
+        <div class="driver-wheel" title="Driver Cabin">☸️ Driver</div>
       </div>
-      <p style="font-size:12px;color:var(--ts);margin-bottom:16px">Green: Available · Red: Booked · Yellow: Reserved for Ladies</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <p style="font-size:12px;color:var(--ts)">Green: Available · Red: Booked · Yellow: Ladies · Orange: Selected</p>
+        <div id="seat-timer-box" style="font-size:11px;font-weight:900;color:var(--gold);background:rgba(245,158,11,0.15);padding:2px 8px;border-radius:100px;display:none">⏱️ Hold: <span id="timer-val">05:00</span></div>
+      </div>
       
-      <div style="display:flex;flex-direction:column;gap:14px;background:rgba(0,0,0,0.25);padding:18px;border-radius:14px;margin-bottom:16px">
-        <div style="font-weight:800;font-size:11px;color:var(--p)">LOWER DECK (BERTHS 1-12)</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L1 (₹499)</button>
-          <button style="padding:10px;border-radius:8px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">L2 (Booked)</button>
-          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">L3 (₹499)</button>
-          <button style="padding:10px;border-radius:8px;background:rgba(245,158,11,0.2);color:#fde047;border:1px solid #f59e0b;font-weight:800;cursor:pointer">L4 (Ladies)</button>
-        </div>
-
-        <div style="font-weight:800;font-size:11px;color:var(--blue);margin-top:6px">UPPER DECK (BERTHS 13-24)</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U1 (₹479)</button>
-          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U2 (₹479)</button>
-          <button style="padding:10px;border-radius:8px;background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;font-weight:800;cursor:not-allowed">U3 (Booked)</button>
-          <button style="padding:10px;border-radius:8px;background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;font-weight:800;cursor:pointer">U4 (₹479)</button>
-        </div>
+      <div id="seat-map-container" style="display:flex;flex-direction:column;gap:14px;background:rgba(0,0,0,0.25);padding:18px;border-radius:14px;margin-bottom:16px;max-height:340px;overflow-y:auto">
+        <div style="padding:20px;text-align:center;color:var(--ts)">Loading real-time seats...</div>
       </div>
 
-      <button onclick="confirmSeats()" class="btn-book" style="width:100%;padding:14px;font-size:15px">Proceed to Ticket Checkout →</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:800">Selected: <span id="sel-seats-list" style="color:var(--p)">None</span></div>
+        <div style="font-size:16px;font-family:'Outfit',sans-serif;font-weight:900;color:var(--green)">Total: ₹<span id="sel-total-price">0</span></div>
+      </div>
+
+      <button id="btn-lock-seats" onclick="lockAndBookSeats()" class="btn-book" style="width:100%;padding:14px;font-size:15px">Lock Seats & Proceed to Booking →</button>
     </div>
   </div>
 
@@ -325,6 +319,10 @@
     let BUSES = [];
     let FROM = 'Mumbai';
     let TO = 'Goa';
+    let ACTIVE_BUS_ID = '';
+    let SELECTED_SEATS = [];
+    let SEAT_PRICES = {};
+    let TIMER_INT = null;
 
     document.addEventListener('DOMContentLoaded', () => {
       const sp = new URLSearchParams(location.search);
@@ -390,15 +388,113 @@
 
             <div class="bc-price-box">
               <div class="bc-lowest">₹${b.lowestPrice}</div>
-              <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:2px">Free Cancellation</div>
+              <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:2px">Free Cancellation • ${b.seatsLeft} Seats Left</div>
               <div style="display:flex;gap:6px;margin-top:8px">
-                <button onclick="openModal('modal-seats')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">💺 2D Seat Map</button>
+                <button onclick="openSeatMap('${b.id}')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">💺 Real-Time Seat Map</button>
                 <a href="/go/redbus/${b.id}" target="_blank" class="btn-book">Book Now ↗</a>
               </div>
             </div>
           </div>
         </div>
       `).join('');
+    }
+
+    async function openSeatMap(busId) {
+      ACTIVE_BUS_ID = busId;
+      SELECTED_SEATS = [];
+      SEAT_PRICES = {};
+      updateSeatSummary();
+      openModal('modal-seats');
+
+      const smContainer = document.getElementById('seat-map-container');
+      smContainer.innerHTML = '<div style="padding:20px;text-align:center;color:var(--ts)">⏳ Fetching live seat availability...</div>';
+
+      try {
+        const r = await fetch(`/api/seat-map/${busId}`);
+        const d = await r.json();
+        document.getElementById('sm-title').textContent = `💺 ${d.busName || 'Bus'} (${d.busType || 'AC'})`;
+
+        const decks = d.decks || {};
+        let html = '';
+
+        if (decks.lowerDeck) {
+          html += `<div style="font-weight:800;font-size:11px;color:var(--p);margin-bottom:6px">LOWER DECK</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">`;
+          decks.lowerDeck.flat().forEach(s => {
+            SEAT_PRICES[s.no || s.id] = s.price;
+            const bg = s.status === 'booked' ? 'background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;cursor:not-allowed' :
+                       s.status === 'female' ? 'background:rgba(245,158,11,0.2);color:#fde047;border:1px solid #f59e0b;cursor:pointer' :
+                       'background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;cursor:pointer';
+            html += `<button data-seatnum="${s.no || s.id}" onclick="toggleSeat('${s.no || s.id}','${s.status}',this)" style="padding:10px;border-radius:8px;${bg};font-weight:800">${s.no || s.id} (₹${s.price})</button>`;
+          });
+          html += `</div>`;
+        }
+
+        if (decks.upperDeck) {
+          html += `<div style="font-weight:800;font-size:11px;color:var(--blue);margin-bottom:6px">UPPER DECK</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">`;
+          decks.upperDeck.flat().forEach(s => {
+            SEAT_PRICES[s.no || s.id] = s.price;
+            const bg = s.status === 'booked' ? 'background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;cursor:not-allowed' :
+                       'background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;cursor:pointer';
+            html += `<button data-seatnum="${s.no || s.id}" onclick="toggleSeat('${s.no || s.id}','${s.status}',this)" style="padding:10px;border-radius:8px;${bg};font-weight:800">${s.no || s.id} (₹${s.price})</button>`;
+          });
+          html += `</div>`;
+        }
+
+        smContainer.innerHTML = html;
+      } catch(e) {
+        smContainer.innerHTML = '<div style="padding:20px;text-align:center;color:var(--red)">Failed to fetch live seats.</div>';
+      }
+    }
+
+    function toggleSeat(seatNo, status, btn) {
+      if (status === 'booked') return;
+      const idx = SELECTED_SEATS.indexOf(seatNo);
+      if (idx > -1) {
+        SELECTED_SEATS.splice(idx, 1);
+        if (btn) btn.style.background = 'rgba(16,185,129,0.2)';
+      } else {
+        SELECTED_SEATS.push(seatNo);
+        if (btn) btn.style.background = '#f97316';
+      }
+      updateSeatSummary();
+    }
+
+    function updateSeatSummary() {
+      document.getElementById('sel-seats-list').textContent = SELECTED_SEATS.length ? SELECTED_SEATS.join(', ') : 'None';
+      const tot = SELECTED_SEATS.reduce((sum, s) => sum + (SEAT_PRICES[s] || 499), 0);
+      document.getElementById('sel-total-price').textContent = tot;
+    }
+
+    async function lockAndBookSeats() {
+      if (!SELECTED_SEATS.length) { alert('Please select at least one seat!'); return; }
+      try {
+        const r = await fetch('/api/seat/lock', {
+          method: 'POST', headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ busId: ACTIVE_BUS_ID, seatIds: SELECTED_SEATS, phone: '9876543210' })
+        });
+        const d = await r.json();
+        if (r.ok) {
+          document.getElementById('seat-timer-box').style.display = 'block';
+          startTimer(300);
+          alert(`🎉 ${d.message}`);
+          location.href = `/go/redbus/${ACTIVE_BUS_ID}`;
+        } else {
+          alert(d.error || 'Seat locking failed');
+        }
+      } catch(e) { location.href = `/go/redbus/${ACTIVE_BUS_ID}`; }
+    }
+
+    function startTimer(seconds) {
+      if (TIMER_INT) clearInterval(TIMER_INT);
+      let s = seconds;
+      TIMER_INT = setInterval(() => {
+        s--;
+        const m = String(Math.floor(s / 60)).padStart(2, '0');
+        const sec = String(s % 60).padStart(2, '0');
+        const el = document.getElementById('timer-val');
+        if (el) el.textContent = `${m}:${sec}`;
+        if (s <= 0) clearInterval(TIMER_INT);
+      }, 1000);
     }
 
     async function loadPriceTrends() {
@@ -434,7 +530,6 @@
 
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-    function confirmSeats() { alert('🎉 Seats confirmed! Redirecting to checkout...'); closeModal('modal-seats'); }
   </script>
 </body>
 </html>

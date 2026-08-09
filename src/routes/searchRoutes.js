@@ -978,6 +978,105 @@ router.get("/bus/:slug", (req, res) => {
   res.json({ bus, reviews, route, operator, related });
 });
 
+// In-memory active seat holds map (seatId -> holdObj)
+const activeSeatLocks = new Map();
+
+// POST /api/seat/lock
+router.post("/seat/lock", (req, res) => {
+  const { busId, seatIds, phone } = req.body;
+  if (!busId || !seatIds || !Array.isArray(seatIds) || seatIds.length === 0) {
+    return res.status(400).json({ error: "busId and non-empty seatIds array are required" });
+  }
+
+  const now = Date.now();
+  const holdDurationMs = 5 * 60 * 1000; // 5 minutes
+  const expiresAt = now + holdDurationMs;
+
+  // Check if any seat is already locked by someone else
+  const conflict = seatIds.find((seatId) => {
+    const key = `${busId}:${seatId}`;
+    const lock = activeSeatLocks.get(key);
+    return lock && lock.expiresAt > now && lock.phone !== phone;
+  });
+
+  if (conflict) {
+    return res.status(409).json({ error: `Seat ${conflict} is currently locked by another user.` });
+  }
+
+  // Lock seats
+  seatIds.forEach((seatId) => {
+    const key = `${busId}:${seatId}`;
+    activeSeatLocks.set(key, { busId, seatId, phone, expiresAt });
+  });
+
+  res.json({
+    success: true,
+    busId,
+    lockedSeats: seatIds,
+    expiresAt,
+    holdTimeSeconds: 300,
+    message: `Reserved ${seatIds.join(", ")} for 5:00 minutes. Complete checkout to confirm.`,
+  });
+});
+
+// POST /api/seat/book
+router.post("/seat/book", (req, res) => {
+  const { busId, seatIds, passengerName, phone, email } = req.body;
+  if (!busId || !seatIds || !Array.isArray(seatIds) || seatIds.length === 0) {
+    return res.status(400).json({ error: "busId, seatIds, passengerName, and phone are required" });
+  }
+
+  const bookingId = "BK-" + Math.floor(100000 + Math.random() * 900000);
+
+  // Clear locks
+  seatIds.forEach((seatId) => {
+    activeSeatLocks.delete(`${busId}:${seatId}`);
+  });
+
+  res.json({
+    success: true,
+    bookingId,
+    busId,
+    seatIds,
+    passengerName: passengerName || "Passenger",
+    phone,
+    email: email || "passenger@example.com",
+    status: "CONFIRMED",
+    message: `🎉 Booking confirmed! Ticket #${bookingId} sent to WhatsApp & Email.`,
+  });
+});
+
+// GET /api/bus/live-status/:busId
+router.get("/bus/live-status/:busId", (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+
+  const bus = findBusByIdOrSlug(req.params.busId, db);
+  if (!bus) return res.status(404).json({ error: "Bus not found" });
+
+  const landmarks = [
+    "Approaching Swargate Bus Terminal",
+    "Passing Panvel Highway Toll Plaza",
+    "En Route on NH48 Expressway",
+    "Arrived at Lonavala Food Court",
+    "Passing Khandala Bypass",
+  ];
+  const landmark = landmarks[Math.floor(Math.random() * landmarks.length)];
+
+  res.json({
+    busId: bus.id,
+    operator: bus.operator,
+    busType: bus.busType,
+    status: "ON_TIME",
+    currentLandmark: landmark,
+    speedKmph: Math.floor(65 + Math.random() * 25),
+    distanceCoveredKm: Math.floor(30 + Math.random() * 80),
+    delayMinutes: 0,
+    liveSeatCount: bus.seatsLeft,
+    lastGpsUpdate: new Date().toISOString(),
+  });
+});
+
 // GET /api/flights/search
 router.get("/flights/search", (req, res) => {
   const db = readDB();

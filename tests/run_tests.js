@@ -651,6 +651,36 @@ test("GET /api/seat-map/nonexistent returns 404", async () => {
   if (r.status !== 404) throw new Error("Expected 404, got " + r.status);
 });
 
+test("POST /api/seat/lock locks seat for 5 minutes", async () => {
+  const r = await req("POST", "/api/seat/lock", {
+    busId: "bus-001",
+    seatIds: ["L1", "L3"],
+    phone: "9876543210",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.success) throw new Error("No success boolean");
+  if (r.body.holdTimeSeconds !== 300) throw new Error("Expected 300s hold time");
+});
+
+test("POST /api/seat/book confirms reservation", async () => {
+  const r = await req("POST", "/api/seat/book", {
+    busId: "bus-001",
+    seatIds: ["L1"],
+    passengerName: "Test Passenger",
+    phone: "9876543210",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.bookingId) throw new Error("No bookingId generated");
+  if (r.body.status !== "CONFIRMED") throw new Error("Status not CONFIRMED");
+});
+
+test("GET /api/bus/live-status/:busId returns live GPS simulation", async () => {
+  const r = await req("GET", "/api/bus/live-status/bus-001");
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.currentLandmark) throw new Error("No currentLandmark");
+  if (!r.body.speedKmph) throw new Error("No speedKmph");
+});
+
 // ─── BUS DETAIL ────────────────────────────────────────────────────────────
 test("GET /api/bus/:slug for valid slug returns full bus data", async () => {
   // Find a slug from routes
