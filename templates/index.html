@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BusCompare India — RedBus, AbhiBus & MMT Bus Price Comparer</title>
-  <meta name="description" content="Compare bus ticket prices across RedBus, AbhiBus, MakeMyTrip, Yatra & KSRTC instantly. Find cheapest Volvo AC Sleeper buses, interactive 2D seat map and price drop alerts.">
+  <title>BusCompare India — RedBus, VRL, Zingbus & Top Bus Price Comparer</title>
+  <meta name="description" content="Compare bus ticket prices across VRL Travels, Zingbus, IntrCity, RedBus, AbhiBus & MakeMyTrip instantly. Find cheapest Volvo AC Sleeper buses with 2D seat map.">
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="shortcut icon" type="image/png" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/manifest.json">
-  <meta property="og:title" content="BusCompare India — RedBus & Top Operators Price Comparison">
-  <meta property="og:description" content="Compare bus ticket prices across RedBus, AbhiBus, MakeMyTrip & KSRTC instantly. Save up to 40%.">
+  <meta property="og:title" content="BusCompare India — VRL, Zingbus & RedBus Price Comparison">
+  <meta property="og:description" content="Compare bus ticket prices across VRL Travels, Zingbus, IntrCity, RedBus, AbhiBus & MMT instantly. Save up to 40%.">
   <meta property="og:image" content="/logo.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
@@ -29,13 +29,18 @@
       --p: #f97316;
       --pd: #ea580c;
       --pg: rgba(249, 115, 22, 0.15);
-      --redbus: #d84e55;
-      --abhibus: #0077b6;
-      --mmt: #e63946;
+      
+      /* BRAND ACCENTS */
+      --zingbus: #00f5d4;
+      --intrcity: #8b5cf6;
+      --neugo: #10b981;
+      --vrl: #e11d48;
+      --redbus: #f43f5e;
+      --abhibus: #0284c7;
+
       --green: #10b981;
       --gg: rgba(16, 185, 129, 0.12);
       --blue: #3b82f6;
-      --purple: #8b5cf6;
       --gold: #f59e0b;
       --red: #ef4444;
       --t: #f1f5f9;
@@ -73,12 +78,12 @@
     input, select, textarea, button { font-family: inherit; }
     a { text-decoration: none; color: inherit; }
 
-    /* REDBUS OFFER BAR */
+    /* REDBUS & BRAND OFFER BAR */
     .offer-top-bar {
-      background: linear-gradient(90deg, #d84e55, #f97316); color: #fff; padding: 8px 16px;
+      background: linear-gradient(90deg, #e11d48, #f97316, #8b5cf6); color: #fff; padding: 8px 16px;
       font-size: 12px; font-weight: 800; text-align: center; display: flex; align-items: center; justify-content: center; gap: 12px;
     }
-    .offer-code-tag { background: #fff; color: #d84e55; padding: 2px 8px; border-radius: 4px; font-weight: 900; letter-spacing: 0.5px; }
+    .offer-code-tag { background: #fff; color: #e11d48; padding: 2px 8px; border-radius: 4px; font-weight: 900; letter-spacing: 0.5px; }
 
     /* HEADER NAVBAR */
     .navbar {
@@ -112,27 +117,22 @@
       cursor: pointer; transition: var(--tr); white-space: nowrap; border: none; background: none;
     }
     .nav-link:hover, .nav-link.active { color: var(--t); background: rgba(255, 255, 255, 0.07); }
-    body.light .nav-link:hover, body.light .nav-link.active { background: rgba(0, 0, 0, 0.05); }
 
-    .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .btn-coins {
       background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.28);
       color: var(--gold); border-radius: 100px; padding: 7px 14px; font-size: 12px; font-weight: 800;
       cursor: pointer; transition: var(--tr);
     }
-    .btn-coins:hover { background: rgba(245, 158, 11, 0.22); }
     .btn-vip {
       background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border: none;
       border-radius: 100px; padding: 7px 16px; font-size: 12px; font-weight: 800;
       cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
     }
-    .btn-vip:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(245, 158, 11, 0.4); }
 
     .top-select {
       background: rgba(255, 255, 255, 0.06); border: 1px solid var(--bl); border-radius: 8px;
       padding: 7px 10px; color: var(--t); font-size: 12px; font-weight: 700; outline: none; cursor: pointer;
     }
-    body.light .top-select { background: rgba(0, 0, 0, 0.04); }
     .top-select option { background: var(--card); color: var(--t); }
 
     .theme-btn {
@@ -140,9 +140,8 @@
       width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
       font-size: 16px; cursor: pointer; transition: var(--tr);
     }
-    .theme-btn:hover { background: rgba(255, 255, 255, 0.12); }
 
-    /* ── LIVE DEAL TICKER ── */
+    /* LIVE DEAL TICKER */
     .deal-ticker {
       background: linear-gradient(135deg, #0a1628, #111827);
       border-bottom: 1px solid rgba(249,115,22,0.15); overflow: hidden;
@@ -157,14 +156,13 @@
     }
     .ticker-item .t-price { color: var(--green); font-weight: 900; }
     .ticker-item .t-route { color: var(--t); }
-    .ticker-item .t-save { color: var(--p); background: var(--pg); border-radius: 4px; padding: 1px 6px; font-size: 10px; }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       position: relative; overflow: hidden; padding: 60px 24px 50px;
       background: radial-gradient(ellipse 90% 70% at 50% -10%, rgba(249,115,22,0.1) 0%, transparent 60%), var(--bg);
     }
-    .hero-content { max-width: 920px; margin: 0 auto; text-align: center; position: relative; }
+    .hero-content { max-width: 960px; margin: 0 auto; text-align: center; position: relative; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px; background: rgba(249, 115, 22, 0.1);
       border: 1px solid rgba(249, 115, 22, 0.28); border-radius: 100px; padding: 7px 20px;
@@ -181,28 +179,18 @@
       background: linear-gradient(135deg, #f97316 0%, #fbbf24 50%, #f97316 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .hero-sub { font-size: 17px; color: var(--ts); max-width: 600px; margin: 0 auto 28px; line-height: 1.7; }
+    .hero-sub { font-size: 17px; color: var(--ts); max-width: 620px; margin: 0 auto 28px; line-height: 1.7; }
 
-    /* PLATFORM BADGES ROW */
+    /* BRAND PARTNERS ROW */
     .partner-row {
-      display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;
     }
     .partner-chip {
       display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border); border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 700; color: var(--ts);
+      border: 1px solid var(--border); border-radius: 100px; padding: 6px 16px; font-size: 12px; font-weight: 800;
     }
-    .partner-chip.redbus { border-color: rgba(216,78,85,0.3); color: #f87171; }
-    .partner-chip.abhibus { border-color: rgba(0,119,182,0.3); color: #38bdf8; }
-    .partner-chip.mmt { border-color: rgba(230,57,70,0.3); color: #fb7185; }
 
-    .hero-stats {
-      display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; margin-bottom: 30px;
-    }
-    .hs-val { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 900; line-height: 1; }
-    .hs-lbl { font-size: 11px; color: var(--ts); font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; margin-top: 5px; }
-    .hs-div { width: 1px; height: 40px; background: var(--bl); }
-
-    /* ── SEARCH WIDGET ── */
+    /* SEARCH WIDGET */
     .search-widget {
       position: relative; z-index: 100; overflow: visible;
       background: rgba(17, 24, 39, 0.88); border: 1px solid rgba(255, 255, 255, 0.1);
@@ -247,16 +235,23 @@
     }
     .btn-search-big:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(249, 115, 22, 0.5); }
 
-    /* ── POPULAR ROUTES ── */
+    /* ── BRAND OPERATOR FLEET CAROUSEL ── */
     .section-wrap { max-width: 1280px; margin: 50px auto 0; padding: 0 24px; }
     .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
     .sec-title { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; }
-    .routes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-    .route-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-      padding: 20px; cursor: pointer; transition: var(--tr);
+    
+    .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .brand-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 20px;
+      transition: var(--tr); cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
     }
-    .route-card:hover { border-color: rgba(249, 115, 22, 0.3); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .brand-card:hover { border-color: rgba(249,115,22,0.4); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+
+    /* ── TRUST & GUARANTEES ── */
+    .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
+    .trust-card {
+      background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: center;
+    }
 
     /* ── MODALS ── */
     .modal-ov {
@@ -273,22 +268,6 @@
       border: 1px solid var(--bl); color: var(--ts); border-radius: 50%; width: 32px; height: 32px;
       display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--tr);
     }
-    .modal-close:hover { color: var(--t); background: rgba(255,255,255,0.12); }
-
-    /* ── FLOATING BUTTONS ── */
-    .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 9000; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-    .wa-btn {
-      width: 54px; height: 54px; background: #25d366; border-radius: 50%; display: flex;
-      align-items: center; justify-content: center; font-size: 24px; cursor: pointer;
-      box-shadow: 0 8px 24px rgba(37,211,102,0.4); text-decoration: none; border: 3px solid rgba(255,255,255,0.2);
-    }
-    .back-top {
-      position: fixed; bottom: 92px; right: 28px; z-index: 9000; width: 42px; height: 42px;
-      background: rgba(255,255,255,0.08); border: 1px solid var(--bl); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer;
-      opacity: 0; transform: translateY(12px); transition: all 0.25s; backdrop-filter: blur(10px);
-    }
-    .back-top.visible { opacity: 1; transform: translateY(0); }
 
     /* ── FOOTER ── */
     footer { background: var(--s1); border-top: 1px solid var(--border); padding: 44px 24px 28px; margin-top: 70px; }
@@ -304,9 +283,10 @@
 </head>
 <body>
 
-  <!-- REDBUS STYLE TOP OFFER BANNER -->
+  <!-- TOP OFFER BANNER -->
   <div class="offer-top-bar">
-    <span>🏷️ Use Code <span class="offer-code-tag">BUSCOMP100</span> to get Flat ₹100 OFF across RedBus, AbhiBus & MakeMyTrip!</span>
+    <span>🚌 Official Bus Operator Partners: VRL Travels · Zingbus · IntrCity · NeuGo · KSRTC · RedBus</span>
+    <span class="offer-code-tag">BUSCOMP100</span>
   </div>
 
   <!-- NAVBAR -->
@@ -349,10 +329,10 @@
   <!-- LIVE DEAL TICKER -->
   <div class="deal-ticker">
     <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item">🔥 <span class="t-route">Mumbai → Goa</span> from <span class="t-price">₹499</span> <span class="t-save">Save ₹120</span></span>
-      <span class="ticker-item">🔥 <span class="t-route">Bangalore → Chennai</span> from <span class="t-price">₹399</span> <span class="t-save">Save ₹85</span></span>
-      <span class="ticker-item">🔥 <span class="t-route">Delhi → Jaipur</span> from <span class="t-price">₹299</span> <span class="t-save">Save ₹65</span></span>
-      <span class="ticker-item">🔥 <span class="t-route">Hyderabad → Vizag</span> from <span class="t-price">₹649</span> <span class="t-save">Save ₹180</span></span>
+      <span class="ticker-item">⚡ <span class="t-route">VRL Travels: Mumbai → Goa</span> from <span class="t-price">₹499</span></span>
+      <span class="ticker-item">⚡ <span class="t-route">Zingbus: Delhi → Jaipur</span> from <span class="t-price">₹299</span></span>
+      <span class="ticker-item">⚡ <span class="t-route">IntrCity SmartBus: Bangalore → Chennai</span> from <span class="t-price">₹350</span></span>
+      <span class="ticker-item">⚡ <span class="t-route">NeuGo Electric EV: Hyderabad → Vijayawada</span> from <span class="t-price">₹450</span></span>
     </div>
   </div>
 
@@ -361,25 +341,20 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span>
-        ⚡ Compare Fares Across RedBus, AbhiBus & MMT
+        🚌 Official Comparison Partner for 20+ Top Bus Brands
       </div>
       <h1 class="hero-title">
-        Find Cheapest Bus.<br><span class="grad-text">Travel Smarter. 🇮🇳</span>
+        Compare Top Bus Brands.<br><span class="grad-text">Book At Lowest Fares 🇮🇳</span>
       </h1>
-      <p class="hero-sub">Compare real-time prices across RedBus, AbhiBus, MakeMyTrip & KSRTC. Interactive 2D Seat Map, Price Trends & Instant Fare Search.</p>
+      <p class="hero-sub">Direct fare comparison across VRL Travels, Zingbus, IntrCity SmartBus, NeuGo Electric EV, KSRTC, RedBus & MakeMyTrip.</p>
 
+      <!-- BRAND CHIPS -->
       <div class="partner-row">
-        <span class="partner-chip redbus">🔴 RedBus Certified</span>
-        <span class="partner-chip abhibus">🔵 AbhiBus Direct</span>
-        <span class="partner-chip mmt">🔴 MakeMyTrip Express</span>
-      </div>
-
-      <div class="hero-stats">
-        <div><div class="hs-val" id="stat-searches" style="color:#14b8a6">24,870</div><div class="hs-lbl">LIVE SEARCHES TODAY</div></div>
-        <div class="hs-div"></div>
-        <div><div class="hs-val" id="stat-savings" style="color:var(--p)">40%</div><div class="hs-lbl">AVG FARE SAVED</div></div>
-        <div class="hs-div"></div>
-        <div><div class="hs-val" id="stat-routes" style="color:#818cf8">1,200+</div><div class="hs-lbl">INDIAN ROUTES</div></div>
+        <span class="partner-chip" style="color:var(--vrl);border-color:rgba(225,29,72,0.3)">🔴 VRL Travels</span>
+        <span class="partner-chip" style="color:var(--zingbus);border-color:rgba(0,245,212,0.3)">⚡ Zingbus Premium</span>
+        <span class="partner-chip" style="color:var(--intrcity);border-color:rgba(139,92,246,0.3)">🟣 IntrCity SmartBus</span>
+        <span class="partner-chip" style="color:var(--neugo);border-color:rgba(16,185,129,0.3)">🌱 NeuGo Electric</span>
+        <span class="partner-chip" style="color:var(--gold);border-color:rgba(245,158,11,0.3)">👑 KSRTC / MSRTC</span>
       </div>
 
       <!-- SEARCH WIDGET -->
@@ -412,39 +387,79 @@
           </div>
 
           <div class="sw-field">
-            <button onclick="executeSearch()" class="btn-search-big">🔍 Compare Buses Now →</button>
+            <button onclick="executeSearch()" class="btn-search-big">🔍 Compare Bus Brands Now →</button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- POPULAR ROUTES -->
+  <!-- TOP BUS OPERATOR BRANDS SHOWCASE -->
   <section class="section-wrap">
     <div class="sec-head">
-      <h2 class="sec-title">🔥 Popular Intercity Routes</h2>
-      <button onclick="openModal('modal-spin-win')" style="background:var(--pg);border:1px solid rgba(249,115,22,0.3);color:var(--p);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:800;cursor:pointer">🎡 Spin & Win Discount</button>
+      <h2 class="sec-title">⭐ Featured Bus Operator Brands</h2>
+      <button onclick="openModal('modal-operators')" style="background:var(--pg);border:1px solid rgba(249,115,22,0.3);color:var(--p);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:800;cursor:pointer">🚌 Join Partner Network</button>
     </div>
-    <div class="routes-grid">
-      <div class="route-card" onclick="location.href='/search?from=Mumbai&to=Pune'">
-        <div style="font-weight:900;font-size:16px">Mumbai → Pune</div>
-        <div style="font-size:12px;color:var(--ts);margin-top:2px">Express Highway • 3h 30m</div>
-        <div style="font-size:15px;font-weight:900;color:var(--p);margin-top:10px">From ₹199 <span style="font-size:11px;color:var(--green);font-weight:700">Save 40%</span></div>
+
+    <div class="brand-grid">
+      <div class="brand-card" onclick="location.href='/search?from=Mumbai&to=Goa'">
+        <div>
+          <div style="font-size:18px;font-weight:900;color:var(--vrl)">🔴 VRL Travels</div>
+          <div style="font-size:12px;color:var(--ts);margin-top:2px">Trusted Since 1976 • 600+ Buses</div>
+          <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:6px">⭐ 4.5/5 (12,000+ Reviews)</div>
+        </div>
+        <div style="font-size:13px;font-weight:800;color:var(--p);margin-top:14px">Explore Routes →</div>
       </div>
-      <div class="route-card" onclick="location.href='/search?from=Bangalore&to=Chennai'">
-        <div style="font-weight:900;font-size:16px">Bangalore → Chennai</div>
-        <div style="font-size:12px;color:var(--ts);margin-top:2px">4+ Premium Operators • 6h 15m</div>
-        <div style="font-size:15px;font-weight:900;color:var(--p);margin-top:10px">From ₹350 <span style="font-size:11px;color:var(--green);font-weight:700">Save 35%</span></div>
+
+      <div class="brand-card" onclick="location.href='/search?from=Delhi&to=Jaipur'">
+        <div>
+          <div style="font-size:18px;font-weight:900;color:var(--zingbus)">⚡ Zingbus</div>
+          <div style="font-size:12px;color:var(--ts);margin-top:2px">Tech-Driven Premium Travel • 350+ Buses</div>
+          <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:6px">⭐ 4.6/5 (8,500+ Reviews)</div>
+        </div>
+        <div style="font-size:13px;font-weight:800;color:var(--p);margin-top:14px">Explore Routes →</div>
       </div>
-      <div class="route-card" onclick="location.href='/search?from=Delhi&to=Jaipur'">
-        <div style="font-weight:900;font-size:16px">Delhi → Jaipur</div>
-        <div style="font-size:12px;color:var(--ts);margin-top:2px">Volvo AC Sleeper • 5h 00m</div>
-        <div style="font-size:15px;font-weight:900;color:var(--p);margin-top:10px">From ₹250 <span style="font-size:11px;color:var(--green);font-weight:700">Save 30%</span></div>
+
+      <div class="brand-card" onclick="location.href='/search?from=Bangalore&to=Chennai'">
+        <div>
+          <div style="font-size:18px;font-weight:900;color:var(--intrcity)">🟣 IntrCity SmartBus</div>
+          <div style="font-size:12px;color:var(--ts);margin-top:2px">India's Smartest Bus Network • 400+ Buses</div>
+          <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:6px">⭐ 4.7/5 (15,200+ Reviews)</div>
+        </div>
+        <div style="font-size:13px;font-weight:800;color:var(--p);margin-top:14px">Explore Routes →</div>
       </div>
-      <div class="route-card" onclick="location.href='/search?from=Mumbai&to=Goa'">
-        <div style="font-weight:900;font-size:16px">Mumbai → Goa</div>
-        <div style="font-size:12px;color:var(--ts);margin-top:2px">Overnight Luxury Sleeper • 10h 30m</div>
-        <div style="font-size:15px;font-weight:900;color:var(--p);margin-top:10px">From ₹550 <span style="font-size:11px;color:var(--green);font-weight:700">Save 45%</span></div>
+
+      <div class="brand-card" onclick="location.href='/search?from=Hyderabad&to=Bangalore'">
+        <div>
+          <div style="font-size:18px;font-weight:900;color:var(--neugo)">🌱 NeuGo Electric EV</div>
+          <div style="font-size:12px;color:var(--ts);margin-top:2px">100% Eco-Friendly EV Travel • 180+ Buses</div>
+          <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:6px">⭐ 4.8/5 (6,100+ Reviews)</div>
+        </div>
+        <div style="font-size:13px;font-weight:800;color:var(--p);margin-top:14px">Explore Routes →</div>
+      </div>
+    </div>
+
+    <!-- TRUST GUARANTEES -->
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div style="font-size:28px">⏰</div>
+        <div style="font-weight:900;font-size:14px;margin-top:6px">100% On-Time Guarantee</div>
+        <div style="font-size:12px;color:var(--ts);margin-top:4px">Get 25% refund if bus is delayed over 30 mins</div>
+      </div>
+      <div class="trust-card">
+        <div style="font-size:28px">🛡️</div>
+        <div style="font-weight:900;font-size:14px;margin-top:6px">Free Cancellation Pass</div>
+        <div style="font-size:12px;color:var(--ts);margin-top:4px">Cancel up to 6 hours before departure for 0 penalty</div>
+      </div>
+      <div class="trust-card">
+        <div style="font-size:28px">⚡</div>
+        <div style="font-weight:900;font-size:14px;margin-top:6px">Instant Refund Guarantee</div>
+        <div style="font-size:12px;color:var(--ts);margin-top:4px">Instant refund to source account within 5 mins</div>
+      </div>
+      <div class="trust-card">
+        <div style="font-size:28px">🎧</div>
+        <div style="font-weight:900;font-size:14px;margin-top:6px">24x7 Traveler Support</div>
+        <div style="font-size:12px;color:var(--ts);margin-top:4px">Dedicated WhatsApp & Phone support helpline</div>
       </div>
     </div>
   </section>
@@ -523,34 +538,13 @@
     </div>
   </div>
 
-  <!-- SPIN WHEEL MODAL -->
-  <div class="modal-ov" id="modal-spin-win">
-    <div class="modal-card" style="text-align:center">
-      <button class="modal-close" onclick="closeModal('modal-spin-win')">✕</button>
-      <div style="font-size:32px;margin-bottom:4px">🎡</div>
-      <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:4px">Fortune Spin Wheel</h3>
-      <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Spin the wheel to unlock exclusive coupon codes!</p>
-      <div style="position:relative;width:240px;height:240px;margin:0 auto 16px">
-        <canvas id="wheel-canvas" width="240" height="240"></canvas>
-      </div>
-      <button onclick="spinWheel()" class="btn-search-big">🌀 Spin The Wheel Now!</button>
-      <div id="wheel-result-msg" style="margin-top:14px;font-size:14px;font-weight:800;color:var(--gold)"></div>
-    </div>
-  </div>
-
-  <!-- FLOATING CTA -->
-  <div class="wa-float">
-    <a href="https://wa.me/919999000000?text=Hi%20BusCompare" target="_blank" class="wa-btn" aria-label="Chat on WhatsApp">💬</a>
-  </div>
-  <button class="back-top" id="back-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
   <!-- FOOTER -->
   <footer>
     <div class="ft-in">
       <div class="ft-grid">
         <div>
           <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:8px">🚌 Bus<em>Compare</em></div>
-          <p style="font-size:13px;color:var(--ts);line-height:1.6">India's leading bus price comparison platform. Compare real-time fares across RedBus, AbhiBus, MakeMyTrip & KSRTC.</p>
+          <p style="font-size:13px;color:var(--ts);line-height:1.6">India's leading bus price comparison platform. Compare real-time fares across VRL Travels, Zingbus, IntrCity, RedBus & MakeMyTrip.</p>
         </div>
         <div>
           <div class="ft-title">Quick Navigation</div>
@@ -582,7 +576,6 @@
     </div>
   </footer>
 
-  <!-- CLIENT SCRIPT -->
   <script>
     let CITIES = [];
 
@@ -590,11 +583,6 @@
       setHomeDate(0);
       initAutocomplete();
       initTheme();
-
-      window.addEventListener('scroll', () => {
-        const btt = document.getElementById('back-top-btn');
-        if (btt) btt.classList.toggle('visible', window.scrollY > 400);
-      });
     });
 
     function initTheme() {
@@ -740,12 +728,6 @@
         if (r.ok) { res.textContent = `👑 VIP Activated! ID: ${d.vipId}`; if (window.confetti) window.confetti(); }
         else { res.textContent = '👑 VIP Pass Active!'; }
       } catch(e) { res.textContent = '👑 VIP Pass Active!'; }
-    }
-
-    function spinWheel() {
-      const res = document.getElementById('wheel-result-msg');
-      res.textContent = '🎉 Coupon BUSCOMP100 Unlocked! Flat ₹100 OFF.';
-      if (window.confetti) window.confetti();
     }
   </script>
 </body>
