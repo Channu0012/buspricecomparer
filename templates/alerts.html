@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Smart Price Drop Alerts — BusCompare India</title>
   <meta name="description" content="Set automated email & WhatsApp price drop alerts for any bus route in India. Never overpay for bus tickets again.">
   <link rel="icon" type="image/png" href="/logo.png">
@@ -13,25 +13,40 @@
       --p: #f97316; --pd: #ea580c; --green: #10b981; --t: #f1f5f9; --ts: #94a3b8; --rl: 20px;
     }
     body.light { --bg: #f8fafc; --card: #ffffff; --border: rgba(0,0,0,0.08); --t: #0f172a; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); min-height: 100vh; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); min-height: 100vh; padding-bottom: 76px; }
     a { text-decoration: none; color: inherit; }
 
-    .navbar { position: sticky; top: 0; z-index: 1000; padding: 12px 24px; background: rgba(6,10,19,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .navbar { position: sticky; top: 0; z-index: 1000; padding: 12px 20px; background: rgba(6,10,19,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     .nav-in { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: var(--t); display: flex; align-items: center; gap: 8px; }
 
-    .container { max-width: 680px; margin: 50px auto; padding: 0 24px 80px; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 32px; box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
+    .container { max-width: 680px; margin: 30px auto; padding: 0 16px 80px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 24px; box-shadow: 0 32px 80px rgba(0,0,0,0.5); }
 
     .sw-input {
       width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--bl);
-      border-radius: 12px; padding: 14px; color: var(--t); font-size: 14px; font-weight: 700; outline: none; margin-bottom: 14px;
+      border-radius: 12px; padding: 14px; color: var(--t); font-size: 14px; font-weight: 700; outline: none; margin-bottom: 14px; min-height: 48px;
     }
     .btn-submit {
       width: 100%; background: linear-gradient(135deg, var(--p), var(--pd)); color: #fff; border: none;
-      border-radius: 12px; padding: 16px; font-size: 15px; font-weight: 800; cursor: pointer;
+      border-radius: 12px; padding: 16px; font-size: 15px; font-weight: 800; cursor: pointer; min-height: 50px;
     }
+
+    /* MOBILE STICKY BOTTOM NAVBAR */
+    .nav-mobile-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: rgba(12, 18, 32, 0.95); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border); display: flex; padding: 6px 12px;
+      align-items: center; justify-content: space-around;
+    }
+    body.light .nav-mobile-bottom { background: rgba(255, 255, 255, 0.95); }
+    .mob-nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 10px; font-weight: 800; color: var(--ts); text-decoration: none; cursor: pointer;
+    }
+    .mob-nav-item.active, .mob-nav-item:hover { color: var(--p); }
+    .mob-nav-icon { font-size: 18px; }
   </style>
 </head>
 <body>
@@ -47,17 +62,17 @@
   </nav>
 
   <main class="container">
-    <div style="text-align:center;margin-bottom:30px">
+    <div style="text-align:center;margin-bottom:24px">
       <div style="font-size:12px;font-weight:800;color:var(--p);text-transform:uppercase;letter-spacing:1px">🔔 Smart Price Drop Tracker</div>
-      <h1 style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;margin:8px 0">Set Bus Fare Price Alert</h1>
-      <p style="color:var(--ts);font-size:14px">Get instant WhatsApp & Email notifications whenever prices drop on your route.</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-size:30px;font-weight:900;margin:6px 0">Set Bus Fare Price Alert</h1>
+      <p style="color:var(--ts);font-size:13px">Get instant WhatsApp & Email notifications whenever prices drop on your route.</p>
     </div>
 
     <div class="card">
       <form onsubmit="submitAlert(event)">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <input class="sw-input" id="al-from" placeholder="Departure City (e.g. Mumbai)" value="Mumbai" required>
-          <input class="sw-input" id="al-to" placeholder="Destination City (e.g. Pune)" value="Pune" required>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <input class="sw-input" id="al-from" placeholder="Departure (e.g. Mumbai)" value="Mumbai" required>
+          <input class="sw-input" id="al-to" placeholder="Destination (e.g. Pune)" value="Pune" required>
         </div>
         <input class="sw-input" type="email" id="al-email" placeholder="Your Email Address *" required>
         <input class="sw-input" type="tel" id="al-wa" placeholder="WhatsApp Number (Optional)">
@@ -67,6 +82,26 @@
       <div id="al-msg" style="margin-top:16px;font-size:13px;font-weight:800;text-align:center;display:none"></div>
     </div>
   </main>
+
+  <!-- MOBILE STICKY BOTTOM NAVIGATION BAR -->
+  <div class="nav-mobile-bottom">
+    <a href="/" class="mob-nav-item">
+      <span class="mob-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/search?from=Mumbai&to=Goa" class="mob-nav-item">
+      <span class="mob-nav-icon">🔍</span>
+      <span>Search</span>
+    </a>
+    <a href="/alerts" class="mob-nav-item active">
+      <span class="mob-nav-icon">🔔</span>
+      <span>Alerts</span>
+    </a>
+    <a href="https://wa.me/919999000000?text=Hi%20BusCompare" target="_blank" class="mob-nav-item">
+      <span class="mob-nav-icon">💬</span>
+      <span>Support</span>
+    </a>
+  </div>
 
   <script>
     async function submitAlert(e) {

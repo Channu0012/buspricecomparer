@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title id="page-title">Bus Search Results — BusCompare India</title>
   <meta name="description" content="Compare bus prices across all major operators for your route. Find cheapest tickets on RedBus, AbhiBus, MakeMyTrip and more.">
   <link rel="icon" type="image/png" href="/logo.png">
@@ -45,126 +45,144 @@
       --tm: #94a3b8;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
       font-family: 'Inter', -apple-system, system-ui, sans-serif;
       background: var(--bg); color: var(--t); line-height: 1.6;
       -webkit-font-smoothing: antialiased; min-height: 100vh;
-      transition: background 0.3s, color 0.3s;
+      transition: background 0.3s, color 0.3s; overflow-x: hidden;
+      padding-bottom: 70px;
     }
     input, select, button { font-family: inherit; }
     a { text-decoration: none; color: inherit; }
 
     /* NAVBAR */
     .navbar {
-      position: sticky; top: 0; z-index: 1000; padding: 12px 24px;
+      position: sticky; top: 0; z-index: 1000; padding: 12px 20px;
       background: rgba(6, 10, 19, 0.95); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
     body.light .navbar { background: rgba(255, 255, 255, 0.95); }
     .nav-in {
-      max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
-    .nav-left { display: flex; align-items: center; gap: 16px; }
+    .nav-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .nav-logo { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: var(--t); display: flex; align-items: center; gap: 8px; }
     .nav-logo em { color: var(--p); font-style: normal; }
     .nav-logo-icon { width: 34px; height: 34px; background: var(--p); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
 
     .cs-bar {
-      display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05);
-      border: 1px solid var(--bl); border-radius: 100px; padding: 4px 14px;
+      display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.05);
+      border: 1px solid var(--bl); border-radius: 100px; padding: 4px 10px;
     }
     body.light .cs-bar { background: rgba(0,0,0,0.03); }
-    .cs-input { background: transparent; border: none; color: var(--t); font-size: 13px; font-weight: 700; outline: none; width: 110px; }
+    .cs-input { background: transparent; border: none; color: var(--t); font-size: 12px; font-weight: 700; outline: none; width: 90px; }
 
     .top-select {
       background: rgba(255, 255, 255, 0.06); border: 1px solid var(--bl); border-radius: 100px;
-      padding: 6px 12px; color: var(--t); font-size: 12px; font-weight: 700; outline: none; cursor: pointer;
+      padding: 6px 12px; color: var(--t); font-size: 12px; font-weight: 700; outline: none; cursor: pointer; min-height: 40px;
     }
-    body.light .top-select { background: rgba(0,0,0,0.04); }
-    .top-select option { background: var(--card); color: var(--t); }
+
+    /* MOBILE STICKY BOTTOM NAVBAR */
+    .nav-mobile-bottom {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+      background: rgba(12, 18, 32, 0.95); backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border); display: none; padding: 6px 12px;
+      align-items: center; justify-content: space-around;
+    }
+    body.light .nav-mobile-bottom { background: rgba(255, 255, 255, 0.95); }
+    .mob-nav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 10px; font-weight: 800; color: var(--ts); text-decoration: none; cursor: pointer;
+    }
+    .mob-nav-item.active, .mob-nav-item:hover { color: var(--p); }
+    .mob-nav-icon { font-size: 18px; }
+
+    @media (max-width: 768px) {
+      .nav-mobile-bottom { display: flex; }
+      body { padding-bottom: 76px; }
+      .cs-bar { width: 100%; justify-content: space-between; margin-top: 6px; }
+      .cs-input { width: 40%; }
+    }
 
     /* LAYOUT */
     .main-layout {
-      max-width: 1400px; margin: 24px auto; padding: 0 24px 80px;
-      display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start;
+      max-width: 1400px; margin: 20px auto; padding: 0 16px 80px;
+      display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start;
     }
     @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } }
 
     /* SIDEBAR */
     .sidebar {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 22px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 20px;
       position: sticky; top: 80px;
     }
     .sf-title { font-size: 15px; font-weight: 800; color: var(--t); margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
-    .sf-group { margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    .sf-group { margin-bottom: 18px; border-bottom: 1px solid var(--border); padding-bottom: 14px; }
     .sf-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .sf-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--p); margin-bottom: 8px; }
     .sf-select {
       width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--bl); border-radius: 8px;
-      padding: 8px; color: var(--t); font-size: 12px; font-weight: 700; outline: none;
+      padding: 10px; color: var(--t); font-size: 13px; font-weight: 700; outline: none; min-height: 44px;
     }
-    body.light .sf-select { background: rgba(0,0,0,0.03); }
 
     /* RESULTS */
     .results-area { display: flex; flex-direction: column; gap: 16px; }
-    .trend-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 18px 20px;
-    }
+    .trend-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 18px; }
     .mm-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 18px;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--rl); padding: 16px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;
     }
     .mm-item {
-      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 12px; text-align: center;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 10px; text-align: center;
     }
 
-    /* REDBUS ENHANCED BUS CARD */
+    /* BUS CARD */
     .bus-card {
       background: var(--card); border: 1px solid var(--border); border-radius: var(--rl);
-      padding: 22px; transition: var(--tr); display: flex; flex-direction: column; gap: 16px; position: relative;
+      padding: 20px; transition: var(--tr); display: flex; flex-direction: column; gap: 14px;
     }
-    .bus-card:hover { border-color: rgba(249, 115, 22, 0.35); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
-    .bc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-    .bc-op-name { font-size: 18px; font-weight: 900; color: var(--t); display: flex; align-items: center; gap: 8px; }
+    .bc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .bc-op-name { font-size: 17px; font-weight: 900; color: var(--t); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .bc-rating-chip { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 800; }
     .bc-type { font-size: 12px; color: var(--ts); font-weight: 600; margin-top: 2px; }
 
-    .platform-matrix {
-      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px;
-    }
-    .platform-badge {
-      font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-    }
+    .platform-matrix { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .platform-badge { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); }
     .platform-badge.rb { border-color: rgba(216,78,85,0.3); color: #f87171; }
     .platform-badge.ab { border-color: rgba(0,119,182,0.3); color: #38bdf8; }
     .platform-badge.mmt { border-color: rgba(230,57,70,0.3); color: #fb7185; }
 
     .bc-price-box { text-align: right; }
+    @media (max-width: 768px) {
+      .bc-top { flex-direction: column; align-items: stretch; }
+      .bc-price-box { text-align: left; margin-top: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+    }
     .bc-lowest { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 900; color: var(--p); line-height: 1; }
 
     .btn-book {
-      background: var(--p); color: #fff; border: none; border-radius: 8px; padding: 9px 20px;
-      font-size: 13px; font-weight: 800; cursor: pointer; transition: var(--tr);
+      background: var(--p); color: #fff; border: none; border-radius: 8px; padding: 10px 18px;
+      font-size: 13px; font-weight: 800; cursor: pointer; transition: var(--tr); min-height: 44px;
+      display: inline-flex; align-items: center; justify-content: center;
     }
-    .btn-book:hover { background: var(--pd); transform: scale(1.02); }
 
     /* SEAT MAP MODAL */
     .modal-ov {
       position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; padding: 20px;
+      backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; padding: 16px;
     }
     .modal-ov.open { display: flex; }
     .modal-card {
       background: var(--card); border: 1px solid var(--border); border-radius: 24px;
-      padding: 26px; width: 100%; max-width: 560px; position: relative; box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      padding: 22px; width: 100%; max-width: 560px; position: relative; box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+      max-height: 90vh; overflow-y: auto;
     }
     .modal-close {
       position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.06);
-      border: 1px solid var(--bl); color: var(--ts); border-radius: 50%; width: 32px; height: 32px;
+      border: 1px solid var(--bl); color: var(--ts); border-radius: 50%; width: 36px; height: 36px;
       display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
-    .driver-wheel { width: 28px; height: 28px; border: 2px solid var(--ts); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: auto; margin-bottom: 12px; }
+    .driver-wheel { width: 28px; height: 28px; border: 2px solid var(--ts); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: auto; }
   </style>
 </head>
 <body>
@@ -181,7 +199,7 @@
           <input type="text" id="cs-from" class="cs-input" placeholder="From">
           <span style="color:var(--p);font-weight:800">→</span>
           <input type="text" id="cs-to" class="cs-input" placeholder="To">
-          <button onclick="runSearch()" style="background:var(--p);color:#fff;border:none;border-radius:100px;padding:4px 12px;font-size:11px;font-weight:800;cursor:pointer">Search</button>
+          <button onclick="runSearch()" style="background:var(--p);color:#fff;border:none;border-radius:100px;padding:6px 14px;font-size:11px;font-weight:800;cursor:pointer;min-height:36px">Search</button>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
@@ -191,7 +209,7 @@
           <option value="USD">$ USD</option>
           <option value="EUR">€ EUR</option>
         </select>
-        <button onclick="document.body.classList.toggle('light')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);border-radius:8px;width:34px;height:34px;color:var(--t);cursor:pointer">🌙</button>
+        <button onclick="document.body.classList.toggle('light')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);border-radius:8px;width:38px;height:38px;color:var(--t);cursor:pointer">🌙</button>
       </div>
     </div>
   </nav>
@@ -241,9 +259,9 @@
     <!-- RESULTS -->
     <main class="results-area">
       <!-- ROUTE HEADER -->
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:18px 20px;display:flex;align-items:center;justify-content:space-between">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
         <div>
-          <h1 id="route-title" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900">Mumbai → Goa</h1>
+          <h1 id="route-title" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900">Mumbai → Goa</h1>
           <div id="route-sub" style="font-size:12px;color:var(--ts)">Comparing real-time fares across RedBus, AbhiBus & MakeMyTrip</div>
         </div>
         <div style="font-size:13px;font-weight:800;color:var(--green)" id="route-count">10 Buses Found</div>
@@ -294,15 +312,15 @@
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal('modal-seats')">✕</button>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <h3 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900" id="sm-title">💺 Real-Time Seat Map</h3>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900" id="sm-title">💺 Real-Time Seat Map</h3>
         <div class="driver-wheel" title="Driver Cabin">☸️ Driver</div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-        <p style="font-size:12px;color:var(--ts)">Green: Available · Red: Booked · Yellow: Ladies · Orange: Selected</p>
+        <p style="font-size:11px;color:var(--ts)">Green: Available · Red: Booked · Yellow: Ladies · Orange: Selected</p>
         <div id="seat-timer-box" style="font-size:11px;font-weight:900;color:var(--gold);background:rgba(245,158,11,0.15);padding:2px 8px;border-radius:100px;display:none">⏱️ Hold: <span id="timer-val">05:00</span></div>
       </div>
       
-      <div id="seat-map-container" style="display:flex;flex-direction:column;gap:14px;background:rgba(0,0,0,0.25);padding:18px;border-radius:14px;margin-bottom:16px;max-height:340px;overflow-y:auto">
+      <div id="seat-map-container" style="display:flex;flex-direction:column;gap:14px;background:rgba(0,0,0,0.25);padding:16px;border-radius:14px;margin-bottom:16px;max-height:340px;overflow-y:auto">
         <div style="padding:20px;text-align:center;color:var(--ts)">Loading real-time seats...</div>
       </div>
 
@@ -313,6 +331,26 @@
 
       <button id="btn-lock-seats" onclick="lockAndBookSeats()" class="btn-book" style="width:100%;padding:14px;font-size:15px">Lock Seats & Proceed to Booking →</button>
     </div>
+  </div>
+
+  <!-- MOBILE STICKY BOTTOM NAVIGATION BAR -->
+  <div class="nav-mobile-bottom">
+    <a href="/" class="mob-nav-item">
+      <span class="mob-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/search?from=Mumbai&to=Goa" class="mob-nav-item active">
+      <span class="mob-nav-icon">🔍</span>
+      <span>Search</span>
+    </a>
+    <a href="/alerts" class="mob-nav-item">
+      <span class="mob-nav-icon">🔔</span>
+      <span>Alerts</span>
+    </a>
+    <a href="https://wa.me/919999000000?text=Hi%20BusCompare" target="_blank" class="mob-nav-item">
+      <span class="mob-nav-icon">💬</span>
+      <span>Support</span>
+    </a>
   </div>
 
   <script>
@@ -389,8 +427,8 @@
             <div class="bc-price-box">
               <div class="bc-lowest">₹${b.lowestPrice}</div>
               <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:2px">Free Cancellation • ${b.seatsLeft} Seats Left</div>
-              <div style="display:flex;gap:6px;margin-top:8px">
-                <button onclick="openSeatMap('${b.id}')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:8px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer">💺 Real-Time Seat Map</button>
+              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+                <button onclick="openSeatMap('${b.id}')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:8px;padding:10px 14px;font-size:12px;font-weight:800;cursor:pointer;min-height:44px">💺 Real-Time Seat Map</button>
                 <a href="/go/redbus/${b.id}" target="_blank" class="btn-book">Book Now ↗</a>
               </div>
             </div>
@@ -424,7 +462,7 @@
             const bg = s.status === 'booked' ? 'background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;cursor:not-allowed' :
                        s.status === 'female' ? 'background:rgba(245,158,11,0.2);color:#fde047;border:1px solid #f59e0b;cursor:pointer' :
                        'background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;cursor:pointer';
-            html += `<button data-seatnum="${s.no || s.id}" onclick="toggleSeat('${s.no || s.id}','${s.status}',this)" style="padding:10px;border-radius:8px;${bg};font-weight:800">${s.no || s.id} (₹${s.price})</button>`;
+            html += `<button data-seatnum="${s.no || s.id}" onclick="toggleSeat('${s.no || s.id}','${s.status}',this)" style="padding:12px;border-radius:8px;${bg};font-weight:800;min-height:44px">${s.no || s.id} (₹${s.price})</button>`;
           });
           html += `</div>`;
         }
@@ -435,7 +473,7 @@
             SEAT_PRICES[s.no || s.id] = s.price;
             const bg = s.status === 'booked' ? 'background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;cursor:not-allowed' :
                        'background:rgba(16,185,129,0.2);color:#6ee7b7;border:1px solid #10b981;cursor:pointer';
-            html += `<button data-seatnum="${s.no || s.id}" onclick="toggleSeat('${s.no || s.id}','${s.status}',this)" style="padding:10px;border-radius:8px;${bg};font-weight:800">${s.no || s.id} (₹${s.price})</button>`;
+            html += `<button data-seatnum="${s.no || s.id}" onclick="toggleSeat('${s.no || s.id}','${s.status}',this)" style="padding:12px;border-radius:8px;${bg};font-weight:800;min-height:44px">${s.no || s.id} (₹${s.price})</button>`;
           });
           html += `</div>`;
         }
