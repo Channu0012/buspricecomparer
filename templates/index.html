@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>BusCompare India — RedBus, VRL, Zingbus & Top Bus Price Comparer</title>
   <meta name="description" content="Compare bus ticket prices across VRL Travels, Zingbus, IntrCity, RedBus, AbhiBus & MakeMyTrip instantly. Find cheapest Volvo AC Sleeper buses with 2D seat map.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/logo.png">
-  <link rel="shortcut icon" type="image/png" href="/logo.png">
+  <link rel="shortcut icon" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/manifest.json">
   <meta property="og:title" content="BusCompare India — VRL, Zingbus & RedBus Price Comparison">
@@ -311,7 +312,9 @@
     <div class="nav-in">
       <div class="nav-left">
         <a href="/" class="nav-logo">
-          <div class="nav-logo-icon">🚌</div>
+          <div class="nav-logo-icon">
+            <img src="/logo.png" alt="BusCompare" style="width:26px;height:26px;object-fit:contain" onerror="this.style.display='none';this.parentNode.innerHTML='🚌'">
+          </div>
           <div>
             <div class="nav-logo-text">Bus<em>Compare</em></div>
             <span class="nav-logo-sub">INDIA</span>
@@ -347,10 +350,10 @@
   <!-- LIVE DEAL TICKER -->
   <div class="deal-ticker">
     <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item">⚡ <span class="t-route">VRL Travels: Mumbai → Goa</span> from <span class="t-price">₹499</span></span>
-      <span class="ticker-item">⚡ <span class="t-route">Zingbus: Delhi → Jaipur</span> from <span class="t-price">₹299</span></span>
-      <span class="ticker-item">⚡ <span class="t-route">IntrCity SmartBus: Bangalore → Chennai</span> from <span class="t-price">₹350</span></span>
-      <span class="ticker-item">⚡ <span class="t-route">NeuGo Electric EV: Hyderabad → Vijayawada</span> from <span class="t-price">₹450</span></span>
+      <span class="ticker-item" onclick="quickSearch('Mumbai','Goa')" style="cursor:pointer">⚡ <span class="t-route">VRL Travels: Mumbai → Goa</span> from <span class="t-price">₹499</span></span>
+      <span class="ticker-item" onclick="quickSearch('Delhi','Jaipur')" style="cursor:pointer">⚡ <span class="t-route">Zingbus: Delhi → Jaipur</span> from <span class="t-price">₹299</span></span>
+      <span class="ticker-item" onclick="quickSearch('Bangalore','Chennai')" style="cursor:pointer">⚡ <span class="t-route">IntrCity SmartBus: Bangalore → Chennai</span> from <span class="t-price">₹350</span></span>
+      <span class="ticker-item" onclick="quickSearch('Hyderabad','Vijayawada')" style="cursor:pointer">⚡ <span class="t-route">NeuGo Electric EV: Hyderabad → Vijayawada</span> from <span class="t-price">₹450</span></span>
     </div>
   </div>
 
@@ -368,11 +371,11 @@
 
       <!-- BRAND CHIPS -->
       <div class="partner-row">
-        <span class="partner-chip" style="color:var(--vrl);border-color:rgba(225,29,72,0.3)">🔴 VRL Travels</span>
-        <span class="partner-chip" style="color:var(--zingbus);border-color:rgba(0,245,212,0.3)">⚡ Zingbus Premium</span>
-        <span class="partner-chip" style="color:var(--intrcity);border-color:rgba(139,92,246,0.3)">🟣 IntrCity SmartBus</span>
-        <span class="partner-chip" style="color:var(--neugo);border-color:rgba(16,185,129,0.3)">🌱 NeuGo Electric</span>
-        <span class="partner-chip" style="color:var(--gold);border-color:rgba(245,158,11,0.3)">👑 KSRTC / MSRTC</span>
+        <span class="partner-chip" onclick="quickSearch('Mumbai','Goa')" style="color:var(--vrl);border-color:rgba(225,29,72,0.3);cursor:pointer">🔴 VRL Travels</span>
+        <span class="partner-chip" onclick="quickSearch('Delhi','Jaipur')" style="color:var(--zingbus);border-color:rgba(0,245,212,0.3);cursor:pointer">⚡ Zingbus Premium</span>
+        <span class="partner-chip" onclick="quickSearch('Bangalore','Chennai')" style="color:var(--intrcity);border-color:rgba(139,92,246,0.3);cursor:pointer">🟣 IntrCity SmartBus</span>
+        <span class="partner-chip" onclick="quickSearch('Hyderabad','Vijayawada')" style="color:var(--neugo);border-color:rgba(16,185,129,0.3);cursor:pointer">🌱 NeuGo Electric</span>
+        <span class="partner-chip" onclick="quickSearch('Bangalore','Hyderabad')" style="color:var(--gold);border-color:rgba(245,158,11,0.3);cursor:pointer">👑 KSRTC / MSRTC</span>
       </div>
 
       <!-- SEARCH WIDGET -->
@@ -454,6 +457,56 @@
           <div style="font-size:11px;color:var(--green);font-weight:800;margin-top:6px">⭐ 4.8/5 (6,100+ Reviews)</div>
         </div>
         <div style="font-size:13px;font-weight:800;color:var(--p);margin-top:14px">Explore Routes →</div>
+      </div>
+    </div>
+
+    <!-- POPULAR INTERCITY ROUTES GRID -->
+    <div style="margin-top:36px">
+      <div class="sec-head">
+        <h2 class="sec-title">🔥 Popular Intercity Bus Routes</h2>
+        <div style="font-size:12px;color:var(--ts)">Click any route for live fare comparison</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+        <div onclick="quickSearch('Mumbai','Goa')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Mumbai → Goa</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹499</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">VRL, Zingbus, IntrCity • 45+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Delhi','Jaipur')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Delhi → Jaipur</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹299</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">Zingbus, IntrCity, NeuGo • 60+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Bangalore','Chennai')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Bangalore → Chennai</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹350</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">VRL, IntrCity, KSRTC • 80+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Hyderabad','Bangalore')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Hyderabad → Bangalore</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹450</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">Orange, VRL, Jabbar • 50+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Pune','Mumbai')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Pune → Mumbai</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹199</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">MSRTC, Neeta, Purple • 100+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Chennai','Madurai')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Chennai → Madurai</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹399</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">Parveen, SRM, SETC • 40+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Agra','Delhi')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Agra → Delhi</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹249</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">UPSRTC, Zingbus • 35+ Buses</div>
+        </div>
+        <div onclick="quickSearch('Kalaburagi','Hyderabad')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:var(--tr)">
+          <div style="font-weight:800;font-size:14px">Kalaburagi → Hyderabad</div>
+          <div style="font-size:12px;color:var(--green);font-weight:900;margin-top:4px">from ₹299</div>
+          <div style="font-size:11px;color:var(--ts);margin-top:2px">KKRTC, VRL • 25+ Buses</div>
+        </div>
       </div>
     </div>
 
@@ -754,6 +807,12 @@
       const f = document.getElementById('home-from');
       const t = document.getElementById('home-to');
       const tmp = f.value; f.value = t.value; t.value = tmp;
+    }
+
+    function quickSearch(from, to) {
+      document.getElementById('home-from').value = from;
+      document.getElementById('home-to').value = to;
+      executeSearch();
     }
 
     function executeSearch() {

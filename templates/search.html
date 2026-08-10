@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title id="page-title">Bus Search Results — BusCompare India</title>
   <meta name="description" content="Compare bus prices across all major operators for your route. Find cheapest tickets on RedBus, AbhiBus, MakeMyTrip and more.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" href="/logo.png">
-  <link rel="shortcut icon" type="image/png" href="/logo.png">
+  <link rel="shortcut icon" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/logo.png">
   <link rel="manifest" href="/manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
@@ -192,7 +193,9 @@
     <div class="nav-in">
       <div class="nav-left">
         <a href="/" class="nav-logo">
-          <div class="nav-logo-icon">🚌</div>
+          <div class="nav-logo-icon">
+            <img src="/logo.png" alt="BusCompare" style="width:26px;height:26px;object-fit:contain" onerror="this.style.display='none';this.parentNode.innerHTML='🚌'">
+          </div>
           <span>Bus<em>Compare</em></span>
         </a>
         <div class="cs-bar">
