@@ -8770,6 +8770,18 @@
       "active": true,
       "createdAt": "2026-08-10T13:48:30.675Z",
       "triggeredCount": 0
+    },
+    {
+      "id": "alert-7bff9266",
+      "email": "xss_1786369710858@test.com",
+      "whatsapp": "",
+      "routeFrom": "&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": 500,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T13:48:30.863Z",
+      "triggeredCount": 0
     }
   ],
   "telemetry": [
@@ -11032,9 +11044,9 @@
   ],
   "admin": {
     "totalClicks": 13,
-    "totalSearches": 1193,
+    "totalSearches": 1197,
     "totalReviews": 126,
-    "totalAlerts": 152,
+    "totalAlerts": 153,
     "flightClicks": 5,
     "priceLocksCount": 72,
     "vipSubscriptionsCount": 144,
@@ -11042,17 +11054,17 @@
     "flightAffiliateRevenue": 2250,
     "priceLockRevenue": 2808,
     "vipRevenue": 28656,
-    "sponsoredRevenue": 200,
-    "revenueEstimate": 113823,
+    "sponsoredRevenue": 250,
+    "revenueEstimate": 132600,
     "lastReset": "2026-07-27",
     "insurancePoliciesCount": 62,
     "insuranceRevenue": 4026,
-    "premiumAlertRevenue": 116,
-    "hotelCommission": 800,
-    "analyticsRevenue": 3996,
-    "whitelabelRevenue": 39996,
-    "operatorSaasRevenue": 30000,
-    "sponsoredImpressions": 4
+    "premiumAlertRevenue": 145,
+    "hotelCommission": 1000,
+    "analyticsRevenue": 4995,
+    "whitelabelRevenue": 49995,
+    "operatorSaasRevenue": 37500,
+    "sponsoredImpressions": 5
   },
   "coupons": [
     {
@@ -14781,6 +14793,19 @@
       "pricePaid": 29,
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:22.742Z"
+    },
+    {
+      "id": "PA-D8942D86",
+      "phone": "9876500001",
+      "email": "alert@test.com",
+      "routes": [
+        "Mumbai-Goa",
+        "Delhi-Jaipur"
+      ],
+      "plan": "Premium WhatsApp Alerts (₹29/mo)",
+      "pricePaid": 29,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:48:30.873Z"
     }
   ],
   "hotelBookings": [
@@ -14831,6 +14856,18 @@
       "commission": 200,
       "status": "LEAD_SENT",
       "createdAt": "2026-08-10T13:48:22.751Z"
+    },
+    {
+      "id": "HTL-D88FDAD0",
+      "destination": "Goa",
+      "hotelName": "Beach Resort",
+      "phone": "9876500002",
+      "email": "",
+      "checkIn": "2026-08-10",
+      "nights": 1,
+      "commission": 200,
+      "status": "LEAD_SENT",
+      "createdAt": "2026-08-10T13:48:30.880Z"
     }
   ],
   "analyticsReports": [
@@ -14873,6 +14910,16 @@
       "price": 999,
       "status": "GENERATING",
       "createdAt": "2026-08-10T13:48:22.758Z"
+    },
+    {
+      "id": "RPT-74E2A09C",
+      "operatorName": "Test Travels",
+      "email": "operator@test.com",
+      "route": "Mumbai-Goa",
+      "reportType": "demand_pricing",
+      "price": 999,
+      "status": "GENERATING",
+      "createdAt": "2026-08-10T13:48:30.885Z"
     }
   ],
   "whitelabelLicenses": [
@@ -14927,6 +14974,19 @@
       "requestsPerDay": 10000,
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:22.766Z"
+    },
+    {
+      "id": "WL-6CD586F4",
+      "apiKey": "bc_live_27d13579e0484a1fb5872f62e02b1f80",
+      "companyName": "TravelApp Inc",
+      "email": "api@travelapp.com",
+      "phone": "",
+      "useCase": "travel_app",
+      "plan": "White-Label API (₹9,999/mo)",
+      "monthlyFee": 9999,
+      "requestsPerDay": 10000,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:48:30.891Z"
     }
   ],
   "operatorSubscriptions": [
@@ -14997,6 +15057,23 @@
       ],
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:22.772Z"
+    },
+    {
+      "id": "OPSAAS-FAAA8BA0",
+      "operatorName": "VRL Travels",
+      "email": "ops@vrl.com",
+      "phone": "",
+      "plan": "Growth",
+      "monthlyFee": 7500,
+      "maxBuses": 50,
+      "features": [
+        "Featured listing",
+        "Weekly reports",
+        "Priority support",
+        "Dynamic pricing"
+      ],
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:48:30.897Z"
     }
   ]
 }
