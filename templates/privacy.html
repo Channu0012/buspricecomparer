@@ -25,7 +25,12 @@
 <body>
   <nav class="navbar">
     <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between">
-      <a href="/" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--t)">🚌 Bus<em style="color:var(--p);font-style:normal">Compare</em></a>
+      <a href="/" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--t);display:flex;align-items:center;gap:8px">
+        <div style="width:36px;height:36px;border-radius:50%;border:2px solid var(--p);box-shadow:0 0 12px rgba(249,115,22,0.45);overflow:hidden;display:flex;align-items:center;justify-content:center;background:#0c1220;flex-shrink:0">
+          <img src="/logo.png" alt="BusCompare" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none';this.parentNode.innerHTML='🚌'">
+        </div>
+        <span>Bus<em style="color:var(--p);font-style:normal">Compare</em></span>
+      </a>
       <div style="display:flex;gap:14px;align-items:center">
         <a href="/" style="color:var(--ts);font-size:13px;font-weight:700">Home</a>
         <a href="/search?from=Mumbai&to=Goa" style="color:var(--ts);font-size:13px;font-weight:700">Search</a>

@@ -1816,6 +1816,51 @@
           "price": 825
         }
       ]
+    },
+    {
+      "id": "kol-sil",
+      "from": "Kolkata",
+      "fromCode": "KOL",
+      "to": "Siliguri",
+      "toCode": "SIL",
+      "slug": "kolkata-to-siliguri",
+      "distance": 560,
+      "avgDuration": "11h 00m",
+      "minPrice": 750,
+      "maxPrice": 2250,
+      "popularCount": 1000,
+      "description": "Direct Express Route from Kolkata to Siliguri",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 750
+        },
+        {
+          "day": "Tue",
+          "price": 713
+        },
+        {
+          "day": "Wed",
+          "price": 735
+        },
+        {
+          "day": "Thu",
+          "price": 750
+        },
+        {
+          "day": "Fri",
+          "price": 900
+        },
+        {
+          "day": "Sat",
+          "price": 975
+        },
+        {
+          "day": "Sun",
+          "price": 825
+        }
+      ]
     }
   ],
   "buses": [
@@ -1827,7 +1872,7 @@
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
       "rating": 4.5,
-      "reviewCount": 118,
+      "reviewCount": 120,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -5455,6 +5500,35 @@
         "arrivalStop": "Goa Main Station"
       },
       "sponsored": false
+    },
+    {
+      "id": "bus-058",
+      "slug": "test-express-mumbai-to-goa-volvo-ac-sleeper-2-1-",
+      "operator": "Test Express",
+      "operatorCode": "TES",
+      "busType": "Volvo AC Sleeper (2+1)",
+      "rating": 4.5,
+      "reviewCount": 50,
+      "totalSeats": 36,
+      "seatsLeft": 18,
+      "lowestPrice": 650,
+      "prices": {
+        "redbus": 700,
+        "abhibus": 670,
+        "makemytrip": 715,
+        "yatra": 730
+      },
+      "route": {
+        "from": "Mumbai",
+        "to": "Goa",
+        "routeId": "mum-goa",
+        "departureTime": "22:00",
+        "arrivalTime": "08:00",
+        "duration": "10h 00m",
+        "departureStop": "Mumbai Central Bus Terminal",
+        "arrivalStop": "Goa Main Station"
+      },
+      "sponsored": false
     }
   ],
   "reviews": [
@@ -6902,6 +6976,29 @@
     },
     {
       "id": "rev-2cb106f0",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-08-10",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
+    },
+    {
+      "id": "REV-6E4B69DB",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-08-10T13:52:04.848Z"
+    },
+    {
+      "id": "rev-35bf8506",
       "busId": "bus-001",
       "userName": "Tester",
       "userCity": "",
@@ -8782,6 +8879,42 @@
       "active": true,
       "createdAt": "2026-08-10T13:48:30.863Z",
       "triggeredCount": 0
+    },
+    {
+      "id": "alert-17c0b81f",
+      "email": "alert_1786369924783@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T13:52:04.781Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-fce4317f",
+      "email": "dup_1786369924784@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T13:52:04.786Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-e41f6617",
+      "email": "xss_1786369924962@test.com",
+      "whatsapp": "",
+      "routeFrom": "&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": 500,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T13:52:04.965Z",
+      "triggeredCount": 0
     }
   ],
   "telemetry": [
@@ -9741,6 +9874,16 @@
       "phone": "9876543210",
       "email": "",
       "expiresAt": "2026-08-10T19:48:30.686Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-89FB9680",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-10T19:52:04.798Z",
       "status": "ACTIVE"
     }
   ],
@@ -11040,31 +11183,49 @@
       "pricePaid": 299,
       "createdAt": "2026-08-10T13:48:30.698Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-E23034BD",
+      "email": "vip_1786369924809@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-10T13:52:04.808Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-C2FC7684",
+      "email": "vipa_1786369924811@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-10T13:52:04.814Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 13,
-    "totalSearches": 1197,
-    "totalReviews": 126,
-    "totalAlerts": 153,
+    "totalSearches": 1212,
+    "totalReviews": 128,
+    "totalAlerts": 156,
     "flightClicks": 5,
-    "priceLocksCount": 72,
-    "vipSubscriptionsCount": 144,
+    "priceLocksCount": 73,
+    "vipSubscriptionsCount": 146,
     "busAffiliateRevenue": 1040,
     "flightAffiliateRevenue": 2250,
-    "priceLockRevenue": 2808,
-    "vipRevenue": 28656,
-    "sponsoredRevenue": 250,
-    "revenueEstimate": 132600,
+    "priceLockRevenue": 2847,
+    "vipRevenue": 29054,
+    "sponsoredRevenue": 300,
+    "revenueEstimate": 151879,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 62,
-    "insuranceRevenue": 4026,
-    "premiumAlertRevenue": 145,
-    "hotelCommission": 1000,
-    "analyticsRevenue": 4995,
-    "whitelabelRevenue": 49995,
-    "operatorSaasRevenue": 37500,
-    "sponsoredImpressions": 5
+    "insurancePoliciesCount": 63,
+    "insuranceRevenue": 4091,
+    "premiumAlertRevenue": 174,
+    "hotelCommission": 1200,
+    "analyticsRevenue": 5994,
+    "whitelabelRevenue": 59994,
+    "operatorSaasRevenue": 45000,
+    "sponsoredImpressions": 6
   },
   "coupons": [
     {
@@ -11843,6 +12004,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:30.714Z"
+    },
+    {
+      "id": "INS-F3B54DB3",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:52:04.829Z"
     }
   ],
   "loyaltyUsers": [
@@ -12961,6 +13132,24 @@
       "referralCode": "BHARATBUS-0714-X2BI",
       "referralCount": 0,
       "joinedAt": "2026-08-10T13:48:30.726Z"
+    },
+    {
+      "id": "loyalty-33cd7b6d",
+      "phone": "91229461315",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-1315-ZLG7",
+      "referralCount": 0,
+      "joinedAt": "2026-08-10T13:52:04.834Z"
+    },
+    {
+      "id": "loyalty-57379580",
+      "phone": "88470592933",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-2933-5PUV",
+      "referralCount": 0,
+      "joinedAt": "2026-08-10T13:52:04.840Z"
     }
   ],
   "referrals": [],
@@ -13796,6 +13985,19 @@
       "status": "NEW_LEAD",
       "estimatedMRR": 15000,
       "createdAt": "2026-08-10T13:48:30.744Z"
+    },
+    {
+      "id": "CORP-A4C8C40F",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1786369924855@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-08-10T13:52:04.854Z"
     }
   ],
   "operatorLeads": [
@@ -14617,6 +14819,19 @@
       "status": "NEW_LEAD",
       "estimatedPlan": "Enterprise (₹15,000/mo)",
       "createdAt": "2026-08-10T13:48:30.751Z"
+    },
+    {
+      "id": "OPR-3FF18AD3",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1786369924863@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (₹15,000/mo)",
+      "createdAt": "2026-08-10T13:52:04.861Z"
     }
   ],
   "translations": {
@@ -14806,6 +15021,19 @@
       "pricePaid": 29,
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:30.873Z"
+    },
+    {
+      "id": "PA-D6841857",
+      "phone": "9876500001",
+      "email": "alert@test.com",
+      "routes": [
+        "Mumbai-Goa",
+        "Delhi-Jaipur"
+      ],
+      "plan": "Premium WhatsApp Alerts (₹29/mo)",
+      "pricePaid": 29,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:52:04.978Z"
     }
   ],
   "hotelBookings": [
@@ -14868,6 +15096,18 @@
       "commission": 200,
       "status": "LEAD_SENT",
       "createdAt": "2026-08-10T13:48:30.880Z"
+    },
+    {
+      "id": "HTL-A0A3718C",
+      "destination": "Goa",
+      "hotelName": "Beach Resort",
+      "phone": "9876500002",
+      "email": "",
+      "checkIn": "2026-08-10",
+      "nights": 1,
+      "commission": 200,
+      "status": "LEAD_SENT",
+      "createdAt": "2026-08-10T13:52:04.985Z"
     }
   ],
   "analyticsReports": [
@@ -14920,6 +15160,16 @@
       "price": 999,
       "status": "GENERATING",
       "createdAt": "2026-08-10T13:48:30.885Z"
+    },
+    {
+      "id": "RPT-7D7C93A1",
+      "operatorName": "Test Travels",
+      "email": "operator@test.com",
+      "route": "Mumbai-Goa",
+      "reportType": "demand_pricing",
+      "price": 999,
+      "status": "GENERATING",
+      "createdAt": "2026-08-10T13:52:04.992Z"
     }
   ],
   "whitelabelLicenses": [
@@ -14987,6 +15237,19 @@
       "requestsPerDay": 10000,
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:30.891Z"
+    },
+    {
+      "id": "WL-538621E2",
+      "apiKey": "bc_live_a5bf30aa966c4b5c89b5ecb11e256a8c",
+      "companyName": "TravelApp Inc",
+      "email": "api@travelapp.com",
+      "phone": "",
+      "useCase": "travel_app",
+      "plan": "White-Label API (₹9,999/mo)",
+      "monthlyFee": 9999,
+      "requestsPerDay": 10000,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:52:04.998Z"
     }
   ],
   "operatorSubscriptions": [
@@ -15074,6 +15337,23 @@
       ],
       "status": "ACTIVE",
       "createdAt": "2026-08-10T13:48:30.897Z"
+    },
+    {
+      "id": "OPSAAS-D004D188",
+      "operatorName": "VRL Travels",
+      "email": "ops@vrl.com",
+      "phone": "",
+      "plan": "Growth",
+      "monthlyFee": 7500,
+      "maxBuses": 50,
+      "features": [
+        "Featured listing",
+        "Weekly reports",
+        "Priority support",
+        "Dynamic pricing"
+      ],
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T13:52:05.006Z"
     }
   ]
 }
