@@ -811,5 +811,95 @@ test("GET /api/admin/stats with invalid token returns 401", async () => {
   if (r.status !== 401) throw new Error("Expected 401, got " + r.status);
 });
 
+// ─── MONETIZATION ENGINE TESTS ─────────────────────────────────────────────
+
+test("POST /api/premium-alert/subscribe creates a subscription", async () => {
+  const r = await req("POST", "/api/premium-alert/subscribe", {
+    phone: "9876500001",
+    email: "alert@test.com",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.success) throw new Error("Expected success=true");
+  if (!r.body.subscriptionId || !r.body.subscriptionId.startsWith("PA-"))
+    throw new Error("Expected PA- subscription ID, got: " + r.body.subscriptionId);
+});
+
+test("POST /api/premium-alert/subscribe requires phone", async () => {
+  const r = await req("POST", "/api/premium-alert/subscribe", { email: "a@b.com" });
+  if (r.status !== 400) throw new Error("Expected 400, got " + r.status);
+});
+
+test("POST /api/hotel/book creates hotel lead", async () => {
+  const r = await req("POST", "/api/hotel/book", {
+    destination: "Goa",
+    phone: "9876500002",
+    hotelName: "Beach Resort",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.bookingId || !r.body.bookingId.startsWith("HTL-"))
+    throw new Error("Expected HTL- booking ID, got: " + r.body.bookingId);
+});
+
+test("POST /api/analytics/purchase creates report", async () => {
+  const r = await req("POST", "/api/analytics/purchase", {
+    email: "operator@test.com",
+    route: "Mumbai-Goa",
+    operatorName: "Test Travels",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.reportId || !r.body.reportId.startsWith("RPT-"))
+    throw new Error("Expected RPT- report ID, got: " + r.body.reportId);
+});
+
+test("POST /api/whitelabel/subscribe creates API license", async () => {
+  const r = await req("POST", "/api/whitelabel/subscribe", {
+    companyName: "TravelApp Inc",
+    email: "api@travelapp.com",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.apiKey || !r.body.apiKey.startsWith("bc_live_"))
+    throw new Error("Expected bc_live_ API key");
+  if (!r.body.licenseId || !r.body.licenseId.startsWith("WL-"))
+    throw new Error("Expected WL- license ID");
+});
+
+test("POST /api/operator/subscribe creates SaaS subscription (growth)", async () => {
+  const r = await req("POST", "/api/operator/subscribe", {
+    operatorName: "VRL Travels",
+    email: "ops@vrl.com",
+    plan: "growth",
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.subscription || r.body.subscription.plan !== "Growth")
+    throw new Error("Expected Growth plan");
+  if (r.body.subscription.monthlyFee !== 7500)
+    throw new Error("Expected ₹7,500 fee");
+});
+
+test("POST /api/sponsored/track records impression", async () => {
+  const r = await req("POST", "/api/sponsored/track", {
+    busId: "test-bus-1",
+    position: 1,
+  });
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  if (!r.body.tracked) throw new Error("Expected tracked=true");
+});
+
+test("Admin stats include all 12 revenue streams", async () => {
+  const token = await getAdminToken();
+  const r = await adminReq("GET", "/api/admin/stats", null, token);
+  if (r.status !== 200) throw new Error("HTTP " + r.status);
+  const rb = r.body.overview.revenueBreakdown;
+  const requiredKeys = [
+    "busAffiliate", "flightAffiliate", "convenienceFees",
+    "priceLockFees", "vipSubscriptions", "sponsoredAds",
+    "travelInsurance", "premiumAlerts", "hotelCrossSell",
+    "analyticsReports", "whitelabelAPI", "operatorSaaS",
+  ];
+  for (const key of requiredKeys) {
+    if (rb[key] === undefined) throw new Error(`Missing revenue stream: ${key}`);
+  }
+});
+
 run();
 

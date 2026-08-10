@@ -67,13 +67,27 @@ router.get("/stats", requireAdmin, (req, res) => {
   const sponsoredRevenue = db.admin.sponsoredRevenue || 0;
   const insuranceRevenue = db.admin.insuranceRevenue || insuranceCount * 49;
 
+  // New monetization streams
+  const convenienceFeeRevenue = db.admin.convenienceFeeRevenue || 0;
+  const premiumAlertRevenue = db.admin.premiumAlertRevenue || 0;
+  const hotelCommission = db.admin.hotelCommission || 0;
+  const analyticsRevenue = db.admin.analyticsRevenue || 0;
+  const whitelabelRevenue = db.admin.whitelabelRevenue || 0;
+  const operatorSaasRevenue = db.admin.operatorSaasRevenue || 0;
+
   const grandTotalRevenue =
     busAffiliateRevenue +
     flightAffiliateRevenue +
     priceLockRevenue +
     vipRevenue +
     sponsoredRevenue +
-    insuranceRevenue;
+    insuranceRevenue +
+    convenienceFeeRevenue +
+    premiumAlertRevenue +
+    hotelCommission +
+    analyticsRevenue +
+    whitelabelRevenue +
+    operatorSaasRevenue;
   db.admin.revenueEstimate = grandTotalRevenue;
 
   const clicksByPlatform = (db.telemetry || []).reduce((acc, click) => {
@@ -120,14 +134,26 @@ router.get("/stats", requireAdmin, (req, res) => {
       revenueBreakdown: {
         busAffiliate: busAffiliateRevenue,
         flightAffiliate: flightAffiliateRevenue,
+        convenienceFees: convenienceFeeRevenue,
         priceLockFees: priceLockRevenue,
         vipSubscriptions: vipRevenue,
         sponsoredAds: sponsoredRevenue,
         travelInsurance: insuranceRevenue,
+        premiumAlerts: premiumAlertRevenue,
+        hotelCrossSell: hotelCommission,
+        analyticsReports: analyticsRevenue,
+        whitelabelAPI: whitelabelRevenue,
+        operatorSaaS: operatorSaasRevenue,
       },
       revenueEstimate: grandTotalRevenue,
       totalBuses: db.buses.length,
       totalRoutes: db.routes.length,
+      premiumAlertSubs: (db.premiumAlerts || []).length,
+      hotelBookings: (db.hotelBookings || []).length,
+      analyticsReportsSold: (db.analyticsReports || []).length,
+      whitelabelLicenses: (db.whitelabelLicenses || []).length,
+      operatorSaaSActive: (db.operatorSubscriptions || []).length,
+      convenienceFeeCount: db.admin.convenienceFeeCount || 0,
     },
     clicksByPlatform,
     topRoutes,

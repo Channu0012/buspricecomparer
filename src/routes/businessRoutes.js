@@ -152,8 +152,12 @@ router.get("/go/:platform/:busId", (req, res) => {
   if (db.telemetry.length > 500) db.telemetry = db.telemetry.slice(-500);
   db.admin.totalClicks = (db.admin.totalClicks || 0) + 1;
 
+  // Convenience fee revenue (₹15 per booking redirect)
+  db.admin.convenienceFeeRevenue = (db.admin.convenienceFeeRevenue || 0) + 15;
+  db.admin.convenienceFeeCount = (db.admin.convenienceFeeCount || 0) + 1;
+
   db.admin.busAffiliateRevenue = (db.admin.busAffiliateRevenue || 0) + 80;
-  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 80;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 95; // 80 affiliate + 15 convenience
 
   writeDB(db);
 

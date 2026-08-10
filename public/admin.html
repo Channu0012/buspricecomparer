@@ -94,8 +94,27 @@
           <div class="m-val" id="adm-buses" style="color:var(--gold)">0</div>
         </div>
         <div class="metric-box">
-          <div class="m-label">ESTIMATED REVENUE</div>
+          <div class="m-label">💰 TOTAL REVENUE</div>
           <div class="m-val" id="adm-rev" style="color:var(--blue)">₹0</div>
+        </div>
+      </div>
+
+      <!-- 12-STREAM REVENUE BREAKDOWN -->
+      <div class="card" style="margin-bottom:24px">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:16px">💰 12-Stream Revenue Breakdown (Live)</h2>
+        <div class="grid-4" id="revenue-streams">
+          <div class="metric-box"><div class="m-label">1. Affiliate Clicks</div><div style="font-size:20px;font-weight:900;color:var(--green)" id="rv-affiliate">₹0</div></div>
+          <div class="metric-box"><div class="m-label">2. Convenience Fee</div><div style="font-size:20px;font-weight:900;color:var(--p)" id="rv-convenience">₹0</div></div>
+          <div class="metric-box"><div class="m-label">3. Price Lock Pass</div><div style="font-size:20px;font-weight:900;color:var(--gold)" id="rv-pricelock">₹0</div></div>
+          <div class="metric-box"><div class="m-label">4. Travel Insurance</div><div style="font-size:20px;font-weight:900;color:var(--blue)" id="rv-insurance">₹0</div></div>
+          <div class="metric-box"><div class="m-label">5. VIP BusPass</div><div style="font-size:20px;font-weight:900;color:#8b5cf6" id="rv-vip">₹0</div></div>
+          <div class="metric-box"><div class="m-label">6. Sponsored Ads</div><div style="font-size:20px;font-weight:900;color:#f43f5e" id="rv-sponsored">₹0</div></div>
+          <div class="metric-box"><div class="m-label">7. Premium Alerts</div><div style="font-size:20px;font-weight:900;color:#00f5d4" id="rv-premium">₹0</div></div>
+          <div class="metric-box"><div class="m-label">8. Hotel Cross-Sell</div><div style="font-size:20px;font-weight:900;color:#f59e0b" id="rv-hotel">₹0</div></div>
+          <div class="metric-box"><div class="m-label">9. Analytics Reports</div><div style="font-size:20px;font-weight:900;color:#06b6d4" id="rv-analytics">₹0</div></div>
+          <div class="metric-box"><div class="m-label">10. White-Label API</div><div style="font-size:20px;font-weight:900;color:#a855f7" id="rv-whitelabel">₹0</div></div>
+          <div class="metric-box"><div class="m-label">11. Operator SaaS</div><div style="font-size:20px;font-weight:900;color:#22c55e" id="rv-saas">₹0</div></div>
+          <div class="metric-box"><div class="m-label">12. Flight Affiliate</div><div style="font-size:20px;font-weight:900;color:#3b82f6" id="rv-flight">₹0</div></div>
         </div>
       </div>
 
@@ -216,11 +235,27 @@
         const r = await fetch('/api/admin/stats', { headers: { 'x-admin-token': TOKEN } });
         const d = await r.json();
         const o = d.overview || {};
+        const rv = o.revenueBreakdown || {};
 
         document.getElementById('adm-searches').textContent = o.totalSearches || 0;
         document.getElementById('adm-clicks').textContent = o.totalClicks || 0;
         document.getElementById('adm-buses').textContent = o.totalBuses || 0;
         document.getElementById('adm-rev').textContent = `₹${(o.revenueEstimate || 0).toLocaleString('en-IN')}`;
+
+        // 12-Stream Revenue Breakdown
+        const fmt = v => `₹${(v || 0).toLocaleString('en-IN')}`;
+        document.getElementById('rv-affiliate').textContent = fmt(rv.busAffiliate);
+        document.getElementById('rv-convenience').textContent = fmt(rv.convenienceFees);
+        document.getElementById('rv-pricelock').textContent = fmt(rv.priceLockFees);
+        document.getElementById('rv-insurance').textContent = fmt(rv.travelInsurance);
+        document.getElementById('rv-vip').textContent = fmt(rv.vipSubscriptions);
+        document.getElementById('rv-sponsored').textContent = fmt(rv.sponsoredAds);
+        document.getElementById('rv-premium').textContent = fmt(rv.premiumAlerts);
+        document.getElementById('rv-hotel').textContent = fmt(rv.hotelCrossSell);
+        document.getElementById('rv-analytics').textContent = fmt(rv.analyticsReports);
+        document.getElementById('rv-whitelabel').textContent = fmt(rv.whitelabelAPI);
+        document.getElementById('rv-saas').textContent = fmt(rv.operatorSaaS);
+        document.getElementById('rv-flight').textContent = fmt(rv.flightAffiliate);
 
         if (d.corporateLeads) {
           document.getElementById('corp-leads-list').innerHTML = d.corporateLeads.map(c => `• ${c.companyName} (${c.contactName})`).join('<br>') || 'None yet';

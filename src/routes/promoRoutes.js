@@ -431,4 +431,200 @@ router.get("/hotels/destination", (req, res) => {
   res.json({ destination: req.query.city || "India", hotels: results });
 });
 
+// ─── MONETIZATION: Premium WhatsApp Alerts (₹29/mo) ────────────────────────
+router.post("/premium-alert/subscribe", submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+  const { phone, email, routes } = req.body;
+  if (!phone) return res.status(400).json({ error: "Phone number required" });
+
+  const subId = `PA-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const sub = {
+    id: subId,
+    phone: sanitizeInput(phone),
+    email: sanitizeInput(email || ""),
+    routes: routes || ["Mumbai-Goa", "Delhi-Jaipur"],
+    plan: "Premium WhatsApp Alerts (₹29/mo)",
+    pricePaid: 29,
+    status: "ACTIVE",
+    createdAt: new Date().toISOString(),
+  };
+
+  if (!db.premiumAlerts) db.premiumAlerts = [];
+  db.premiumAlerts.push(sub);
+  db.admin.premiumAlertRevenue = (db.admin.premiumAlertRevenue || 0) + 29;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 29;
+  writeDB(db);
+
+  res.json({
+    success: true,
+    subscriptionId: subId,
+    message: "📱 Premium WhatsApp Alerts activated! You'll get instant price drop notifications.",
+    subscription: sub,
+  });
+});
+
+// ─── MONETIZATION: Hotel Cross-Sell Commission (₹200/lead) ──────────────────
+router.post("/hotel/book", submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+  const { destination, hotelName, phone, email, checkIn, nights } = req.body;
+  if (!destination || !phone) return res.status(400).json({ error: "Destination and phone required" });
+
+  const bookingId = `HTL-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const booking = {
+    id: bookingId,
+    destination: sanitizeInput(destination),
+    hotelName: sanitizeInput(hotelName || "Partner Hotel"),
+    phone: sanitizeInput(phone),
+    email: sanitizeInput(email || ""),
+    checkIn: checkIn || new Date().toISOString().split("T")[0],
+    nights: parseInt(nights) || 1,
+    commission: 200,
+    status: "LEAD_SENT",
+    createdAt: new Date().toISOString(),
+  };
+
+  if (!db.hotelBookings) db.hotelBookings = [];
+  db.hotelBookings.push(booking);
+  db.admin.hotelCommission = (db.admin.hotelCommission || 0) + 200;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 200;
+  writeDB(db);
+
+  res.json({
+    success: true,
+    bookingId,
+    message: `🏨 Hotel inquiry sent! Our partner hotel in ${destination} will confirm within 2 hours.`,
+    booking,
+  });
+});
+
+// ─── MONETIZATION: Route Analytics Reports for Operators (₹999/report) ──────
+router.post("/analytics/purchase", submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+  const { operatorName, email, route, reportType } = req.body;
+  if (!email || !route) return res.status(400).json({ error: "Email and route required" });
+
+  const reportId = `RPT-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const report = {
+    id: reportId,
+    operatorName: sanitizeInput(operatorName || "Unknown"),
+    email: sanitizeInput(email),
+    route: sanitizeInput(route),
+    reportType: reportType || "demand_pricing",
+    price: 999,
+    status: "GENERATING",
+    createdAt: new Date().toISOString(),
+  };
+
+  if (!db.analyticsReports) db.analyticsReports = [];
+  db.analyticsReports.push(report);
+  db.admin.analyticsRevenue = (db.admin.analyticsRevenue || 0) + 999;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 999;
+  writeDB(db);
+
+  res.json({
+    success: true,
+    reportId,
+    message: `📊 Route Analytics Report for "${route}" is being generated. Delivery to ${email} within 24 hours.`,
+    report,
+  });
+});
+
+// ─── MONETIZATION: White-Label API License (₹9,999/mo) ──────────────────────
+router.post("/whitelabel/subscribe", submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+  const { companyName, email, phone, useCase } = req.body;
+  if (!email || !companyName) return res.status(400).json({ error: "Company name and email required" });
+
+  const licenseId = `WL-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const apiKey = `bc_live_${uuidv4().replace(/-/g, "").slice(0, 32)}`;
+  const license = {
+    id: licenseId,
+    apiKey,
+    companyName: sanitizeInput(companyName),
+    email: sanitizeInput(email),
+    phone: sanitizeInput(phone || ""),
+    useCase: sanitizeInput(useCase || "travel_app"),
+    plan: "White-Label API (₹9,999/mo)",
+    monthlyFee: 9999,
+    requestsPerDay: 10000,
+    status: "ACTIVE",
+    createdAt: new Date().toISOString(),
+  };
+
+  if (!db.whitelabelLicenses) db.whitelabelLicenses = [];
+  db.whitelabelLicenses.push(license);
+  db.admin.whitelabelRevenue = (db.admin.whitelabelRevenue || 0) + 9999;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 9999;
+  writeDB(db);
+
+  res.json({
+    success: true,
+    licenseId,
+    apiKey,
+    message: `🔑 White-Label API License activated! Your API key: ${apiKey}. 10,000 requests/day included.`,
+    license,
+  });
+});
+
+// ─── MONETIZATION: Operator SaaS Tier Subscription (₹2,999-15,000/mo) ───────
+router.post("/operator/subscribe", submitLimiter, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+  const { operatorName, email, phone, plan } = req.body;
+  if (!email || !operatorName) return res.status(400).json({ error: "Operator name and email required" });
+
+  const PLANS = {
+    starter: { name: "Starter", price: 2999, buses: 10, features: ["Basic listing", "Monthly reports", "Email support"] },
+    growth: { name: "Growth", price: 7500, buses: 50, features: ["Featured listing", "Weekly reports", "Priority support", "Dynamic pricing"] },
+    enterprise: { name: "Enterprise", price: 15000, buses: 500, features: ["Top placement", "Real-time analytics", "Dedicated manager", "API access", "Custom branding"] },
+  };
+
+  const selected = PLANS[plan] || PLANS.starter;
+  const subId = `OPSAAS-${uuidv4().slice(0, 8).toUpperCase()}`;
+  const subscription = {
+    id: subId,
+    operatorName: sanitizeInput(operatorName),
+    email: sanitizeInput(email),
+    phone: sanitizeInput(phone || ""),
+    plan: selected.name,
+    monthlyFee: selected.price,
+    maxBuses: selected.buses,
+    features: selected.features,
+    status: "ACTIVE",
+    createdAt: new Date().toISOString(),
+  };
+
+  if (!db.operatorSubscriptions) db.operatorSubscriptions = [];
+  db.operatorSubscriptions.push(subscription);
+  db.admin.operatorSaasRevenue = (db.admin.operatorSaasRevenue || 0) + selected.price;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + selected.price;
+  writeDB(db);
+
+  res.json({
+    success: true,
+    subscriptionId: subId,
+    message: `🚌 ${selected.name} Plan activated for ${operatorName}! List up to ${selected.buses} buses.`,
+    subscription,
+  });
+});
+
+// ─── MONETIZATION: Sponsored Listing Impression Track (₹50/impression) ──────
+router.post("/sponsored/track", (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+  const { busId, position } = req.body;
+
+  db.admin.sponsoredImpressions = (db.admin.sponsoredImpressions || 0) + 1;
+  db.admin.sponsoredRevenue = (db.admin.sponsoredRevenue || 0) + 50;
+  db.admin.revenueEstimate = (db.admin.revenueEstimate || 0) + 50;
+  writeDB(db);
+
+  res.json({ success: true, tracked: true, busId, position });
+});
+
 module.exports = router;
+

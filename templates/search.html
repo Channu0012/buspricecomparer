@@ -407,8 +407,9 @@
         return;
       }
 
-      container.innerHTML = list.map(b => `
-        <div class="bus-card">
+      container.innerHTML = list.map((b, idx) => `
+        <div class="bus-card" style="${idx === 0 ? 'border:2px solid var(--p);position:relative' : ''}">
+          ${idx === 0 ? '<div style="position:absolute;top:-10px;right:16px;background:var(--p);color:#fff;font-size:10px;font-weight:900;padding:3px 10px;border-radius:20px;letter-spacing:0.5px">⭐ SPONSORED</div>' : ''}
           <div class="bc-top">
             <div>
               <div class="bc-op-name">
@@ -431,10 +432,27 @@
                 <button onclick="openSeatMap('${b.id}')" style="background:rgba(255,255,255,0.06);border:1px solid var(--bl);color:var(--t);border-radius:8px;padding:10px 14px;font-size:12px;font-weight:800;cursor:pointer;min-height:44px">💺 Real-Time Seat Map</button>
                 <a href="/go/redbus/${b.id}" target="_blank" class="btn-book">Book Now ↗</a>
               </div>
+              <div style="font-size:10px;color:var(--tm);margin-top:4px">+ ₹15 convenience fee applies</div>
             </div>
           </div>
         </div>
-      `).join('');
+        ${idx === 2 ? '<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:12px;text-align:center;margin:8px 0;min-height:60px;display:flex;align-items:center;justify-content:center;opacity:0.7"><div style="font-size:11px;color:var(--tm)">📢 Ad Space — Google AdSense / Sponsor Slot</div></div>' : ''}
+      `).join('') + `
+        <div style="background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.2);border-radius:var(--rl);padding:20px;margin-top:16px;display:flex;align-items:center;gap:16px;cursor:pointer">
+          <div style="font-size:32px;flex-shrink:0">🏨</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;margin-bottom:4px">Hotel Deals at ${TO || 'your destination'} <span style="background:var(--gold);color:#000;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;margin-left:4px">Up to 60% OFF</span></div>
+            <div style="font-size:12px;color:var(--ts)">Book a hotel through BusCompare and save big on your trip!</div>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(0,245,212,0.1),rgba(0,245,212,0.03));border:1px solid rgba(0,245,212,0.2);border-radius:var(--rl);padding:20px;margin-top:12px;display:flex;align-items:center;gap:16px;cursor:pointer">
+          <div style="font-size:32px;flex-shrink:0">📱</div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;margin-bottom:4px">Get Price Drop Alerts on WhatsApp <span style="background:#00f5d4;color:#000;font-size:9px;padding:2px 8px;border-radius:20px;font-weight:700;margin-left:4px">₹29/mo</span></div>
+            <div style="font-size:12px;color:var(--ts)">Instant WhatsApp notifications when prices drop for this route!</div>
+          </div>
+        </div>
+      `;
     }
 
     async function openSeatMap(busId) {

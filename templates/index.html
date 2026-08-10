@@ -554,6 +554,106 @@
     </div>
   </div>
 
+  <!-- PREMIUM WHATSAPP ALERTS MODAL -->
+  <div class="modal-ov" id="modal-premium-alerts">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-premium-alerts')">✕</button>
+      <div style="font-size:32px;margin-bottom:8px">📱</div>
+      <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px">Premium WhatsApp Alerts</h3>
+      <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Get instant WhatsApp price drop notifications for your favorite routes. Never miss a deal again!</p>
+      <div style="background:rgba(0,245,212,0.1);border:1px solid rgba(0,245,212,0.25);border-radius:14px;padding:16px;margin-bottom:16px;text-align:center">
+        <div style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;color:#00f5d4">₹29<span style="font-size:14px;color:var(--ts)">/month</span></div>
+        <div style="font-size:12px;color:var(--ts);margin-top:4px">Unlimited routes • Instant alerts • Cancel anytime</div>
+      </div>
+      <input class="sw-input" id="pa-phone" placeholder="WhatsApp Number *" style="margin-bottom:12px" />
+      <input class="sw-input" id="pa-email" placeholder="Email Address" style="margin-bottom:12px" />
+      <button onclick="subscribePremiumAlert()" class="btn-search-big" style="background:#00f5d4;color:#000">Activate WhatsApp Alerts →</button>
+      <div id="pa-res" style="margin-top:12px;font-size:13px;font-weight:700;color:var(--green);display:none"></div>
+    </div>
+  </div>
+
+  <!-- HOTEL CROSS-SELL MODAL -->
+  <div class="modal-ov" id="modal-hotel">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal('modal-hotel')">✕</button>
+      <div style="font-size:32px;margin-bottom:8px">🏨</div>
+      <h3 style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;margin-bottom:6px">Hotel Deals at Your Destination</h3>
+      <p style="font-size:13px;color:var(--ts);margin-bottom:16px">Save up to 60% on partner hotels when you book through BusCompare!</p>
+      <input class="sw-input" id="htl-dest" placeholder="Destination City *" style="margin-bottom:12px" />
+      <input class="sw-input" id="htl-phone" placeholder="WhatsApp Number *" style="margin-bottom:12px" />
+      <button onclick="bookHotel()" class="btn-search-big" style="background:var(--gold)">Get Hotel Deals →</button>
+      <div id="htl-res" style="margin-top:12px;font-size:13px;font-weight:700;color:var(--green);display:none"></div>
+    </div>
+  </div>
+
+  <!-- OPERATOR SaaS PRICING + ANALYTICS + WHITE-LABEL SECTION -->
+  <section style="max-width:900px;margin:40px auto;padding:0 16px">
+    <!-- Google AdSense Ready Banner Slot -->
+    <div id="adsense-banner-home" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center;margin-bottom:24px;min-height:90px;display:flex;align-items:center;justify-content:center;opacity:0.7">
+      <div style="font-size:11px;color:var(--tm)">📢 Ad Space — Partner with BusCompare India<br><span style="font-size:10px;opacity:0.6">Google AdSense / Direct Sponsorship Slot</span></div>
+    </div>
+
+    <!-- Premium WhatsApp Alerts CTA Card -->
+    <div style="background:linear-gradient(135deg,rgba(0,245,212,0.12),rgba(0,245,212,0.03));border:1px solid rgba(0,245,212,0.25);border-radius:var(--rl);padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:20px;cursor:pointer" onclick="openModal('modal-premium-alerts')">
+      <div style="font-size:40px;flex-shrink:0">📱</div>
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin-bottom:4px">Premium WhatsApp Alerts <span style="background:#00f5d4;color:#000;font-size:10px;padding:3px 8px;border-radius:20px;font-weight:700;margin-left:6px">₹29/mo</span></div>
+        <div style="font-size:13px;color:var(--ts)">Instant price drop alerts on WhatsApp. Never miss the cheapest fare again! 🔥</div>
+      </div>
+    </div>
+
+    <!-- Hotel Deals Cross-Sell Card -->
+    <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.03));border:1px solid rgba(245,158,11,0.25);border-radius:var(--rl);padding:24px;margin-bottom:24px;display:flex;align-items:center;gap:20px;cursor:pointer" onclick="openModal('modal-hotel')">
+      <div style="font-size:40px;flex-shrink:0">🏨</div>
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin-bottom:4px">Hotel Deals at Destination <span style="background:var(--gold);color:#000;font-size:10px;padding:3px 8px;border-radius:20px;font-weight:700;margin-left:6px">Up to 60% OFF</span></div>
+        <div style="font-size:13px;color:var(--ts)">Book partner hotels at your bus destination and save big. Commission-free for you!</div>
+      </div>
+    </div>
+
+    <!-- Operator SaaS Pricing Cards -->
+    <h2 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;text-align:center;margin-bottom:20px">🚌 For Bus Operators — Fleet Management SaaS</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:24px">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:24px;text-align:center">
+        <div style="font-size:11px;color:var(--ts);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Starter</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:32px;font-weight:900;color:var(--p)">₹2,999<span style="font-size:14px;color:var(--ts)">/mo</span></div>
+        <div style="font-size:12px;color:var(--ts);margin:12px 0;line-height:1.8">✓ Up to 10 buses<br>✓ Basic listing<br>✓ Monthly reports<br>✓ Email support</div>
+        <button onclick="openModal('modal-operators')" class="btn-search-big" style="background:var(--p);font-size:13px;padding:10px 20px">Get Started →</button>
+      </div>
+      <div style="background:linear-gradient(135deg,var(--card),rgba(139,92,246,0.12));border:2px solid rgba(139,92,246,0.4);border-radius:var(--rl);padding:24px;text-align:center;position:relative">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#8b5cf6;color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px">MOST POPULAR</div>
+        <div style="font-size:11px;color:var(--ts);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Growth</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:32px;font-weight:900;color:#8b5cf6">₹7,500<span style="font-size:14px;color:var(--ts)">/mo</span></div>
+        <div style="font-size:12px;color:var(--ts);margin:12px 0;line-height:1.8">✓ Up to 50 buses<br>✓ Featured listing badge<br>✓ Weekly analytics reports<br>✓ Priority support + Dynamic pricing</div>
+        <button onclick="openModal('modal-operators')" class="btn-search-big" style="background:#8b5cf6;font-size:13px;padding:10px 20px">Go Growth →</button>
+      </div>
+      <div style="background:linear-gradient(135deg,var(--card),rgba(16,185,129,0.12));border:1px solid rgba(16,185,129,0.3);border-radius:var(--rl);padding:24px;text-align:center">
+        <div style="font-size:11px;color:var(--ts);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Enterprise</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:32px;font-weight:900;color:var(--green)">₹15,000<span style="font-size:14px;color:var(--ts)">/mo</span></div>
+        <div style="font-size:12px;color:var(--ts);margin:12px 0;line-height:1.8">✓ Up to 500 buses<br>✓ Top search placement<br>✓ Real-time analytics + API<br>✓ Dedicated account manager</div>
+        <button onclick="openModal('modal-operators')" class="btn-search-big" style="background:var(--green);font-size:13px;padding:10px 20px">Go Enterprise →</button>
+      </div>
+    </div>
+
+    <!-- White-Label API + Route Analytics -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+      <div style="background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(168,85,247,0.03));border:1px solid rgba(168,85,247,0.25);border-radius:var(--rl);padding:20px">
+        <div style="font-size:28px;margin-bottom:8px">🔑</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;margin-bottom:4px">White-Label API</div>
+        <div style="font-size:12px;color:var(--ts);margin-bottom:12px">Integrate our bus comparison engine into your travel app. 10K requests/day.</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#a855f7;margin-bottom:12px">₹9,999<span style="font-size:12px;color:var(--ts)">/mo</span></div>
+        <button onclick="openModal('modal-operators')" class="btn-search-big" style="background:#a855f7;font-size:12px;padding:8px 16px;width:100%">Get API Key →</button>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(6,182,212,0.12),rgba(6,182,212,0.03));border:1px solid rgba(6,182,212,0.25);border-radius:var(--rl);padding:20px">
+        <div style="font-size:28px;margin-bottom:8px">📊</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;margin-bottom:4px">Route Analytics Reports</div>
+        <div style="font-size:12px;color:var(--ts);margin-bottom:12px">Get demand & pricing data reports for any bus route in India.</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;color:#06b6d4;margin-bottom:12px">₹999<span style="font-size:12px;color:var(--ts)">/report</span></div>
+        <button onclick="openModal('modal-operators')" class="btn-search-big" style="background:#06b6d4;font-size:12px;padding:8px 16px;width:100%">Order Report →</button>
+      </div>
+    </div>
+  </section>
+
   <!-- MOBILE STICKY BOTTOM NAVIGATION BAR -->
   <div class="nav-mobile-bottom">
     <a href="/" class="mob-nav-item active">
@@ -767,6 +867,35 @@
         if (r.ok) { res.textContent = `👑 VIP Activated! ID: ${d.vipId}`; if (window.confetti) window.confetti(); }
         else { res.textContent = '👑 VIP Pass Active!'; }
       } catch(e) { res.textContent = '👑 VIP Pass Active!'; }
+    }
+    async function subscribePremiumAlert() {
+      const phone = document.getElementById('pa-phone').value;
+      const email = document.getElementById('pa-email').value;
+      const res = document.getElementById('pa-res'); res.style.display = 'block';
+      if (!phone) { res.style.color = 'var(--red)'; res.textContent = 'Please enter your WhatsApp number'; return; }
+      try {
+        const r = await fetch('/api/premium-alert/subscribe', {
+          method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ phone, email })
+        });
+        const d = await r.json();
+        if (r.ok) { res.style.color = 'var(--green)'; res.textContent = `📱 Activated! Sub ID: ${d.subscriptionId}`; if (window.confetti) window.confetti(); }
+        else { res.style.color = 'var(--red)'; res.textContent = d.error || 'Failed'; }
+      } catch(e) { res.style.color = 'var(--red)'; res.textContent = 'Network error'; }
+    }
+
+    async function bookHotel() {
+      const dest = document.getElementById('htl-dest').value;
+      const phone = document.getElementById('htl-phone').value;
+      const res = document.getElementById('htl-res'); res.style.display = 'block';
+      if (!dest || !phone) { res.style.color = 'var(--red)'; res.textContent = 'Please enter destination and phone'; return; }
+      try {
+        const r = await fetch('/api/hotel/book', {
+          method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ destination: dest, phone })
+        });
+        const d = await r.json();
+        if (r.ok) { res.style.color = 'var(--green)'; res.textContent = `🏨 ${d.message}`; if (window.confetti) window.confetti(); }
+        else { res.style.color = 'var(--red)'; res.textContent = d.error || 'Failed'; }
+      } catch(e) { res.style.color = 'var(--red)'; res.textContent = 'Network error'; }
     }
   </script>
 </body>
