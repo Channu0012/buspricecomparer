@@ -203,7 +203,10 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:10px">
+        <a href="/" style="color:var(--ts);font-size:12px;font-weight:700">Home</a>
         <a href="/alerts" style="color:var(--p);font-size:12px;font-weight:800;background:var(--pg);border:1px solid rgba(249,115,22,0.3);padding:6px 14px;border-radius:100px">🔔 Price Alert</a>
+        <a href="/corporate" style="color:var(--ts);font-size:12px;font-weight:700">Corporate</a>
+        <a href="/operators" style="color:var(--ts);font-size:12px;font-weight:700">Operators</a>
         <select class="top-select" id="curr-sel" onchange="localStorage.setItem('bc_curr', this.value)">
           <option value="INR">₹ INR</option>
           <option value="USD">$ USD</option>
@@ -587,5 +590,28 @@
     function openModal(id) { document.getElementById(id).classList.add('open'); }
     function closeModal(id) { document.getElementById(id).classList.remove('open'); }
   </script>
+  <!-- MOBILE STICKY BOTTOM NAVIGATION BAR -->
+  <div class="nav-mobile-bottom">
+    <a href="/" class="mob-nav-item">
+      <span class="mob-nav-icon">🏠</span>
+      <span>Home</span>
+    </a>
+    <a href="/search?from=Mumbai&to=Goa" class="mob-nav-item active">
+      <span class="mob-nav-icon">🔍</span>
+      <span>Search</span>
+    </a>
+    <a href="/alerts" class="mob-nav-item">
+      <span class="mob-nav-icon">🔔</span>
+      <span>Alerts</span>
+    </a>
+    <a href="/corporate" class="mob-nav-item">
+      <span class="mob-nav-icon">💼</span>
+      <span>Corporate</span>
+    </a>
+    <a href="https://wa.me/919999000000?text=Hi%20BusCompare" target="_blank" class="mob-nav-item">
+      <span class="mob-nav-icon">💬</span>
+      <span>Support</span>
+    </a>
+  </div>
 </body>
 </html>

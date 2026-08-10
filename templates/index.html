@@ -323,6 +323,8 @@
           <li><a href="/" class="nav-link active">Home</a></li>
           <li><a href="/search?from=Mumbai&to=Goa" class="nav-link">Search</a></li>
           <li><a href="/alerts" class="nav-link">Alerts 🔔</a></li>
+          <li><a href="/corporate" onclick="openModal('modal-corporate'); return false;" class="nav-link">Corporate 💼</a></li>
+          <li><a href="/operators" onclick="openModal('modal-operators'); return false;" class="nav-link">Operators 🚌</a></li>
         </ul>
         <button class="btn-coins" onclick="openModal('modal-coins')">🪙 150 BusCoins</button>
         <button class="btn-vip" onclick="openModal('modal-vip')">👑 VIP Pass</button>
@@ -697,8 +699,8 @@
         <div>
           <div class="ft-title">Partners & SaaS</div>
           <ul class="ft-links">
-            <li><a onclick="openModal('modal-corporate')">Corporate Booking</a></li>
-            <li><a onclick="openModal('modal-operators')">Operator Fleet SaaS</a></li>
+            <li><a href="/corporate" onclick="openModal('modal-corporate'); return false;">Corporate Booking</a></li>
+            <li><a href="/operators" onclick="openModal('modal-operators'); return false;">Operator Fleet SaaS</a></li>
           </ul>
         </div>
         <div>
@@ -722,6 +724,8 @@
       setHomeDate(0);
       initAutocomplete();
       initTheme();
+      if (location.pathname === '/corporate') openModal('modal-corporate');
+      else if (location.pathname === '/operators') openModal('modal-operators');
     });
 
     function initTheme() {
