@@ -578,6 +578,45 @@ test("GET /api/admin/leads/export JSON format", async () => {
   if (r.body.totalLeads === undefined) throw new Error("No totalLeads field");
 });
 
+test("POST /api/admin/buses/add creates new bus in database", async () => {
+  const token = await getAdminToken();
+  const r = await adminReq(
+    "POST",
+    "/api/admin/buses/add",
+    {
+      operator: "Test Express",
+      busType: "Volvo AC Sleeper (2+1)",
+      from: "Mumbai",
+      to: "Goa",
+      departureTime: "22:00",
+      arrivalTime: "08:00",
+      lowestPrice: "650",
+      seatsLeft: "18",
+    },
+    token,
+  );
+  if (r.status !== 201) throw new Error("HTTP " + r.status);
+  if (!r.body.bus || !r.body.bus.id) throw new Error("No bus returned");
+});
+
+test("POST /api/admin/routes/add creates new intercity route", async () => {
+  const token = await getAdminToken();
+  const r = await adminReq(
+    "POST",
+    "/api/admin/routes/add",
+    {
+      from: "Kolkata",
+      to: "Siliguri",
+      distance: "560",
+      avgDuration: "11h 00m",
+      minPrice: "750",
+    },
+    token,
+  );
+  if (r.status !== 201) throw new Error("HTTP " + r.status);
+  if (!r.body.route || !r.body.route.id) throw new Error("No route returned");
+});
+
 test("GET /api/translations/hi returns Hindi translations", async () => {
   const r = await req("GET", "/api/translations/hi");
   if (r.status !== 200) throw new Error("HTTP " + r.status);

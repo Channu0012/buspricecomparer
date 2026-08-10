@@ -206,4 +206,136 @@ router.post("/toggle-sponsor", requireAdmin, (req, res) => {
   res.json({ success: true, busId, sponsored: bus.sponsored });
 });
 
+// POST /api/admin/buses/add - Real-Time Bus Data Entry
+router.post("/buses/add", requireAdmin, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+
+  const { operator, busType, from, to, departureTime, arrivalTime, lowestPrice, seatsLeft, rating } = req.body;
+  if (!operator || !from || !to || !lowestPrice) {
+    return res.status(400).json({ error: "Operator, From, To, and Lowest Price are required" });
+  }
+
+  const busId = "bus-" + String(db.buses.length + 1).padStart(3, "0");
+  const slug = `${operator.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${from.toLowerCase()}-to-${to.toLowerCase()}-${busType ? busType.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "ac-sleeper"}`;
+
+  const priceNum = parseInt(lowestPrice, 10) || 499;
+
+  const newBus = {
+    id: busId,
+    slug,
+    operator: operator.trim(),
+    operatorCode: operator.substring(0, 3).toUpperCase(),
+    busType: busType || "Volvo AC Sleeper (2+1)",
+    rating: parseFloat(rating) || 4.5,
+    reviewCount: 50,
+    totalSeats: 36,
+    seatsLeft: parseInt(seatsLeft, 10) || 12,
+    lowestPrice: priceNum,
+    prices: {
+      redbus: priceNum + 50,
+      abhibus: priceNum + 20,
+      makemytrip: priceNum + 65,
+      yatra: priceNum + 80,
+    },
+    route: {
+      from: from.trim(),
+      to: to.trim(),
+      routeId: `${from.substring(0, 3).toLowerCase()}-${to.substring(0, 3).toLowerCase()}`,
+      departureTime: departureTime || "21:00",
+      arrivalTime: arrivalTime || "07:00",
+      duration: "10h 00m",
+      departureStop: `${from} Central Bus Terminal`,
+      arrivalStop: `${to} Main Station`,
+    },
+    sponsored: false,
+  };
+
+  db.buses.push(newBus);
+  writeDB(db);
+
+  res.status(201).json({ success: true, message: "Bus added successfully!", bus: newBus });
+});
+
+// PUT /api/admin/buses/:id - Real-Time Bus Edit
+router.put("/buses/:id", requireAdmin, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+
+  const bus = db.buses.find((b) => b.id === req.params.id);
+  if (!bus) return res.status(404).json({ error: "Bus not found" });
+
+  const { operator, busType, lowestPrice, seatsLeft, rating } = req.body;
+  if (operator) bus.operator = operator.trim();
+  if (busType) bus.busType = busType.trim();
+  if (lowestPrice) {
+    const p = parseInt(lowestPrice, 10);
+    bus.lowestPrice = p;
+    bus.prices = { redbus: p + 50, abhibus: p + 20, makemytrip: p + 65, yatra: p + 80 };
+  }
+  if (seatsLeft !== undefined) bus.seatsLeft = parseInt(seatsLeft, 10);
+  if (rating) bus.rating = parseFloat(rating);
+
+  writeDB(db);
+  res.json({ success: true, message: "Bus updated successfully!", bus });
+});
+
+// DELETE /api/admin/buses/:id - Real-Time Bus Delete
+router.delete("/buses/:id", requireAdmin, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+
+  const idx = db.buses.findIndex((b) => b.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: "Bus not found" });
+
+  const removed = db.buses.splice(idx, 1)[0];
+  writeDB(db);
+
+  res.json({ success: true, message: "Bus deleted successfully!", busId: removed.id });
+});
+
+// POST /api/admin/routes/add - Real-Time Route Data Entry
+router.post("/routes/add", requireAdmin, (req, res) => {
+  const db = readDB();
+  if (!db) return res.status(500).json({ error: "DB error" });
+
+  const { from, to, distance, avgDuration, minPrice } = req.body;
+  if (!from || !to || !minPrice) {
+    return res.status(400).json({ error: "From, To, and Minimum Price are required" });
+  }
+
+  const routeId = `${from.substring(0, 3).toLowerCase()}-${to.substring(0, 3).toLowerCase()}`;
+  const slug = `${from.toLowerCase()}-to-${to.toLowerCase()}`;
+
+  const newRoute = {
+    id: routeId,
+    from: from.trim(),
+    fromCode: from.substring(0, 3).toUpperCase(),
+    to: to.trim(),
+    toCode: to.substring(0, 3).toUpperCase(),
+    slug,
+    distance: parseInt(distance, 10) || 350,
+    avgDuration: avgDuration || "6h 30m",
+    minPrice: parseInt(minPrice, 10) || 350,
+    maxPrice: (parseInt(minPrice, 10) || 350) * 3,
+    popularCount: 1000,
+    description: `Direct Express Route from ${from} to ${to}`,
+    category: "express",
+    priceHistory: [
+      { day: "Mon", price: parseInt(minPrice, 10) || 350 },
+      { day: "Tue", price: Math.round((parseInt(minPrice, 10) || 350) * 0.95) },
+      { day: "Wed", price: Math.round((parseInt(minPrice, 10) || 350) * 0.98) },
+      { day: "Thu", price: parseInt(minPrice, 10) || 350 },
+      { day: "Fri", price: Math.round((parseInt(minPrice, 10) || 350) * 1.2) },
+      { day: "Sat", price: Math.round((parseInt(minPrice, 10) || 350) * 1.3) },
+      { day: "Sun", price: Math.round((parseInt(minPrice, 10) || 350) * 1.1) },
+    ],
+  };
+
+  db.routes.push(newRoute);
+  writeDB(db);
+
+  res.status(201).json({ success: true, message: "Route created successfully!", route: newRoute });
+});
+
 module.exports = router;

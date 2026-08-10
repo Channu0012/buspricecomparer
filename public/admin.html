@@ -2,46 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Founder Dashboard — BusCompare India</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Founder Dashboard & Real-Time Data Entry — BusCompare India</title>
   <link rel="icon" type="image/png" href="/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #050810; --card: #121929; --border: rgba(255, 255, 255, 0.06); --bl: rgba(255, 255, 255, 0.1);
-      --p: #f97316; --green: #10b981; --blue: #3b82f6; --gold: #f59e0b; --red: #ef4444; --t: #f1f5f9; --ts: #94a3b8;
+      --p: #f97316; --pg: rgba(249, 115, 22, 0.15); --green: #10b981; --blue: #3b82f6; --gold: #f59e0b; --red: #ef4444; --t: #f1f5f9; --ts: #94a3b8;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); min-height: 100vh; }
-    input, button { font-family: inherit; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--t); min-height: 100vh; padding-bottom: 60px; }
+    input, select, button { font-family: inherit; }
     a { text-decoration: none; color: inherit; }
 
-    .navbar { position: sticky; top: 0; z-index: 1000; padding: 12px 24px; background: rgba(5,8,16,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+    .navbar { position: sticky; top: 0; z-index: 1000; padding: 12px 20px; background: rgba(5,8,16,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
     .nav-in { max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 900; color: var(--t); }
 
-    .container { max-width: 1200px; margin: 30px auto; padding: 0 24px 80px; }
+    .container { max-width: 1200px; margin: 24px auto; padding: 0 16px 80px; }
     .card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 24px; margin-bottom: 24px; }
 
     .sw-input {
       width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--bl);
-      border-radius: 10px; padding: 12px; color: var(--t); font-size: 14px; outline: none; margin-bottom: 12px;
+      border-radius: 10px; padding: 12px; color: var(--t); font-size: 14px; outline: none; margin-bottom: 12px; min-height: 44px;
     }
     .btn-admin {
-      background: var(--p); color: #fff; border: none; border-radius: 10px; padding: 12px 24px; font-weight: 800; cursor: pointer;
+      background: var(--p); color: #fff; border: none; border-radius: 10px; padding: 12px 24px; font-weight: 800; cursor: pointer; min-height: 44px;
     }
 
-    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
     .metric-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
     .m-label { font-size: 11px; font-weight: 800; color: var(--ts); text-transform: uppercase; letter-spacing: 1px; }
-    .m-val { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; margin-top: 4px; }
+    .m-val { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 900; margin-top: 4px; }
+
+    .tab-btn {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 16px; color: var(--ts); font-size: 13px; font-weight: 800; cursor: pointer; margin-right: 8px;
+    }
+    .tab-btn.active { background: var(--pg); border-color: rgba(249,115,22,0.4); color: var(--p); }
+
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13px; }
+    .data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { color: var(--p); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
   </style>
 </head>
 <body>
 
   <nav class="navbar">
     <div class="nav-in">
-      <div class="nav-logo">📊 Founder <em>Dashboard</em></div>
+      <div class="nav-logo">📊 Founder <em>Dashboard & Data Entry</em></div>
       <a href="/" style="color:var(--ts);font-size:13px;font-weight:700">← Back to Main Site</a>
     </div>
   </nav>
@@ -58,13 +68,13 @@
 
     <!-- BODY -->
     <div id="admin-body" style="display:none">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
         <div>
-          <h1 style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:900">Platform Analytics & Revenue</h1>
-          <div style="font-size:13px;color:var(--ts)">Real-time SaaS telemetry breakdown</div>
+          <h1 style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:900">Real-Time Platform & Data Entry</h1>
+          <div style="font-size:13px;color:var(--ts)">Live telemetry & instant bus schedule manager</div>
         </div>
         <div style="display:flex;gap:10px">
-          <a href="/api/admin/leads/export?format=csv" target="_blank" style="background:var(--green);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:800">📥 Export Leads CSV</a>
+          <a href="/api/admin/leads/export?format=csv" target="_blank" style="background:var(--green);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:800;display:inline-flex;align-items:center">📥 Export Leads CSV</a>
           <button onclick="loadAdminStats()" class="btn-admin" style="padding:8px 16px;font-size:12px">🔄 Refresh</button>
         </div>
       </div>
@@ -80,8 +90,8 @@
           <div class="m-val" id="adm-clicks" style="color:var(--green)">0</div>
         </div>
         <div class="metric-box">
-          <div class="m-label">PRICE LOCKS</div>
-          <div class="m-val" id="adm-locks" style="color:var(--gold)">0</div>
+          <div class="m-label">ACTIVE BUS FLEET</div>
+          <div class="m-val" id="adm-buses" style="color:var(--gold)">0</div>
         </div>
         <div class="metric-box">
           <div class="m-label">ESTIMATED REVENUE</div>
@@ -89,28 +99,93 @@
         </div>
       </div>
 
-      <!-- BREAKDOWN CARDS -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-        <div class="card">
-          <h2 style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin-bottom:14px">💼 Corporate & Operator Leads</h2>
-          <div style="display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px solid var(--border)">
-            <span>Corporate Leads:</span><strong id="adm-corp" style="color:var(--p)">0</strong>
-          </div>
-          <div style="display:flex;justify-content:space-between;font-size:14px;padding:10px 0">
-            <span>Operator SaaS Leads:</span><strong id="adm-ops" style="color:var(--green)">0</strong>
-          </div>
-        </div>
+      <!-- TABS SECTION -->
+      <div style="margin-bottom:16px">
+        <button class="tab-btn active" id="tb-entry" onclick="switchTab('entry')">➕ Add New Bus / Route</button>
+        <button class="tab-btn" id="tb-fleet" onclick="switchTab('fleet')">🚌 Manage Bus Fleet</button>
+        <button class="tab-btn" id="tb-leads" onclick="switchTab('leads')">💼 Leads & Subscriptions</button>
+      </div>
 
-        <div class="card">
-          <h2 style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;margin-bottom:14px">👑 VIP & Loyalty Users</h2>
-          <div style="display:flex;justify-content:space-between;font-size:14px;padding:10px 0;border-bottom:1px solid var(--border)">
-            <span>VIP Pass Members:</span><strong id="adm-vip" style="color:var(--gold)">0</strong>
+      <!-- DATA ENTRY TAB -->
+      <div id="tab-sec-entry" class="card">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:14px">🚌 Add New Bus Schedule (Real-Time Data Entry)</h2>
+        <form onsubmit="submitAddBus(event)" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">OPERATOR NAME *</label>
+            <input class="sw-input" id="de-operator" placeholder="e.g. VRL Travels" required />
           </div>
-          <div style="display:flex;justify-content:space-between;font-size:14px;padding:10px 0">
-            <span>BusCoins Users:</span><strong id="adm-loyalty" style="color:var(--blue)">0</strong>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">BUS TYPE *</label>
+            <input class="sw-input" id="de-bustype" placeholder="e.g. Volvo AC Sleeper (2+1)" value="Volvo AC Sleeper (2+1)" required />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">DEPARTURE CITY *</label>
+            <input class="sw-input" id="de-from" placeholder="e.g. Mumbai" required />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">DESTINATION CITY *</label>
+            <input class="sw-input" id="de-to" placeholder="e.g. Goa" required />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">DEP TIME</label>
+            <input class="sw-input" id="de-deptime" placeholder="e.g. 21:00" value="21:00" />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">ARR TIME</label>
+            <input class="sw-input" id="de-arrtime" placeholder="e.g. 07:00" value="07:00" />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">LOWEST PRICE (₹) *</label>
+            <input class="sw-input" type="number" id="de-price" placeholder="e.g. 499" required />
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:800;color:var(--p)">SEATS LEFT</label>
+            <input class="sw-input" type="number" id="de-seats" placeholder="e.g. 14" value="14" />
+          </div>
+          <div style="grid-column:1/-1">
+            <button type="submit" class="btn-admin" style="width:100%">⚡ Add Bus To Live Database →</button>
+          </div>
+        </form>
+        <div id="de-msg" style="margin-top:12px;font-size:13px;font-weight:800;display:none"></div>
+      </div>
+
+      <!-- MANAGE FLEET TAB -->
+      <div id="tab-sec-fleet" class="card" style="display:none">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:14px">🚌 Active Bus Fleet Manager</h2>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Bus ID</th>
+                <th>Operator</th>
+                <th>Route</th>
+                <th>Type</th>
+                <th>Price (₹)</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="fleet-table-body">
+              <tr><td colspan="6" style="text-align:center;color:var(--ts)">Loading fleet...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LEADS TAB -->
+      <div id="tab-sec-leads" class="card" style="display:none">
+        <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;margin-bottom:14px">💼 Leads & Subscriptions Overview</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <h3 style="font-size:14px;font-weight:800;color:var(--p);margin-bottom:8px">Corporate Inquiries</h3>
+            <div id="corp-leads-list" style="font-size:13px;color:var(--ts)">Loading...</div>
+          </div>
+          <div>
+            <h3 style="font-size:14px;font-weight:800;color:var(--green);margin-bottom:8px">Operator Partner Leads</h3>
+            <div id="ops-leads-list" style="font-size:13px;color:var(--ts)">Loading...</div>
           </div>
         </div>
       </div>
+
     </div>
   </main>
 
@@ -131,6 +206,7 @@
           document.getElementById('admin-gate').style.display = 'none';
           document.getElementById('admin-body').style.display = 'block';
           loadAdminStats();
+          setInterval(loadAdminStats, 4000); // Live real-time stats polling
         } else { err.style.display = 'block'; }
       } catch(e) { err.style.display = 'block'; }
     }
@@ -143,12 +219,95 @@
 
         document.getElementById('adm-searches').textContent = o.totalSearches || 0;
         document.getElementById('adm-clicks').textContent = o.totalClicks || 0;
-        document.getElementById('adm-locks').textContent = o.priceLocksCount || 0;
+        document.getElementById('adm-buses').textContent = o.totalBuses || 0;
         document.getElementById('adm-rev').textContent = `₹${(o.revenueEstimate || 0).toLocaleString('en-IN')}`;
-        document.getElementById('adm-corp').textContent = o.corporateLeads || 0;
-        document.getElementById('adm-ops').textContent = o.operatorLeads || 0;
-        document.getElementById('adm-vip').textContent = o.vipSubscriptionsCount || 0;
-        document.getElementById('adm-loyalty').textContent = o.loyaltyUsers || 0;
+
+        if (d.corporateLeads) {
+          document.getElementById('corp-leads-list').innerHTML = d.corporateLeads.map(c => `• ${c.companyName} (${c.contactName})`).join('<br>') || 'None yet';
+        }
+        if (d.operatorLeads) {
+          document.getElementById('ops-leads-list').innerHTML = d.operatorLeads.map(o => `• ${o.operatorName} (${o.contactName})`).join('<br>') || 'None yet';
+        }
+      } catch(e) {}
+    }
+
+    function switchTab(tab) {
+      document.getElementById('tb-entry').classList.toggle('active', tab === 'entry');
+      document.getElementById('tb-fleet').classList.toggle('active', tab === 'fleet');
+      document.getElementById('tb-leads').classList.toggle('active', tab === 'leads');
+
+      document.getElementById('tab-sec-entry').style.display = tab === 'entry' ? 'block' : 'none';
+      document.getElementById('tab-sec-fleet').style.display = tab === 'fleet' ? 'block' : 'none';
+      document.getElementById('tab-sec-leads').style.display = tab === 'leads' ? 'block' : 'none';
+
+      if (tab === 'fleet') loadFleetList();
+    }
+
+    async function submitAddBus(e) {
+      e.preventDefault();
+      const msg = document.getElementById('de-msg'); msg.style.display = 'block';
+      msg.style.color = 'var(--p)'; msg.textContent = '⏳ Adding bus to live database...';
+
+      try {
+        const body = {
+          operator: document.getElementById('de-operator').value,
+          busType: document.getElementById('de-bustype').value,
+          from: document.getElementById('de-from').value,
+          to: document.getElementById('de-to').value,
+          departureTime: document.getElementById('de-deptime').value,
+          arrivalTime: document.getElementById('de-arrtime').value,
+          lowestPrice: document.getElementById('de-price').value,
+          seatsLeft: document.getElementById('de-seats').value,
+        };
+
+        const r = await fetch('/api/admin/buses/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-token': TOKEN },
+          body: JSON.stringify(body)
+        });
+        const d = await r.json();
+        if (r.ok) {
+          msg.style.color = 'var(--green)';
+          msg.textContent = `🎉 Success! Bus ID ${d.bus.id} added live!`;
+          loadAdminStats();
+        } else {
+          msg.style.color = 'var(--red)'; msg.textContent = d.error || 'Failed to add bus';
+        }
+      } catch(err) {
+        msg.style.color = 'var(--red)'; msg.textContent = 'Network error';
+      }
+    }
+
+    async function loadFleetList() {
+      const tbody = document.getElementById('fleet-table-body');
+      try {
+        const r = await fetch('/api/routes');
+        const d = await r.json();
+        const buses = d.buses || [];
+        tbody.innerHTML = buses.map(b => `
+          <tr>
+            <td><strong>${b.id}</strong></td>
+            <td>${b.operator}</td>
+            <td>${b.route.from} → ${b.route.to}</td>
+            <td>${b.busType}</td>
+            <td style="color:var(--green);font-weight:800">₹${b.lowestPrice}</td>
+            <td>
+              <button onclick="deleteBus('${b.id}')" style="background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid #ef4444;border-radius:6px;padding:4px 10px;font-weight:800;cursor:pointer">Delete ✕</button>
+            </td>
+          </tr>
+        `).join('');
+      } catch(e) {}
+    }
+
+    async function deleteBus(busId) {
+      if (!confirm(`Delete bus ${busId}?`)) return;
+      try {
+        const r = await fetch(`/api/admin/buses/${busId}`, {
+          method: 'DELETE',
+          headers: { 'x-admin-token': TOKEN }
+        });
+        const d = await r.json();
+        if (r.ok) { alert('Bus removed!'); loadFleetList(); loadAdminStats(); }
       } catch(e) {}
     }
   </script>
