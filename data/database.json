@@ -1546,6 +1546,51 @@
           "price": 825
         }
       ]
+    },
+    {
+      "id": "kol-sil",
+      "from": "Kolkata",
+      "fromCode": "KOL",
+      "to": "Siliguri",
+      "toCode": "SIL",
+      "slug": "kolkata-to-siliguri",
+      "distance": 560,
+      "avgDuration": "11h 00m",
+      "minPrice": 750,
+      "maxPrice": 2250,
+      "popularCount": 1000,
+      "description": "Direct Express Route from Kolkata to Siliguri",
+      "category": "express",
+      "priceHistory": [
+        {
+          "day": "Mon",
+          "price": 750
+        },
+        {
+          "day": "Tue",
+          "price": 713
+        },
+        {
+          "day": "Wed",
+          "price": 735
+        },
+        {
+          "day": "Thu",
+          "price": 750
+        },
+        {
+          "day": "Fri",
+          "price": 900
+        },
+        {
+          "day": "Sat",
+          "price": 975
+        },
+        {
+          "day": "Sun",
+          "price": 825
+        }
+      ]
     }
   ],
   "buses": [
@@ -1557,7 +1602,7 @@
       "busType": "AC Sleeper (2+1)",
       "busTypeCode": "ac-sleeper",
       "rating": 4.5,
-      "reviewCount": 106,
+      "reviewCount": 108,
       "totalBookings": 48920,
       "amenities": [
         "wifi",
@@ -4953,6 +4998,93 @@
         "arrivalStop": "Goa Main Station"
       },
       "sponsored": false
+    },
+    {
+      "id": "bus-050",
+      "slug": "channu-travels-maigur-to-jamakhandi-volvo-ac-sleeper-2-1-",
+      "operator": "channu travels",
+      "operatorCode": "CHA",
+      "busType": "Volvo AC Sleeper (2+1)",
+      "rating": 4.5,
+      "reviewCount": 50,
+      "totalSeats": 36,
+      "seatsLeft": 14,
+      "lowestPrice": 522,
+      "prices": {
+        "redbus": 572,
+        "abhibus": 542,
+        "makemytrip": 587,
+        "yatra": 602
+      },
+      "route": {
+        "from": "maigur",
+        "to": "jamakhandi",
+        "routeId": "mai-jam",
+        "departureTime": "21:00",
+        "arrivalTime": "07:00",
+        "duration": "10h 00m",
+        "departureStop": "maigur Central Bus Terminal",
+        "arrivalStop": "jamakhandi Main Station"
+      },
+      "sponsored": false
+    },
+    {
+      "id": "bus-051",
+      "slug": "channu-travels-maigur-to-jamakhandi-volvo-ac-sleeper-2-1-",
+      "operator": "channu travels",
+      "operatorCode": "CHA",
+      "busType": "Volvo AC Sleeper (2+1)",
+      "rating": 4.5,
+      "reviewCount": 50,
+      "totalSeats": 36,
+      "seatsLeft": 14,
+      "lowestPrice": 522,
+      "prices": {
+        "redbus": 572,
+        "abhibus": 542,
+        "makemytrip": 587,
+        "yatra": 602
+      },
+      "route": {
+        "from": "maigur",
+        "to": "jamakhandi",
+        "routeId": "mai-jam",
+        "departureTime": "21:00",
+        "arrivalTime": "07:00",
+        "duration": "10h 00m",
+        "departureStop": "maigur Central Bus Terminal",
+        "arrivalStop": "jamakhandi Main Station"
+      },
+      "sponsored": false
+    },
+    {
+      "id": "bus-052",
+      "slug": "test-express-mumbai-to-goa-volvo-ac-sleeper-2-1-",
+      "operator": "Test Express",
+      "operatorCode": "TES",
+      "busType": "Volvo AC Sleeper (2+1)",
+      "rating": 4.5,
+      "reviewCount": 50,
+      "totalSeats": 36,
+      "seatsLeft": 18,
+      "lowestPrice": 650,
+      "prices": {
+        "redbus": 700,
+        "abhibus": 670,
+        "makemytrip": 715,
+        "yatra": 730
+      },
+      "route": {
+        "from": "Mumbai",
+        "to": "Goa",
+        "routeId": "mum-goa",
+        "departureTime": "22:00",
+        "arrivalTime": "08:00",
+        "duration": "10h 00m",
+        "departureStop": "Mumbai Central Bus Terminal",
+        "arrivalStop": "Goa Main Station"
+      },
+      "sponsored": false
     }
   ],
   "reviews": [
@@ -6262,6 +6394,29 @@
     },
     {
       "id": "rev-bdbdde32",
+      "busId": "bus-001",
+      "userName": "Tester",
+      "userCity": "",
+      "rating": 5,
+      "title": "",
+      "comment": "Testing rating clamp",
+      "date": "2026-08-10",
+      "helpfulCount": 0,
+      "verified": false,
+      "platform": "buscompare"
+    },
+    {
+      "id": "REV-B52B2EE8",
+      "busId": "bus-001",
+      "rating": 4,
+      "comment": "Great ride!",
+      "travelerName": "Test User",
+      "route": "Mumbai-Goa",
+      "verified": false,
+      "createdAt": "2026-08-10T12:57:49.961Z"
+    },
+    {
+      "id": "rev-e9236208",
       "busId": "bus-001",
       "userName": "Tester",
       "userCity": "",
@@ -7914,6 +8069,54 @@
       "active": true,
       "createdAt": "2026-08-10T12:43:47.847Z",
       "triggeredCount": 0
+    },
+    {
+      "id": "alert-b858b36c",
+      "email": "channupatil@gmail.com",
+      "whatsapp": "6363890658",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": 32312,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T12:50:01.471Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-aa0fd7d2",
+      "email": "alert_1786366669660@test.com",
+      "whatsapp": "",
+      "routeFrom": "Hyderabad",
+      "routeTo": "Chennai",
+      "maxPrice": 900,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T12:57:49.661Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-498230d9",
+      "email": "dup_1786366669662@test.com",
+      "whatsapp": "",
+      "routeFrom": "Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": null,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T12:57:49.699Z",
+      "triggeredCount": 0
+    },
+    {
+      "id": "alert-78dffe6f",
+      "email": "xss_1786366670396@test.com",
+      "whatsapp": "",
+      "routeFrom": "&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;Mumbai",
+      "routeTo": "Pune",
+      "maxPrice": 500,
+      "tier": "free",
+      "active": true,
+      "createdAt": "2026-08-10T12:57:50.420Z",
+      "triggeredCount": 0
     }
   ],
   "telemetry": [
@@ -8813,6 +9016,16 @@
       "phone": "9876543210",
       "email": "",
       "expiresAt": "2026-08-10T18:43:47.348Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "PL-28507666",
+      "busId": "bus-001",
+      "lockedPrice": 799,
+      "feePaid": 39,
+      "phone": "9876543210",
+      "email": "",
+      "expiresAt": "2026-08-10T18:57:49.740Z",
       "status": "ACTIVE"
     }
   ],
@@ -10004,25 +10217,43 @@
       "pricePaid": 299,
       "createdAt": "2026-08-10T12:43:47.390Z",
       "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-CC7AFD47",
+      "email": "vip_1786366669765@test.com",
+      "phone": "9111111111",
+      "plan": "Monthly Pass (₹99/mo)",
+      "pricePaid": 99,
+      "createdAt": "2026-08-10T12:57:49.770Z",
+      "status": "ACTIVE"
+    },
+    {
+      "id": "VIP-99226FDD",
+      "email": "vipa_1786366669771@test.com",
+      "phone": "9222222222",
+      "plan": "Annual Pass (₹299/yr)",
+      "pricePaid": 299,
+      "createdAt": "2026-08-10T12:57:49.787Z",
+      "status": "ACTIVE"
     }
   ],
   "admin": {
     "totalClicks": 13,
-    "totalSearches": 1100,
-    "totalReviews": 114,
-    "totalAlerts": 134,
+    "totalSearches": 1122,
+    "totalReviews": 116,
+    "totalAlerts": 138,
     "flightClicks": 5,
-    "priceLocksCount": 66,
-    "vipSubscriptionsCount": 132,
+    "priceLocksCount": 67,
+    "vipSubscriptionsCount": 134,
     "busAffiliateRevenue": 1040,
     "flightAffiliateRevenue": 2250,
-    "priceLockRevenue": 2574,
-    "vipRevenue": 26268,
+    "priceLockRevenue": 2613,
+    "vipRevenue": 26666,
     "sponsoredRevenue": 0,
-    "revenueEstimate": 35703,
+    "revenueEstimate": 36205,
     "lastReset": "2026-07-27",
-    "insurancePoliciesCount": 56,
-    "insuranceRevenue": 3636
+    "insurancePoliciesCount": 57,
+    "insuranceRevenue": 3701
   },
   "coupons": [
     {
@@ -10741,6 +10972,16 @@
       "insuranceFee": 65,
       "status": "ACTIVE",
       "createdAt": "2026-08-10T12:43:47.429Z"
+    },
+    {
+      "id": "INS-C0461D6C",
+      "phone": "9000000001",
+      "email": "ins@test.com",
+      "busId": "bus-001",
+      "fare": 800,
+      "insuranceFee": 65,
+      "status": "ACTIVE",
+      "createdAt": "2026-08-10T12:57:49.848Z"
     }
   ],
   "loyaltyUsers": [
@@ -11751,6 +11992,24 @@
       "referralCode": "BHARATBUS-0301-VR7V",
       "referralCount": 0,
       "joinedAt": "2026-08-10T12:43:47.463Z"
+    },
+    {
+      "id": "loyalty-58cd50ef",
+      "phone": "91638958806",
+      "coins": 15,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-8806-8HVV",
+      "referralCount": 0,
+      "joinedAt": "2026-08-10T12:57:49.878Z"
+    },
+    {
+      "id": "loyalty-ae43ff2e",
+      "phone": "88184663468",
+      "coins": 2,
+      "tier": "Bronze",
+      "referralCode": "BHARATBUS-3468-OSVV",
+      "referralCount": 0,
+      "joinedAt": "2026-08-10T12:57:49.909Z"
     }
   ],
   "referrals": [],
@@ -12508,6 +12767,19 @@
       "status": "NEW_LEAD",
       "estimatedMRR": 15000,
       "createdAt": "2026-08-10T12:43:47.519Z"
+    },
+    {
+      "id": "CORP-7156151D",
+      "companyName": "Acme Corp",
+      "contactName": "Raj",
+      "email": "corp_1786366669984@acme.com",
+      "phone": "9000000002",
+      "employees": "30",
+      "monthlyTrips": "100",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedMRR": 15000,
+      "createdAt": "2026-08-10T12:57:49.985Z"
     }
   ],
   "operatorLeads": [
@@ -13251,6 +13523,19 @@
       "status": "NEW_LEAD",
       "estimatedPlan": "Enterprise (₹15,000/mo)",
       "createdAt": "2026-08-10T12:43:47.542Z"
+    },
+    {
+      "id": "OPR-159FFFBD",
+      "operatorName": "SpeedBus",
+      "contactName": "Kumar",
+      "email": "ops_1786366670017@speed.com",
+      "phone": "9000000003",
+      "fleetSize": "25",
+      "routes": "Chennai-Madurai",
+      "message": "",
+      "status": "NEW_LEAD",
+      "estimatedPlan": "Enterprise (₹15,000/mo)",
+      "createdAt": "2026-08-10T12:57:50.018Z"
     }
   ],
   "translations": {

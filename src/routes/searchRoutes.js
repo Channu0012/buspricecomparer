@@ -52,9 +52,58 @@ router.get("/cities", (req, res) => {
   const db = readDB();
   if (!db) return res.status(500).json({ error: "DB error" });
   const q = (req.query.q || "").toLowerCase();
+
+  const citySet = new Set((db.cities || []).map((c) => c.name.toLowerCase()));
+  const extraCities = [];
+
+  (db.buses || []).forEach((b) => {
+    if (b.route) {
+      if (b.route.from && !citySet.has(b.route.from.toLowerCase())) {
+        citySet.add(b.route.from.toLowerCase());
+        extraCities.push({
+          id: b.route.from.toLowerCase().replace(/[^a-z0-9]/g, ""),
+          name: b.route.from,
+          state: "India",
+          popular: true,
+        });
+      }
+      if (b.route.to && !citySet.has(b.route.to.toLowerCase())) {
+        citySet.add(b.route.to.toLowerCase());
+        extraCities.push({
+          id: b.route.to.toLowerCase().replace(/[^a-z0-9]/g, ""),
+          name: b.route.to,
+          state: "India",
+          popular: true,
+        });
+      }
+    }
+  });
+
+  (db.routes || []).forEach((r) => {
+    if (r.from && !citySet.has(r.from.toLowerCase())) {
+      citySet.add(r.from.toLowerCase());
+      extraCities.push({
+        id: r.from.toLowerCase().replace(/[^a-z0-9]/g, ""),
+        name: r.from,
+        state: "India",
+        popular: true,
+      });
+    }
+    if (r.to && !citySet.has(r.to.toLowerCase())) {
+      citySet.add(r.to.toLowerCase());
+      extraCities.push({
+        id: r.to.toLowerCase().replace(/[^a-z0-9]/g, ""),
+        name: r.to,
+        state: "India",
+        popular: true,
+      });
+    }
+  });
+
+  const allCities = [...db.cities, ...extraCities];
   const cities = q
-    ? db.cities.filter((c) => c.name.toLowerCase().includes(q))
-    : db.cities;
+    ? allCities.filter((c) => c.name.toLowerCase().includes(q))
+    : allCities;
   res.json({ cities });
 });
 
